@@ -2,7 +2,7 @@
 
 namespace Lab1.Model
 {
-    internal struct Point
+    public struct Point
     {
         public double X;
 

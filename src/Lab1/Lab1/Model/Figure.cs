@@ -1,6 +1,10 @@
-﻿namespace Lab1.Model
+﻿using System.Xml.Serialization;
+
+namespace Lab1.Model
 {
-    internal abstract class Figure
+    [XmlInclude(typeof(Rectangle))]
+    [XmlInclude(typeof(Square))]
+    public abstract class Figure
     {
         public abstract double GetLength();
     }

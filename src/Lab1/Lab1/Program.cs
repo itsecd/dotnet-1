@@ -1,20 +1,28 @@
-﻿using Lab1.Model;
-using System;
+﻿using Lab1.Repositories;
+using Microsoft.Extensions.DependencyInjection;
+using Lab1.Infrastructure;
+using Spectre.Console.Cli;
+using Lab1.Commands;
 
 namespace Lab1
 {
     internal class Program
     {
-
         static void Main(string[] args)
         {
-            Figure figure = new Rectangle
-            {
-                Point1 = new Point(1, 1),
-                Point2 = new Point(2, 2)
-            };
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IFiguresRepository, XmlFiguresRepository>();
 
-            Console.WriteLine(figure);
+            var registrar = new TypeRegistrar(serviceCollection);
+            var app = new CommandApp(registrar);
+
+            app.Configure(config =>
+            {
+                config.AddCommand<AddFigureCommand>("add");
+                config.AddCommand<GetAllFeaturesCommand>("print");
+            });
+
+            app.Run(args);
         }
     }
 }

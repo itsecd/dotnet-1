@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Lab1.Model
 {
-    internal class Rectangle : Figure
+    public class Rectangle : Figure
     {
         public Point Point1 { get; set; }
 
@@ -21,6 +21,12 @@ namespace Lab1.Model
         {
             Point1 = point1;
             Point2 = point2;
+        }
+
+        public Rectangle(double x1, double y1, double x2, double y2)
+        {
+            Point1 = new Point(x1, y1);
+            Point2 = new Point(x2, y2);
         }
 
         public override double GetLength()
