@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolumetricFigures", "VolumetricFigures\VolumetricFigures.csproj", "{142A4AEC-6D79-47F9-8470-B4ADC96F059E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{142A4AEC-6D79-47F9-8470-B4ADC96F059E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{142A4AEC-6D79-47F9-8470-B4ADC96F059E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{142A4AEC-6D79-47F9-8470-B4ADC96F059E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{142A4AEC-6D79-47F9-8470-B4ADC96F059E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A11C02A2-7CAA-49CC-AE68-14E04DAF07F2}
+	EndGlobalSection
+EndGlobal
