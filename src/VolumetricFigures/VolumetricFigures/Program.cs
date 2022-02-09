@@ -6,7 +6,18 @@ namespace VolumetricFigures
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            while (true)
+            {
+                Console.WriteLine("Input Command(\\help to help):\n");
+                String input = Console.ReadLine();
+                /*
+                switch (input)
+                {
+                    case "\\help":
+
+                }
+                */
+            }
         }
     }
 }
