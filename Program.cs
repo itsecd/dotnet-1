@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using dotnet_1.Matrix;
+using System.Xml.Serialization;
 
 namespace dotnet_1
 {
@@ -7,7 +9,10 @@ namespace dotnet_1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BufferedMatrix tmp = new BufferedMatrix(4, 4);
+            tmp.Set(2, 2, 2.34);
+            Console.WriteLine(tmp.Get(2, 2));
+            Console.WriteLine(tmp.ToString());
         }
     }
 }
