@@ -1,0 +1,16 @@
+/home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/Lab1
+/home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/Lab1.deps.json
+/home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/Lab1.runtimeconfig.json
+/home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/Lab1.runtimeconfig.dev.json
+/home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/Lab1.dll
+/home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/ref/Lab1.dll
+/home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/Lab1.pdb
+/home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/Lab1.csproj.AssemblyReference.cache
+/home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/Lab1.GeneratedMSBuildEditorConfig.editorconfig
+/home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/Lab1.AssemblyInfoInputs.cache
+/home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/Lab1.AssemblyInfo.cs
+/home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/Lab1.csproj.CoreCompileInputs.cache
+/home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/Lab1.dll
+/home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/ref/Lab1.dll
+/home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/Lab1.pdb
+/home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/Lab1.genruntimeconfig.cache

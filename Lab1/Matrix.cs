@@ -23,6 +23,24 @@ namespace Lab1
             A[x, y] = val;
         }
 
+        public double Norm
+        {
+            get
+            {
+                double maxval = Math.Abs(A[0, 0]);
+                for (int i = 0; i < Height; i++)
+                    for (int j = 0; j < Width; j++)
+                        if (Math.Abs(A[i, j]) > maxval)
+                            maxval = Math.Abs(A[i, j]);
+                return maxval;
+            }
+        }
+
+        public double NormL()
+        {
+            return 0;
+        }
+
         public static bool operator == (BufferedMatrix lhs, BufferedMatrix rhs)
         {
             if (lhs.Width != rhs.Width || lhs.Height != rhs.Height)
