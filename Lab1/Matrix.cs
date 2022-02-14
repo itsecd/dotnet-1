@@ -13,7 +13,7 @@ namespace Lab1
         public BufferedMatrix(int w, int h)
         {
             Width = w;
-            Height = w;
+            Height = h;
             A = new double[Height, Width];
         }
 
