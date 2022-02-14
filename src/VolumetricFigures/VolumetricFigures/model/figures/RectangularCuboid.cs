@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace VolumetricFigures.model.figures
 {
+    [Serializable]
+    [XmlRoot("RectangularCuboid")]
     public class RectangularCuboid : Counting
     {
+        [XmlElement("Point_1")]
+        public Point _p1 { get; set; }
+        [XmlElement("Point_2")]
+        public Point _p2 { get; set; }
 
-        private Point _p1;
-        private Point _p2;
+        public RectangularCuboid()
+        {
+        }
 
         public RectangularCuboid(Point p1, Point p2)
         {
@@ -33,14 +41,17 @@ namespace VolumetricFigures.model.figures
             return Math.Abs(_p1.z - _p2.z);
         }
 
-        public override double[,] GetMinCuboid()
+        public override RectangularCuboid GetMinCuboid()
         {
-            return new double[2, 3] { { _p1.x, _p1.y, _p1.z }, { _p2.x, _p2.y, _p2.z } };
+            return new RectangularCuboid(
+                new Point(_p1.x, _p1.y, _p1.z ),
+                new Point(_p2.x, _p2.y, _p2.z )
+                );
         }
 
         public override double GetPerimeter()
         {
-            return 4 * (GetHight() + GetWidht() + GetLength());
+            return 2 * (GetHight() * GetWidht() + GetWidht() * GetLength() + GetLength() * GetHight());
         }
 
         public override double GetSquare()
@@ -56,7 +67,13 @@ namespace VolumetricFigures.model.figures
         public override bool Equals(Object obj)
         {
             RectangularCuboid rectangularCuboid = obj as RectangularCuboid;
-            return rectangularCuboid._p1.Equals(_p1) && rectangularCuboid._p2.Equals(_p2);
+            return rectangularCuboid._p1.Equals(_p1) && 
+                rectangularCuboid._p2.Equals(_p2);
+        }
+
+        public override int GetHashCode()
+        {
+            return _p1.GetHashCode() ^ _p2.GetHashCode();
         }
     }
 }

@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace VolumetricFigures.model.figures
 {
+    [Serializable]
+    [XmlRoot("Sphere")]
     public class Sphere : Counting
     {
+        [XmlElement("Point")]
+        public Point _centre { get; set; }
+        [XmlElement("Radius")]
+        public double _radius { get; set; }
 
-        private Point _centre;
-        private double _radius { get; set; }
+        public Sphere()
+        {
+        }
 
         public Sphere(Point centre, double radius)
         {
@@ -18,19 +26,22 @@ namespace VolumetricFigures.model.figures
             _radius = radius;
         }
 
-        public override double[,] GetMinCuboid()
+        public override RectangularCuboid GetMinCuboid()
         {
-            return new double[2, 3] { { _centre.x + _radius , _centre.y + _radius, _centre.z + _radius }, { _centre.x - _radius, _centre.y - _radius, _centre.z - _radius } };
+            return new RectangularCuboid(
+                new Point(_centre.x + _radius , _centre.y + _radius, _centre.z + _radius ), 
+                new Point( _centre.x - _radius, _centre.y - _radius, _centre.z - _radius )
+                );
         }
 
         public override double GetPerimeter()
         {
-            return 4 * Math.PI * _radius * _radius;
+            return 4 * Math.PI * Math.Pow(_radius, 2);
         }
 
         public override double GetSquare()
         {
-            return (4/3) * Math.PI * _radius * _radius * _radius;
+            return (4/3) * Math.PI * Math.Pow(_radius, 3);
         }
 
         public override string ToString()
@@ -41,8 +52,13 @@ namespace VolumetricFigures.model.figures
         public override bool Equals(Object obj)
         {
             Sphere sphere = obj as Sphere;
-            Сylinder сylinder = obj as Сylinder;
-            return sphere._centre.Equals(_centre) && sphere._radius == _radius;
+            return sphere._centre.Equals(_centre) && 
+                sphere._radius == _radius;
+        }
+
+        public override int GetHashCode()
+        {
+            return _centre.GetHashCode() ^ _radius.GetHashCode();
         }
     }
 }

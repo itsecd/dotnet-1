@@ -1,16 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace VolumetricFigures.model.figures
 {
+    [Serializable]
+    [XmlRoot("Point")]
     public class Point : Counting
     {
+        [XmlElement("X")]
         public double x { get; set; }
+        [XmlElement("Y")]
         public double y { get; set; }
+        [XmlElement("Z")]
         public double z { get; set; }
+
+        public Point()
+        {
+        }
+
 
         public Point(double x, double y, double z)
         {
@@ -19,9 +26,12 @@ namespace VolumetricFigures.model.figures
             this.z = z;
         }
 
-        public override double[,] GetMinCuboid()
+        public override RectangularCuboid GetMinCuboid()
         {
-            return new double[2, 3] { { 0, 0, 0 }, { 0, 0, 0 } };
+            return new RectangularCuboid(
+                new Point( 0, 0, 0 ), 
+                new Point( 0, 0, 0 )
+                );
         }
 
         public override double GetPerimeter()
@@ -42,7 +52,14 @@ namespace VolumetricFigures.model.figures
         public override bool Equals(Object obj)
         {
             Point p = obj as Point; 
-            return p.x == x && p.y == y && p.z == z;   
-        }  
+            return p.x == x && 
+                p.y == y && 
+                p.z == z;   
+        }
+
+        public override int GetHashCode()
+        {
+            return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode();
+        }
     }
 }
