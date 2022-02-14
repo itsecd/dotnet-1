@@ -1,4 +1,5 @@
 ﻿using System;
+using Spectre.Console;
 
 namespace Lab1
 {
@@ -6,7 +7,17 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var tmp = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("[bold]Меню[/]")
+                .AddChoices(new[] {
+                    "Создать матрицу",
+                    "Удалить матрицу",
+                    "Очистить коллекцию",
+                    "Сравнить пару матриц",
+                    "Вывести коллекцию на экран"
+                })
+            );
         }
     }
 }

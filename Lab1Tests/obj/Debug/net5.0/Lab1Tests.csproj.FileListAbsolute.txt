@@ -104,3 +104,4 @@
 /home/dimadivan/dotnet-1/Lab1Tests/obj/Debug/net5.0/ref/Lab1Tests.dll
 /home/dimadivan/dotnet-1/Lab1Tests/obj/Debug/net5.0/Lab1Tests.pdb
 /home/dimadivan/dotnet-1/Lab1Tests/obj/Debug/net5.0/Lab1Tests.genruntimeconfig.cache
+/home/dimadivan/dotnet-1/Lab1Tests/bin/Debug/net5.0/Spectre.Console.dll

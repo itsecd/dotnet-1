@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Lab1
@@ -41,23 +42,42 @@ namespace Lab1
             return 0;
         }
 
-        public static bool operator == (BufferedMatrix lhs, BufferedMatrix rhs)
+        public override string ToString()
+        {
+            return $"BufferedMatrix [[{Height} x {Width}]]";
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool eq = obj.GetType() != this.GetType();
+            if (eq)
+                return false;
+            BufferedMatrix tmp = obj as BufferedMatrix;
+            return this == tmp;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(A, Width, Height);
+        }
+
+        public static bool operator ==(BufferedMatrix lhs, BufferedMatrix rhs)
         {
             if (lhs.Width != rhs.Width || lhs.Height != rhs.Height)
                 return false;
-            for (int i=0;i<lhs.Height;i++)
-                for (int j=0;j<lhs.Width;j++)
+            for (int i = 0; i < lhs.Height; i++)
+                for (int j = 0; j < lhs.Width; j++)
                     if (lhs.Get(i, j) != rhs.Get(i, j))
                         return false;
             return true;
         }
 
-        public static bool operator != (BufferedMatrix lhs, BufferedMatrix rhs)
+        public static bool operator !=(BufferedMatrix lhs, BufferedMatrix rhs)
         {
             if (lhs.Width != rhs.Width || lhs.Height != rhs.Height)
                 return true;
-            for (int i=0;i<lhs.Height;i++)
-                for (int j=0;j<lhs.Width;j++)
+            for (int i = 0; i < lhs.Height; i++)
+                for (int j = 0; j < lhs.Width; j++)
                     if (lhs.Get(i, j) != rhs.Get(i, j))
                         return true;
             return false;

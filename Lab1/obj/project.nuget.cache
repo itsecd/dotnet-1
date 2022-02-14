@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "vgUyj2yA1h570+P/qtRjRZ2YiSAl9VZusHS/isachnKJY3NGk7yZSZeLxSUPhFE9ve3f9zWUMoVdoM4xyiipVQ==",
+  "dgSpecHash": "vcVI2RI5NwNlKW8xum9baLGdjzBuigwrQ5Uueq6AWJVt28ivVVSF/06QRz/RdiNCrZMwwTZtXD3hCJ16xBvdUw==",
   "success": true,
   "projectFilePath": "/home/dimadivan/dotnet-1/Lab1/Lab1.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/dimadivan/.nuget/packages/spectre.console/0.43.0/spectre.console.0.43.0.nupkg.sha512"
+  ],
   "logs": []
 }

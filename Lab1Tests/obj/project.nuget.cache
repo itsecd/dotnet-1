@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bo1jUtR3Ivr/sDlaFBKmMeNrj3kG7U/jlaANk35A7lYI4mFXB+doVaxHaCSGIrDkr7haNZdi+7/o4BIZLltXtg==",
+  "dgSpecHash": "ZVG5egjFI5J13LIfT9PEDg531akOjU42s3UVTPXjAbfKp8YAYbfxnI3YXsoKlJa+XYQFrpQlNyNpZGbIpHfiYA==",
   "success": true,
   "projectFilePath": "/home/dimadivan/dotnet-1/Lab1Tests/Lab1Tests.csproj",
   "expectedPackageFiles": [
@@ -32,6 +32,7 @@
     "/home/dimadivan/.nuget/packages/runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "/home/dimadivan/.nuget/packages/runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "/home/dimadivan/.nuget/packages/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "/home/dimadivan/.nuget/packages/spectre.console/0.43.0/spectre.console.0.43.0.nupkg.sha512",
     "/home/dimadivan/.nuget/packages/system.appcontext/4.3.0/system.appcontext.4.3.0.nupkg.sha512",
     "/home/dimadivan/.nuget/packages/system.buffers/4.3.0/system.buffers.4.3.0.nupkg.sha512",
     "/home/dimadivan/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",

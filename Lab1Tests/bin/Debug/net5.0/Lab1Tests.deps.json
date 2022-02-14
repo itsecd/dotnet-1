@@ -445,6 +445,14 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
+      "Spectre.Console/0.43.0": {
+        "runtime": {
+          "lib/net5.0/Spectre.Console.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.43.0.0"
+          }
+        }
+      },
       "System.AppContext/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -1091,6 +1099,9 @@
       },
       "xunit.runner.visualstudio/2.4.3": {},
       "Lab1/1.0.0": {
+        "dependencies": {
+          "Spectre.Console": "0.43.0"
+        },
         "runtime": {
           "Lab1.dll": {}
         }
@@ -1298,6 +1309,13 @@
       "sha512": "sha512-VB5cn/7OzUfzdnC8tqAIMQciVLiq2epm2NrAm1E9OjNRyG4lVhfR61SMcLizejzQP8R8Uf/0l5qOIbUEi+RdEg==",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
+    },
+    "Spectre.Console/0.43.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TyfzVxx3jHr1FeeI9Z6Jn6QTnP7KduV14dn9GTYc0v/t2h4L6WJ0Kc2DOnOJUlGBQ/qXK4P+HITIR/JTHcKYLg==",
+      "path": "spectre.console/0.43.0",
+      "hashPath": "spectre.console.0.43.0.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

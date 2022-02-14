@@ -605,6 +605,15 @@
           }
         }
       },
+      "Spectre.Console/0.43.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Spectre.Console.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Spectre.Console.dll": {}
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -1674,6 +1683,9 @@
       "Lab1/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Spectre.Console": "0.43.0"
+        },
         "compile": {
           "bin/placeholder/Lab1.dll": {}
         },
@@ -2651,6 +2663,24 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "Spectre.Console/0.43.0": {
+      "sha512": "TyfzVxx3jHr1FeeI9Z6Jn6QTnP7KduV14dn9GTYc0v/t2h4L6WJ0Kc2DOnOJUlGBQ/qXK4P+HITIR/JTHcKYLg==",
+      "type": "package",
+      "path": "spectre.console/0.43.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net5.0/Spectre.Console.dll",
+        "lib/net5.0/Spectre.Console.xml",
+        "lib/net6.0/Spectre.Console.dll",
+        "lib/net6.0/Spectre.Console.xml",
+        "lib/netstandard2.0/Spectre.Console.dll",
+        "lib/netstandard2.0/Spectre.Console.xml",
+        "small-logo.png",
+        "spectre.console.0.43.0.nupkg.sha512",
+        "spectre.console.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
