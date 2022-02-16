@@ -6,20 +6,23 @@ using System.Threading.Tasks;
 
 namespace iProg1.Model
 {
+    [Serializable]
     public class BufferedMatrix : IMatrix
     {
-        private double[,] _matrix;
+        public double[][] _matrix;
+        public BufferedMatrix()
+        {}
         public BufferedMatrix(int a, int b)
         {
-            _matrix = new double[a, b];
+            _matrix = new double[a][];
+            for (int i = 0; i < a; i++)
+            {
+                _matrix[i] = new double[b];
+            }
         }
-        public BufferedMatrix(double[,] matrix)
+        public BufferedMatrix(double[][] matrix)
         {
-            _matrix = (double[,])matrix.Clone();
-        }
-        public int[] GetDimension()
-        {
-            return new int[2] { _matrix.GetLength(0), _matrix.GetLength(1) };
+            _matrix = (double[][])matrix.Clone();
         }
         public int GetColumnCount()
         {
@@ -27,7 +30,7 @@ namespace iProg1.Model
         }
         public int GetRowCount()
         {
-            return _matrix.GetLength(1);
+            return _matrix[0].Length;
         }
         public double GetValue(int indexC, int indexR)
         {
@@ -36,7 +39,7 @@ namespace iProg1.Model
             {
                 throw new ArgumentOutOfRangeException("incorrect index");
             }
-            return _matrix[indexC, indexR];
+            return _matrix[indexC][indexR];
         }
         public void SetValue(int indexC, int indexR, int value)
         {
@@ -45,7 +48,7 @@ namespace iProg1.Model
             {
                 throw new ArgumentOutOfRangeException("incorrect index");
             }
-            _matrix[indexC,indexR] = value;
+            _matrix[indexC][indexR] = value;
         }
         public override string ToString()
         {
@@ -53,9 +56,9 @@ namespace iProg1.Model
             sb.Append("BufferedMatrix: \n");
             for(int i = 0; i < _matrix.GetLength(0); i++)
             {
-                for(int j = 0; j < _matrix.GetLength(1); j++)
+                for(int j = 0; j < _matrix[0].Length; j++)
                 {
-                    sb.Append(_matrix[i,j]);
+                    sb.Append(_matrix[i][j]);
                 }
                 sb.Append('\n');
             }
@@ -82,15 +85,28 @@ namespace iProg1.Model
             }
             for (int i = 0; i < _matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < _matrix.GetLength(1); j++)
+                for (int j = 0; j < _matrix[0].Length; j++)
                 {
-                    if (_matrix[i, j] != matrix._matrix[i, j])
+                    if (_matrix[i][j] != matrix._matrix[i][j])
                     {
                         return false;
                     }
                 }
             }
             return true;
+        }
+        public override int GetHashCode()
+        {
+            double hashCode = 0;
+            foreach(var el in _matrix)
+            {
+                foreach (var el2 in el)
+                {
+                    hashCode += el2 - 0.1488 * _matrix.GetLength(0);
+                    hashCode *= (el2 + 1.11111) * 2.1444 * _matrix[0].Length;
+                }
+            }
+            return Math.Abs((int)hashCode);
         }
     }
 }
