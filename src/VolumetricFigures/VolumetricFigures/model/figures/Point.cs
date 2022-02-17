@@ -5,7 +5,7 @@ namespace VolumetricFigures.model.figures
 {
     [Serializable]
     [XmlRoot("Point")]
-    public class Point : Counting
+    public struct Point
     {
         [XmlElement("X")]
         public double x { get; set; }
@@ -13,10 +13,6 @@ namespace VolumetricFigures.model.figures
         public double y { get; set; }
         [XmlElement("Z")]
         public double z { get; set; }
-
-        public Point()
-        {
-        }
 
 
         public Point(double x, double y, double z)
@@ -26,40 +22,32 @@ namespace VolumetricFigures.model.figures
             this.z = z;
         }
 
-        public override RectangularCuboid GetMinCuboid()
-        {
-            return new RectangularCuboid(
-                new Point( 0, 0, 0 ), 
-                new Point( 0, 0, 0 )
-                );
-        }
-
-        public override double GetPerimeter()
-        {
-            return 0;
-        }
-
-        public override double GetSquare()
-        {
-            return 0;
-        }
-
         public override string ToString()
         {
             return "x: " + x + " y: " + y + " z: " + z + "\n";
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object obj)
         {
-            Point p = obj as Point; 
-            return p.x == x && 
-                p.y == y && 
-                p.z == z;   
+            return obj is Point point &&
+                   x == point.x &&
+                   y == point.y &&
+                   z == point.z;
         }
 
         public override int GetHashCode()
         {
             return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode();
+        }
+
+        public static bool operator ==(Point left, Point right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Point left, Point right)
+        {
+            return !(left == right);
         }
     }
 }

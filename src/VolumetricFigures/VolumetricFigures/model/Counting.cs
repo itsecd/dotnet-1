@@ -8,7 +8,6 @@ using VolumetricFigures.model.figures;
 
 namespace VolumetricFigures.model
 {
-    [XmlInclude(typeof(Point))]
     [XmlInclude(typeof(RectangularCuboid))]
     [XmlInclude(typeof(Sphere))]
     [XmlInclude(typeof(Cylinder))]

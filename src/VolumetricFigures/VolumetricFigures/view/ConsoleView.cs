@@ -39,10 +39,6 @@ namespace VolumetricFigures.view
                         {
                             switch (add)
                             {
-                                case "Point":
-                                    _controller.AddPoint(indexAdd,
-                                        InputPointCoordinate());
-                                    break;
                                 case "Rectangular Cuboid":
                                     _controller.AddRectangularCuboid(
                                         indexAdd,
@@ -124,35 +120,17 @@ namespace VolumetricFigures.view
                         var saveOpen = AnsiConsole.Prompt(new SelectionPrompt<string>()
                             .Title("What to do?")
                             .AddChoices("Save", "Open"));
-                        XmlSerializer formatter = new XmlSerializer(typeof(List<Counting>));
                         switch (saveOpen)
                         {
                             case "Save":
                                 AnsiConsole.Write("Path to Save file:\n");
                                 String pathSave = Console.ReadLine();
-                                try
-                                {
-                                    FileStream fs = new FileStream(pathSave, FileMode.OpenOrCreate);
-                                    formatter.Serialize(fs, _controller.GetFigures());
-                                }catch (Exception ex)
-                                {
-                                    AnsiConsole.Write("File don't open\n");
-                                    Console.ReadLine();
-                                }
+                                _controller.SaveFile(pathSave);
                                 break;
                             case "Open":
                                 AnsiConsole.Write("Path to Open file:\n");
                                 String pathOpen = Console.ReadLine();
-                                try
-                                {
-                                    FileStream fs = new FileStream(pathOpen, FileMode.OpenOrCreate);
-                                    _controller.SetFigures((List<Counting>)formatter.Deserialize(fs));
-                                }
-                                catch (Exception ex)
-                                {
-                                    AnsiConsole.Write("File don't open\n");
-                                    Console.ReadLine();
-                                }
+                                _controller.OpenFile(pathOpen);
                                 break;
                         };
                         break;

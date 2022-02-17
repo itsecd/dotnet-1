@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 using VolumetricFigures.model;
 using VolumetricFigures.model.figures;
 
@@ -13,11 +15,6 @@ namespace VolumetricFigures.controller
         public ConsoleController(List<Counting> figures)
         {
             _figures = figures;
-        }
-
-        public void AddPoint(int index, Point p)
-        {
-            AddFigure(index, p);
         }
 
         public void AddRectangularCuboid(int index, Point p1, Point p2)
@@ -75,6 +72,37 @@ namespace VolumetricFigures.controller
             _figures.RemoveRange(0, _figures.Count);
         }
 
+        public void OpenFile(String path)
+        {
+            try 
+            { 
+                XmlSerializer formatter = new XmlSerializer(typeof(List<Counting>));
+                FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+                _figures = (List<Counting>)formatter.Deserialize(fs);
+            }
+            catch (Exception ex)
+            {
+                Console.Write("File don't open\n");
+                Console.ReadLine();
+            }
+        }
+
+        public void SaveFile(String path)
+        {
+            try
+            {
+                XmlSerializer formatter = new XmlSerializer(typeof(List<Counting>));
+                FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+                formatter.Serialize(fs, _figures);
+            }
+            catch (Exception ex)
+            {
+                Console.Write("File don't save\n");
+                Console.ReadLine();
+            }
+
+        }
+
         public Counting GetFigure(int index)
         {
             return _figures[index];
@@ -100,11 +128,6 @@ namespace VolumetricFigures.controller
                 }
             }
             return false;
-        }
-
-        internal void SetFigures(object v)
-        {
-            throw new NotImplementedException();
         }
     }
 }
