@@ -34,7 +34,20 @@ namespace Lab1
                             AnsiConsole.MarkupLine("[#ff7d00]Недопустимый размер матрицы![/]");
                             break;
                         }
-                        matrices.Add(new BufferedMatrix(th, tw));
+                        if (matrices.Count == 0)
+                        {
+                            matrices.Add(new BufferedMatrix(th, tw));
+                            break;
+                        }
+                        AnsiConsole.MarkupLine($"Всего {matrices.Count} матриц в списке");
+                        int indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
+                        if (indIns < 0 || indIns > matrices.Count - 1)
+                        {
+                            AnsiConsole.Write(new Panel("[#ff7d00]Индекс вышел за границы списка![/]"));
+                            AnsiConsole.WriteLine();
+                            break;
+                        }
+                        matrices.Insert(indIns, new BufferedMatrix(th, tw));
                         break;
                     case "Удалить матрицу":
                         AnsiConsole.Clear();
@@ -87,8 +100,10 @@ namespace Lab1
                         }
                         var tmpTab = new Table();
                         tmpTab.AddColumns(new[] {"№", "Матрица"});
-                        for (int i = 0; i < matrices.Count; i++)
+                        for (int i = 0; i < matrices.Count && i != 10; i++)
                             tmpTab.AddRow(new[] {$"[bold blue]{i}[/]", matrices[i].ToString()});
+                        if (matrices.Count > 10)
+                            tmpTab.AddRow(new[] {"...", "..."});
                         AnsiConsole.Write(tmpTab);
                         AnsiConsole.WriteLine();
                         break;
