@@ -9,7 +9,8 @@ using System.Xml.Serialization;
 
 namespace iProg1.Model
 {
-    public class SparseMatrix : IMatrix, IXmlSerializable
+    [Serializable]
+    public class SparseMatrix : Matrix, IXmlSerializable
     {
         public int ColumnCount;
         public int RowCount;
@@ -34,15 +35,15 @@ namespace iProg1.Model
             ColumnCount = cCount;
             RowCount = rCount;
         }
-        public int GetColumnCount()
+        public override int GetColumnCount()
         {
             return ColumnCount;
         }
-        public int GetRowCount()
+        public override int GetRowCount()
         {
             return RowCount;
         }
-        public double GetValue(int indexC, int indexR)
+        public override double GetValue(int indexC, int indexR)
         {
             if (!Valid.IsValidIndex(indexC, GetColumnCount()) ||
                 !Valid.IsValidIndex(indexR, GetRowCount()))
@@ -53,7 +54,7 @@ namespace iProg1.Model
                 ? _matrix[new Tuple<int, int>(indexC, indexR)]
                 : 0;
         }
-        public void SetValue(int indexC, int indexR, int value)
+        public override void SetValue(int indexC, int indexR, int value)
         {
             if (!Valid.IsValidIndex(indexC, GetColumnCount()) ||
                  !Valid.IsValidIndex(indexR, GetRowCount()))
@@ -145,8 +146,6 @@ namespace iProg1.Model
 
         public void ReadXml(XmlReader reader)
         {
-            XmlSerializer dimensionAndKeySerializer = new XmlSerializer(typeof(int));
-            XmlSerializer valueSerializer = new XmlSerializer(typeof(double));
             bool wasEmpty = reader.IsEmptyElement;
             if (wasEmpty)
                 return;
@@ -161,7 +160,8 @@ namespace iProg1.Model
                     double.Parse(reader.GetAttribute("Value")));
                 reader.Read();
             }
-            //reader.ReadStartElement();
+            //XmlSerializer dimensionAndKeySerializer = new XmlSerializer(typeof(int));
+            //XmlSerializer valueSerializer = new XmlSerializer(typeof(double));
             //reader.ReadStartElement("colCount");
             //this.ColumnCount = (int)dimensionAndKeySerializer.Deserialize(reader);
             //reader.ReadEndElement();

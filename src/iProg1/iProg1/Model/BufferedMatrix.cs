@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace iProg1.Model
 {
     [Serializable]
-    public class BufferedMatrix : IMatrix
+    public class BufferedMatrix : Matrix
     {
         public double[][] _matrix;
         public BufferedMatrix()
@@ -24,15 +24,15 @@ namespace iProg1.Model
         {
             _matrix = (double[][])matrix.Clone();
         }
-        public int GetColumnCount()
+        public override int GetColumnCount()
         {
             return _matrix.GetLength(0);
         }
-        public int GetRowCount()
+        public override int GetRowCount()
         {
             return _matrix[0].Length;
         }
-        public double GetValue(int indexC, int indexR)
+        public override double GetValue(int indexC, int indexR)
         {
             if (!Valid.IsValidIndex(indexC, GetColumnCount()) ||
                 !Valid.IsValidIndex(indexR, GetRowCount()))
@@ -41,7 +41,7 @@ namespace iProg1.Model
             }
             return _matrix[indexC][indexR];
         }
-        public void SetValue(int indexC, int indexR, int value)
+        public override void SetValue(int indexC, int indexR, int value)
         {
             if (!Valid.IsValidIndex(indexC, GetColumnCount()) ||
                 !Valid.IsValidIndex(indexR, GetRowCount()))
