@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
-using VolumetricFigures.model;
-using VolumetricFigures.model.figures;
+using VolumetricFigures.Model;
+using VolumetricFigures.Model.Figures;
 
-namespace VolumetricFigures.controller
+namespace VolumetricFigures.Controller
 {
     public class ConsoleController
     {
 
-        private List<Counting> _figures = null;
+        private List<Figure> _figures;
+        public List<Figure> Figures { get { return _figures; } set { _figures = value; } }
 
-        public ConsoleController(List<Counting> figures)
+        public ConsoleController(List<Figure> figures)
         {
             _figures = figures;
         }
@@ -27,12 +29,12 @@ namespace VolumetricFigures.controller
             AddFigure(index, new Sphere(p, radius));
         }
 
-        public void AddСylinder(int index, Point p, double radius, double height)
+        public void AddCylinder(int index, Point p, double radius, double height)
         {
             AddFigure(index, new Cylinder(p, radius, height));
         }
 
-        public void AddFigure(int index, Counting figure)
+        public void AddFigure(int index, Figure figure)
         {
             if (_figures.Count != index)
             {
@@ -72,30 +74,30 @@ namespace VolumetricFigures.controller
             _figures.RemoveRange(0, _figures.Count);
         }
 
-        public void OpenFile(String path)
+        public void OpenFile(string path)
         {
             try 
             { 
-                XmlSerializer formatter = new XmlSerializer(typeof(List<Counting>));
+                XmlSerializer formatter = new XmlSerializer(typeof(List<Figure>));
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-                _figures = (List<Counting>)formatter.Deserialize(fs);
+                _figures = (List<Figure>)formatter.Deserialize(fs);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.Write("File don't open\n");
                 Console.ReadLine();
             }
         }
 
-        public void SaveFile(String path)
+        public void SaveFile(string path)
         {
             try
             {
-                XmlSerializer formatter = new XmlSerializer(typeof(List<Counting>));
+                XmlSerializer formatter = new XmlSerializer(typeof(List<Figure>));
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
                 formatter.Serialize(fs, _figures);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.Write("File don't save\n");
                 Console.ReadLine();
@@ -103,31 +105,24 @@ namespace VolumetricFigures.controller
 
         }
 
-        public Counting GetFigure(int index)
+        public double SumManual()
         {
-            return _figures[index];
+            double sum = 0;
+            foreach (Figure figure in _figures)
+            {
+                sum += figure.GetSquare();
+            }
+            return sum;
         }
 
-        public List<Counting> GetFigures()
+        public double SumSystemLinq()
         {
-            return _figures;
-        }
-
-        public void SetFigures(List<Counting> figures)
-        {
-            _figures = figures;
+            return _figures.Sum(f => f.GetSquare());
         }
 
         public bool CheckIndex(int index)
         {
-            if (_figures != null)
-            {
-                if ((index < _figures.Count) && (index >= 0))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return (index < _figures.Count) && (index >= 0);
         }
     }
 }

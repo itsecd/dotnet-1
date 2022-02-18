@@ -1,14 +1,9 @@
 ﻿using Spectre.Console;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using VolumetricFigures.controller;
-using VolumetricFigures.model;
-using VolumetricFigures.model.figures;
+using VolumetricFigures.Controller;
+using VolumetricFigures.Model;
+using VolumetricFigures.Model.Figures;
 
 namespace VolumetricFigures.view
 {
@@ -27,15 +22,15 @@ namespace VolumetricFigures.view
             {
                 var action = AnsiConsole.Prompt(new SelectionPrompt<string>()
                     .Title("What to do?")
-                    .AddChoices("Add", "Compare", "Delete","Sort", "Save/Open", "View Table"));
+                    .AddChoices("Add", "Compare", "Delete","Sort", "Sum All Square", "Save/Open", "View Table"));
                 switch(action)
                 {
                     case "Add":
                         var add = AnsiConsole.Prompt(new SelectionPrompt<string>()
                             .Title("What to add?")
-                            .AddChoices("Point", "Rectangular Cuboid", "Sphere", "Cylinder"));
+                            .AddChoices("Rectangular Cuboid", "Sphere", "Cylinder"));
                         int indexAdd = AnsiConsole.Prompt(new TextPrompt<int>(" Index :"));
-                        if (_controller.CheckIndex(indexAdd) || indexAdd == _controller.GetFigures().Count)
+                        if (_controller.CheckIndex(indexAdd) || indexAdd == _controller.Figures.Count)
                         {
                             switch (add)
                             {
@@ -52,7 +47,7 @@ namespace VolumetricFigures.view
                                         AnsiConsole.Prompt(new TextPrompt<double>("Radius :")));
                                     break;
                                 case "Cylinder":
-                                    _controller.AddСylinder(
+                                    _controller.AddCylinder(
                                         indexAdd,
                                         InputPointCoordinate(),
                                         AnsiConsole.Prompt(new TextPrompt<double>("Radius :")),
@@ -73,8 +68,8 @@ namespace VolumetricFigures.view
                         {
                             Table tableEquals = new Table();
                             tableEquals.AddColumns("Index", "Type", "Info", "Square", "Perimeter", "Min.Cuboid");
-                            tableEquals = AddRowToTable(tableEquals, index1, _controller.GetFigure(index1));
-                            tableEquals = AddRowToTable(tableEquals, index2, _controller.GetFigure(index2));
+                            tableEquals = AddRowToTable(tableEquals, index1, _controller.Figures[index1]);
+                            tableEquals = AddRowToTable(tableEquals, index2, _controller.Figures[index2]);
                             AnsiConsole.Write(tableEquals);
                             AnsiConsole.Write("\nSquare biggest in element by index " + _controller.CompareSquare(index1, index2));
                             AnsiConsole.Write("\nPerimeter biggest in element by index " + _controller.ComparePerimeter(index1, index2));
@@ -107,14 +102,21 @@ namespace VolumetricFigures.view
                         switch (sort)
                         {
                             case "Square":
-                                _controller.GetFigures().Sort((figure1, figure2) =>
+                                _controller.Figures.Sort((figure1, figure2) =>
                                     figure1.GetSquare().CompareTo(figure2.GetSquare()));
                                 break;
                             case "Perimeter":
-                                _controller.GetFigures().Sort((figure1, figure2) =>
+                                _controller.Figures.Sort((figure1, figure2) =>
                                     figure1.GetPerimeter().CompareTo(figure2.GetPerimeter()));
                                 break;
                         };
+                        break;
+                    case "Sum All Square":
+                        AnsiConsole.Write("Sum manual mode:\n");
+                        AnsiConsole.Write(_controller.SumManual());
+                        AnsiConsole.Write("\nSum System.Linq mode:\n");
+                        AnsiConsole.Write(_controller.SumSystemLinq());
+                        Console.ReadLine();
                         break;
                     case "Save/Open":
                         var saveOpen = AnsiConsole.Prompt(new SelectionPrompt<string>()
@@ -124,12 +126,12 @@ namespace VolumetricFigures.view
                         {
                             case "Save":
                                 AnsiConsole.Write("Path to Save file:\n");
-                                String pathSave = Console.ReadLine();
+                                string pathSave = Console.ReadLine();
                                 _controller.SaveFile(pathSave);
                                 break;
                             case "Open":
                                 AnsiConsole.Write("Path to Open file:\n");
-                                String pathOpen = Console.ReadLine();
+                                string pathOpen = Console.ReadLine();
                                 _controller.OpenFile(pathOpen);
                                 break;
                         };
@@ -137,14 +139,14 @@ namespace VolumetricFigures.view
                     case "View Table":
                         Table table = new Table();
                         table.AddColumns("Index", "Type", "Info", "Square", "Perimeter", "Min.Cuboid");
-                        for(int indexTable = 0; indexTable < _controller.GetFigures().Count; indexTable++)
+                        for(int indexTable = 0; indexTable < _controller.Figures.Count; indexTable++)
                         {
                             if (indexTable > 10)
                             {
                                 table.AddRow("...", "...", "...", "...", "...", "...");
                                 break;
                             }
-                            table = AddRowToTable(table, indexTable, _controller.GetFigure(indexTable));
+                            table = AddRowToTable(table, indexTable, _controller.Figures[indexTable]);
                             AnsiConsole.WriteLine();
                         }
                         AnsiConsole.Write(table);
@@ -155,14 +157,14 @@ namespace VolumetricFigures.view
             }
         }
 
-        private Table AddRowToTable(Table table, int index, Counting figure)
+        private Table AddRowToTable(Table table, int index, Figure figure)
         {
             table.AddRow(new Markup(index.ToString()),
                 new Markup(figure.GetType().Name),
-                new Markup("[red]" + figure.ToString() + "[/]"),
-                new Markup("[blue]" + figure.GetSquare().ToString() + "[/]"),
-                new Markup("[blue]" + figure.GetPerimeter().ToString() + "[/]"),
-                new Panel("[green]Сuboid: [/]\n" + figure.GetMinCuboid().ToString()));
+                new Markup("[red]" + figure + "[/]"),
+                new Markup("[blue]" + figure.GetSquare() + "[/]"),
+                new Markup("[blue]" + figure.GetPerimeter() + "[/]"),
+                new Panel("[green]Сuboid: [/]\n" + figure.GetMinCuboid()));
             return table;
         }
 

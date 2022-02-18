@@ -1,79 +1,85 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
+using VolumetricFigures.Model.Figures;
 
-namespace VolumetricFigures.model.figures
+namespace VolumetricFigures.Model.Figures
 {
     [Serializable]
     [XmlRoot("RectangularCuboid")]
-    public class RectangularCuboid : Counting
+    public class RectangularCuboid : Figure
     {
         [XmlElement("Point_1")]
-        public Point _p1 { get; set; }
+        public Point P1 { get; set; }
         [XmlElement("Point_2")]
-        public Point _p2 { get; set; }
+        public Point P2 { get; set; }
 
         public RectangularCuboid()
         {
+            P1 = new Point();
+            P2 = new Point();
         }
 
         public RectangularCuboid(Point p1, Point p2)
         {
-            _p1 = p1;
-            _p2 = p2;
+            P1 = p1;
+            P2 = p2;
         }
 
-        public double GetWidht()
+        public double GetWidth()
         {
-            return Math.Abs(_p1.x - _p2.x);
+            return Math.Abs(P1.X - P2.X);
         }
 
         public double GetLength()
         {
-            return Math.Abs(_p1.y - _p2.y);
+            return Math.Abs(P1.Y - P2.Y);
         }
 
-        public double GetHight()
+        public double GetHigth()
         {
-            return Math.Abs(_p1.z - _p2.z);
+            return Math.Abs(P1.Z - P2.Z);
         }
 
         public override RectangularCuboid GetMinCuboid()
         {
             return new RectangularCuboid(
-                new Point(_p1.x, _p1.y, _p1.z ),
-                new Point(_p2.x, _p2.y, _p2.z )
+                new Point(P1.X, P1.Y, P1.Z ),
+                new Point(P2.X, P2.Y, P2.Z )
                 );
         }
 
         public override double GetPerimeter()
         {
-            return 2 * (GetHight() * GetWidht() + GetWidht() * GetLength() + GetLength() * GetHight());
+            return 2 * (GetHigth() * GetWidth() + GetWidth() * GetLength() + GetLength() * GetHigth());
         }
 
         public override double GetSquare()
         {
-            return GetHight() * GetWidht() * GetLength();
+            return GetHigth() * GetWidth() * GetLength();
         }
 
         public override string ToString()
         {
-            return "1: " + _p1.ToString() + "2: " + _p2.ToString();
+            return "1: " + P1 + "2: " + P2;
         }
 
         public override bool Equals(Object obj)
         {
-            RectangularCuboid rectangularCuboid = obj as RectangularCuboid;
-            return rectangularCuboid._p1.Equals(_p1) && 
-                rectangularCuboid._p2.Equals(_p2);
+            try
+            {
+                RectangularCuboid rectangularCuboid = obj as RectangularCuboid;
+                return rectangularCuboid.P1.Equals(P1) &&
+                rectangularCuboid.P2.Equals(P2);
+            }
+            catch(Exception)
+            {
+                throw new NullReferenceException();
+            }     
         }
 
         public override int GetHashCode()
         {
-            return _p1.GetHashCode() ^ _p2.GetHashCode();
+            return P1.GetHashCode() ^ P2.GetHashCode();
         }
     }
 }

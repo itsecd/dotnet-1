@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
-using VolumetricFigures.model.figures;
+using VolumetricFigures.Model.Figures;
 
-namespace VolumetricFigures.model
+namespace VolumetricFigures.Model
 {
     [XmlInclude(typeof(RectangularCuboid))]
     [XmlInclude(typeof(Sphere))]
     [XmlInclude(typeof(Cylinder))]
     [Serializable]
-    public abstract class Counting
+    public abstract class Figure
     {
         public abstract double GetSquare();
         public abstract double GetPerimeter();    

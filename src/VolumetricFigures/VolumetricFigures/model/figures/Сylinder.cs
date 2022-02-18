@@ -1,67 +1,73 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace VolumetricFigures.model.figures
+namespace VolumetricFigures.Model.Figures
 {
     [Serializable]
     [XmlRoot("Cylinder")]
-    public class Cylinder : Counting
+    public class Cylinder : Figure
     {
         [XmlElement("Point")]
-        public Point _centreFoundation { get; set; }
+        public Point CentreFoundation { get; set; }
         [XmlElement("Radius")]
-        public double _radius { get; set; }
+        public double Radius { get; set; }
         [XmlElement("Height")]
-        public double _height { get; set; }
+        public double Height { get; set; }
 
         public Cylinder()
         {
+            Radius = 0;
+            Height = 0;
+            CentreFoundation = new Point();
         }
 
         public Cylinder(Point centreFoundation, double radius, double height)
         {
-            _centreFoundation = centreFoundation;
-            _radius = radius;
-            _height = height;
+            CentreFoundation = centreFoundation;
+            Radius = radius;
+            Height = height;
         }
 
         public override RectangularCuboid GetMinCuboid()
         {
             return new RectangularCuboid(
-                new Point(_centreFoundation.x + _radius, _centreFoundation.y + _radius, _centreFoundation.z), 
-                new Point( _centreFoundation.x - _radius, _centreFoundation.y - _radius, _centreFoundation.z + _height )
+                new Point(CentreFoundation.X + Radius, CentreFoundation.Y + Radius, CentreFoundation.Z), 
+                new Point( CentreFoundation.X - Radius, CentreFoundation.Y - Radius, CentreFoundation.Z + Height )
                 );
         }
 
         public override double GetPerimeter()
         {
-            return 2 * Math.PI * _radius * (_height + _radius);
+            return 2 * Math.PI * Radius * (Height + Radius);
         }
 
         public override double GetSquare()
         {
-            return Math.PI * Math.Pow(_radius, 2) * _height;
+            return Math.PI * Math.Pow(Radius, 2) * Height;
         }
         public override string ToString()
         {
-            return "Centre: " + _centreFoundation.ToString() + "Radius: " + _radius + "\nHeight: " + _height;
+            return "Centre: " + CentreFoundation + "Radius: " + Radius + "\nHeight: " + Height;
         }
 
         public override bool Equals(Object obj)
         {
+            try 
+            {
             Cylinder cylinder = obj as Cylinder;
-            return cylinder._centreFoundation.Equals(_centreFoundation) &&
-                cylinder._radius == _radius &&
-                cylinder._height == _height;
+            return cylinder.CentreFoundation.Equals(CentreFoundation) &&
+                cylinder.Radius == Radius &&
+                cylinder.Height == Height;
+            }
+            catch(Exception)
+            {
+                throw new NullReferenceException();
+            }
         }
 
         public override int GetHashCode()
         {
-            return _centreFoundation.GetHashCode() ^ _radius.GetHashCode() ^ _height.GetHashCode();
+            return CentreFoundation.GetHashCode() ^ Radius.GetHashCode() ^ Height.GetHashCode();
         }
     }
 }

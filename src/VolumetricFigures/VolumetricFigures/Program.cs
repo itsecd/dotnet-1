@@ -6,8 +6,8 @@ namespace VolumetricFigures
     {
         static void Main(string[] args)
         {
-            Facede facade = new Facede();
-            facade.Start();
+            Faсade faсade = new Faсade();
+            faсade.Start();
         }
     }
 }

@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using VolumetricFigures.controller;
-using VolumetricFigures.model;
+using VolumetricFigures.Controller;
+using VolumetricFigures.Model;
 using VolumetricFigures.view;
 
 namespace VolumetricFigures
 {
-    public class Facede
+    public class Faсade
     {
-        private List<Counting> _figures;
         private ConsoleController _controller;
 
-        public Facede()
+        public Faсade()
         {
-            _figures = new List<Counting>();
+            List<Figure> _figures = new List<Figure>();
             _controller = new ConsoleController(_figures);
         }
 

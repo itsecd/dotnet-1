@@ -1,43 +1,42 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace VolumetricFigures.model.figures
+namespace VolumetricFigures.Model.Figures
 {
     [Serializable]
     [XmlRoot("Point")]
     public struct Point
     {
         [XmlElement("X")]
-        public double x { get; set; }
+        public double X { get; set; }
         [XmlElement("Y")]
-        public double y { get; set; }
+        public double Y { get; set; }
         [XmlElement("Z")]
-        public double z { get; set; }
-
+        public double Z { get; set; }
 
         public Point(double x, double y, double z)
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            X = x;
+            Y = y;
+            Z = z;
         }
 
         public override string ToString()
         {
-            return "x: " + x + " y: " + y + " z: " + z + "\n";
+            return "x: " + X + " y: " + Y + " z: " + Z + "\n";
         }
 
         public override bool Equals(object obj)
         {
             return obj is Point point &&
-                   x == point.x &&
-                   y == point.y &&
-                   z == point.z;
+                   X == point.X &&
+                   Y == point.Y &&
+                   Z == point.Z;
         }
 
         public override int GetHashCode()
         {
-            return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode();
+            return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
         }
 
         public static bool operator ==(Point left, Point right)

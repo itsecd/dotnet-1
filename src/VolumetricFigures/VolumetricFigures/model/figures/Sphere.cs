@@ -1,64 +1,69 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace VolumetricFigures.model.figures
+namespace VolumetricFigures.Model.Figures
 {
     [Serializable]
     [XmlRoot("Sphere")]
-    public class Sphere : Counting
+    public class Sphere : Figure
     {
         [XmlElement("Point")]
-        public Point _centre { get; set; }
+        public Point Centre { get; set; }
         [XmlElement("Radius")]
-        public double _radius { get; set; }
+        public double Radius { get; set; }
 
         public Sphere()
         {
+            Radius = 0;
+            Centre = new Point();
         }
 
         public Sphere(Point centre, double radius)
         {
-            _centre = centre;
-            _radius = radius;
+            Centre = centre;
+            Radius = radius;
         }
 
         public override RectangularCuboid GetMinCuboid()
         {
             return new RectangularCuboid(
-                new Point(_centre.x + _radius , _centre.y + _radius, _centre.z + _radius ), 
-                new Point( _centre.x - _radius, _centre.y - _radius, _centre.z - _radius )
+                new Point(Centre.X + Radius , Centre.Y + Radius, Centre.Z + Radius ), 
+                new Point( Centre.X - Radius, Centre.Y - Radius, Centre.Z - Radius )
                 );
         }
 
         public override double GetPerimeter()
         {
-            return 4 * Math.PI * Math.Pow(_radius, 2);
+            return 4 * Math.PI * Math.Pow(Radius, 2);
         }
 
         public override double GetSquare()
         {
-            return (4/3) * Math.PI * Math.Pow(_radius, 3);
+            return 4 / 3.0 * Math.PI * Math.Pow(Radius, 3);
         }
 
         public override string ToString()
         {
-            return "Centre: " + _centre.ToString() + "Radius: " + _radius;
+            return "Centre: " + Centre + "Radius: " + Radius;
         }
 
         public override bool Equals(Object obj)
         {
-            Sphere sphere = obj as Sphere;
-            return sphere._centre.Equals(_centre) && 
-                sphere._radius == _radius;
+            try
+            {
+                Sphere sphere = obj as Sphere;
+                return sphere.Centre.Equals(Centre) && 
+                    sphere.Radius == Radius;
+            }
+            catch(Exception)
+            {
+                throw new NullReferenceException();
+            }
         }
 
         public override int GetHashCode()
         {
-            return _centre.GetHashCode() ^ _radius.GetHashCode();
+            return Centre.GetHashCode() ^ Radius.GetHashCode();
         }
     }
 }
