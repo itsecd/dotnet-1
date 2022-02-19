@@ -35,7 +35,7 @@ namespace VolumetricFigures.Model.Figures
             return Math.Abs(P1.Y - P2.Y);
         }
 
-        public double GetHigth()
+        public double GetHeight()
         {
             return Math.Abs(P1.Z - P2.Z);
         }
@@ -50,12 +50,12 @@ namespace VolumetricFigures.Model.Figures
 
         public override double GetPerimeter()
         {
-            return 2 * (GetHigth() * GetWidth() + GetWidth() * GetLength() + GetLength() * GetHigth());
+            return 2 * (GetHeight() * GetWidth() + GetWidth() * GetLength() + GetLength() * GetHeight());
         }
 
         public override double GetSquare()
         {
-            return GetHigth() * GetWidth() * GetLength();
+            return GetHeight() * GetWidth() * GetLength();
         }
 
         public override string ToString()
@@ -75,11 +75,6 @@ namespace VolumetricFigures.Model.Figures
             {
                 throw new NullReferenceException();
             }     
-        }
-
-        public override int GetHashCode()
-        {
-            return P1.GetHashCode() ^ P2.GetHashCode();
         }
     }
 }

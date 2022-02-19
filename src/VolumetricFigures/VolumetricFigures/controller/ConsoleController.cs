@@ -11,18 +11,16 @@ namespace VolumetricFigures.Controller
     public class ConsoleController : IConsoleController
     {
 
-        private List<Figure> _figures;
-
-        public List<Figure> Figures { get => _figures; set => _figures = value; }
+        public List<Figure> Figures { get ; set; }
 
         public ConsoleController()
         {
-            _figures = new List<Figure>();
+            Figures = new List<Figure>();
         }
 
         public ConsoleController(List<Figure> figures)
         {
-            _figures = figures;
+            Figures = figures;
         }
 
         public void AddRectangularCuboid(int index, Point p1, Point p2)
@@ -42,16 +40,16 @@ namespace VolumetricFigures.Controller
 
         public void AddFigure(int index, Figure figure)
         {
-            if (_figures.Count != index)
+            if (Figures.Count != index)
             {
                 DeleteFigure(index);
             }
-            _figures.Insert(index, figure);
+            Figures.Insert(index, figure);
         }
 
         public int CompareSquare(int index1, int index2)
         {
-            if (_figures[index1].GetSquare() > _figures[index2].GetSquare())
+            if (Figures[index1].GetSquare() > Figures[index2].GetSquare())
             {
                 return index1;
             }
@@ -60,7 +58,7 @@ namespace VolumetricFigures.Controller
 
         public int ComparePerimeter(int index1, int index2)
         {
-            if (_figures[index1].GetPerimeter() > _figures[index2].GetPerimeter())
+            if (Figures[index1].GetPerimeter() > Figures[index2].GetPerimeter())
             {
                 return index1;
             }
@@ -71,13 +69,13 @@ namespace VolumetricFigures.Controller
         {
             if (CheckIndex(index))
             {
-                _figures.RemoveAt(index);
+                Figures.RemoveAt(index);
             }
         }
 
         public void DeleteAll()
         {
-            _figures.RemoveRange(0, _figures.Count);
+            Figures.RemoveRange(0, Figures.Count);
         }
 
         public void OpenFile(string path)
@@ -86,7 +84,7 @@ namespace VolumetricFigures.Controller
             {
                 XmlSerializer formatter = new XmlSerializer(typeof(List<Figure>));
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-                _figures = (List<Figure>)formatter.Deserialize(fs);
+                Figures = (List<Figure>)formatter.Deserialize(fs);
             }
             catch (Exception)
             {
@@ -101,7 +99,7 @@ namespace VolumetricFigures.Controller
             {
                 XmlSerializer formatter = new XmlSerializer(typeof(List<Figure>));
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-                formatter.Serialize(fs, _figures);
+                formatter.Serialize(fs, Figures);
             }
             catch (Exception)
             {
@@ -114,7 +112,7 @@ namespace VolumetricFigures.Controller
         public double SumManual()
         {
             double sum = 0;
-            foreach (Figure figure in _figures)
+            foreach (Figure figure in Figures)
             {
                 sum += figure.GetSquare();
             }
@@ -123,12 +121,16 @@ namespace VolumetricFigures.Controller
 
         public double SumSystemLinq()
         {
-            return _figures.Sum(f => f.GetSquare());
+            return Figures.Sum(f => f.GetSquare());
         }
 
         public bool CheckIndex(int index)
         {
-            return (index < _figures.Count) && (index >= 0);
+            if (Figures == null)
+            {
+                return false;
+            }
+            return (index < Figures.Count) && (index >= 0);
         }
 
        

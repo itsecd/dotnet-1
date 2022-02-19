@@ -34,11 +34,6 @@ namespace VolumetricFigures.Model.Figures
                    Z == point.Z;
         }
 
-        public override int GetHashCode()
-        {
-            return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
-        }
-
         public static bool operator ==(Point left, Point right)
         {
             return left.Equals(right);

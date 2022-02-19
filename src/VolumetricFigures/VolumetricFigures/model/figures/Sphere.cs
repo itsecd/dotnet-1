@@ -60,10 +60,5 @@ namespace VolumetricFigures.Model.Figures
                 throw new NullReferenceException();
             }
         }
-
-        public override int GetHashCode()
-        {
-            return Centre.GetHashCode() ^ Radius.GetHashCode();
-        }
     }
 }

@@ -54,20 +54,15 @@ namespace VolumetricFigures.Model.Figures
         {
             try 
             {
-            Cylinder cylinder = obj as Cylinder;
-            return cylinder.CentreFoundation.Equals(CentreFoundation) &&
-                cylinder.Radius == Radius &&
-                cylinder.Height == Height;
+                Cylinder cylinder = obj as Cylinder;
+                return cylinder.CentreFoundation.Equals(CentreFoundation) &&
+                    cylinder.Radius == Radius &&
+                    cylinder.Height == Height;
             }
             catch(Exception)
             {
                 throw new NullReferenceException();
             }
-        }
-
-        public override int GetHashCode()
-        {
-            return CentreFoundation.GetHashCode() ^ Radius.GetHashCode() ^ Height.GetHashCode();
         }
     }
 }
