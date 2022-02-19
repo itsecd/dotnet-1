@@ -8,11 +8,17 @@ using VolumetricFigures.Model.Figures;
 
 namespace VolumetricFigures.Controller
 {
-    public class ConsoleController
+    public class ConsoleController : IConsoleController
     {
 
         private List<Figure> _figures;
-        public List<Figure> Figures { get { return _figures; } set { _figures = value; } }
+
+        public List<Figure> Figures { get => _figures; set => _figures = value; }
+
+        public ConsoleController()
+        {
+            _figures = new List<Figure>();
+        }
 
         public ConsoleController(List<Figure> figures)
         {
@@ -63,10 +69,10 @@ namespace VolumetricFigures.Controller
 
         public void DeleteFigure(int index)
         {
-            if (CheckIndex(index)) 
+            if (CheckIndex(index))
             {
                 _figures.RemoveAt(index);
-            }   
+            }
         }
 
         public void DeleteAll()
@@ -76,8 +82,8 @@ namespace VolumetricFigures.Controller
 
         public void OpenFile(string path)
         {
-            try 
-            { 
+            try
+            {
                 XmlSerializer formatter = new XmlSerializer(typeof(List<Figure>));
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
                 _figures = (List<Figure>)formatter.Deserialize(fs);
@@ -124,5 +130,7 @@ namespace VolumetricFigures.Controller
         {
             return (index < _figures.Count) && (index >= 0);
         }
+
+       
     }
 }

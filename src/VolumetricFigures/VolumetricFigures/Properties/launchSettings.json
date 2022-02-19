@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "VolumetricFigures": {
+      "commandName": "Project",
+      "commandLineArgs": "SumSquare"
+    }
+  }
+}

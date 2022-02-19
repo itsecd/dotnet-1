@@ -1,4 +1,4 @@
-﻿using System;
+﻿using VolumetricFigures.view;
 
 namespace VolumetricFigures
 {
@@ -6,8 +6,8 @@ namespace VolumetricFigures
     {
         static void Main(string[] args)
         {
-            Faсade faсade = new Faсade();
-            faсade.Start();
+            ConsoleView view = new ConsoleView(args);
+            view.Start();
         }
     }
 }
