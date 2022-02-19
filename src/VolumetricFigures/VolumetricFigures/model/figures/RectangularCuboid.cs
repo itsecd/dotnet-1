@@ -9,9 +9,9 @@ namespace VolumetricFigures.Model.Figures
     public class RectangularCuboid : Figure
     {
         [XmlElement("Point_1")]
-        public Point P1 { get; set; }
+        public Point P1 { get; init; }
         [XmlElement("Point_2")]
-        public Point P2 { get; set; }
+        public Point P2 { get; init; }
 
         public RectangularCuboid()
         {
@@ -65,16 +65,18 @@ namespace VolumetricFigures.Model.Figures
 
         public override bool Equals(Object obj)
         {
-            try
+            if ((obj != null) || this.GetType().Equals(obj.GetType()))
             {
                 RectangularCuboid rectangularCuboid = obj as RectangularCuboid;
                 return rectangularCuboid.P1.Equals(P1) &&
-                rectangularCuboid.P2.Equals(P2);
+                    rectangularCuboid.P2.Equals(P2);
             }
-            catch(Exception)
-            {
-                throw new NullReferenceException();
-            }     
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return P1.GetHashCode() ^ P2.GetHashCode();
         }
     }
 }

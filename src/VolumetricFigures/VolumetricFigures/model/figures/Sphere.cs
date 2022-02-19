@@ -8,9 +8,9 @@ namespace VolumetricFigures.Model.Figures
     public class Sphere : Figure
     {
         [XmlElement("Point")]
-        public Point Centre { get; set; }
+        public Point Centre { get; init; }
         [XmlElement("Radius")]
-        public double Radius { get; set; }
+        public double Radius { get; init; }
 
         public Sphere()
         {
@@ -27,8 +27,8 @@ namespace VolumetricFigures.Model.Figures
         public override RectangularCuboid GetMinCuboid()
         {
             return new RectangularCuboid(
-                new Point(Centre.X + Radius , Centre.Y + Radius, Centre.Z + Radius ), 
-                new Point( Centre.X - Radius, Centre.Y - Radius, Centre.Z - Radius )
+                new Point(Centre.X + Radius, Centre.Y + Radius, Centre.Z + Radius),
+                new Point(Centre.X - Radius, Centre.Y - Radius, Centre.Z - Radius)
                 );
         }
 
@@ -49,16 +49,18 @@ namespace VolumetricFigures.Model.Figures
 
         public override bool Equals(Object obj)
         {
-            try
+            if ((obj != null) || this.GetType().Equals(obj.GetType()))
             {
                 Sphere sphere = obj as Sphere;
-                return sphere.Centre.Equals(Centre) && 
+                return sphere.Centre.Equals(Centre) &&
                     sphere.Radius == Radius;
             }
-            catch(Exception)
-            {
-                throw new NullReferenceException();
-            }
+            return false;
+        }
+
+        public override int GetHashCode() 
+        { 
+            return Centre.GetHashCode() ^ Radius.GetHashCode();
         }
     }
 }

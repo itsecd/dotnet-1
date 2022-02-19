@@ -8,11 +8,11 @@ namespace VolumetricFigures.Model.Figures
     public class Cylinder : Figure
     {
         [XmlElement("Point")]
-        public Point CentreFoundation { get; set; }
+        public Point CentreFoundation { get; init; }
         [XmlElement("Radius")]
-        public double Radius { get; set; }
+        public double Radius { get; init; }
         [XmlElement("Height")]
-        public double Height { get; set; }
+        public double Height { get; init; }
 
         public Cylinder()
         {
@@ -52,17 +52,19 @@ namespace VolumetricFigures.Model.Figures
 
         public override bool Equals(Object obj)
         {
-            try 
+            if ((obj != null) || this.GetType().Equals(obj.GetType()))
             {
                 Cylinder cylinder = obj as Cylinder;
                 return cylinder.CentreFoundation.Equals(CentreFoundation) &&
                     cylinder.Radius == Radius &&
                     cylinder.Height == Height;
             }
-            catch(Exception)
-            {
-                throw new NullReferenceException();
-            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return CentreFoundation.GetHashCode() ^ Radius.GetHashCode() ^ Height.GetHashCode();
         }
     }
 }

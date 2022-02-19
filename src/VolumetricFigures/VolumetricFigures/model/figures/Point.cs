@@ -8,11 +8,11 @@ namespace VolumetricFigures.Model.Figures
     public struct Point
     {
         [XmlElement("X")]
-        public double X { get; set; }
+        public double X { get; init; }
         [XmlElement("Y")]
-        public double Y { get; set; }
+        public double Y { get; init; }
         [XmlElement("Z")]
-        public double Z { get; set; }
+        public double Z { get; init; }
 
         public Point(double x, double y, double z)
         {
@@ -28,10 +28,14 @@ namespace VolumetricFigures.Model.Figures
 
         public override bool Equals(object obj)
         {
-            return obj is Point point &&
+            if ((obj != null) || this.GetType().Equals(obj.GetType()))
+            {
+                return obj is Point point &&
                    X == point.X &&
                    Y == point.Y &&
                    Z == point.Z;
+            }
+            return false;
         }
 
         public static bool operator ==(Point left, Point right)
@@ -42,6 +46,11 @@ namespace VolumetricFigures.Model.Figures
         public static bool operator !=(Point left, Point right)
         {
             return !(left == right);
+        }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
         }
     }
 }

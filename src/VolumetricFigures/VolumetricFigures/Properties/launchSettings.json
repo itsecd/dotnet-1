@@ -2,7 +2,7 @@
   "profiles": {
     "VolumetricFigures": {
       "commandName": "Project",
-      "commandLineArgs": "SumSquare"
+      "commandLineArgs": "Add"
     }
   }
 }
