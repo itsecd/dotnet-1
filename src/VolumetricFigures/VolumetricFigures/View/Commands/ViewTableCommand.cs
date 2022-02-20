@@ -22,6 +22,7 @@ namespace VolumetricFigures.View.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] ViewTableSettings settings)
         {
+            _controller.OpenFile(_controller.StorageFileName);
             Table table = new Table();
             table.AddColumns("Index", "Type", "Info", "Square", "Perimeter", "Min.Cuboid");
             for (int indexTable = 0; indexTable < _controller.Figures.Count; indexTable++)

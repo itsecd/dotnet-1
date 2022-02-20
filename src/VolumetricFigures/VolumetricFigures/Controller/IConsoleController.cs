@@ -6,6 +6,7 @@ namespace VolumetricFigures.Controller
 {
     public interface IConsoleController
     {
+        string StorageFileName { get; set; }
         List<Figure> Figures { get; set; }
         void AddRectangularCuboid(int index, Point p1, Point p2);
         void AddSphere(int index, Point p, double radius);
