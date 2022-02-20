@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -10,14 +8,14 @@ using System.Xml.Serialization;
 namespace iProg1.Model
 {
     [Serializable]
-    public class SparseMatrix : Matrix, IXmlSerializable
+    public class SparseMatrix : Matrix//, IXmlSerializable
     {
         public int ColumnCount;
         public int RowCount;
         public Dictionary<Tuple<int, int>, double> _matrix;
         public SparseMatrix()
         {
-            _matrix = new Dictionary<Tuple<int,int>, double>();
+            _matrix = new Dictionary<Tuple<int, int>, double>();
         }
         public SparseMatrix(int cCount, int rCount)
         {
@@ -28,7 +26,7 @@ namespace iProg1.Model
         public SparseMatrix(Dictionary<Tuple<int, int>, double> matrix, int cCount, int rCount)
         {
             _matrix = new Dictionary<Tuple<int, int>, double>();
-            foreach(var pair in matrix)
+            foreach (var pair in matrix)
             {
                 _matrix.Add(pair.Key, pair.Value);
             }
@@ -79,7 +77,7 @@ namespace iProg1.Model
                 for (int j = 0; j < RowCount; j++)
                 {
                     var tuple = new Tuple<int, int>(i, j);
-                    if(_matrix.ContainsKey(tuple))
+                    if (_matrix.ContainsKey(tuple))
                     {
                         sb.Append(_matrix[tuple]);
                     }
@@ -133,61 +131,50 @@ namespace iProg1.Model
             double hashCode = 0;
             foreach (var el in _matrix)
             {
-                hashCode += (el.Key.Item1*el.Key.Item2/el.Value) + 0.1483 * ColumnCount;
-                hashCode *= (el.Value*el.Key.Item1*el.Key.Item2 + 8.56789) * RowCount+13;
+                hashCode += (el.Key.Item1 * el.Key.Item2 / el.Value) + 0.1483 * ColumnCount;
+                hashCode *= (el.Value * el.Key.Item1 * el.Key.Item2 + 8.56789) * RowCount + 13;
             }
             return Math.Abs((int)hashCode);
         }
 
-        public XmlSchema GetSchema()
-        {
-            return null;
-        }
+        //public XmlSchema GetSchema()
+        //{
+        //    return null;
+        //}
 
-        public void ReadXml(XmlReader reader)
-        {
-            bool wasEmpty = reader.IsEmptyElement;
-            if (wasEmpty)
-                return;
-            this.ColumnCount = int.Parse(reader.GetAttribute("ColumnCount"));
-            this.RowCount = int.Parse(reader.GetAttribute("RowCount"));
-            reader.Read();
-            while (reader.NodeType != XmlNodeType.EndElement)
-            {   
-                _matrix.Add(new Tuple<int, int>(
-                    int.Parse(reader.GetAttribute("I")),
-                    int.Parse(reader.GetAttribute("J"))),
-                    double.Parse(reader.GetAttribute("Value")));
-                reader.Read();
-            }
-            //XmlSerializer dimensionAndKeySerializer = new XmlSerializer(typeof(int));
-            //XmlSerializer valueSerializer = new XmlSerializer(typeof(double));
-            //reader.ReadStartElement("colCount");
-            //this.ColumnCount = (int)dimensionAndKeySerializer.Deserialize(reader);
-            //reader.ReadEndElement();
-            //reader.ReadStartElement("rowCount");
-            //this.RowCount = (int)dimensionAndKeySerializer.Deserialize(reader);
-            //reader.ReadEndElement();
-            //while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
-            //{
-            //    reader.ReadStartElement("MatrixElement");
-            //    reader.ReadStartElement("key");
-            //    reader.ReadStartElement("keyItem1");
-            //    int keyItem1 = (int)dimensionAndKeySerializer.Deserialize(reader);
-            //    reader.ReadEndElement();
-            //    reader.ReadStartElement("keyItem2");
-            //    int keyItem2 = (int)dimensionAndKeySerializer.Deserialize(reader);
-            //    reader.ReadEndElement();
-            //    reader.ReadEndElement();
-            //    reader.ReadStartElement("value");
-            //    double value = (double)valueSerializer.Deserialize(reader);
-            //    reader.ReadEndElement();
-            //    reader.ReadEndElement();
-            //    _matrix.Add(new Tuple<int, int>(keyItem1, keyItem2), value);
-            //}
-        }
+        //public void ReadXml(XmlReader reader)
+        //{
+        //    bool wasEmpty = reader.IsEmptyElement;
+        //    if (wasEmpty)
+        //        return;
+        //    this.ColumnCount = int.Parse(reader.GetAttribute("ColumnCount"));
+        //    this.RowCount = int.Parse(reader.GetAttribute("RowCount"));
+        //    reader.Read();
+        //    while (reader.NodeType != XmlNodeType.EndElement)
+        //    {
+        //        _matrix.Add(new Tuple<int, int>(
+        //            int.Parse(reader.GetAttribute("I")),
+        //            int.Parse(reader.GetAttribute("J"))),
+        //            double.Parse(reader.GetAttribute("Value")));
+        //        reader.Read();
+        //    }
+        //}
 
-        public void WriteXml(XmlWriter writer)
+        //public void WriteXml(XmlWriter writer)
+        //{
+        //    writer.WriteAttributeString("ColumnCount", ColumnCount.ToString());
+        //    writer.WriteAttributeString("RowCount", RowCount.ToString());
+        //    foreach (var el in _matrix)
+        //    {
+        //        writer.WriteStartElement("MatrixElement");
+        //        writer.WriteAttributeString("I", el.Key.Item1.ToString());
+        //        writer.WriteAttributeString("J", el.Key.Item2.ToString());
+        //        writer.WriteAttributeString("Value", el.Value.ToString());
+        //        writer.WriteEndElement();
+        //    }
+        //}
+
+        public override void GetXml(XmlTextWriter writer)
         {
             writer.WriteAttributeString("ColumnCount", ColumnCount.ToString());
             writer.WriteAttributeString("RowCount", RowCount.ToString());
@@ -198,32 +185,25 @@ namespace iProg1.Model
                 writer.WriteAttributeString("J", el.Key.Item2.ToString());
                 writer.WriteAttributeString("Value", el.Value.ToString());
                 writer.WriteEndElement();
-
             }
-            //XmlSerializer dimensionAndKeySerializer = new XmlSerializer(typeof(int));
-            //XmlSerializer valueSerializer = new XmlSerializer(typeof(double));
-            //writer.WriteStartElement("colCount");
-            //dimensionAndKeySerializer.Serialize(writer, ColumnCount);
-            //writer.WriteEndElement();
-            //writer.WriteStartElement("rowCount");
-            //dimensionAndKeySerializer.Serialize(writer, RowCount);
-            //writer.WriteEndElement();
-            //foreach (var el in _matrix)
-            //{
-            //    writer.WriteStartElement("MatrixElement");
-            //    writer.WriteStartElement("key");
-            //    writer.WriteStartElement("keyItem1");
-            //    dimensionAndKeySerializer.Serialize(writer, el.Key.Item1);
-            //    writer.WriteEndElement();
-            //    writer.WriteStartElement("keyItem2");
-            //    dimensionAndKeySerializer.Serialize(writer, el.Key.Item2);
-            //    writer.WriteEndElement();
-            //    writer.WriteEndElement();
-            //    writer.WriteStartElement("value");
-            //    valueSerializer.Serialize(writer, el.Value);
-            //    writer.WriteEndElement();
-            //    writer.WriteEndElement();
-            //}
+        }
+
+        public override void LoadFromXml(XmlTextReader reader)
+        {
+            if (reader.IsEmptyElement)
+                return;
+            Valid.SkipToElement(reader);
+            this.ColumnCount = int.Parse(reader.GetAttribute("ColumnCount"));
+            this.RowCount = int.Parse(reader.GetAttribute("RowCount"));
+            reader.Read();
+            while (reader.NodeType != XmlNodeType.EndElement)
+            {
+                _matrix.Add(new Tuple<int, int>(
+                    int.Parse(reader.GetAttribute("I")),
+                    int.Parse(reader.GetAttribute("J"))),
+                    double.Parse(reader.GetAttribute("Value")));
+                reader.Read();
+            }
         }
     }
 }

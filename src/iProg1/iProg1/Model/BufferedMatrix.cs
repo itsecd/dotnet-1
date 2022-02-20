@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Xml;
 
 namespace iProg1.Model
 {
@@ -10,8 +8,7 @@ namespace iProg1.Model
     public class BufferedMatrix : Matrix
     {
         public double[][] _matrix;
-        public BufferedMatrix()
-        {}
+        public BufferedMatrix() {}
         public BufferedMatrix(int a, int b)
         {
             _matrix = new double[a][];
@@ -107,6 +104,40 @@ namespace iProg1.Model
                 }
             }
             return Math.Abs((int)hashCode);
+        }
+        public override void GetXml(XmlTextWriter writer)
+        {
+            writer.WriteAttributeString("ColumnCount", GetColumnCount().ToString());
+            writer.WriteAttributeString("RowCount", GetRowCount().ToString());
+            foreach (var el in _matrix)
+            {
+                foreach (var el2 in el)
+                {
+                    writer.WriteStartElement("MatrixElement");
+                    writer.WriteAttributeString("Value", el2.ToString());
+                    writer.WriteEndElement();
+                }
+            }
+        }
+        public override void LoadFromXml(XmlTextReader reader)
+        {
+            bool wasEmpty = reader.IsEmptyElement;
+            if (wasEmpty)
+                return;
+            Valid.SkipToElement(reader);
+            var columnCount = int.Parse(reader.GetAttribute("ColumnCount"));
+            var RowCount = int.Parse(reader.GetAttribute("RowCount"));
+            _matrix = new double[columnCount][];
+            for (int i = 0; i < columnCount; i++)
+            {
+                _matrix[i] = new double[RowCount];
+                for(int j = 0; j < RowCount; j++)
+                {
+                    reader.Read();
+                    _matrix[i][j] = double.Parse(reader.GetAttribute("Value"));
+                }
+            }
+            reader.Skip();
         }
     }
 }
