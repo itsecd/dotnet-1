@@ -21,6 +21,7 @@ namespace VolumetricFigures.View.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] SumSquareCommandSettings settings)
         {
+            _controller.OpenFile(_controller.StorageFileName);
             AnsiConsole.Write("Sum manual mode:\n");
             AnsiConsole.Write(_controller.SumManual());
             AnsiConsole.Write("\nSum System.Linq mode:\n");

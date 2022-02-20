@@ -49,7 +49,7 @@ namespace VolumetricFigures.Model.Figures
 
         public override bool Equals(Object obj)
         {
-            if ((obj != null) || this.GetType().Equals(obj.GetType()))
+            if ((obj != null) && obj is Sphere)
             {
                 Sphere sphere = obj as Sphere;
                 return sphere.Centre.Equals(Centre) &&

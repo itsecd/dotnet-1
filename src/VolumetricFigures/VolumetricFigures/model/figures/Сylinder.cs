@@ -52,7 +52,7 @@ namespace VolumetricFigures.Model.Figures
 
         public override bool Equals(Object obj)
         {
-            if ((obj != null) || this.GetType().Equals(obj.GetType()))
+            if ((obj != null) && obj is Cylinder)
             {
                 Cylinder cylinder = obj as Cylinder;
                 return cylinder.CentreFoundation.Equals(CentreFoundation) &&
