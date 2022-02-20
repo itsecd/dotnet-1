@@ -65,9 +65,8 @@ namespace VolumetricFigures.Model.Figures
 
         public override bool Equals(Object obj)
         {
-            if ((obj != null) && obj is RectangularCuboid)
+            if (obj is RectangularCuboid rectangularCuboid)
             {
-                RectangularCuboid rectangularCuboid = obj as RectangularCuboid;
                 return rectangularCuboid.P1.Equals(P1) &&
                     rectangularCuboid.P2.Equals(P2);
             }

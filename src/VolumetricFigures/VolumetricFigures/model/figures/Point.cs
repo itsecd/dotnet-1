@@ -28,10 +28,9 @@ namespace VolumetricFigures.Model.Figures
 
         public override bool Equals(object obj)
         {
-            if ((obj != null) && obj is Point)
+            if (obj is Point point)
             {
-                return obj is Point point &&
-                   X == point.X &&
+                return X == point.X &&
                    Y == point.Y &&
                    Z == point.Z;
             }
