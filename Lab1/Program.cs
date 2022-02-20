@@ -8,13 +8,18 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            List<Matrix> matrices = new();
+            AnsiConsole.Clear();
+            MatrixStorage data = new();
+            Panel warningIndex = new Panel("[#ff7d00]Индекс вышел за границы списка![/]");
+            Panel warningSize = new Panel("[#ff7d00]Недопустимый размер матрицы![/]");
+            Panel warningEmptyList = new Panel("[#ff7d00]Список пуст![/]");
+
             bool exitApp = false;
             while (!exitApp)
             {
                 string choice = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("[bold]Меню[/]")
-                .AddChoices( new[] {
+                .Title("[blue]Меню[/]")
+                .AddChoices(new[] {
                     "Создать матрицу",
                     "Удалить матрицу",
                     "Очистить список",
@@ -22,93 +27,74 @@ namespace Lab1
                     "Показать список",
                     "Выход"
                 }));
-
+                AnsiConsole.Clear();
                 switch (choice)
                 {
                     case "Создать матрицу":
-                        AnsiConsole.Clear();
+                        string matType = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                        .Title("Выберите тип матрицы:")
+                        .AddChoices(new[] {
+                            "BufferedMatrix",
+                            "SparseMatrix"
+                        }));
                         int tw = AnsiConsole.Prompt(new TextPrompt<int>("Кол-во столбцов: "));
                         int th = AnsiConsole.Prompt(new TextPrompt<int>("Кол-во строк: "));
                         if (tw < 1 || th < 1)
                         {
-                            AnsiConsole.MarkupLine("[#ff7d00]Недопустимый размер матрицы![/]");
-                            break;
-                        }
-                        if (matrices.Count == 0)
-                        {
-                            matrices.Add(new BufferedMatrix(th, tw));
-                            break;
-                        }
-                        AnsiConsole.MarkupLine($"Всего {matrices.Count} матриц в списке");
-                        int indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
-                        if (indIns < 0 || indIns > matrices.Count - 1)
-                        {
-                            AnsiConsole.Write(new Panel("[#ff7d00]Индекс вышел за границы списка![/]"));
+                            AnsiConsole.Write(warningSize);
                             AnsiConsole.WriteLine();
                             break;
                         }
-                        matrices.Insert(indIns, new BufferedMatrix(th, tw));
+                        Matrix tmpMat = matType switch
+                        {
+                            "BufferedMatrix" => new BufferedMatrix(th, tw),
+                            "SparseMatrix" => new SparseMatrix(th, tw),
+                            _ => null
+                        };
+                        AnsiConsole.MarkupLine($"Всего матриц в списке: {data.Count}");
+                        int indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
+                        data.Insert(tmpMat, indIns);
                         break;
                     case "Удалить матрицу":
-                        AnsiConsole.Clear();
-                        if (matrices.Count == 0)
+                        if (data.Count == 0)
                         {
-                            AnsiConsole.Write(new Panel("[#ff7d00]Список пуст![/]"));
+                            AnsiConsole.Write(warningEmptyList);
                             AnsiConsole.WriteLine();
                             break;
                         }
-                        AnsiConsole.MarkupLine($"Всего {matrices.Count} матриц в списке");
+                        AnsiConsole.MarkupLine($"Всего матриц в списке: {data.Count}");
                         int indDel = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
-                        if (indDel < 0 || indDel > matrices.Count - 1)
-                        {
-                            AnsiConsole.Write(new Panel("[#ff7d00]Индекс вышел за границы списка![/]"));
-                            AnsiConsole.WriteLine();
-                            break;
-                        }
-                        matrices.RemoveAt(indDel);
+                        data.Delete(indDel);
                         AnsiConsole.Write(new Panel("[yellow]Матрица удалена[/]"));
+                        AnsiConsole.WriteLine();
                         break;
                     case "Очистить список":
-                        AnsiConsole.Clear();
-                        matrices.Clear();
+                        data.Clear();
                         AnsiConsole.Write(new Panel("[yellow]Список очищен[/]"));
                         AnsiConsole.WriteLine();
                         break;
                     case "Сравнить две матрицы":
-                        AnsiConsole.Clear();
+                        AnsiConsole.MarkupLine($"Всего матриц в списке: {data.Count}");
                         int indL = AnsiConsole.Prompt(new TextPrompt<int>("Индекс первой матрицы: "));
                         int indR = AnsiConsole.Prompt(new TextPrompt<int>("Индекс второй матрицы: "));
-                        if (indL < 0 || indL > matrices.Count - 1 || indR < 0 || indR > matrices.Count - 1)
-                        {
-                            AnsiConsole.Write(new Panel("[#ff7d00]Индекс вышел за границы списка![/]"));
-                            AnsiConsole.WriteLine();
-                            break;
-                        }
-                        if (matrices[indL].Equals(matrices[indR]))
+                        if (data.Compare(indL, indR))
                             AnsiConsole.Write(new Panel("[yellow]Матрицы равны[/]"));
                         else
                             AnsiConsole.Write(new Panel("[yellow]Матрицы НЕ равны[/]"));
                         AnsiConsole.WriteLine();
                         break;
                     case "Показать список":
-                        AnsiConsole.Clear();
-                        if (matrices.Count == 0)
+                        if (data.Count == 0)
                         {
-                            AnsiConsole.Write(new Panel("[#ff7d00]Список пуст![/]"));
+                            AnsiConsole.Write(warningEmptyList);
                             AnsiConsole.WriteLine();
                             break;
                         }
-                        var tmpTab = new Table();
-                        tmpTab.AddColumns(new[] {"№", "Матрица"});
-                        for (int i = 0; i < matrices.Count && i != 10; i++)
-                            tmpTab.AddRow(new[] {$"[bold blue]{i}[/]", matrices[i].ToString()});
-                        if (matrices.Count > 10)
-                            tmpTab.AddRow(new[] {"...", "..."});
-                        AnsiConsole.Write(tmpTab);
+                        AnsiConsole.Write(data.ToTable());
                         AnsiConsole.WriteLine();
                         break;
                     default:
-                        AnsiConsole.MarkupLine("[bold red]Выключаюсь...[/]");
+                        AnsiConsole.Write(new Panel("[bold red]Выключаюсь...[/]"));
                         exitApp = true;
                         break;
                 }
