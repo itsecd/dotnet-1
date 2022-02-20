@@ -20,7 +20,6 @@ namespace VolumetricFigures.View.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] SortCommandSettings settings)
         {
-            _controller.OpenFile(_controller.StorageFileName);
             var sort = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("What to sort?")
                 .AddChoices("Square", "Perimeter"));
@@ -35,7 +34,6 @@ namespace VolumetricFigures.View.Commands
                         figure1.GetPerimeter().CompareTo(figure2.GetPerimeter()));
                     break;
             };
-            _controller.SaveFile(_controller.StorageFileName);
             return 0;
         }
     }

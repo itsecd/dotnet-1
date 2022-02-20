@@ -28,7 +28,7 @@ namespace VolumetricFigures.Model.Figures
 
         public override bool Equals(object obj)
         {
-            if ((obj != null) && obj is Point)
+            if ((obj != null) || this.GetType().Equals(obj.GetType()))
             {
                 return obj is Point point &&
                    X == point.X &&

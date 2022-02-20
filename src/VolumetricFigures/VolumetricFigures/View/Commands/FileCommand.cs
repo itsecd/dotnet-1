@@ -23,19 +23,18 @@ namespace VolumetricFigures.View.Commands
         {
             var saveOpen = AnsiConsole.Prompt(new SelectionPrompt<string>()
                             .Title("What to do?")
-                            .AddChoices("Save As", "Open As"));
+                            .AddChoices("Save", "Open"));
             switch (saveOpen)
             {
-                case "Save As":
+                case "Save":
                     AnsiConsole.Write("Path to Save file:\n");
                     string pathSave = Console.ReadLine();
                     _controller.SaveFile(pathSave);
                     break;
-                case "Open As":
+                case "Open":
                     AnsiConsole.Write("Path to Open file:\n");
                     string pathOpen = Console.ReadLine();
                     _controller.OpenFile(pathOpen);
-                    _controller.SaveFile(_controller.StorageFileName);
                     break;
             };
             return 0;

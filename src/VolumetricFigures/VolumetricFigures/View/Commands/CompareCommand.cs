@@ -22,7 +22,6 @@ namespace VolumetricFigures.View.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] CompareCommandSettings settings)
         {
-            _controller.OpenFile(_controller.StorageFileName);
             int index1 = AnsiConsole.Prompt(new TextPrompt<int>(" Index 1:"));
             int index2 = AnsiConsole.Prompt(new TextPrompt<int>(" Index 2:"));
             if (_controller.CheckIndex(index1) && _controller.CheckIndex(index2))

@@ -10,11 +10,12 @@ namespace VolumetricFigures.Controller
 {
     public class ConsoleController : IConsoleController
     {
-        public string StorageFileName { get; set; } = "C:\\Users\\Ilya\\Desktop\\figures.xml";
+
         public List<Figure> Figures { get ; set; }
 
         public ConsoleController()
         {
+            Figures = new List<Figure>();
         }
 
         public ConsoleController(List<Figure> figures)
@@ -79,19 +80,11 @@ namespace VolumetricFigures.Controller
 
         public void OpenFile(string path)
         {
-            if (Figures != null) return;
-
-            if (!File.Exists(StorageFileName))
-            {
-                Figures = new List<Figure>();
-                return;
-            }
             try
             {
                 XmlSerializer formatter = new XmlSerializer(typeof(List<Figure>));
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
                 Figures = (List<Figure>)formatter.Deserialize(fs);
-                fs.Close();
             }
             catch (Exception)
             {
@@ -107,7 +100,6 @@ namespace VolumetricFigures.Controller
                 XmlSerializer formatter = new XmlSerializer(typeof(List<Figure>));
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
                 formatter.Serialize(fs, Figures);
-                fs.Close();
             }
             catch (Exception)
             {

@@ -22,7 +22,6 @@ namespace VolumetricFigures.View.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSettings settings)
         {
-            _controller.OpenFile(_controller.StorageFileName);
             var add = AnsiConsole.Prompt(new SelectionPrompt<string>()
                             .Title("What to add?")
                             .AddChoices("Rectangular Cuboid", "Sphere", "Cylinder"));
@@ -57,7 +56,6 @@ namespace VolumetricFigures.View.Commands
                 AnsiConsole.Write("Index Error");
                 Console.ReadLine();
             }
-            _controller.SaveFile(_controller.StorageFileName);
             return 0;
         }
 

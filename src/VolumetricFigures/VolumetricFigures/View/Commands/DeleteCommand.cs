@@ -20,7 +20,6 @@ namespace VolumetricFigures.View.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] DeleteCommandSettings settings)
         {
-            _controller.OpenFile(_controller.StorageFileName);
             var delete = AnsiConsole.Prompt(new SelectionPrompt<string>()
                             .Title("What to delete?")
                             .AddChoices("Delete Item", "Delete All"));
@@ -33,7 +32,6 @@ namespace VolumetricFigures.View.Commands
                     _controller.DeleteAll();
                     break;
             };
-            _controller.SaveFile(_controller.StorageFileName);
             return 0;
         }
     }
