@@ -33,6 +33,8 @@ namespace Lab1
             try
             {
                 data.RemoveAt(ind);
+                AnsiConsole.Write(new Panel("[yellow]Матрица удалена[/]"));
+                AnsiConsole.WriteLine();
             }
             catch (ArgumentOutOfRangeException e)
             {
@@ -43,18 +45,22 @@ namespace Lab1
         public void Clear()
         {
             data.Clear();
+            AnsiConsole.Write(new Panel("[yellow]Список очищен[/]"));
+            AnsiConsole.WriteLine();
         }
 
-        public bool Compare(int ind1, int ind2)
+        public int Compare(int ind1, int ind2)
         {
             try
             {
-                return data[ind1].Equals(data[ind2]);
+                if (data[ind1].Equals(data[ind2]))
+                    return 1;
+                return 0;
             }
             catch (ArgumentOutOfRangeException e)
             {
                 AnsiConsole.WriteException(e);
-                return false;
+                return -1;
             }
         }
 

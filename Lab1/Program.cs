@@ -65,22 +65,20 @@ namespace Lab1
                         AnsiConsole.MarkupLine($"Всего матриц в списке: {data.Count}");
                         int indDel = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
                         data.Delete(indDel);
-                        AnsiConsole.Write(new Panel("[yellow]Матрица удалена[/]"));
-                        AnsiConsole.WriteLine();
                         break;
                     case "Очистить список":
                         data.Clear();
-                        AnsiConsole.Write(new Panel("[yellow]Список очищен[/]"));
-                        AnsiConsole.WriteLine();
                         break;
                     case "Сравнить две матрицы":
                         AnsiConsole.MarkupLine($"Всего матриц в списке: {data.Count}");
                         int indL = AnsiConsole.Prompt(new TextPrompt<int>("Индекс первой матрицы: "));
                         int indR = AnsiConsole.Prompt(new TextPrompt<int>("Индекс второй матрицы: "));
-                        if (data.Compare(indL, indR))
+                        if (data.Compare(indL, indR) == 1)
                             AnsiConsole.Write(new Panel("[yellow]Матрицы равны[/]"));
-                        else
+                        if (data.Compare(indL, indR) == 0)
                             AnsiConsole.Write(new Panel("[yellow]Матрицы НЕ равны[/]"));
+                        if (data.Compare(indL, indR) == -1)
+                            AnsiConsole.Write(warningIndex);
                         AnsiConsole.WriteLine();
                         break;
                     case "Показать список":
