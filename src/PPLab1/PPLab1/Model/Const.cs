@@ -18,7 +18,21 @@ namespace PPLab1.Model
         {
             return String.Format("y = {0}", Elems.K);
         }
-       
+
+        public override bool Equals(Object obj)
+        {
+            if (obj is Const)
+            {
+                Const c = (Const)obj;
+                return(Elems.K == c.Elems.K);
+            }
+            else { return false; }
+        }
+
+        public override int GetHashCode()
+        {
+            return Elems.K;
+        }
     }
 }
 

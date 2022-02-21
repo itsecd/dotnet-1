@@ -11,9 +11,15 @@ namespace PPLab1
             {
                 Elems = new Data(10, 5)
             };
+            Function f1 = new LogFunct()
+            {
+                Elems = new Data(10, 3)
+            };
 
-            Console.WriteLine(f.calc_funct(2));
-            Console.WriteLine(f);
+            //Console.WriteLine(f.calc_funct(2));
+            //Console.WriteLine(f.Equals(f1));
+            Console.WriteLine(f.GetHashCode());
+            Console.WriteLine(f1.GetHashCode());
 
         }
     }

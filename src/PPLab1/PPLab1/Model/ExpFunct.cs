@@ -23,6 +23,19 @@ namespace PPLab1.Model
         {
             return String.Format("y = {0}{1}^x", Elems.K, Elems.A);
         }
+        public override bool Equals(Object obj)
+        {
+            if (obj is ExpFunct)
+            {
+                ExpFunct ef = (ExpFunct)obj;
+                return (Elems.K == ef.Elems.K) && (Elems.A == ef.Elems.A);
+            }
+            else { return false; }
+        }
+        public override int GetHashCode()
+        {
+            return Elems.A ^ Elems.K;
+        }
     }
 }
 

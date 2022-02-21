@@ -22,6 +22,19 @@ namespace PPLab1.Model
         {
             return String.Format("y = {0}x^{1}", Elems.K, Elems.A);
         }
+        public override bool Equals(Object obj)
+        {
+            if (obj is PowerFunct)
+            {
+                PowerFunct pf = (PowerFunct)obj;
+                return (Elems.K == pf.Elems.K) && (Elems.A == pf.Elems.A);
+            }
+            else { return false; }
+        }
+        public override int GetHashCode()
+        {
+            return Elems.A ^ Elems.K;
+        }
     }
 }
 

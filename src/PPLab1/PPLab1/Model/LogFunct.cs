@@ -24,6 +24,20 @@ namespace PPLab1.Model
         {
             return String.Format("y = {0} log_{1}x", Elems.K, Elems.A);
         }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj is LogFunct) 
+            {
+                LogFunct lf = (LogFunct)obj;
+                return (Elems.K == lf.Elems.K) && (Elems.A == lf.Elems.A);
+            }
+            else { return false; }
+        }
+        public override int GetHashCode()
+        {
+            return Elems.A ^ Elems.K;
+        }
     }
 }
 
