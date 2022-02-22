@@ -10,9 +10,9 @@ namespace iProg1.Model
     [Serializable]
     public class SparseMatrix : Matrix//, IXmlSerializable
     {
-        public int ColumnCount;
-        public int RowCount;
-        public Dictionary<Tuple<int, int>, double> _matrix;
+        private int _rowCount;
+        private int _columnCount;
+        private readonly Dictionary<Tuple<int, int>, double> _matrix;
         public SparseMatrix()
         {
             _matrix = new Dictionary<Tuple<int, int>, double>();
@@ -20,8 +20,29 @@ namespace iProg1.Model
         public SparseMatrix(int cCount, int rCount)
         {
             _matrix = new Dictionary<Tuple<int, int>, double>();
-            ColumnCount = cCount;
-            RowCount = rCount;
+            _rowCount = cCount;
+            _columnCount = rCount;
+        }
+        public SparseMatrix(double[][] matrix)
+        {
+            if (matrix == null)
+            {
+                _rowCount = 0;
+                _columnCount = 0;
+                _matrix = null;
+            }
+            _rowCount = matrix.Length;
+            _columnCount = matrix[0].Length;
+            for(int i = 0; i < _rowCount; i++)
+            {
+                for(int j = 0;j < _columnCount; j++)
+                {
+                    if(matrix[i][j] != 0)
+                    {
+                        _matrix.Add(new Tuple<int, int>(i, j), matrix[i][j]);
+                    }
+                } 
+            }
         }
         public SparseMatrix(Dictionary<Tuple<int, int>, double> matrix, int cCount, int rCount)
         {
@@ -30,16 +51,16 @@ namespace iProg1.Model
             {
                 _matrix.Add(pair.Key, pair.Value);
             }
-            ColumnCount = cCount;
-            RowCount = rCount;
+            _rowCount = cCount;
+            _columnCount = rCount;
         }
         public override int GetColumnCount()
         {
-            return ColumnCount;
+            return _rowCount;
         }
         public override int GetRowCount()
         {
-            return RowCount;
+            return _columnCount;
         }
         public override double GetValue(int indexC, int indexR)
         {
@@ -72,14 +93,15 @@ namespace iProg1.Model
         {
             var sb = new StringBuilder();
             sb.Append("SparseMatrix: \n");
-            for (int i = 0; i < ColumnCount; i++)
+            for (int i = 0; i < _rowCount; i++)
             {
-                for (int j = 0; j < RowCount; j++)
+                for (int j = 0; j < _columnCount; j++)
                 {
                     var tuple = new Tuple<int, int>(i, j);
                     if (_matrix.ContainsKey(tuple))
                     {
                         sb.Append(_matrix[tuple]);
+                        sb.Append(' ');
                     }
                     else
                     {
@@ -100,27 +122,22 @@ namespace iProg1.Model
             {
                 return false;
             }
-            var matrix = (SparseMatrix)obj;
-            if (matrix.GetColumnCount() != ColumnCount)
+            var matrix = (Matrix)obj;
+            if (matrix.GetColumnCount() != _rowCount)
             {
                 return false;
             }
-            if (matrix.GetRowCount() != RowCount)
+            if (matrix.GetRowCount() != _columnCount)
             {
                 return false;
             }
-            for (int i = 0; i < ColumnCount; i++)
+            for (int i = 0; i < _rowCount; i++)
             {
-                for (int j = 0; j < RowCount; j++)
+                for (int j = 0; j < _columnCount; j++)
                 {
-                    var tuple = new Tuple<int, int>(i, j);
-                    bool isExist = _matrix.ContainsKey(tuple);
-                    if (isExist == matrix._matrix.ContainsKey(tuple) && isExist)
+                    if (GetValue(i, j) != matrix.GetValue(i, j))
                     {
-                        if (_matrix[tuple] != matrix._matrix[tuple])
-                        {
-                            return false;
-                        }
+                        return false;
                     }
                 }
             }
@@ -131,10 +148,41 @@ namespace iProg1.Model
             double hashCode = 0;
             foreach (var el in _matrix)
             {
-                hashCode += (el.Key.Item1 * el.Key.Item2 / el.Value) + 0.1483 * ColumnCount;
-                hashCode *= (el.Value * el.Key.Item1 * el.Key.Item2 + 8.56789) * RowCount + 13;
+                hashCode += (el.Key.Item1 * el.Key.Item2 / el.Value) + 0.1483 * _rowCount;
+                hashCode *= (el.Value * el.Key.Item1 * el.Key.Item2 + 8.56789) * _columnCount + 13;
             }
             return Math.Abs((int)hashCode);
+        }
+        public override void GetXml(XmlTextWriter writer)
+        {
+            writer.WriteAttributeString("RowCount", _rowCount.ToString());
+            writer.WriteAttributeString("ColumnCount", _columnCount.ToString());
+            foreach (var el in _matrix)
+            {
+                writer.WriteStartElement("MatrixElement");
+                writer.WriteAttributeString("I", el.Key.Item1.ToString());
+                writer.WriteAttributeString("J", el.Key.Item2.ToString());
+                writer.WriteAttributeString("Value", el.Value.ToString());
+                writer.WriteEndElement();
+            }
+        }
+
+        public override void LoadFromXml(XmlTextReader reader)
+        {
+            if (reader.IsEmptyElement)
+                return;
+            Valid.SkipToElement(reader);
+            this._columnCount = int.Parse(reader.GetAttribute("RowCount"));
+            this._rowCount = int.Parse(reader.GetAttribute("ColumnCount"));
+            reader.Read();
+            while (reader.NodeType != XmlNodeType.EndElement)
+            {
+                _matrix.Add(new Tuple<int, int>(
+                    int.Parse(reader.GetAttribute("I")),
+                    int.Parse(reader.GetAttribute("J"))),
+                    double.Parse(reader.GetAttribute("Value")));
+                reader.Read();
+            }
         }
 
         //public XmlSchema GetSchema()
@@ -173,37 +221,5 @@ namespace iProg1.Model
         //        writer.WriteEndElement();
         //    }
         //}
-
-        public override void GetXml(XmlTextWriter writer)
-        {
-            writer.WriteAttributeString("ColumnCount", ColumnCount.ToString());
-            writer.WriteAttributeString("RowCount", RowCount.ToString());
-            foreach (var el in _matrix)
-            {
-                writer.WriteStartElement("MatrixElement");
-                writer.WriteAttributeString("I", el.Key.Item1.ToString());
-                writer.WriteAttributeString("J", el.Key.Item2.ToString());
-                writer.WriteAttributeString("Value", el.Value.ToString());
-                writer.WriteEndElement();
-            }
-        }
-
-        public override void LoadFromXml(XmlTextReader reader)
-        {
-            if (reader.IsEmptyElement)
-                return;
-            Valid.SkipToElement(reader);
-            this.ColumnCount = int.Parse(reader.GetAttribute("ColumnCount"));
-            this.RowCount = int.Parse(reader.GetAttribute("RowCount"));
-            reader.Read();
-            while (reader.NodeType != XmlNodeType.EndElement)
-            {
-                _matrix.Add(new Tuple<int, int>(
-                    int.Parse(reader.GetAttribute("I")),
-                    int.Parse(reader.GetAttribute("J"))),
-                    double.Parse(reader.GetAttribute("Value")));
-                reader.Read();
-            }
-        }
     }
 }
