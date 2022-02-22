@@ -125,18 +125,22 @@ namespace iProg1.Repositories
                 }
             }
         }
-        public ValidationResult isIndexInRange(int index)
+        public ValidationResult IsIndexInRange(int index)
         {
             ReadFromFile();
-            if (index > _matrices.Count)
+            if (index == -1)
             {
-                return ValidationResult.Error($"[red]The index must be less than { _matrices.Count}[/]");
+                return ValidationResult.Success();
             }
             if (index < 0)
             {
                 return ValidationResult.Error("[red]The index must be greater than 0[/]");
             }
-            else return ValidationResult.Success();
+            if (index > _matrices.Count)
+            {
+                return ValidationResult.Error($"[red]The index must be less than { _matrices.Count}[/]");
+            }
+            return ValidationResult.Success();
         }
     }
 }

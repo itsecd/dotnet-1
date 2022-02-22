@@ -11,6 +11,6 @@ namespace iProg1.Repositories
         void Output();
         void RemoveAllMatrix();
         void RemoveMatrix(int index);
-        ValidationResult isIndexInRange(int index);
+        ValidationResult IsIndexInRange(int index);
     }
 }
