@@ -128,19 +128,15 @@ namespace iProg1.Repositories
         public ValidationResult isIndexInRange(int index)
         {
             ReadFromFile();
-            if(index == -1)
+            if (index > _matrices.Count)
             {
-                return ValidationResult.Success();
+                return ValidationResult.Error($"[red]The index must be less than { _matrices.Count}[/]");
             }
             if (index < 0)
             {
                 return ValidationResult.Error("[red]The index must be greater than 0[/]");
             }
-            if (index > _matrices.Count)
-            {
-                return ValidationResult.Error($"[red]The index must be less than { _matrices.Count}[/]");
-            }
-            return ValidationResult.Success();
+            else return ValidationResult.Success();
         }
     }
 }
