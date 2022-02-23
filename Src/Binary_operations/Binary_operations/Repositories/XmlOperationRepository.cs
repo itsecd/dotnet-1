@@ -92,10 +92,7 @@ namespace Binary_operations.Repositories
                 return true;
             return false;
         }
-        public int Count()
-        {
-            return _operations.Count();
-        }
+       
         public void MinElement()
         {
             ReadFromFile();

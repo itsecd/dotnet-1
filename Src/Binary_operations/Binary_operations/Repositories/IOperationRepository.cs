@@ -7,7 +7,6 @@ namespace Binary_operations.Repositories
     {
         void AddOperation(int index, Operation operation);
         void PrintCollection();
-        public int Count();
         void RemoveCollection();
         void RemoveOperation(int index);
         void MinElement();
