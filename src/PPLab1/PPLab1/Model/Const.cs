@@ -10,13 +10,18 @@ namespace PPLab1.Model
 
         public Const(Data elems) { Elems = elems; }
 
-        public override double calc_funct(double value) { return Elems.K; }
+        public Const(int Coeff) 
+        { 
+            Elems = new Data(1, Coeff);
+        }
 
-        public override string derivative() { return "0"; }
+        public override double? calc_funct(double value) { return Elems.Coeff; }
+
+        public override string derivative() { return "y' = 0"; }
 
         public override string ToString()
         {
-            return String.Format("y = {0}", Elems.K);
+            return String.Format("y = {0}", Elems.Coeff);
         }
 
         public override bool Equals(Object obj)
@@ -24,14 +29,14 @@ namespace PPLab1.Model
             if (obj is Const)
             {
                 Const c = (Const)obj;
-                return(Elems.K == c.Elems.K);
+                return(Elems.Coeff == c.Elems.Coeff);
             }
             else { return false; }
         }
 
         public override int GetHashCode()
         {
-            return Elems.K;
+            return Elems.Coeff;
         }
     }
 }

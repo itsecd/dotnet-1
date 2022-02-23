@@ -6,20 +6,20 @@ namespace PPLab1.Model
     internal struct Data
     {
         private int _a;
-        private int _k;
+        private int _coeff;
 
         public int A 
         {
             get => _a;
             set { _a = value; }
         }
-        public int K
+        public int Coeff
         {
-            get => _k;
-            set { _k = value; }
+            get => _coeff;
+            set { _coeff = value; }
         }
 
-        public Data(int a = 1, int k = 1 ) { _a = a; _k = k; }
+        public Data(int a = 1, int coeff = 1 ) { _a = a; _coeff = coeff; }
 
     }
 }

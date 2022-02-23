@@ -10,31 +10,53 @@ namespace PPLab1.Model
 
         public ExpFunct(Data elems) { Elems = elems; }
 
-        public override double calc_funct(double value)
+        public ExpFunct(int A, int Coeff)
         {
-            return Elems.K * Math.Pow(Elems.A, value);
+            Elems = new Data(A, Coeff);
+        }
+
+        public override double? calc_funct(double value)
+        {
+            if (value < 0)
+                return null;
+            return Elems.Coeff * Math.Pow(Elems.A, value);
         }
         public override string derivative()
         {
-            return String.Format("y' = {0} {1}^x ",
-                Math.Round( Elems.K* Math.Log(Elems.A), 2), Elems.A );
+            if (Elems.A < 0)
+                return "indefinitely";
+            else if (Elems.Coeff == 1)
+                return String.Format("y' = {0}*{1}^x ",
+                Math.Round(Math.Log(Elems.A), 2), Elems.A);
+            else if (Elems.Coeff == 0)
+                return String.Format("y' = 0");
+            else if (Elems.A == 0)
+                return String.Format("y' = 0");
+            else
+                return String.Format("y' = {0}*{1}^x ",
+                Math.Round(Elems.Coeff * Math.Log(Elems.A), 2), Elems.A);
         }
         public override string ToString()
         {
-            return String.Format("y = {0}{1}^x", Elems.K, Elems.A);
+            if(Elems.Coeff == 1)
+                return String.Format("y = {0}^x", Elems.A);
+            else if(Elems.Coeff == 0)
+                return String.Format("y = 0");
+            else 
+                return String.Format("y = {0}*{1}^x", Elems.Coeff, Elems.A);
         }
         public override bool Equals(Object obj)
         {
             if (obj is ExpFunct)
             {
                 ExpFunct ef = (ExpFunct)obj;
-                return (Elems.K == ef.Elems.K) && (Elems.A == ef.Elems.A);
+                return (Elems.Coeff == ef.Elems.Coeff) && (Elems.A == ef.Elems.A);
             }
             else { return false; }
         }
         public override int GetHashCode()
         {
-            return Elems.A ^ Elems.K;
+            return Elems.A ^ Elems.Coeff;
         }
     }
 }

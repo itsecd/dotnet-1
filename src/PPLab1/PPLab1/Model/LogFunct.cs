@@ -10,19 +10,36 @@ namespace PPLab1.Model
 
         public LogFunct(Data elems) { Elems = elems; }
 
-        public override double calc_funct(double value)
+        public LogFunct(int A, int Coeff)
         {
-            return Elems.K * Math.Round(Math.Log(value, Elems.A), 2);
+            Elems = new Data(A, Coeff);
+        }
+
+        public override double? calc_funct(double value)
+        {
+            if (value < 0)
+                return null; 
+            return Elems.Coeff * Math.Round(Math.Log(value, Elems.A), 2);
         }
         public override string derivative()
         {
-            return String.Format("y' = {0} x^-1",
-                
-                Math.Round(Elems.K / Math.Log(Elems.A), 2));
+            if (Elems.A < 1)
+                return "indefinitely";
+            else if (Elems.Coeff == 0)
+                return String.Format("y' = 0");
+            else
+                return String.Format("y' = {0} x^-1", Math.Round(Elems.Coeff / Math.Log(Elems.A), 2));
         }
         public override string ToString()
         {
-            return String.Format("y = {0} log_{1}x", Elems.K, Elems.A);
+            if (Elems.A < 1)
+                return "incorrect base";
+            else if (Elems.Coeff == 1)
+                return String.Format("y =  log_{0}x", Elems.A);
+            else if (Elems.Coeff == 0)
+                return String.Format("y = 0");
+            else
+                return String.Format("y = {0} log_{1}x", Elems.Coeff, Elems.A);
         }
 
         public override bool Equals(Object obj)
@@ -30,13 +47,13 @@ namespace PPLab1.Model
             if (obj is LogFunct) 
             {
                 LogFunct lf = (LogFunct)obj;
-                return (Elems.K == lf.Elems.K) && (Elems.A == lf.Elems.A);
+                return (Elems.Coeff == lf.Elems.Coeff) && (Elems.A == lf.Elems.A);
             }
             else { return false; }
         }
         public override int GetHashCode()
         {
-            return Elems.A ^ Elems.K;
+            return Elems.A ^ Elems.Coeff;
         }
     }
 }

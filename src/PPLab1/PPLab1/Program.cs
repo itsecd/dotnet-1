@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using PPLab1.Model;
+using System.Linq;
+using Spectre.Console;
 
 namespace PPLab1
 {
@@ -7,19 +10,110 @@ namespace PPLab1
     {
         static void Main(string[] args)
         {
-            Function f = new LogFunct()
+            Function f1 = new LogFunct()
             {
                 Elems = new Data(10, 5)
             };
-            Function f1 = new LogFunct()
+            Function f2 = new Const()
             {
-                Elems = new Data(10, 3)
+                Elems = new Data(8, 3)
+            };
+            Function f3 = new PowerFunct()
+            {
+                Elems = new Data(2, 7)
             };
 
-            //Console.WriteLine(f.calc_funct(2));
-            //Console.WriteLine(f.Equals(f1));
-            Console.WriteLine(f.GetHashCode());
-            Console.WriteLine(f1.GetHashCode());
+            List<Function> functions = new() { f1, f2, f3 };
+
+
+            var functionType = AnsiConsole.Prompt(new SelectionPrompt<string>()
+               .Title("Select function type: ")
+               .AddChoices("Constant", "Power function", "Exponential function", "Logarithm"));
+
+
+            //int inputIndex = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input insertion index: [/]"));
+
+
+            Function newFunction = functionType switch
+            {
+                "Constant" => new Const(
+                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
+                    ),
+                "Power function" => new PowerFunct(
+                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input power: [/]")),
+                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
+                    ),
+                "Exponential function" => new ExpFunct(
+                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input exponent: [/]")),
+                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
+                    ),
+                "Logarithm" => new LogFunct(
+                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input base: [/]")),
+                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
+                    ),
+                _ => null
+            }; 
+
+            if (newFunction == null)
+            {
+                AnsiConsole.MarkupLine($"[red]Unknowen function: {functionType}[/]");
+            }
+
+            functions.Add(newFunction);
+
+            //foreach (Function f in functions)
+            //{
+            //    Console.WriteLine(f);
+            //}
+
+            // Нахождение макимальной фундкии для заданного параметра START
+
+            //var value = 8;
+            //var max_result = Double.MinValue;
+            //Function max_function = f1;
+
+            //foreach (Function function in functions)
+            //{
+            //   if (function.calc_funct(value) >= max_result)
+            //   {
+            //        max_result = function.calc_funct(value);
+            //        max_function = function;
+            //   }
+            //}
+            //Console.WriteLine(max_function);
+            //// Console.WriteLine(functions.Max(f => f.calc_funct(value)));
+
+            // Нахождение макимальной фундкии для заданного параметра START
+
+
+            //Displayning the Collections START
+
+            var table = new Table();
+            int counter = 0;
+
+            table.AddColumn("Type");
+            table.AddColumn("Function");
+            table.AddColumn("Derivative");
+
+            foreach (Function function in functions)
+            {
+                if (counter < 10)
+                {
+                    table.AddRow(function.GetType().Name, function.ToString(),
+                    function.derivative().ToString());
+                    ++counter;
+                }
+                else
+                {
+                    table.AddRow("...", "...", "...");
+                    break;
+                }
+
+            }
+
+            AnsiConsole.Write(table);
+
+            //Displayning the Collections END
 
         }
     }
