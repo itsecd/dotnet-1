@@ -7,6 +7,14 @@ namespace PromLab01
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            var a = new Point();
+            a.X = 1;
+            a.Y = 1;
+            a.Print();
+            var b = new Point(2,2);
+            b.Print();
+            var c = Point.GetMiddle(a, b);
+            c.Print();
         }
     }
 }
