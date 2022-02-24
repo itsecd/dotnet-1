@@ -13,7 +13,12 @@ namespace Laba1.Model
             Radius = radius;
             Height = height;
         }
-
+        public Cylinder( double x, double y, double z, double radius, double height)
+        {
+            Centre = new Point(x, y, z);
+            Radius = radius;
+            Height = height;
+        }
         public override double GetArea()
         {
             return (2 * Math.PI * Radius * (Radius + Height));
@@ -29,6 +34,10 @@ namespace Laba1.Model
             return new RectangularParallelepiped
                 (new(Centre.X + Radius, Centre.Y - Radius, Centre.Z), 
                  new(Centre.X - Radius, Centre.Y + Radius, Centre.Z + Height));
+        }
+        public override string ToString()
+        {
+            return $"Centre: {Centre.X} {Centre.Y} {Centre.Z}\nRadius: {Radius}\nHeight: {Height}\n";
         }
     }
 }

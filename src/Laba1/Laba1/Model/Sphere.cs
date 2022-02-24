@@ -11,7 +11,11 @@ namespace Laba1.Model
             Centre = centre;
             Radius = radius;
         }
-
+        public Sphere(double x, double y, double z, double radius)
+        {
+            Centre = new Point(x, y, z);
+            Radius = radius;
+        }
         public override double GetArea()
         {
             return (4 * Math.PI * Math.Pow(Radius, 2));
@@ -28,7 +32,10 @@ namespace Laba1.Model
                 (new(Centre.X + Radius, Centre.Y - Radius, Centre.Z - Radius),
                  new(Centre.X - Radius, Centre.Y + Radius, Centre.Z + Radius));
         }
-
+        public override string ToString()
+        {
+            return $"Centre: {Centre.X} {Centre.Y} {Centre.Z}\nRadius: {Radius}\n";
+        }
     }
 }
 

@@ -12,6 +12,11 @@ namespace Laba1.Model
             Point2 = point2;
 
         }
+        public RectangularParallelepiped(double x1, double y1, double z1, double x2, double y2, double z2)
+        {
+            Point1 = new Point(x1, y1, z1);
+            Point2 = new Point(x2, y2, z2);
+        }
         public double GetWidth()
         {
             return Math.Abs(Point1.X - Point2.X);
@@ -39,6 +44,10 @@ namespace Laba1.Model
         {
             return new RectangularParallelepiped
                 (new (Point1.X, Point1.Y, Point1.Z), new (Point2.X, Point2.Y, Point2.Z));
+        }
+        public override string ToString()
+        {
+            return $"Point1: {Point1.X} {Point1.Y} {Point1.Z}\nPoint2: {Point2.X} { Point2.Y} {Point2.Z}\n";
         }
     }
 }
