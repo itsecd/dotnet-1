@@ -47,11 +47,11 @@ namespace Binary_operations.Commands
             };
             if (operationType == null)
             {
-                AnsiConsole.MarkupLine($"[orange]Неизвестный тип фигуры: {operationType}[/]");
+                AnsiConsole.MarkupLine($"[orange]Неизвестный тип фигуры [/]");
                 return -1;
             }
-            var text_insert = new TextPrompt<int>("[darkslategray3]Введите индекс, куда хотите вставить операцию: [/]");
-            int index = AnsiConsole.Prompt(text_insert);
+            var textInsert = new TextPrompt<int>("[darkslategray3]Введите индекс, куда хотите вставить операцию: [/]");
+            int index = AnsiConsole.Prompt(textInsert);
             _operationsRepository.AddOperation(index, operation);
             return 0;
         }

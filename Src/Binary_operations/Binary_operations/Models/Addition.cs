@@ -4,6 +4,7 @@
     {
         public Numbers nums;
 
+        public Addition() { }
         public Addition(int l, int r)
         {
             nums.Lhs = l;

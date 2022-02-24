@@ -4,6 +4,8 @@
     {
         public Numbers nums;
 
+        public Substraction() { }
+
         public Substraction(int l, int r)
         {
             nums.Lhs = l;

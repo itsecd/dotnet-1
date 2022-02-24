@@ -4,6 +4,8 @@
     {
         public Numbers nums;
 
+        public Division() { }
+
         public Division(int l, int r)
         {
             nums.Lhs = l;

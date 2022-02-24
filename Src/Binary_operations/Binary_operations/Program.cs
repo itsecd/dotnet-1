@@ -27,8 +27,6 @@ namespace Binary_operations
             });
             app.Run(args);
 
-            IOperationRepository operations_repository = new XmlOperationRepository();
-
 
         }
     }

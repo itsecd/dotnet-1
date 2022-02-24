@@ -4,6 +4,8 @@
     {
         public Numbers nums;
 
+        public Remainder() { }
+
         public Remainder(int l, int r)
         {
             nums.Lhs = l;

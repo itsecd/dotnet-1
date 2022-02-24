@@ -18,9 +18,9 @@ namespace Binary_operations.Commands
         }
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveOperationSettings settings)
         {
-            var text_delete = new TextPrompt<int>("[blue]Введите индекс операции, которую хотите удалить: [/]");
-            int index_delete = AnsiConsole.Prompt(text_delete);
-            _operationsRepository.RemoveOperation(index_delete);
+            var textDelete = new TextPrompt<int>("[blue]Введите индекс операции, которую хотите удалить: [/]");
+            int indexDelete = AnsiConsole.Prompt(textDelete);
+            _operationsRepository.RemoveOperation(indexDelete);
             return 0;
         }
 

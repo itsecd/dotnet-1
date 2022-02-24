@@ -27,13 +27,13 @@ namespace Binary_operations.Commands
             table.AddColumn("[yellow]Вид[/]");
             table.AddColumn("[yellow]Результат операции[/]");
             table.Border(TableBorder.Ascii2);
-            for (var i = 0; i < operations.Count(); ++i)
+            for (var i = 0; i < operations.Count; ++i)
             {
                 if (i == 10)
                     break;
                 table.AddRow($"[mediumpurple2_1]{operations[i].GetType().Name}[/]", $"[skyblue1]{operations[i].ToString()}[/]", $"[seagreen1_1]{operations[i].GetResult().ToString()}[/]");
             }
-            if (operations.Count() > 10)
+            if (operations.Count > 10)
                 table.AddRow("[red3_1]...[/]", "[red3_1]...[/]", "[red3_1]...[/]");
             AnsiConsole.Write(table);
             return 0;

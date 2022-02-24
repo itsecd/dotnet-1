@@ -20,11 +20,11 @@ namespace Binary_operations.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] ComparingOperationsCommandSettings settings)
         {
             var text1 = new TextPrompt<int>("[lightpink3]Введите индекс первой операции для сравнения: [/]");
-            int index_lhs = AnsiConsole.Prompt(text1);
+            int indexLhs = AnsiConsole.Prompt(text1);
 
             var text2 = new TextPrompt<int>("[lightpink3]Введите индекс второй операции для сравнения: [/]");
-            int index_rhs = AnsiConsole.Prompt(text2);
-            if (_operationsRepository.CompareOperations(index_lhs, index_rhs) == true)
+            int indexRhs = AnsiConsole.Prompt(text2);
+            if (_operationsRepository.CompareOperations(indexLhs, indexRhs) == true)
                 AnsiConsole.MarkupLine("[green]Операции равны [/]");
             else
                 AnsiConsole.MarkupLine("[red]Операции не равны [/]");
