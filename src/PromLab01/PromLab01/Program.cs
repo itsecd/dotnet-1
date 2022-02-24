@@ -15,6 +15,10 @@ namespace PromLab01
             b.Print();
             var c = Point.GetMiddle(a, b);
             c.Print();
+            var d = new Rectangle(a, b);
+            d.ToString();
+            Console.WriteLine($"Area: {d.GetArea()}, Perimeter: {d.GetPerimeter()}");
+
         }
     }
 }
