@@ -1,6 +1,6 @@
 ﻿using iProg1.Model;
 using Spectre.Console;
-using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
@@ -32,7 +32,7 @@ namespace iProg1.Repositories
             {
                 return;
             }
-            if (!File.Exists(_storageFileName))
+            if (!File.Exists(_storageFileName) || new FileInfo(_storageFileName).Length == 0)
             {
                 _matrices = new List<Matrix>();
                 return;
@@ -41,8 +41,13 @@ namespace iProg1.Repositories
             {
                 using (XmlTextReader reader = new XmlTextReader(sr))
                 {
+                    if (new FileInfo(_storageFileName).Length==0)
+                    {
+                        _matrices = new List<Matrix>();
+                        return;
+                    }
                     reader.WhitespaceHandling = WhitespaceHandling.None;
-                    Valid.SkipToElement(reader);
+                    Helper.SkipToElement(reader);
                     if (int.Parse(reader.GetAttribute("size")) == 0)
                     {
                         _matrices = new List<Matrix>();
@@ -63,7 +68,7 @@ namespace iProg1.Repositories
 
         private void WriteToFile()
         {
-            using (var fileStream = new FileStream(_storageFileName, FileMode.OpenOrCreate))
+            using (var fileStream = new FileStream(_storageFileName, FileMode.Create, FileAccess.Write))
             {
                 using (var writer = new XmlTextWriter(new StreamWriter(fileStream)))
                 {
@@ -84,12 +89,19 @@ namespace iProg1.Repositories
 
         public void AddMatrix(Matrix matrix, int index)
         {
+            ReadFromFile();
             _matrices.Insert(index, matrix);
             WriteToFile();
         }
-
+        public void UpdateMatrix(int indexOfMatrix, int iIndex, int jIndex, double value)
+        {
+            ReadFromFile();
+            _matrices[indexOfMatrix].SetValue(iIndex, jIndex, value);
+            WriteToFile();
+        }
         public void RemoveMatrix(int index)
         {
+            ReadFromFile();
             _matrices.RemoveAt(index);
             WriteToFile();
         }
@@ -101,34 +113,82 @@ namespace iProg1.Repositories
             WriteToFile();
         }
 
-        public bool Compare(Matrix fst, Matrix sec)
+        public bool Compare(int fstInd, int secInd)
         {
-            return fst.Equals(sec);
+            ReadFromFile();
+            return _matrices[fstInd].Equals(_matrices[secInd]);
         }
 
-        public void Output()
+        public void OutputMatrix(int index)
+        {
+            ReadFromFile();
+            var table = new Table();
+            table.Title = new TableTitle($"{index} matrix").SetStyle("rapidblink");
+            table.AddColumn("Type");
+            table.AddColumn("Size");
+            table.AddColumn("Matrix");
+            table.AddRow(_matrices[index].GetType().Name,
+                    $"({_matrices[index].GetDimension()},{_matrices[index].GetDimension()})",
+                    _matrices[index].ToString());
+            table.Columns[2].LeftAligned();
+            AnsiConsole.Write(table);
+        }
+        public void OutputAllMatrix()
         {
             ReadFromFile();
             if (_matrices == null || _matrices.Count == 0)
             {
-                Console.WriteLine("Repository is empty");
+                AnsiConsole.WriteLine("[red]Repository is empty[/]");
             }
-            int i = 0;
-            foreach (var matrix in _matrices)
+            var table = new Table();
+            table.Title = new TableTitle("[mediumorchid1]Matrices[/]").SetStyle("rapidblink");
+            table.AddColumn("Type");
+            table.AddColumn("Size");
+            table.AddColumn("Matrix");
+            for (int i = 0; i < _matrices.Count; i++)
             {
-                Console.WriteLine(matrix.ToString());
-                i++;
+                table.AddRow(_matrices[i].GetType().Name,
+                    $"({_matrices[i].GetDimension()},{_matrices[i].GetDimension()})",
+                    _matrices[i].ToString());
                 if (i == 10)
                 {
-                    Console.WriteLine("...");
+                    table.AddRow("...", "...", "...");
                     break;
                 }
             }
+            table.Border(TableBorder.DoubleEdge);
+            AnsiConsole.Write(table);
+        }
+        public void PrintMinMaxAbsMatrixWithLinq()
+        {
+            ReadFromFile();
+            var arr = from p in _matrices
+                      orderby p.GetAbsMaxElement()
+                      select p;
+            OutputMatrix(_matrices.IndexOf(arr.First()));
+
+        }
+        public void PrintMinMaxAbsMatrix()
+        {
+            ReadFromFile();
+            var arr = new double[_matrices.Count];
+            int index = 0;
+            double min = double.MaxValue;
+            for (int i = 0;i < arr.Length; i++)
+            {
+                var absMax = _matrices[i].GetAbsMaxElement();
+                if (absMax < min)
+                {
+                    min = absMax;
+                    index = i;
+                }
+            }
+            OutputMatrix(index);
         }
         public ValidationResult IsIndexInRange(int index)
         {
             ReadFromFile();
-            if (index == -1)
+            if (index == -10)
             {
                 return ValidationResult.Success();
             }
@@ -138,7 +198,7 @@ namespace iProg1.Repositories
             }
             if (index > _matrices.Count)
             {
-                return ValidationResult.Error($"[red]The index must be less than { _matrices.Count}[/]");
+                return ValidationResult.Error($"[red]The index must be less than {_matrices.Count}[/]");
             }
             return ValidationResult.Success();
         }

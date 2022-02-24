@@ -7,10 +7,14 @@ namespace iProg1.Repositories
     {
         int GetCount();
         void AddMatrix(Matrix matrix, int index);
-        bool Compare(Matrix fst, Matrix sec);
-        void Output();
+        void UpdateMatrix(int indexOfMatrix, int iIndex, int jIndex, double value);
+        bool Compare(int fstInd, int secInd);
+        void OutputMatrix(int index);
+        void OutputAllMatrix();
         void RemoveAllMatrix();
-        void RemoveMatrix(int index);
+        void RemoveMatrix(int uindex);
+        void PrintMinMaxAbsMatrixWithLinq();
+        void PrintMinMaxAbsMatrix();
         ValidationResult IsIndexInRange(int index);
     }
 }
