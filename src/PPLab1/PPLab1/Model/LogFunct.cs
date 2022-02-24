@@ -2,7 +2,7 @@ using System;
 
 namespace PPLab1.Model
 {
-    internal class LogFunct : Function
+    public class LogFunct : Function
     {
         public Data Elems { get; set; }
 
@@ -53,7 +53,7 @@ namespace PPLab1.Model
         }
         public override int GetHashCode()
         {
-            return Elems.A ^ Elems.Coeff;
+            return Elems.A.GetHashCode() ^ Elems.Coeff.GetHashCode();
         }
     }
 }

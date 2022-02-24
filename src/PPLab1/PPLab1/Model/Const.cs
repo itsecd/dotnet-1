@@ -2,7 +2,7 @@ using System;
 
 namespace PPLab1.Model
 {
-    internal class Const : Function
+    public class Const : Function
     {
         public Data Elems { get; set; }
 
@@ -36,7 +36,7 @@ namespace PPLab1.Model
 
         public override int GetHashCode()
         {
-            return Elems.Coeff;
+            return Elems.Coeff.GetHashCode();
         }
     }
 }

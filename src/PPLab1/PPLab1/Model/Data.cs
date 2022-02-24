@@ -3,7 +3,7 @@
 
 namespace PPLab1.Model
 {
-    internal struct Data
+    public struct Data
     {
         private int _a;
         private int _coeff;

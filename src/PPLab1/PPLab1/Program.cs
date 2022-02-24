@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using PPLab1.Model;
 using System.Linq;
 using Spectre.Console;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace PPLab1
 {
@@ -25,7 +27,7 @@ namespace PPLab1
 
             List<Function> functions = new() { f1, f2, f3 };
 
-
+        
             var functionType = AnsiConsole.Prompt(new SelectionPrompt<string>()
                .Title("Select function type: ")
                .AddChoices("Constant", "Power function", "Exponential function", "Logarithm"));
@@ -61,10 +63,7 @@ namespace PPLab1
 
             functions.Add(newFunction);
 
-            //foreach (Function f in functions)
-            //{
-            //    Console.WriteLine(f);
-            //}
+            
 
             // Нахождение макимальной фундкии для заданного параметра START
 
@@ -83,38 +82,12 @@ namespace PPLab1
             //Console.WriteLine(max_function);
             //// Console.WriteLine(functions.Max(f => f.calc_funct(value)));
 
-            // Нахождение макимальной фундкии для заданного параметра START
+            // Нахождение макимальной фундкии для заданного параметра END
 
 
-            //Displayning the Collections START
+            
 
-            var table = new Table();
-            int counter = 0;
-
-            table.AddColumn("Type");
-            table.AddColumn("Function");
-            table.AddColumn("Derivative");
-
-            foreach (Function function in functions)
-            {
-                if (counter < 10)
-                {
-                    table.AddRow(function.GetType().Name, function.ToString(),
-                    function.derivative().ToString());
-                    ++counter;
-                }
-                else
-                {
-                    table.AddRow("...", "...", "...");
-                    break;
-                }
-
-            }
-
-            AnsiConsole.Write(table);
-
-            //Displayning the Collections END
-
+            
         }
     }
 }
