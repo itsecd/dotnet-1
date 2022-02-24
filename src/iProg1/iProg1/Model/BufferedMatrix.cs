@@ -1,66 +1,68 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
 namespace iProg1.Model
 {
-    [Serializable]
     public class BufferedMatrix : Matrix
     {
-        public double[][] _matrix;
+        private double[][] _matrix;
         public BufferedMatrix() {}
-        public BufferedMatrix(int a, int b)
+        public BufferedMatrix(int dimension)
         {
-            _matrix = new double[a][];
-            for (int i = 0; i < a; i++)
+            _matrix = new double[dimension][];
+            for (int i = 0; i < dimension; i++)
             {
-                _matrix[i] = new double[b];
+                _matrix[i] = new double[dimension];
             }
         }
+
         public BufferedMatrix(double[][] matrix)
         {
             _matrix = (double[][])matrix.Clone();
         }
-        public override int GetColumnCount()
+        
+        public override int GetDimension()
         {
             return _matrix.GetLength(0);
         }
-        public override int GetRowCount()
+        
+        public override double GetValue(int indexR, int indexC)
         {
-            return _matrix[0].Length;
-        }
-        public override double GetValue(int indexC, int indexR)
-        {
-            if (!Valid.IsValidIndex(indexC, GetColumnCount()) ||
-                !Valid.IsValidIndex(indexR, GetRowCount()))
+            if (!Helper.IsValidIndex(indexR, GetDimension()) ||
+                !Helper.IsValidIndex(indexC, GetDimension()))
             {
                 throw new ArgumentOutOfRangeException("incorrect index");
             }
-            return _matrix[indexC][indexR];
+            return _matrix[indexR][indexC];
         }
-        public override void SetValue(int indexC, int indexR, int value)
+        
+        public override void SetValue(int indexR, int indexC, double value)
         {
-            if (!Valid.IsValidIndex(indexC, GetColumnCount()) ||
-                !Valid.IsValidIndex(indexR, GetRowCount()))
+            if (!Helper.IsValidIndex(indexR, GetDimension()) ||
+                !Helper.IsValidIndex(indexC, GetDimension()))
             {
                 throw new ArgumentOutOfRangeException("incorrect index");
             }
-            _matrix[indexC][indexR] = value;
+            _matrix[indexR][indexC] = value;
         }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("BufferedMatrix: \n");
-            for(int i = 0; i < _matrix.GetLength(0); i++)
+            for(int i = 0; i < GetDimension(); i++)
             {
-                for(int j = 0; j < _matrix[0].Length; j++)
+                for(int j = 0; j < GetDimension(); j++)
                 {
-                    sb.Append(_matrix[i][j]);
+                    sb.Append(String.Format("{0,10}" ,_matrix[i][j]));
+                    sb.Append(" ");
                 }
                 sb.Append('\n');
             }
+            
             return sb.ToString();
         }
+
         public override bool Equals(object obj)
         {
             if(this == obj)
@@ -71,20 +73,16 @@ namespace iProg1.Model
             {
                 return false; 
             }
-            var matrix = (BufferedMatrix)obj;
-            if(matrix.GetColumnCount() != GetColumnCount()) 
+            var matrix = (Matrix)obj;
+            if(matrix.GetDimension() != GetDimension()) 
             { 
                 return false; 
             }
-            if(matrix.GetRowCount() != GetRowCount()) 
+            for (int i = 0; i < GetDimension(); i++)
             {
-                return false; 
-            }
-            for (int i = 0; i < _matrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < _matrix[0].Length; j++)
+                for (int j = 0; j < GetDimension(); j++)
                 {
-                    if (_matrix[i][j] != matrix._matrix[i][j])
+                    if (_matrix[i][j] != matrix.GetValue(i, j))
                     {
                         return false;
                     }
@@ -92,6 +90,7 @@ namespace iProg1.Model
             }
             return true;
         }
+        
         public override int GetHashCode()
         {
             double hashCode = 0;
@@ -105,10 +104,10 @@ namespace iProg1.Model
             }
             return Math.Abs((int)hashCode);
         }
+        
         public override void GetXml(XmlTextWriter writer)
         {
-            writer.WriteAttributeString("ColumnCount", GetColumnCount().ToString());
-            writer.WriteAttributeString("RowCount", GetRowCount().ToString());
+            writer.WriteAttributeString("Dimension", GetDimension().ToString());
             foreach (var el in _matrix)
             {
                 foreach (var el2 in el)
@@ -119,25 +118,46 @@ namespace iProg1.Model
                 }
             }
         }
+        
         public override void LoadFromXml(XmlTextReader reader)
         {
             bool wasEmpty = reader.IsEmptyElement;
             if (wasEmpty)
                 return;
-            Valid.SkipToElement(reader);
-            var columnCount = int.Parse(reader.GetAttribute("ColumnCount"));
-            var RowCount = int.Parse(reader.GetAttribute("RowCount"));
-            _matrix = new double[columnCount][];
-            for (int i = 0; i < columnCount; i++)
+            Helper.SkipToElement(reader);
+            var dimension = int.Parse(reader.GetAttribute("Dimension"));
+            _matrix = new double[dimension][];
+            for (int i = 0; i < dimension; i++)
             {
-                _matrix[i] = new double[RowCount];
-                for(int j = 0; j < RowCount; j++)
+                _matrix[i] = new double[dimension];
+                for(int j = 0; j < dimension; j++)
                 {
                     reader.Read();
                     _matrix[i][j] = double.Parse(reader.GetAttribute("Value"));
                 }
             }
             reader.Skip();
+        }
+
+        
+        public override double GetAbsMaxElementWithLinq()
+        {
+            return _matrix.Max(p => p.Max(z => Math.Abs(z)));
+        }
+
+        public override double GetAbsMaxElement()
+        {
+            double absMax = 0;
+            for(int i = 0; i < _matrix.Length; i++)
+            {
+                double absMaxInRow = Math.Abs(_matrix[i][0]);
+                for(int j = 1; j < _matrix[i].Length; j++)
+                {
+                    absMaxInRow = Math.Abs(_matrix[i][j]) > absMaxInRow ? _matrix[i][j] : absMaxInRow;
+                }
+                absMax = absMaxInRow > absMax ? absMaxInRow : absMax;
+            }
+            return absMax;
         }
     }
 }
