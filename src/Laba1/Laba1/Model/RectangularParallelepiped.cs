@@ -12,20 +12,34 @@ namespace Laba1.Model
             Point2 = point2;
 
         }
-
+        public double GetWidth()
+        {
+            return Math.Abs(Point1.X - Point2.X);
+        }
+        public double GetLength()
+        {
+            return Math.Abs(Point1.Y - Point2.Y);
+        }
+        public double GetHeight()
+        {
+            return Math.Abs(Point1.Z - Point2.Z);
+        }
         public override double GetArea()
         {
-            throw new NotImplementedException();
+            return 2 * (GetLength() * GetWidth() + GetLength() * GetHeight() + GetWidth() * GetHeight());
         }
 
-        public override double GetV()
+        public override double GetVolume()
         {
-            throw new NotImplementedException();
+            return GetLength() * GetWidth() * GetHeight();
+
         }
 
-        public override RectangularParallelepiped GetBbox()
+        public override RectangularParallelepiped GetMinParallelepiped()
         {
-            throw new NotImplementedException();
+            return new RectangularParallelepiped
+                (new (Point1.X, Point1.Y, Point1.Z), new (Point2.X, Point2.Y, Point2.Z));
         }
     }
 }
+

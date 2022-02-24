@@ -31,7 +31,7 @@ namespace Laba1
 
             }
 
-            Console.WriteLine(point.X);
+            Console.WriteLine(sumV);
         }
     }
 }

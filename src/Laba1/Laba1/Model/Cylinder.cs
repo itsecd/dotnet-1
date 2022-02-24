@@ -16,17 +16,19 @@ namespace Laba1.Model
 
         public override double GetArea()
         {
-            throw new NotImplementedException();
+            return (2 * Math.PI * Radius * (Radius + Height));
         }
 
-        public override double GetV()
+        public override double GetVolume()
         {
-            throw new NotImplementedException();
+            return (Math.PI * Math.Pow(Radius, 2) * Height);
         }
 
-        public override RectangularParallelepiped GetBbox()
+        public override RectangularParallelepiped GetMinParallelepiped()
         {
-            throw new NotImplementedException();
+            return new RectangularParallelepiped
+                (new(Centre.X + Radius, Centre.Y - Radius, Centre.Z), 
+                 new(Centre.X - Radius, Centre.Y + Radius, Centre.Z + Height));
         }
     }
 }
