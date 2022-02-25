@@ -31,7 +31,7 @@ namespace Binary_operations.Commands
             {
                 if (i == 10)
                     break;
-                table.AddRow($"[mediumpurple2_1]{operations[i].GetType().Name}[/]", $"[skyblue1]{operations[i].ToString()}[/]", $"[seagreen1_1]{operations[i].GetResult().ToString()}[/]");
+                table.AddRow($"[mediumpurple2_1]{operations[i].GetType().Name}[/]", $"[skyblue1]{operations[i]}[/]", $"[seagreen1_1]{operations[i].GetResult(operations[i].Lhs, operations[i].Rhs)}[/]");
             }
             if (operations.Count > 10)
                 table.AddRow("[red3_1]...[/]", "[red3_1]...[/]", "[red3_1]...[/]");

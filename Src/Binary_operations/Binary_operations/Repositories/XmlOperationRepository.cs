@@ -12,6 +12,7 @@ namespace Binary_operations.Repositories
     {
         private const string StorageFileName = "operations.xml";
         private List<Operation> _operations;
+
         private void ReadFromFile()
         {
             if (_operations != null)
@@ -79,11 +80,11 @@ namespace Binary_operations.Repositories
             int min = int.MaxValue;
             foreach (var operationElement in _operations)
             {
-                if (operationElement.GetResult() < min)
-                    min = operationElement.GetResult();
+                if (operationElement.GetResult(operationElement.Lhs, operationElement.Rhs) < min)
+                    min = operationElement.GetResult(operationElement.Lhs, operationElement.Rhs);
             }
             AnsiConsole.MarkupLine("[orange1]Минимальная операция, найденная циклом: [/]" + min); 
-            AnsiConsole.MarkupLine("[wheat1]Минимальная операция, найденная с помощью Linq: [/] " + _operations.Min(operation => operation.GetResult())); 
+            AnsiConsole.MarkupLine("[wheat1]Минимальная операция, найденная с помощью Linq: [/] " + _operations.Min(operation => operation.GetResult(operation.Lhs, operation.Rhs))); 
         }
     }
 }

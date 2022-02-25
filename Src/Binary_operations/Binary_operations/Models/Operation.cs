@@ -10,7 +10,9 @@ namespace Binary_operations.Models
 
     public abstract class Operation
     {
+      public int Lhs { get; set;}
+      public int Rhs { get; set; }
 
-        public abstract int GetResult();
+        public abstract int GetResult(int left, int right);
     }
 }

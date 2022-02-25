@@ -2,19 +2,17 @@
 {
     public class Remainder : Operation
     {
-        public Numbers nums;
-
         public Remainder() { }
 
         public Remainder(int l, int r)
         {
-            nums.Lhs = l;
-            nums.Rhs = r;
+            Lhs = l;
+            Rhs = r;
         }
 
-        public override int GetResult()
+        public override int GetResult(int left, int right)
         {
-            return nums.Lhs % nums.Rhs;
+            return left % right;
         }
 
         public override bool Equals(object obj)
@@ -23,22 +21,22 @@
                 return false;
             if (obj.GetType().Name == GetType().Name)
             {
-                Remainder add = obj as Remainder;
-                return add.nums.Lhs == nums.Lhs && add.nums.Rhs == nums.Rhs;
+                Remainder rem = obj as Remainder;
+                return rem.Lhs == rem.Lhs && rem.Rhs == Rhs;
             }
             return false;
         }
 
         public override int GetHashCode()
         {
-            int hashcode = this.nums.Lhs.GetHashCode();
-            hashcode = 31 * hashcode + nums.Rhs.GetHashCode();
+            int hashcode = this.Lhs.GetHashCode();
+            hashcode = 31 * hashcode + Rhs.GetHashCode();
             return hashcode;
         }
 
         public override string ToString()
         {
-            return $"{nums.Lhs} % {nums.Rhs}";
+            return $"{Lhs} % {Rhs}";
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Binary_operations.Models.Tests
         {
             var obj1 = new Substraction(10, 2);
             var executed = 8;
-            var actual = obj1.GetResult();
+            var actual = obj1.GetResult(obj1.Lhs, obj1.Rhs);
             Assert.Equal(executed, actual);
         }
 

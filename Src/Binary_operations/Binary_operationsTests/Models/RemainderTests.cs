@@ -9,7 +9,7 @@ namespace Binary_operations.Models.Tests
         {
             var obj1 = new Remainder(10, 3);
             var executed = 1;
-            var actual = obj1.GetResult();
+            var actual = obj1.GetResult(obj1.Lhs, obj1.Rhs);
             Assert.Equal(executed, actual);
         }
 
