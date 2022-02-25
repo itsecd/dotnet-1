@@ -9,56 +9,48 @@ namespace PromLab01
     internal class Rectangle : ICalculations
     {
         Point a;
+        public Point A
+        {
+            get { return a; }
+            set { a = value; }
+        }
         Point b;
-        Point middle;
-        double width;
-        double height;
-
-        public double Width
+        public Point B
         {
-            get { return width; }
+            get { return b; }
+            set { b = value; }  
         }
-        public double Height
-        {
-            get { return height; }
-        }
-
         public Rectangle(Point a, Point b)
         {
             this.a = a;
             this.b = b;
-            middle = Point.GetMiddle(a, b);
-            width = middle.X;
-            height = middle.Y;
         }
 
         public Rectangle(Point a, double width)
         {
             this.a = a;
-            this.width = width;
-            height = width;
-            b = new Point (a.X + width, a.Y - height);
+            b = new Point (a.X + width, a.Y - width);
 
         }
 
         public double GetArea()
         {
-            return Width * Height;
+            return Math.Abs(b.X-a.X)*Math.Abs(b.Y-a.Y);
         }
 
         public double GetPerimeter()
         {
-            return 2*Width + 2*Height;
+            return 2*Math.Abs(b.X - a.X) + 2* Math.Abs(b.Y - a.Y);
         }
 
-        public Rectangle GetBorders() //заглушка
+        public Rectangle GetBorders()
         {
             return new Rectangle(a, b);
         }
 
-        new public string ToString() //тоже заглушка
+        new public string ToString()
         {
-            return "Width: " + Width + "," + "Height: " + Height + "Starting point: " + a.X;
+            return "Width: " + Math.Abs(b.X - a.X) + "," + "Height: " + Math.Abs(b.Y - a.Y) + "Starting point: " + a.ToString();
         }
     }
 }

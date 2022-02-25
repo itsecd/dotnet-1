@@ -24,6 +24,11 @@ namespace PromLab01
             e = new Circle(a, Point.GetLength(c, b));
             Console.WriteLine(e.ToString());
             Console.WriteLine($"Area: {e.GetArea()}, Perimeter: {e.GetPerimeter()}");
+            var s = e.GetBorders();
+            Console.WriteLine(s.ToString());
+            var z = new Triangle(a, b, c);
+            Console.WriteLine(z.ToString());
+            Console.WriteLine($"Area: {z.GetArea()}, Perimeter: {z.GetPerimeter()}");
 
 
         }
