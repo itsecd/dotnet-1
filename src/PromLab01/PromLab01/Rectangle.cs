@@ -32,14 +32,23 @@ namespace PromLab01
             height = middle.Y;
         }
 
+        public Rectangle(Point a, double width)
+        {
+            this.a = a;
+            this.width = width;
+            height = width;
+            b = new Point (a.X + width, a.Y - height);
+
+        }
+
         public double GetArea()
         {
-            return width * height;
+            return Width * Height;
         }
 
         public double GetPerimeter()
         {
-            return 2*width + 2*height;
+            return 2*Width + 2*Height;
         }
 
         public Rectangle GetBorders() //заглушка
@@ -47,9 +56,9 @@ namespace PromLab01
             return new Rectangle(a, b);
         }
 
-        new public void ToString()
+        new public string ToString() //тоже заглушка
         {
-            Console.WriteLine($"Width: {Width}, Height: {Height}, Starting point: ({a.X};{a.Y})");
+            return "Width: " + Width + "," + "Height: " + Height + "Starting point: " + a.X;
         }
     }
 }

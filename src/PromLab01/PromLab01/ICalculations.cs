@@ -11,6 +11,6 @@ namespace PromLab01
         double GetArea();
         double GetPerimeter();
         Rectangle GetBorders();
-        void ToString();
+        string ToString();
     }
 }

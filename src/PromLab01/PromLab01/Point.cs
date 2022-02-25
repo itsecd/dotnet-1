@@ -27,11 +27,24 @@ namespace PromLab01
             this.x = x;
             this.y = y;
         }
-        public void Print()
+
+        public Point(double x)
         {
-            Console.WriteLine($"({x};{y})");
+            this.x = x;
+            y = 0;
+        }
+        new public string ToString()
+        {
+            return "(" + X + ";" + Y + ")";
         }
 
+        static public double GetLength(Point a, Point b)
+        {
+            var c = new Point();
+            c.X = b.X - a.X;
+            c.Y = b.Y - a.Y;
+            return Math.Sqrt(Math.Pow(c.X,2) + Math.Pow(c.Y,2));
+        }
         static public Point GetMiddle(Point a, Point b)
         {
             var c = new Point();
