@@ -2,7 +2,7 @@
   "profiles": {
     "Binary_operations": {
       "commandName": "Project",
-      "commandLineArgs": "compare"
+      "commandLineArgs": "min"
     }
   }
 }

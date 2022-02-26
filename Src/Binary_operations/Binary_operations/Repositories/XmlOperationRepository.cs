@@ -74,25 +74,25 @@ namespace Binary_operations.Repositories
             return false;
         }
        
-        public void MinElement()
+        public string MinElement(int leftNumber, int rightNumber)
         {
             ReadFromFile();
-            var leftInsert = new TextPrompt<int>("[green]Введите левое число: [/]");
-            int left = AnsiConsole.Prompt<int>(leftInsert);
-            var rightInsert = new TextPrompt<int>("[green]Введите левое число: [/]");
-            int right = AnsiConsole.Prompt<int>(leftInsert);
             int minValue = int.MaxValue;
             var minOperation = "";
             foreach (var operationElement in _operations)
             {
-                if (operationElement.GetResult(left, right) < minValue) {
-                    minValue = operationElement.GetResult(left, right);
+                if (operationElement.GetResult(leftNumber, rightNumber) < minValue) {
                     minOperation = operationElement.ToString();
+                    minValue = operationElement.GetResult(leftNumber, rightNumber);
                 }
                     
+                    
             }
-            AnsiConsole.MarkupLine($"[orange1]Для чисел {left} и {right} минимальной будет операция {minOperation}\nЗначение операции равно {minValue} [/]"); 
-            AnsiConsole.MarkupLine($"[wheat1]Минимальная операция, найденная с помощью Linq: {minOperation}. Значение {_operations.Min(operation => operation.GetResult(left,right))}  [/] "); 
+            return minOperation;
         }
+
+        public string MinElementLinq(int leftNumber, int rightNumber) => _operations.First(operation => operation.GetResult(leftNumber, rightNumber) == _operations.Min(operation => operation.GetResult(leftNumber, rightNumber))).ToString();
+       
+        
     }
 }

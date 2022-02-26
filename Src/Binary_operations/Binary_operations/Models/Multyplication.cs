@@ -4,30 +4,12 @@
     {
         public Multyplication() { }
 
-        public override int GetResult(int left, int right)
-        {
-            return left * right;
-        }
+        public override int GetResult(int left, int right) => left * right;
+       
+        public override string ToString() => GetType().Name;
 
-        public override string ToString()
-        {
-            return this.GetType().Name;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return false;
-            if (obj.GetType().Name == GetType().Name)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return this.GetType().GetHashCode();
-        }
+        public override bool Equals(object obj) => obj.GetType().Name == GetType().Name;
+       
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 }
