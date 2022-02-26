@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace PPLab1.Repositories
 {
-    public class FunctionsRepository
+    public class XmlFunctionsRepository : IFunctionsRepository
     {
         private const string StorageFileName = "functions.xml";
 
@@ -16,7 +16,7 @@ namespace PPLab1.Repositories
         private void ReadFromFile()
         {
             if (_functions != null) return;
- 
+
             if (!File.Exists(StorageFileName))
             {
                 _functions = new List<Function>();
@@ -36,7 +36,7 @@ namespace PPLab1.Repositories
 
         public void InsertFunction(Function function, int index)
         {
-            if(_functions != null)
+            if (_functions != null)
             {
                 if (function == null)
                     throw new ArgumentNullException(nameof(function));
@@ -77,11 +77,11 @@ namespace PPLab1.Repositories
         {
             if (index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
-            if(_functions.Count - 1 < index)
+            if (_functions.Count - 1 < index)
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
-            if(_functions[index] != null)
+            if (_functions[index] != null)
             {
                 ReadFromFile();
                 _functions.RemoveAt(index);
@@ -95,7 +95,7 @@ namespace PPLab1.Repositories
         public void RemoveAllFunctions()
         {
             ReadFromFile();
-            _functions.RemoveRange(0, _functions.Count) ;
+            _functions.RemoveRange(0, _functions.Count);
             WriteToFile();
 
         }
@@ -113,39 +113,13 @@ namespace PPLab1.Repositories
                     throw new ArgumentException("Mismatch of function types");
             }
             else
-                throw new ArgumentOutOfRangeException(nameof(index1),nameof(index2));
+                throw new ArgumentOutOfRangeException(nameof(index1), nameof(index2));
         }
 
-        public void PrintFunctions()
+        public List<Function> GetFunctions()
         {
-            var table = new Table();
-            int counter = 0;
-
-            table.AddColumn("Type");
-            table.AddColumn("Function");
-            table.AddColumn("Derivative");
-
-            if(_functions != null)
-            {
-                foreach (Function function in _functions)
-                {
-                    if (counter < 10)
-                    {
-                        table.AddRow(function.GetType().Name, function.ToString(),
-                        function.derivative().ToString());
-                        ++counter;
-                    }
-                    else
-                    {
-                        table.AddRow("...", "...", "...");
-                        break;
-                    }
-
-                }
-            }
-            else
-                table.AddRow("null", "null", "null");
-            AnsiConsole.Write(table);
+            ReadFromFile();
+            return _functions;
         }
     }
 }

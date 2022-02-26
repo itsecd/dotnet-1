@@ -6,7 +6,10 @@ using System.Linq;
 using Spectre.Console;
 using System.Xml.Serialization;
 using System.IO;
-
+using Microsoft.Extensions.DependencyInjection;
+using PPLab1.Infrastructure;
+using Spectre.Console.Cli;
+using PPLab1.Commands;
 
 namespace PPLab1
 {
@@ -14,53 +17,24 @@ namespace PPLab1
     {
         static void Main(string[] args)
         {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IFunctionsRepository, XmlFunctionsRepository>();
 
-            var functRepository = new FunctionsRepository();
+            var registrar = new TypeRegistrar(serviceCollection);
+            var app = new CommandApp(registrar);
+
+            app.Configure(config =>
+            {
+                config.AddCommand<AddFunctionCommand>("add");
+                config.AddCommand<PrintFunctionsCommand>("print");
+            });
+
+            app.Run(args);
+            
+
            
-            var functionType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-               .Title("Select function type: ")
-               .AddChoices("Constant", "Power function", "Exponential function", "Logarithm"));
-
-
-            //int inputIndex = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input insertion index: [/]"));
-
-
-            Function newFunction = functionType switch
-            {
-                "Constant" => new Const(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
-                    ),
-                "Power function" => new PowerFunct(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input power: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
-                    ),
-                "Exponential function" => new ExpFunct(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input exponent: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
-                    ),
-                "Logarithm" => new LogFunct(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input base: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
-                    ),
-                _ => null
-            };
-
-            if (newFunction == null)
-            {
-                AnsiConsole.MarkupLine($"[red]Unknowen function: {functionType}[/]");
-            }
-
-            //functRepository.AddFunction(newFunction);
-
-            functRepository.PrintFunctions();
-
-            functRepository.RemoveAllFunctions();
-
-            functRepository.PrintFunctions();
-
-            //functRepository.RemoveFunction(1);
-
-            //functRepository.PrintFunctions();
+           
+            ////int inputIndex = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input insertion index: [/]"));
 
 
 
@@ -73,13 +47,6 @@ namespace PPLab1
             //           select func).FirstOrDefault();
 
             //AnsiConsole.WriteLine(res.ToString()); ;
-
-
-
-
-
-
-
 
 
 

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PPLab1": {
+      "commandName": "Project",
+      "commandLineArgs": "print"
+    }
+  }
+}
