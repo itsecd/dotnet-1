@@ -3,12 +3,7 @@
     public class Addition : Operation
     {
         public Addition() { }
-        public Addition(int l, int r)
-        {
-            Lhs = l;
-            Rhs = r;
-        }
-
+       
         public override int GetResult(int left, int right)
         {
             return left + right;
@@ -16,7 +11,7 @@
 
         public override string ToString()
         {
-            return $"{Lhs} + {Rhs}";
+            return this.GetType().Name;
         }
 
         public override bool Equals(object obj)
@@ -25,17 +20,14 @@
                 return false;
             if (obj.GetType().Name == GetType().Name)
             {
-                Addition add = obj as Addition;
-                return add.Lhs == Lhs && add.Rhs == Rhs;
+                return true;
             }
             return false;
         }
 
         public override int GetHashCode()
         {
-            int hashcode = this.Lhs.GetHashCode();
-            hashcode = 31 * hashcode + Rhs.GetHashCode();
-            return hashcode;
+            return this.GetType().GetHashCode();
         }
     }
 }

@@ -4,15 +4,14 @@
     {
         public Substraction() { }
 
-        public Substraction(int l, int r)
-        {
-            Lhs = l;
-            Rhs = r;
-        }
-
         public override int GetResult(int left, int right)
         {
             return left - right;
+        }
+
+        public override string ToString()
+        {
+            return this.GetType().Name;
         }
 
         public override bool Equals(object obj)
@@ -21,22 +20,14 @@
                 return false;
             if (obj.GetType().Name == GetType().Name)
             {
-                Substraction sub = obj as Substraction;
-                return sub.Lhs == Lhs && sub.Rhs == Rhs;
+                return true;
             }
             return false;
         }
 
         public override int GetHashCode()
         {
-            int hashcode = this.Lhs.GetHashCode();
-            hashcode = 31 * hashcode + Rhs.GetHashCode();
-            return hashcode;
-        }
-
-        public override string ToString()
-        {
-            return $"{Lhs} - {Rhs}";
+            return this.GetType().GetHashCode();
         }
     }
 }

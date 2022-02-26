@@ -7,17 +7,19 @@ namespace Binary_operations.Models.Tests
         [Fact]
         public void GetResultTest()
         {
-            var obj1 = new Remainder(10, 3);
-            var executed = 1;
-            var actual = obj1.GetResult(obj1.Lhs, obj1.Rhs);
+            int left = 23;
+            int right = 4;
+            var obj1 = new Remainder();
+            var executed = 3;
+            var actual = obj1.GetResult(left, right);
             Assert.Equal(executed, actual);
         }
 
         [Fact]
         public void EqualsTest()
         {
-            var obj1 = new Remainder(1, 2);
-            var obj2 = new Remainder(1, 2);
+            var obj1 = new Remainder();
+            var obj2 = new Remainder();
             var executed = true;
             var actual = obj1.Equals(obj2);
             Assert.Equal(executed, actual);
@@ -26,7 +28,7 @@ namespace Binary_operations.Models.Tests
         [Fact]
         public void ToStringTest()
         {
-            var obj1 = new Remainder(1, 2);
+            var obj1 = new Remainder();
             var executed = "test";
             var actual = obj1.ToString();
             Assert.Equal(executed.GetType(), actual.GetType());

@@ -24,14 +24,12 @@ namespace Binary_operations.Commands
             var operations = _operationsRepository.GetOperations();
             var table = new Table();
             table.AddColumn("[yellow]Операция[/]");
-            table.AddColumn("[yellow]Вид[/]");
-            table.AddColumn("[yellow]Результат операции[/]");
             table.Border(TableBorder.Ascii2);
             for (var i = 0; i < operations.Count; ++i)
             {
                 if (i == 10)
                     break;
-                table.AddRow($"[mediumpurple2_1]{operations[i].GetType().Name}[/]", $"[skyblue1]{operations[i]}[/]", $"[seagreen1_1]{operations[i].GetResult(operations[i].Lhs, operations[i].Rhs)}[/]");
+                table.AddRow($"[mediumpurple2_1]{operations[i]}[/]");
             }
             if (operations.Count > 10)
                 table.AddRow("[red3_1]...[/]", "[red3_1]...[/]", "[red3_1]...[/]");

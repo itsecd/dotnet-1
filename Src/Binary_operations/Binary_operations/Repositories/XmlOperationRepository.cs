@@ -77,14 +77,22 @@ namespace Binary_operations.Repositories
         public void MinElement()
         {
             ReadFromFile();
-            int min = int.MaxValue;
+            var leftInsert = new TextPrompt<int>("[green]Введите левое число: [/]");
+            int left = AnsiConsole.Prompt<int>(leftInsert);
+            var rightInsert = new TextPrompt<int>("[green]Введите левое число: [/]");
+            int right = AnsiConsole.Prompt<int>(leftInsert);
+            int minValue = int.MaxValue;
+            var minOperation = "";
             foreach (var operationElement in _operations)
             {
-                if (operationElement.GetResult(operationElement.Lhs, operationElement.Rhs) < min)
-                    min = operationElement.GetResult(operationElement.Lhs, operationElement.Rhs);
+                if (operationElement.GetResult(left, right) < minValue) {
+                    minValue = operationElement.GetResult(left, right);
+                    minOperation = operationElement.ToString();
+                }
+                    
             }
-            AnsiConsole.MarkupLine("[orange1]Минимальная операция, найденная циклом: [/]" + min); 
-            AnsiConsole.MarkupLine("[wheat1]Минимальная операция, найденная с помощью Linq: [/] " + _operations.Min(operation => operation.GetResult(operation.Lhs, operation.Rhs))); 
+            AnsiConsole.MarkupLine($"[orange1]Для чисел {left} и {right} минимальной будет операция {minOperation}\nЗначение операции равно {minValue} [/]"); 
+            AnsiConsole.MarkupLine($"[wheat1]Минимальная операция, найденная с помощью Linq: {minOperation}. Значение {_operations.Min(operation => operation.GetResult(left,right))}  [/] "); 
         }
     }
 }

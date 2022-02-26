@@ -23,31 +23,16 @@ namespace Binary_operations.Commands
                    .AddChoices("Сложение", "Вычитание", "Умножение", "Деление", "Остаток от деления"));
             Operation operation = operationType switch
             {
-                "Сложение" => new Addition(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[chartreuse1] Левое число: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[chartreuse1] Правое число: [/]"))
-                    ),
-                "Вычитание" => new Substraction(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[greenyellow] Левое число: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[greenyellow] Правое число: [/]"))
-                    ),
-                "Умножение" => new Multyplication(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[darkolivegreen1_1] Левое число: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[darkolivegreen1_1] Правое число: [/]"))
-                    ),
-                "Деление" => new Division(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green] Левое число: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green] Правое число: [/]"))
-                    ),
-                "Остаток от деления" => new Remainder(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[palegreen1_1] Левое число: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[palegreen1_1] Правое число: [/]"))
-                    ),
+                "Сложение" => new Addition(),
+                "Вычитание" => new Substraction(),
+                "Умножение" => new Multyplication(),
+                "Деление" => new Division(),
+                "Остаток от деления" => new Remainder(),
                 _ => null
             };
             if (operationType == null)
             {
-                AnsiConsole.MarkupLine($"[orange]Неизвестный тип фигуры [/]");
+                AnsiConsole.MarkupLine($"[orange]Неизвестный тип операции! [/]");
                 return -1;
             }
             var textInsert = new TextPrompt<int>("[darkslategray3]Введите индекс, куда хотите вставить операцию: [/]");

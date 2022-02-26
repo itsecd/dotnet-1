@@ -4,21 +4,14 @@
     {
         public Multyplication() { }
 
-        public Multyplication(int l, int r)
-        {
-            Lhs = l;
-            Rhs = r;
-        }
         public override int GetResult(int left, int right)
         {
             return left * right;
         }
 
-        public override int GetHashCode()
+        public override string ToString()
         {
-            int hashcode = this.Lhs.GetHashCode();
-            hashcode = 31 * hashcode + Rhs.GetHashCode();
-            return hashcode;
+            return this.GetType().Name;
         }
 
         public override bool Equals(object obj)
@@ -27,15 +20,14 @@
                 return false;
             if (obj.GetType().Name == GetType().Name)
             {
-                Multyplication mul = obj as Multyplication;
-                return mul.Lhs == Lhs && mul.Rhs == Rhs;
+                return true;
             }
             return false;
         }
 
-        public override string ToString()
+        public override int GetHashCode()
         {
-            return $"{Lhs} * {Rhs}";
+            return this.GetType().GetHashCode();
         }
     }
 }

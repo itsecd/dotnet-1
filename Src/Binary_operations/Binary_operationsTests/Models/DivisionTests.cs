@@ -8,17 +8,19 @@ namespace Binary_operations.Models.Tests
         [Fact]
         public void GetResultTest()
         {
-            var obj1 = new Division(22, 11);
-            var executed = 2;
-            var actual = obj1.GetResult(obj1.Lhs, obj1.Rhs);
+            var left = 68;
+            var right = 17;
+            var obj1 = new Division();
+            var executed = 4;
+            var actual = obj1.GetResult(left, right);
             Assert.Equal(executed, actual);
         }
 
         [Fact]
         public void EqualsTest()
         {
-            var obj1 = new Division(1, 2);
-            var obj2 = new Division(1, 2);
+            var obj1 = new Division();
+            var obj2 = new Division();
             var executed = true;
             var actual = obj1.Equals(obj2);
             Assert.Equal(executed, actual);
@@ -27,7 +29,7 @@ namespace Binary_operations.Models.Tests
         [Fact]
         public void ToStringTest()
         {
-            var obj1 = new Division(1, 2);
+            var obj1 = new Division();
             var executed = "test";
             var actual = obj1.ToString();
             Assert.Equal(executed.GetType(), actual.GetType());
