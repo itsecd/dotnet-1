@@ -6,7 +6,8 @@ namespace Laba1.Model
     {
         public Point Centre { get; set; }
         public double Radius { get; set; }
-        public Sphere( Point centre, double radius)
+        public Sphere() { }
+        public Sphere(Point centre, double radius)
         {
             Centre = centre;
             Radius = radius;

@@ -1,10 +1,21 @@
-﻿namespace Laba1.Model
+﻿using System.Xml.Serialization;
+
+namespace Laba1.Model
 {
+    [XmlInclude(typeof(Sphere))]
+    [XmlInclude(typeof(RectangularParallelepiped))]
+    [XmlInclude(typeof(Cylinder))]
     public abstract class Figure3D
     {
+
         public abstract double GetArea();
-        public abstract double GetV();
-        public abstract RectangularParallelepiped GetBbox();
+        public abstract double GetVolume();
+        /// <summary>
+        /// Finding the minimum framing rectangular parallelepiped.
+        /// </summary>
+        /// <returns>Minimal framing rectangular parallelepiped.</returns>
+        public abstract RectangularParallelepiped GetMinParallelepiped();
+
 
     }
 }

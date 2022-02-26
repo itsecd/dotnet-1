@@ -7,13 +7,14 @@ namespace Laba1.Model
         public Point Centre { get; set; }
         public double Radius { get; set; }
         public double Height { get; set; }
+        Cylinder() { }
         public Cylinder(Point centre, double radius, double height)
         {
             Centre = centre;
             Radius = radius;
             Height = height;
         }
-        public Cylinder( double x, double y, double z, double radius, double height)
+        public Cylinder(double x, double y, double z, double radius, double height)
         {
             Centre = new Point(x, y, z);
             Radius = radius;
@@ -32,7 +33,7 @@ namespace Laba1.Model
         public override RectangularParallelepiped GetMinParallelepiped()
         {
             return new RectangularParallelepiped
-                (new(Centre.X + Radius, Centre.Y - Radius, Centre.Z), 
+                (new(Centre.X + Radius, Centre.Y - Radius, Centre.Z),
                  new(Centre.X - Radius, Centre.Y + Radius, Centre.Z + Height));
         }
         public override string ToString()

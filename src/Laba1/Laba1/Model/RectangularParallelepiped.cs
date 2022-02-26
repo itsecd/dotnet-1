@@ -6,6 +6,7 @@ namespace Laba1.Model
     {
         public Point Point1 { get; set; }
         public Point Point2 { get; set; }
+        RectangularParallelepiped() { }
         public RectangularParallelepiped(Point point1, Point point2)
         {
             Point1 = point1;
@@ -43,7 +44,7 @@ namespace Laba1.Model
         public override RectangularParallelepiped GetMinParallelepiped()
         {
             return new RectangularParallelepiped
-                (new (Point1.X, Point1.Y, Point1.Z), new (Point2.X, Point2.Y, Point2.Z));
+                (new(Point1.X, Point1.Y, Point1.Z), new(Point2.X, Point2.Y, Point2.Z));
         }
         public override string ToString()
         {
