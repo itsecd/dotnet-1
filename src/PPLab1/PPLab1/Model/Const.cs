@@ -26,12 +26,9 @@ namespace PPLab1.Model
 
         public override bool Equals(Object obj)
         {
-            if (obj is Const)
-            {
-                Const c = (Const)obj;
-                return(Elems.Coeff == c.Elems.Coeff);
-            }
-            else { return false; }
+            if (obj is not Const other)
+                return false;
+            return Elems.Coeff == other.Elems.Coeff;
         }
 
         public override int GetHashCode()

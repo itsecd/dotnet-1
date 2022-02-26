@@ -41,12 +41,9 @@ namespace PPLab1.Model
         }
         public override bool Equals(Object obj)
         {
-            if (obj is PowerFunct)
-            {
-                PowerFunct pf = (PowerFunct)obj;
-                return (Elems.Coeff == pf.Elems.Coeff) && (Elems.A == pf.Elems.A);
-            }
-            else { return false; }
+            if (obj is not PowerFunct other)
+                return false;
+            return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }
         public override int GetHashCode()
         {

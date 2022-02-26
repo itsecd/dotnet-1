@@ -44,12 +44,9 @@ namespace PPLab1.Model
 
         public override bool Equals(Object obj)
         {
-            if (obj is LogFunct) 
-            {
-                LogFunct lf = (LogFunct)obj;
-                return (Elems.Coeff == lf.Elems.Coeff) && (Elems.A == lf.Elems.A);
-            }
-            else { return false; }
+            if (obj is not LogFunct other)
+                return false;
+            return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }
         public override int GetHashCode()
         {

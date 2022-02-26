@@ -47,12 +47,9 @@ namespace PPLab1.Model
         }
         public override bool Equals(Object obj)
         {
-            if (obj is ExpFunct)
-            {
-                ExpFunct ef = (ExpFunct)obj;
-                return (Elems.Coeff == ef.Elems.Coeff) && (Elems.A == ef.Elems.A);
-            }
-            else { return false; }
+            if (obj is not ExpFunct other)
+                return false;
+            return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }
         public override int GetHashCode()
         {

@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace PPLab1.Model
 {
@@ -11,5 +12,9 @@ namespace PPLab1.Model
     { 
         public abstract double? calc_funct(double value);
         public abstract string derivative();
+        public abstract override string ToString();
+        public abstract override bool Equals(Object obj);
+        public abstract override int GetHashCode();
+
     }
 }
