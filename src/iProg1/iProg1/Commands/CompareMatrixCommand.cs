@@ -33,15 +33,7 @@ namespace iProg1.Commands
             bool isEqual  = _matrixRepository.Compare(firstIndex, secondIndex);
             var rule = new Rule("RESULT").RuleStyle("yellow dim");
             AnsiConsole.Write(rule);
-            if (isEqual)
-            {
-                AnsiConsole.WriteLine($"Matrices {firstIndex} and {secondIndex} are equal");
-            }
-            else
-            {
-                AnsiConsole.WriteLine($"Matrices {firstIndex} and {secondIndex} are not equal");
-
-            }
+            AnsiConsole.WriteLine($"Matrices {firstIndex} and {secondIndex} {(isEqual ? "are" : "are not")} equal");
             AnsiConsole.Write(rule);
 
             return 1;

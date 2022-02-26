@@ -51,7 +51,6 @@ namespace iProg1
                     .LeftAligned()
                     .Color(Color.Yellow));
             }
-            
         }
     }
 }

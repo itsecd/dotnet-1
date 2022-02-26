@@ -25,7 +25,7 @@ namespace iProg1.Commands
             var matrixType = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("Select the matrix type: ")
                 .AddChoices("Buffered matrix", "Sparse matrix"));
-            Matrix matrix = null;
+            IMatrix matrix = null;
             int dimension = AnsiConsole.Prompt(new TextPrompt<int>("Enter the dimension(< 65536): ")
                 .Validate(num => num > 0));
             var wayToFill = AnsiConsole.Prompt(new SelectionPrompt<string>()
@@ -62,18 +62,12 @@ namespace iProg1.Commands
                     }
                     break;
             }
-            switch (matrixType)
+            matrix = matrixType switch
             {
-                case "Buffered matrix":
-                    matrix = new BufferedMatrix(tmpMatrix);
-                    break;
-                case "Sparse matrix":
-                    matrix = new SparseMatrix(tmpMatrix);
-                    break;
-                default:
-                    matrix = null;
-                    break;
-            }
+                "Buffered matrix" => new BufferedMatrix(tmpMatrix),
+                "Sparse matrix" => new SparseMatrix(tmpMatrix),
+                _ => null,
+            };
             AnsiConsole.Clear();
             int index = AnsiConsole.Prompt(new TextPrompt<int>("Enter index of the matrix to add(\"-10\" to EXIT): ")
                 .ValidationErrorMessage("That's not a valid index")

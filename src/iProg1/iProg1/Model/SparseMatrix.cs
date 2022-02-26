@@ -7,9 +7,9 @@ using System.Xml;
 namespace iProg1.Model
 {
 
-    public class SparseMatrix : Matrix
+    public class SparseMatrix : IMatrix
     {
-        private int _dimension;
+        private readonly int _dimension;
         private readonly Dictionary<Tuple<int, int>, double> _matrix;
         public SparseMatrix()
         {
@@ -22,12 +22,12 @@ namespace iProg1.Model
         }
         public SparseMatrix(double[][] matrix)
         {
+            _matrix = new Dictionary<Tuple<int, int>, double>();
             if (matrix == null)
             {
                 _dimension = 0;
-                _matrix = null;
+                return;
             }
-            _matrix = new Dictionary<Tuple<int, int>, double>();
             _dimension = matrix.Length;
             for(int i = 0; i < _dimension; i++)
             {
@@ -43,33 +43,33 @@ namespace iProg1.Model
         public SparseMatrix(Dictionary<Tuple<int, int>, double> matrix, int dimension)
         {
             _matrix = new Dictionary<Tuple<int, int>, double>();
-            foreach (var pair in matrix)
+            foreach (var (index, value) in matrix)
             {
-                _matrix.Add(pair.Key, pair.Value);
+                _matrix.Add(index, value);
             }
             _dimension = dimension;
         }
-        public override int GetDimension()
+        public int GetDimension()
         {
             return _dimension;
         }
-        public override double GetValue(int indexR, int indexC)
+        public double GetValue(int indexR, int indexC)
         {
             if (!Helper.IsValidIndex(indexC, _dimension) ||
                 !Helper.IsValidIndex(indexR, _dimension))
             {
-                throw new ArgumentOutOfRangeException("incorrect index");
+                throw new ArgumentOutOfRangeException("index");
             }
             return _matrix.ContainsKey(new Tuple<int, int>(indexR, indexC))
                 ? _matrix[new Tuple<int, int>(indexR, indexC)]
                 : 0;
         }
-        public override void SetValue(int indexR, int indexC, double value)
+        public void SetValue(int indexR, int indexC, double value)
         {
             if (!Helper.IsValidIndex(indexC, _dimension) ||
                  !Helper.IsValidIndex(indexR, _dimension))
             {
-                throw new ArgumentOutOfRangeException("incorrect index");
+                throw new ArgumentOutOfRangeException("index");
             }
             if (value == 0)
             {
@@ -90,12 +90,13 @@ namespace iProg1.Model
                     var tuple = new Tuple<int, int>(i, j);
                     if (_matrix.ContainsKey(tuple))
                     {
-                        sb.Append(String.Format("{0,11}", _matrix[tuple]));
+                        sb.Append($"{_matrix[tuple],10}");
                     }
                     else
                     {
-                        sb.Append(String.Format("{0,11}", 0));
+                        sb.Append($"{0, 10}");
                     }
+                    sb.Append(' ');
                 }
                 sb.Append('\n');
             }
@@ -107,11 +108,11 @@ namespace iProg1.Model
             {
                 return true;
             }
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
-            var matrix = (Matrix)obj;
+            var matrix = (IMatrix)obj;
             if (matrix.GetDimension() != _dimension)
             {
                 return false;
@@ -131,32 +132,31 @@ namespace iProg1.Model
         public override int GetHashCode()
         {
             double hashCode = 0;
-            foreach (var el in _matrix)
+            foreach (var ((i, j), elem) in _matrix)
             {
-                hashCode += (el.Key.Item1 * el.Key.Item2 / el.Value) + 0.1483 * _dimension;
-                hashCode *= (el.Value * el.Key.Item1 * el.Key.Item2 + 8.56789) * _dimension + 13;
+                hashCode += (i * j / elem) + 0.1483 * _dimension;
+                hashCode *= (elem * i * j + 8.56789) * _dimension + 13;
             }
             return Math.Abs((int)hashCode);
         }
-        public override void GetXml(XmlTextWriter writer)
+        public void GetXml(XmlTextWriter writer)
         {
             writer.WriteAttributeString("Dimension", _dimension.ToString());
-            foreach (var el in _matrix)
+            foreach (var ((i, j), elem) in _matrix)
             {
                 writer.WriteStartElement("MatrixElement");
-                writer.WriteAttributeString("I", el.Key.Item1.ToString());
-                writer.WriteAttributeString("J", el.Key.Item2.ToString());
-                writer.WriteAttributeString("Value", el.Value.ToString());
+                writer.WriteAttributeString("I", i.ToString());
+                writer.WriteAttributeString("J", j.ToString());
+                writer.WriteAttributeString("Value", elem.ToString());
                 writer.WriteEndElement();
             }
         }
 
-        public override void LoadFromXml(XmlTextReader reader)
+        public void LoadFromXml(XmlTextReader reader)
         {
             if (reader.IsEmptyElement)
                 return;
             Helper.SkipToElement(reader);
-            this._dimension = int.Parse(reader.GetAttribute("Dimension"));
             reader.Read();
             while (reader.NodeType != XmlNodeType.EndElement)
             {
@@ -168,20 +168,19 @@ namespace iProg1.Model
             }
         }
 
-        public override double GetAbsMaxElementWithLinq()
+        public double GetAbsMaxElementWithLinq()
         {
-            var arr = new List<double>(_matrix.Values);
-            var res = from p in arr
-                      orderby p
-                      select Math.Abs(p);
-            return res.Last();
+            return _matrix.Values.Max();    
         }
 
-        public override double GetAbsMaxElement()
+        public double GetAbsMaxElement()
         {
-            var arr = new List<double>(_matrix.Values);
-            arr.Sort((x, y) => (int)(Math.Abs(x)*100000 - Math.Abs(y)*100000));
-            return arr[arr.Capacity-1];
+            double absMax = 0;
+            foreach (var elem in _matrix.Values)
+            {
+                absMax = absMax < Math.Abs(elem) ? elem : absMax;
+            }
+            return absMax;
         }
     }
 }

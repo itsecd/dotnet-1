@@ -5,10 +5,9 @@ using System.Xml;
 
 namespace iProg1.Model
 {
-    public class BufferedMatrix : Matrix
+    public class BufferedMatrix : IMatrix
     {
-        private double[][] _matrix;
-        public BufferedMatrix() {}
+        private readonly double[][] _matrix;
         public BufferedMatrix(int dimension)
         {
             _matrix = new double[dimension][];
@@ -23,27 +22,27 @@ namespace iProg1.Model
             _matrix = (double[][])matrix.Clone();
         }
         
-        public override int GetDimension()
+        public int GetDimension()
         {
             return _matrix.GetLength(0);
         }
         
-        public override double GetValue(int indexR, int indexC)
+        public double GetValue(int indexR, int indexC)
         {
             if (!Helper.IsValidIndex(indexR, GetDimension()) ||
                 !Helper.IsValidIndex(indexC, GetDimension()))
             {
-                throw new ArgumentOutOfRangeException("incorrect index");
+                throw new ArgumentOutOfRangeException("index");
             }
             return _matrix[indexR][indexC];
         }
         
-        public override void SetValue(int indexR, int indexC, double value)
+        public void SetValue(int indexR, int indexC, double value)
         {
             if (!Helper.IsValidIndex(indexR, GetDimension()) ||
                 !Helper.IsValidIndex(indexC, GetDimension()))
             {
-                throw new ArgumentOutOfRangeException("incorrect index");
+                throw new ArgumentOutOfRangeException("index");
             }
             _matrix[indexR][indexC] = value;
         }
@@ -54,8 +53,8 @@ namespace iProg1.Model
             {
                 for(int j = 0; j < GetDimension(); j++)
                 {
-                    sb.Append(String.Format("{0,10}" ,_matrix[i][j]));
-                    sb.Append(" ");
+                    sb.Append($"{_matrix[i][j], 10}");
+                    sb.Append(' ');
                 }
                 sb.Append('\n');
             }
@@ -69,11 +68,11 @@ namespace iProg1.Model
             {
                 return true;
             }
-            if(obj == null || this.GetType() != obj.GetType()) 
+            if(obj == null || GetType() != obj.GetType()) 
             {
                 return false; 
             }
-            var matrix = (Matrix)obj;
+            var matrix = (IMatrix)obj;
             if(matrix.GetDimension() != GetDimension()) 
             { 
                 return false; 
@@ -94,43 +93,41 @@ namespace iProg1.Model
         public override int GetHashCode()
         {
             double hashCode = 0;
-            foreach(var el in _matrix)
+            foreach(var row in _matrix)
             {
-                foreach (var el2 in el)
+                foreach (var elem in row)
                 {
-                    hashCode += el2 - 0.1488 * _matrix.GetLength(0);
-                    hashCode *= (el2 + 1.11111) * 2.1444 * _matrix[0].Length;
+                    hashCode += elem - 0.1488 * _matrix.GetLength(0);
+                    hashCode *= (elem + 1.11111) * 2.1444 * _matrix[0].Length;
                 }
             }
             return Math.Abs((int)hashCode);
         }
         
-        public override void GetXml(XmlTextWriter writer)
+        public void GetXml(XmlTextWriter writer)
         {
             writer.WriteAttributeString("Dimension", GetDimension().ToString());
-            foreach (var el in _matrix)
+            foreach (var row in _matrix)
             {
-                foreach (var el2 in el)
+                foreach (var elem in row)
                 {
                     writer.WriteStartElement("MatrixElement");
-                    writer.WriteAttributeString("Value", el2.ToString());
+                    writer.WriteAttributeString("Value", elem.ToString());
                     writer.WriteEndElement();
                 }
             }
         }
         
-        public override void LoadFromXml(XmlTextReader reader)
+        public void LoadFromXml(XmlTextReader reader)
         {
             bool wasEmpty = reader.IsEmptyElement;
             if (wasEmpty)
                 return;
             Helper.SkipToElement(reader);
-            var dimension = int.Parse(reader.GetAttribute("Dimension"));
-            _matrix = new double[dimension][];
-            for (int i = 0; i < dimension; i++)
+            for (int i = 0; i < _matrix.Length; i++)
             {
-                _matrix[i] = new double[dimension];
-                for(int j = 0; j < dimension; j++)
+                _matrix[i] = new double[_matrix.Length];
+                for(int j = 0; j < _matrix.Length; j++)
                 {
                     reader.Read();
                     _matrix[i][j] = double.Parse(reader.GetAttribute("Value"));
@@ -140,22 +137,20 @@ namespace iProg1.Model
         }
 
         
-        public override double GetAbsMaxElementWithLinq()
+        public double GetAbsMaxElementWithLinq()
         {
-            return _matrix.Max(p => p.Max(z => Math.Abs(z)));
+            return _matrix.Max(p => p.Max(Math.Abs));
         }
 
-        public override double GetAbsMaxElement()
+        public double GetAbsMaxElement()
         {
             double absMax = 0;
             for(int i = 0; i < _matrix.Length; i++)
             {
-                double absMaxInRow = Math.Abs(_matrix[i][0]);
-                for(int j = 1; j < _matrix[i].Length; j++)
+                for(int j = 0; j < _matrix[i].Length; j++)
                 {
-                    absMaxInRow = Math.Abs(_matrix[i][j]) > absMaxInRow ? _matrix[i][j] : absMaxInRow;
+                    absMax = Math.Abs(_matrix[i][j]) > absMax ? _matrix[i][j] : absMax;
                 }
-                absMax = absMaxInRow > absMax ? absMaxInRow : absMax;
             }
             return absMax;
         }

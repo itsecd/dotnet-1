@@ -11,13 +11,13 @@ namespace iProg1.Repositories
     {
         private const string _storageFileName = "matrices.xml";
 
-        public List<Matrix> _matrices;
+        public List<IMatrix> _matrices;
 
         private bool _isLoaded = false;
 
         public XmlMatrixRepository()
         {
-            _matrices = new List<Matrix>();
+            _matrices = new List<IMatrix>();
         }
 
         public int GetCount()
@@ -34,7 +34,7 @@ namespace iProg1.Repositories
             }
             if (!File.Exists(_storageFileName) || new FileInfo(_storageFileName).Length == 0)
             {
-                _matrices = new List<Matrix>();
+                _matrices = new List<IMatrix>();
                 return;
             }
             using (var sr = new StreamReader(_storageFileName))
@@ -43,20 +43,22 @@ namespace iProg1.Repositories
                 {
                     if (new FileInfo(_storageFileName).Length==0)
                     {
-                        _matrices = new List<Matrix>();
+                        _matrices = new List<IMatrix>();
                         return;
                     }
                     reader.WhitespaceHandling = WhitespaceHandling.None;
                     Helper.SkipToElement(reader);
                     if (int.Parse(reader.GetAttribute("size")) == 0)
                     {
-                        _matrices = new List<Matrix>();
+                        _matrices = new List<IMatrix>();
                         return;
                     }
                     reader.Read();
                     while (reader.NodeType != XmlNodeType.EndElement)
                     {
-                        Matrix tmp = reader.Name.Equals("SparseMatrix") ? new SparseMatrix() : new BufferedMatrix();
+                        IMatrix tmp = reader.Name.Equals("SparseMatrix") ? 
+                            new SparseMatrix(int.Parse(reader.GetAttribute("Dimension"))) :
+                            new BufferedMatrix(int.Parse(reader.GetAttribute("Dimension")));
                         tmp.LoadFromXml(reader);
                         reader.ReadEndElement();
                         _matrices.Add(tmp);
@@ -87,7 +89,7 @@ namespace iProg1.Repositories
             }
         }
 
-        public void AddMatrix(Matrix matrix, int index)
+        public void AddMatrix(IMatrix matrix, int index)
         {
             ReadFromFile();
             _matrices.Insert(index, matrix);
