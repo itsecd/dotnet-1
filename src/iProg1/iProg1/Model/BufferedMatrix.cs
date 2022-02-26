@@ -29,20 +29,26 @@ namespace iProg1.Model
         
         public double GetValue(int indexR, int indexC)
         {
-            if (!Helper.IsValidIndex(indexR, GetDimension()) ||
-                !Helper.IsValidIndex(indexC, GetDimension()))
+            if (!Helper.IsValidIndex(indexR, GetDimension()))
             {
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(indexR));
+            }
+            if (!Helper.IsValidIndex(indexC, GetDimension()))
+            {
+                throw new ArgumentOutOfRangeException(nameof(indexC));
             }
             return _matrix[indexR][indexC];
         }
         
         public void SetValue(int indexR, int indexC, double value)
         {
-            if (!Helper.IsValidIndex(indexR, GetDimension()) ||
-                !Helper.IsValidIndex(indexC, GetDimension()))
+            if (!Helper.IsValidIndex(indexR, GetDimension()))
             {
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(indexR));
+            }
+            if (!Helper.IsValidIndex(indexC, GetDimension()))
+            {
+                throw new ArgumentOutOfRangeException(nameof(indexC));
             }
             _matrix[indexR][indexC] = value;
         }

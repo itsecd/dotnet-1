@@ -55,10 +55,13 @@ namespace iProg1.Model
         }
         public double GetValue(int indexR, int indexC)
         {
-            if (!Helper.IsValidIndex(indexC, _dimension) ||
-                !Helper.IsValidIndex(indexR, _dimension))
+            if (!Helper.IsValidIndex(indexR, GetDimension()))
             {
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(indexR));
+            }
+            if (!Helper.IsValidIndex(indexC, GetDimension()))
+            {
+                throw new ArgumentOutOfRangeException(nameof(indexC));
             }
             return _matrix.ContainsKey(new Tuple<int, int>(indexR, indexC))
                 ? _matrix[new Tuple<int, int>(indexR, indexC)]
@@ -66,10 +69,13 @@ namespace iProg1.Model
         }
         public void SetValue(int indexR, int indexC, double value)
         {
-            if (!Helper.IsValidIndex(indexC, _dimension) ||
-                 !Helper.IsValidIndex(indexR, _dimension))
+            if (!Helper.IsValidIndex(indexR, GetDimension()))
             {
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(indexR));
+            }
+            if (!Helper.IsValidIndex(indexC, GetDimension()))
+            {
+                throw new ArgumentOutOfRangeException(nameof(indexC));
             }
             if (value == 0)
             {
