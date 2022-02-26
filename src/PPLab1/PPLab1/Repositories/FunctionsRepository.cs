@@ -34,30 +34,53 @@ namespace PPLab1.Repositories
             xmlSerializer.Serialize(filewriter, _functions);
         }
 
-        public void AddFunction(Function function, int index)
+        public void InsertFunction(Function function, int index)
         {
-            if (function == null)
-                throw new ArgumentNullException(nameof(function));
-            if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index));
-            if(_functions[index] == null)
+            if(_functions != null)
             {
-                ReadFromFile();
-                _functions.Insert(index, function);
-                WriteToFile();
+                if (function == null)
+                    throw new ArgumentNullException(nameof(function));
+                if (index < 0)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+
+                if (_functions[index] == null)
+                {
+                    ReadFromFile();
+                    _functions.Insert(index, function);
+                    WriteToFile();
+                }
+                else
+                {
+                    AnsiConsole.WriteLine("Function already exists for this index. " +
+                        "The insertion is done at the end of the list. ");
+                    ReadFromFile();
+                    _functions.Add(function);
+                    WriteToFile();
+                }
             }
             else
             {
                 ReadFromFile();
-                _functions.Add( function);
+                _functions.Add(function);
                 WriteToFile();
             }
+        }
+
+        public void AddFunction(Function function)
+        {
+            ReadFromFile();
+            _functions.Add(function);
+            WriteToFile();
         }
 
         public void RemoveFunction(int index)
         {
             if (index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
+            if(_functions.Count - 1 < index)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
             if(_functions[index] != null)
             {
                 ReadFromFile();
@@ -65,14 +88,14 @@ namespace PPLab1.Repositories
                 WriteToFile();
             }
             else
-                throw new ArgumentOutOfRangeException(nameof(index));
+                throw new ArgumentNullException();
 
         }
 
         public void RemoveAllFunctions()
         {
             ReadFromFile();
-            _functions.RemoveRange(0, _functions.Count -1) ;
+            _functions.RemoveRange(0, _functions.Count) ;
             WriteToFile();
 
         }
@@ -102,21 +125,26 @@ namespace PPLab1.Repositories
             table.AddColumn("Function");
             table.AddColumn("Derivative");
 
-            foreach (Function function in _functions)
+            if(_functions != null)
             {
-                if (counter < 10)
+                foreach (Function function in _functions)
                 {
-                    table.AddRow(function.GetType().Name, function.ToString(),
-                    function.derivative().ToString());
-                    ++counter;
-                }
-                else
-                {
-                    table.AddRow("...", "...", "...");
-                    break;
-                }
+                    if (counter < 10)
+                    {
+                        table.AddRow(function.GetType().Name, function.ToString(),
+                        function.derivative().ToString());
+                        ++counter;
+                    }
+                    else
+                    {
+                        table.AddRow("...", "...", "...");
+                        break;
+                    }
 
+                }
             }
+            else
+                table.AddRow("null", "null", "null");
             AnsiConsole.Write(table);
         }
     }

@@ -35,7 +35,7 @@ namespace PPLab1.Model
             if (Elems.A < 1)
                 return "incorrect base";
             else if (Elems.Coeff == 1)
-                return String.Format("y =  log_{0}x", Elems.A);
+                return String.Format("y = log_{0}x", Elems.A);
             else if (Elems.Coeff == 0)
                 return String.Format("y = 0");
             else
