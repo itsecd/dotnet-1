@@ -53,7 +53,7 @@ namespace PromLab01
 
         new public string ToString()
         {
-            return "Starting point: " + A.ToString() + "," + "Radius: " + Radius;
+            return "{" + A.ToString() + ";" + "R: " + Radius;
         }
 
     }

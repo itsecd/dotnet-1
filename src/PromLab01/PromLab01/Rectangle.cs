@@ -32,6 +32,11 @@ namespace PromLab01
             b = new Point (a.X + width, a.Y - width);
 
         }
+        public Rectangle()
+        {
+            this.a = new Point(0);
+            this.b = new Point(0);
+        }
 
         public double GetArea()
         {
@@ -50,7 +55,7 @@ namespace PromLab01
 
         new public string ToString()
         {
-            return "Width: " + Math.Abs(b.X - a.X) + "," + "Height: " + Math.Abs(b.Y - a.Y) + "Starting point: " + a.ToString();
+            return "{" + a.ToString() + ";" + b.ToString() + "}";
         }
     }
 }
