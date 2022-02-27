@@ -35,7 +35,6 @@ namespace PPLab1
             });
 
             app.Run(args);
-            
 
         }
     }

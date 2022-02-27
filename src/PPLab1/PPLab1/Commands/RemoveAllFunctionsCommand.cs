@@ -23,6 +23,7 @@ namespace PPLab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveAllFunctionsSettings settings)
         {
             _functionsRepository.RemoveAllFunctions();
+            AnsiConsole.MarkupLine($"[skyblue1]Done![/]");
             return 0;
         }
 

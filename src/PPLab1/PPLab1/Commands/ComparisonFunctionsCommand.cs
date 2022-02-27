@@ -22,11 +22,23 @@ namespace PPLab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] ComparisonFunctionsSettings settings)
         {
-            int inputIndex1 = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input index of the first function you want to compare: [/]"));
-            int inputIndex2 = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input index of the second function you want to compare: [/]"));
+            int inputIndex1 = AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input index of the first function you want to compare: [/]"));
+            int inputIndex2 = AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input index of the second function you want to compare: [/]"));
 
-            AnsiConsole.WriteLine(_functionsRepository.ComparisonFunctions(inputIndex1, inputIndex2));
-            
+            if(inputIndex1 < 0 || inputIndex2 < 0)
+            {
+                AnsiConsole.MarkupLine($"[red]Index is out of range[/]");
+                return -1;
+            }
+            if(_functionsRepository.ComparisonFunctions(inputIndex1, inputIndex2) == true)
+            {
+                AnsiConsole.MarkupLine($"[seagreen1]The functions are equal[/]");
+            }
+            else
+            {
+                AnsiConsole.MarkupLine($"[red]The functions arn't equal[/]");
+            }
+            AnsiConsole.MarkupLine($"[skyblue1]Done![/]");
             return 0;
         }
 

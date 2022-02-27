@@ -26,24 +26,24 @@ namespace PPLab1.Commands
               .Title("Select function type: ")
               .AddChoices("Constant", "Power function", "Exponential function", "Logarithm"));
 
-            int inputIndex = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input the insertion index: [/]"));
+            int inputIndex = AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input the insertion index: [/]"));
 
             Function newFunction = functionType switch
             {
                 "Constant" => new Const(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
+                    AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input coefficient: [/]"))
                     ),
                 "Power function" => new PowerFunct(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input power: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
+                    AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input power: [/]")),
+                    AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input coefficient: [/]"))
                     ),
                 "Exponential function" => new ExpFunct(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input exponent: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
+                    AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input exponent: [/]")),
+                    AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input coefficient: [/]"))
                     ),
                 "Logarithm" => new LogFunct(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input base: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Input coefficient: [/]"))
+                    AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input base: [/]")),
+                    AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input coefficient: [/]"))
                     ),
                 _ => null
             };
@@ -54,6 +54,7 @@ namespace PPLab1.Commands
                 return -1;
             }
             _functionsRepository.InsertFunction(newFunction, inputIndex);
+            AnsiConsole.MarkupLine($"[skyblue1]Done![/]");
             return 0;
         }
     }

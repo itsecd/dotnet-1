@@ -22,9 +22,11 @@ namespace PPLab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveFunctionSettings settings)
         {
-            int inputIndex = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input the remove index: [/]"));
+            int inputIndex = AnsiConsole.Prompt(new TextPrompt<int>("[seagreen1]Input the remove index: [/]"));
 
             _functionsRepository.RemoveFunction(inputIndex);
+            AnsiConsole.MarkupLine($"[skyblue1]Done![/]");
+
             return 0;
         }
 

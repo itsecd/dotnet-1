@@ -51,8 +51,8 @@ namespace PPLab1.Repositories
                 }
                 else
                 {
-                    AnsiConsole.WriteLine("Function already exists for this index. " +
-                        "The insertion is done at the end of the list. ");
+                    AnsiConsole.MarkupLine($"[skyblue1]Function already exists for this index.[/]" +
+                        $"[skyblue1]The insertion is done at the end of the list.[/]");
                     ReadFromFile();
                     _functions.Add(function);
                     WriteToFile();
@@ -77,19 +77,25 @@ namespace PPLab1.Repositories
         {
             if (index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
-            if (_functions.Count - 1 < index)
+            ReadFromFile();
+            if(_functions != null)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
-            }
-            if (_functions[index] != null)
-            {
-                ReadFromFile();
-                _functions.RemoveAt(index);
-                WriteToFile();
+                if (_functions.Count - 1 < index)
+                {
+                    WriteToFile();
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                }
+                else 
+                {                
+                    _functions.RemoveAt(index);
+                    WriteToFile();
+                }
             }
             else
+            {
+                WriteToFile();
                 throw new ArgumentNullException();
-
+            } 
         }
 
         public void RemoveAllFunctions()

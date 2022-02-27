@@ -19,6 +19,7 @@ namespace PPLab1.Model
         {
             return Elems.Coeff * Math.Pow(value, Elems.A);
         }
+
         public override string derivative()
         {
             if (Elems.Coeff == 0)
@@ -30,6 +31,7 @@ namespace PPLab1.Model
             else
                 return String.Format("y' = {0}x^{1}", Elems.Coeff * Elems.A, Elems.A - 1);
         }
+
         public override string ToString()
         {
             if (Elems.Coeff == 1)
@@ -39,12 +41,14 @@ namespace PPLab1.Model
             else
                 return String.Format("y = {0}x^{1}", Elems.Coeff, Elems.A);
         }
+
         public override bool Equals(Object obj)
         {
             if (obj is not PowerFunct other)
                 return false;
             return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }
+
         public override int GetHashCode()
         {
             return Elems.A.GetHashCode() ^ Elems.Coeff.GetHashCode();

@@ -21,6 +21,7 @@ namespace PPLab1.Model
                 return null; 
             return Elems.Coeff * Math.Round(Math.Log(value, Elems.A), 2);
         }
+
         public override string derivative()
         {
             if (Elems.A < 1)
@@ -30,6 +31,7 @@ namespace PPLab1.Model
             else
                 return String.Format("y' = {0} x^-1", Math.Round(Elems.Coeff / Math.Log(Elems.A), 2));
         }
+
         public override string ToString()
         {
             if (Elems.A < 1)
@@ -48,6 +50,7 @@ namespace PPLab1.Model
                 return false;
             return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }
+
         public override int GetHashCode()
         {
             return Elems.A.GetHashCode() ^ Elems.Coeff.GetHashCode();
