@@ -26,30 +26,16 @@ namespace PPLab1
             app.Configure(config =>
             {
                 config.AddCommand<AddFunctionCommand>("add");
+                config.AddCommand<InsertFunctionCommand>("insert");
+                config.AddCommand<RemoveFunctionCommand>("remove");
+                config.AddCommand<RemoveAllFunctionsCommand>("remove all");
+                config.AddCommand<ComparisonFunctionsCommand>("comparison");
+                config.AddCommand<MaxFunctionCommand>("max");
                 config.AddCommand<PrintFunctionsCommand>("print");
             });
 
             app.Run(args);
             
-
-           
-           
-            ////int inputIndex = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input insertion index: [/]"));
-
-
-
-            //var value = 8;
-
-            //var max_result2 = functions.Max(f => (double)f.calc_funct(value));
-
-            //var res = (from func in functions
-            //           where func.calc_funct(value) == max_result2
-            //           select func).FirstOrDefault();
-
-            //AnsiConsole.WriteLine(res.ToString()); ;
-
-
-
 
         }
     }
