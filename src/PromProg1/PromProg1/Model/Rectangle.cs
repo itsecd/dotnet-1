@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace PromProg1
 {
+    [Serializable]
+    [XmlRoot("Rectangle")]
     public class Rectangle:Figure
     {
+        [XmlElement("FirstPoint")]
         public Point FirstPoint { get; init; }
-
+        [XmlElement("LastPoint")]
         public Point LastPoint { get; init; }
         public Rectangle()
         {

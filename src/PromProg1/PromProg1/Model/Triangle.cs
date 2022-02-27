@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Linq;
-using System.Collections;
+using System.Xml.Serialization;
 
 namespace PromProg1
 {
+
+    [Serializable]
+    [XmlRoot("Triangle")]
     public class Triangle: Figure
     {
+        [XmlElement("Vertex")]
         public Point[] Vertex { get; init; }
         public Triangle()
         {

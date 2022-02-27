@@ -1,6 +1,8 @@
-﻿using System;
- 
-
+﻿//using Microsoft.Extensions.CommandLineUtils;
+using Spectre.Console;
+using Spectre.Console.Cli;
+using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PromProg1
 {
@@ -8,25 +10,43 @@ namespace PromProg1
     {
         static void Main()
         {
-            Figure figure1 = new Rectangle()
+            FigureRepository figureRepository= new FigureRepository();
+            // figureRepository.AddFigure();
+            // var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>().Title)
+            var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                               .Title("What to add?")
+                               .AddChoices("Rectangle", "Circle", "Triangle"));
+            Figure figure = figureType switch
             {
-                FirstPoint = new Point(1, 2),
-                LastPoint = new Point(2, 3)
+                "Rectangle" => new Rectangle(
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("Точка X1 :")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("Точка Y1 :"))),
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("Точка X2 :")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("Точка Y2 :")))
+                    ),
+                 "Circle" => new Circle(
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("Точка X1 :")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("Точка Y1 :"))),
+                    AnsiConsole.Prompt(new TextPrompt<double>("Radius :"))),
 
+                  "Triangle" => new Triangle(
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("Точка X1 :")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("Точка Y1 :"))),
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("Точка X2 :")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("Точка Y2 :"))),
+                     new Point(AnsiConsole.Prompt(new TextPrompt<double>("Точка X3 :")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("Точка Y3 :")))),
+                    _ => null
             };
-            Console.WriteLine(figure1.Perimeter());
-            Console.WriteLine(figure1.Square());
-            Figure figure2 = new Circle()
+            if(figure == null)
             {
-                Centr = new Point(1, 2),
-                Radius = 2
+                AnsiConsole.MarkupLine("Неизвестный тип фигуры: {figureType}[/]");
+            }
+            figureRepository.AddFigure(figure);
+            //var table = new Table();
+            //table.AddColumn("Type");
+            //table.AddColumn("Coordinate");
 
-            };
-            Console.WriteLine(figure2.Perimeter());
-            Console.WriteLine(figure2.Square());
-            Figure figure3 = new Triangle(new Point(1,2), new Point(2,3), new Point(3,5));
-            Console.WriteLine(figure3.Perimeter());
-            Console.WriteLine(figure3.Square());
         }
     }
 }

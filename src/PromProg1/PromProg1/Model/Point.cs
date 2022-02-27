@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace PromProg1
 {
+    [Serializable]
+    [XmlRoot("Point")]
     public struct Point
     {
+        [XmlElement("X")]
         public double X { get; init; }
+        [XmlElement("Y")]
         public double Y { get; init; }
         public Point(double x, double y)
         {
