@@ -48,7 +48,7 @@ namespace PPLab1.Commands
 
             if (newFunction == null)
             {
-                AnsiConsole.MarkupLine($"[red]Unknowen function: {functionType}[/]");
+                AnsiConsole.MarkupLine($"[red]Unknown function: {functionType}[/]");
                 return -1;
             }
             _functionsRepository.AddFunction(newFunction);

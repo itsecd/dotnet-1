@@ -4,44 +4,52 @@ namespace PPLab1.Model
 {
     public class LogFunct : Function
     {
-        public Data Elems { get; set; }
+        public Data Elems { get; init; }
 
         public LogFunct() { Elems = new Data(); }
 
-        public LogFunct(Data elems) { Elems = elems; }
-
+        public LogFunct(Data elems)
+        {
+            Elems = new Data(elems.A, elems.Coeff);
+        }
         public LogFunct(int A, int Coeff)
         {
             Elems = new Data(A, Coeff);
         }
 
-        public override double? calc_funct(double value)
+        public override double? CalculationFunction(double value)
         {
             if (value < 0)
                 return null; 
             return Elems.Coeff * Math.Round(Math.Log(value, Elems.A), 2);
         }
 
-        public override string derivative()
+        public override string Derivative()
         {
             if (Elems.A < 1)
                 return "indefinitely";
             else if (Elems.Coeff == 0)
-                return String.Format("y' = 0");
+                return "y' = 0";
             else
-                return String.Format("y' = {0} x^-1", Math.Round(Elems.Coeff / Math.Log(Elems.A), 2));
+                return $"y' = {Math.Round(Elems.Coeff / Math.Log(Elems.A), 2)} x^-1";
         }
 
         public override string ToString()
         {
             if (Elems.A < 1)
                 return "incorrect base";
-            else if (Elems.Coeff == 1)
-                return String.Format("y = log_{0}x", Elems.A);
-            else if (Elems.Coeff == 0)
-                return String.Format("y = 0");
-            else
-                return String.Format("y = {0} log_{1}x", Elems.Coeff, Elems.A);
+            
+            switch (Elems.Coeff)
+            {
+                case 1:
+                    return $"y = log_{Elems.A}x";
+
+                case 0:
+                    return "y = 0";
+
+                default:
+                    return $"y = {Elems.Coeff} log_{Elems.A}x";
+            }  
         }
 
         public override bool Equals(Object obj)

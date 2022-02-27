@@ -38,7 +38,7 @@ namespace PPLab1.Commands
                     if (counter < 10)
                     {
                         table.AddRow(function.GetType().Name, function.ToString(),
-                        function.derivative().ToString());
+                        function.Derivative().ToString());
                         ++counter;
                     }
                     else

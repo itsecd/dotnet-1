@@ -23,15 +23,15 @@ namespace PPLab1.Repositories
                 return;
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
-            using var filereader = new FileStream(StorageFileName, FileMode.Open);
-            _functions = (List<Function>)xmlSerializer.Deserialize(filereader);
+            using var fileReader = new FileStream(StorageFileName, FileMode.Open);
+            _functions = (List<Function>)xmlSerializer.Deserialize(fileReader);
         }
 
         private void WriteToFile()
         {
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
-            using var filewriter = new FileStream(StorageFileName, FileMode.Create);
-            xmlSerializer.Serialize(filewriter, _functions);
+            using var fileWriter = new FileStream(StorageFileName, FileMode.Create);
+            xmlSerializer.Serialize(fileWriter, _functions);
         }
 
         public void InsertFunction(Function function, int index)
@@ -94,7 +94,7 @@ namespace PPLab1.Repositories
             else
             {
                 WriteToFile();
-                throw new ArgumentNullException();
+                throw new ArgumentException("The list is empty");
             } 
         }
 
@@ -119,7 +119,7 @@ namespace PPLab1.Repositories
                     throw new ArgumentException("Mismatch of function types");
             }
             else
-                throw new ArgumentOutOfRangeException(nameof(index1), nameof(index2));
+                throw new ArgumentException("Index is out of range");
         }
 
         public List<Function> GetFunctions()
