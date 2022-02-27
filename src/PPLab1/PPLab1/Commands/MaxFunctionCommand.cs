@@ -2,6 +2,7 @@
 using PPLab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -25,13 +26,14 @@ namespace PPLab1.Commands
         {
             int value = AnsiConsole.Prompt(new TextPrompt<int>(
                 "[green]Input the value for which you want to find the maximum function: [/]"));
-            
+
             var functions = _functionsRepository.GetFunctions();
 
-            if(functions == null) 
+            if (functions == null)
                 return 0;
 
-            var max_result = functions.Max(f => (double)f.calc_funct(value));
+            var max_result = functions.Max(f => f.calc_funct(value) != null ? f.calc_funct(value) : Int32.MinValue);
+       
             var res = (from func in functions
                        where func.calc_funct(value) == max_result
                        select func).FirstOrDefault();

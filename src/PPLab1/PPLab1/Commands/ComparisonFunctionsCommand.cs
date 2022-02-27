@@ -25,7 +25,8 @@ namespace PPLab1.Commands
             int inputIndex1 = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input index of the first function you want to compare: [/]"));
             int inputIndex2 = AnsiConsole.Prompt(new TextPrompt<int>("[green]Input index of the second function you want to compare: [/]"));
 
-            _functionsRepository.ComparisonFunctions(inputIndex1, inputIndex2);
+            AnsiConsole.WriteLine(_functionsRepository.ComparisonFunctions(inputIndex1, inputIndex2));
+            
             return 0;
         }
 
