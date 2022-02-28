@@ -12,6 +12,24 @@ namespace Laba1.Model
             Y = y;
             Z = z;
         }
+        public override string ToString()
+        {
+            return $"({X},{Y},{Z})";
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+            var point = (Point)obj;
+            if (X == point.X && Y == point.Y && Z == point.Z)
+            {
+                return true;
+            }
+            return false;
+        }
+                
 
     }
 }

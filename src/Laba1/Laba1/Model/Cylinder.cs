@@ -38,7 +38,20 @@ namespace Laba1.Model
         }
         public override string ToString()
         {
-            return $"Centre: {Centre.X} {Centre.Y} {Centre.Z}\nRadius: {Radius}\nHeight: {Height}\n";
+            return $"Centre: {Centre}\nRadius: {Radius}\nHeight: {Height}\n";
+        }
+        public  override bool Equals(object obj)
+        {
+            if (obj == null || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+            var cylinder = (Cylinder)obj;
+            if (Centre.Equals(cylinder.Centre) && Radius == cylinder.Radius && Height == cylinder.Height)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

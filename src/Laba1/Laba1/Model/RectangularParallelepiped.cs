@@ -48,7 +48,20 @@ namespace Laba1.Model
         }
         public override string ToString()
         {
-            return $"Point1: {Point1.X} {Point1.Y} {Point1.Z}\nPoint2: {Point2.X} { Point2.Y} {Point2.Z}\n";
+            return $"Point1: {Point1}\nPoint2: {Point2}\n";
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+            var parallelepiped = (RectangularParallelepiped)obj;
+            if (Point1.Equals(parallelepiped.Point1) && Point2.Equals(parallelepiped.Point2))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

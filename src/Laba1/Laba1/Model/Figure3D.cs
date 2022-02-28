@@ -15,7 +15,8 @@ namespace Laba1.Model
         /// </summary>
         /// <returns>Minimal framing rectangular parallelepiped.</returns>
         public abstract RectangularParallelepiped GetMinParallelepiped();
-
+        public abstract override string ToString();
+        public abstract override bool Equals(object obj);
 
     }
 }

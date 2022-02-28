@@ -35,7 +35,20 @@ namespace Laba1.Model
         }
         public override string ToString()
         {
-            return $"Centre: {Centre.X} {Centre.Y} {Centre.Z}\nRadius: {Radius}\n";
+            return $"Centre: {Centre}\nRadius: {Radius}\n";
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+            var sphere = (Sphere)obj;
+            if (Centre.Equals(sphere.Centre) && Radius == sphere.Radius)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
