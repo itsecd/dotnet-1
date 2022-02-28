@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Laba1": {
+      "commandName": "Project",
+      "commandLineArgs": "Print"
+    }
+  }
+}

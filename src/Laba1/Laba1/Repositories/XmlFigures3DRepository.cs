@@ -6,7 +6,7 @@ using Laba1.Model;
 
 namespace Laba1.Repositories
 {
-    public class XmlFigures3DRepository : IXmlFigures3DRepository
+    public class XmlFigures3DRepository : IFigures3DRepository
     {
         private const string StorageFileName = "figures.xml";
         private List<Figure3D> _figures;
@@ -30,12 +30,12 @@ namespace Laba1.Repositories
             using var fileStream = new FileStream(StorageFileName, FileMode.Create);
             xmlSerializer.Serialize(fileStream, _figures);
         }
-        public void AddFigure(Figure3D figure)
+        public void AddFigure(Figure3D figure, int index)
         {
             if (figure == null)
                 throw new ArgumentNullException(nameof(figure));
             ReadFromFile();
-            _figures.Add(figure);
+            _figures.Insert(index,figure);
             WriteToFile();
         }
         public void RemoveFigure(int index)
@@ -43,6 +43,17 @@ namespace Laba1.Repositories
             ReadFromFile();
             _figures.RemoveAt(index);
             WriteToFile();
+        }
+        public void RemoveAllFigures()
+        {
+            ReadFromFile();
+            _figures.RemoveRange(0, _figures.Count);
+            WriteToFile();
+        }
+        public List<Figure3D> GetFigures()
+        {
+            ReadFromFile();
+            return _figures;
         }
     }
 }
