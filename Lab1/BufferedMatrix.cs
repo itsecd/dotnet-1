@@ -5,7 +5,7 @@ namespace Lab1
 {
     public class BufferedMatrix : Matrix
     {
-        private double[] A;
+        public double[] A;
         public override double this[int y, int x]
         {
             get => A[y * Height + x];
@@ -14,6 +14,12 @@ namespace Lab1
         public override int Width { get; }
         public override int Height { get; }
 
+        public BufferedMatrix()
+        {
+            Height = 1;
+            Width = 1;
+            A = new double[1];
+        }
         public BufferedMatrix(int H, int W)
         {
             Height = H;

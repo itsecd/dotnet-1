@@ -66,16 +66,24 @@ namespace Lab1
 
         public void Dump()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Matrix>));
-            using FileStream fd = new FileStream("matrices.xml", FileMode.Create);
-            serializer.Serialize(fd, data);
-            fd.Close();
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Matrix>));
+                using FileStream fd = new FileStream("matrices.xml", FileMode.Create);
+                serializer.Serialize(fd, data);
+                fd.Close();
+            }
+            catch (InvalidOperationException e)
+            {
+                AnsiConsole.WriteException(e);
+            }
+                
         }
 
         public void Load()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Matrix>));
-            using FileStream fd = new FileStream("matrices.xml", FileMode.Open);
+            using FileStream fd = new FileStream("matrices.xml", FileMode.OpenOrCreate);
             data = (List<Matrix>)serializer.Deserialize(fd);
             fd.Close();
         }

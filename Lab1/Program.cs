@@ -92,11 +92,12 @@ namespace Lab1
                         AnsiConsole.WriteLine();
                         break;
                     default:
-                        AnsiConsole.Write(new Panel("[bold red]Выключаюсь...[/]"));
+                        AnsiConsole.Write(new Panel("[red]Выключаюсь...[/]"));
                         exitApp = true;
                         break;
                 }
             }
+            data.Dump();
         }
     }
 }

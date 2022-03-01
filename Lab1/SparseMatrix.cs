@@ -6,7 +6,7 @@ namespace Lab1
 {
     public class SparseMatrix : Matrix
     {
-        Dictionary<Tuple<int, int>, double> A;
+        public Dictionary<Tuple<int, int>, double> A;
         public override double this[int y, int x]
         {
             get
@@ -30,7 +30,13 @@ namespace Lab1
         public override int Width { get; }
         public override int Height { get; }
 
-        public SparseMatrix(int H, int W)
+        public SparseMatrix()
+        {
+            Height = 1;
+            Width = 1;
+            A = new();
+        }
+        public SparseMatrix(int H = 1, int W = 1)
         {
             Height = H;
             Width = W;
