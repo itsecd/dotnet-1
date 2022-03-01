@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab1
+namespace Lab1
 {
     public class IntOperand :  IComparable
     {

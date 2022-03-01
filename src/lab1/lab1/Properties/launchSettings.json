@@ -2,7 +2,7 @@
   "profiles": {
     "lab1": {
       "commandName": "Project",
-      "commandLineArgs": "min"
+      "commandLineArgs": "add"
     }
   }
 }

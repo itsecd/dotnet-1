@@ -4,19 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab1
+namespace Lab1.Operations
 {
     public class Rem : BinaryOperation
     {
         public override IntOperand Calculate(IntOperand first, IntOperand second) => new IntOperand(first % second);
 
-        public override bool Equals(object obj)
-        {
-            if (obj is not Rem)
-                return false;
-            else
-                return true;
-        }
+        public override bool Equals(object obj) => obj is not Rem;
 
         public override int GetHashCode() => nameof(Rem).GetHashCode();
 

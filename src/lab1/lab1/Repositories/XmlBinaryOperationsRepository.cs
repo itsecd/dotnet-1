@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab1.Operations;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,14 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace lab1.Repositories
+namespace Lab1.Repositories
 {
-    class XmlBinaryOperationsRepository : IBinaryOperationsRepository
+    public class XmlBinaryOperationsRepository : IBinaryOperationsRepository
     {
         private const string _filePath = "database.xml";
-
         private List<BinaryOperation> _operations;
-
         private void ReadFile()
         {
             if (_operations != null)

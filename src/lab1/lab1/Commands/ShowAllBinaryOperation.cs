@@ -1,10 +1,10 @@
-﻿using lab1.Repositories;
+﻿using Lab1.Repositories;
 using System;
 using System.ComponentModel;
 using Spectre.Console.Cli;
 using Spectre.Console;
 
-namespace lab1.Commands
+namespace Lab1.Commands
 {
     class ShowAllBinaryOperation : Command<ShowAllBinaryOperation.Settings>
     {

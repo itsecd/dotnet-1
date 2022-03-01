@@ -1,4 +1,5 @@
-﻿using lab1.Repositories;
+﻿using Lab1.Operations;
+using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab1.Commands
+namespace Lab1.Commands
 {
     class MinBinaryOperation : Command<MinBinaryOperation.Settings>
     {
