@@ -11,20 +11,21 @@ namespace Lab1
         {
             get
             {
-                if (A.ContainsKey(new Tuple<int, int>(y, x)))
-                    return A[new Tuple<int, int>(y, x)];
+                var indGet = new Tuple<int, int>(y, x);
+                if (A.ContainsKey(indGet))
+                    return A[indGet];
                 return 0;
             }
 
             set
             {
-                var tmpCoord = new Tuple<int, int>(y, x);
-                if (A.ContainsKey(tmpCoord) && value == 0)
-                    A.Remove(tmpCoord);
-                if (A.ContainsKey(tmpCoord) && value != 0)
-                    A[tmpCoord] = value;
+                var indSet = new Tuple<int, int>(y, x);
+                if (A.ContainsKey(indSet) && value == 0)
+                    A.Remove(indSet);
+                if (A.ContainsKey(indSet) && value != 0)
+                    A[indSet] = value;
                 else
-                    A.Add(tmpCoord, value);
+                    A.Add(indSet, value);
             }
         }
         public override int Width { get; }
@@ -36,7 +37,7 @@ namespace Lab1
             Width = 1;
             A = new();
         }
-        public SparseMatrix(int H = 1, int W = 1)
+        public SparseMatrix(int H, int W)
         {
             Height = H;
             Width = W;
