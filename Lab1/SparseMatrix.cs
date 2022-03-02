@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace Lab1
 {
@@ -70,5 +71,20 @@ namespace Lab1
             return A.SequenceEqual(tmp.A);
         }
         public override int GetHashCode() => HashCode.Combine(A, Height, Width);
+        public override XElement ToXml()
+        {
+            XElement tmp = new XElement("SparseMatrix");
+            tmp.Add(new XAttribute("width", Width));
+            tmp.Add(new XAttribute("height", Height));
+            foreach(Tuple<int, int> coord in A.Keys)
+            {
+                XElement tmp1 = new XElement("value");
+                tmp1.Add(new XAttribute("i", coord.Item1 ));
+                tmp1.Add(new XAttribute("j", coord.Item2 ));
+                tmp1.Add(new XText($"{A[coord]}"));
+                tmp.Add(tmp1);
+            }
+            return tmp;
+        }
     }
 }

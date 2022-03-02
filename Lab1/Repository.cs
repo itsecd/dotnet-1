@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using Spectre.Console;
 
@@ -68,12 +69,14 @@ namespace Lab1
         {
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Matrix>));
-                using FileStream fd = new FileStream("matrices.xml", FileMode.Create);
-                serializer.Serialize(fd, data);
-                fd.Close();
+                XDocument tmpDoc = XDocument.Load("matrices.xml");
+                XElement root = tmpDoc.Element("Matrix");
+                root.RemoveNodes();
+                foreach (Matrix mat in data)
+                    root.Add(mat.ToXml());
+                tmpDoc.Save("matrices.xml");
             }
-            catch (InvalidOperationException e)
+            catch (Exception e)
             {
                 AnsiConsole.WriteException(e);
             }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
+using System.Xml.Linq;
 
 namespace Lab1
 {
@@ -19,5 +20,6 @@ namespace Lab1
         public override string ToString() => $"Matrix [[{Height}x{Width}]]";
         public override bool Equals(object obj) => base.Equals(obj);
         public override int GetHashCode() => base.GetHashCode();
+        public abstract XElement ToXml();
     }
 }

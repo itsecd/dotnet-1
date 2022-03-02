@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace Lab1
 {
@@ -53,5 +54,18 @@ namespace Lab1
             return A.SequenceEqual(tmp.A);
         }
         public override int GetHashCode() => HashCode.Combine(A, Height, Width);
+        public override XElement ToXml()
+        {
+            XElement tmp = new XElement("BufferedMatrix");
+            tmp.Add(new XAttribute("width", Width));
+            tmp.Add(new XAttribute("height", Height));
+            foreach (double val in A)
+            {
+                var tmp1 = new XElement("value");
+                tmp1.Add(new XText($"{val}"));
+                tmp.Add(tmp1);
+            }
+            return tmp;
+        }
     }
 }
