@@ -20,9 +20,9 @@ namespace Laba1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSettings settings)
         {
             var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Select the shape type:")
+                .Title("Select the figure type:")
                 .AddChoices("Rectangular parallelepiped", "Cylinder", "Sphere"));
-            Figure3D figure= figureType switch
+            Figure3D figure = figureType switch
             {
                 "Rectangular parallelepiped" => new RectangularParallelepiped(
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]X coordinate for point 1:[/]")),
@@ -38,33 +38,29 @@ namespace Laba1.Commands
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Z coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Radius:[/]")
                     .ValidationErrorMessage("[red]Invalid input[/]")
-                    .Validate(num=>num>=0)
-                    ),
+                    .Validate(num => num >= 0)),
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Height:[/]")
                     .ValidationErrorMessage("[red]Invalid input[/]")
-                    .Validate(num => num >=0))
-                    ),
+                    .Validate(num => num >= 0))),
                 "Sphere" => new Sphere(
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]X coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Y coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Z coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Radius:[/]")
                     .ValidationErrorMessage("[red]Invalid input[/]")
-                    .Validate(num => num >= 0))
-                    ),
+                    .Validate(num => num >= 0))),
                 _ => null
             };
-            if (figure== null)
+            if (figure == null)
             {
-                AnsiConsole.MarkupLine($"[red]Unknown shape type:{figureType} [/]");
+                AnsiConsole.MarkupLine($"[red]Unknown figure type:{figureType} [/]");
                 return -1;
             }
-            int index = AnsiConsole.Prompt(new TextPrompt<int>("[blue]Enter the index to insert the shape: [/]"));
-            _figureRepository.AddFigure(figure , index );
+            int index = AnsiConsole.Prompt(new TextPrompt<int>("[blue]Enter the index to insert the shape: [/]")
+               .ValidationErrorMessage("[red]Invalid input[/]")
+               .Validate(ind => (ind >= 0 && ind < _figureRepository.GetCountFigures())));
+            _figureRepository.AddFigure(figure, index);
             return 0;
         }
-
-        
     }
-    
 }

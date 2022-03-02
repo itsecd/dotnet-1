@@ -6,7 +6,10 @@ namespace Laba1.Model
     {
         public Point Centre { get; set; }
         public double Radius { get; set; }
-        public Sphere() { }
+        public Sphere()
+        {
+            Centre = new Point();
+        }
         public Sphere(Point centre, double radius)
         {
             Centre = centre;
@@ -19,12 +22,12 @@ namespace Laba1.Model
         }
         public override double GetArea()
         {
-            return (4 * Math.PI * Math.Pow(Radius, 2));
+            return 4 * Math.PI * Math.Pow(Radius, 2);
         }
 
         public override double GetVolume()
         {
-            return ((4 / 3) * Math.PI * Math.Pow(Radius, 3));
+            return (4 / 3) * Math.PI * Math.Pow(Radius, 3);
         }
 
         public override RectangularParallelepiped GetMinParallelepiped()
@@ -39,9 +42,13 @@ namespace Laba1.Model
         }
         public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
+            }
+            if (obj == this)
+            {
+                return true;
             }
             var sphere = (Sphere)obj;
             if (Centre.Equals(sphere.Centre) && Radius == sphere.Radius)
@@ -49,6 +56,11 @@ namespace Laba1.Model
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Centre.GetHashCode() ^ Radius.GetHashCode();
         }
     }
 }

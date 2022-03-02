@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace Laba1.Model
 {
@@ -7,7 +9,6 @@ namespace Laba1.Model
     [XmlInclude(typeof(Cylinder))]
     public abstract class Figure3D
     {
-
         public abstract double GetArea();
         public abstract double GetVolume();
         /// <summary>
@@ -17,6 +18,7 @@ namespace Laba1.Model
         public abstract RectangularParallelepiped GetMinParallelepiped();
         public abstract override string ToString();
         public abstract override bool Equals(object obj);
+        public abstract override int GetHashCode();
 
     }
 }

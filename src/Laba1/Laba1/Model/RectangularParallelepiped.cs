@@ -6,12 +6,15 @@ namespace Laba1.Model
     {
         public Point Point1 { get; set; }
         public Point Point2 { get; set; }
-        RectangularParallelepiped() { }
+        RectangularParallelepiped()
+        {
+            Point1 = new Point();
+            Point2 = new Point();
+        }
         public RectangularParallelepiped(Point point1, Point point2)
         {
             Point1 = point1;
             Point2 = point2;
-
         }
         public RectangularParallelepiped(double x1, double y1, double z1, double x2, double y2, double z2)
         {
@@ -38,13 +41,12 @@ namespace Laba1.Model
         public override double GetVolume()
         {
             return GetLength() * GetWidth() * GetHeight();
-
         }
 
         public override RectangularParallelepiped GetMinParallelepiped()
         {
-            return new RectangularParallelepiped
-                (new(Point1.X, Point1.Y, Point1.Z), new(Point2.X, Point2.Y, Point2.Z));
+            return new RectangularParallelepiped(
+                new(Point1.X, Point1.Y, Point1.Z), new(Point2.X, Point2.Y, Point2.Z));
         }
         public override string ToString()
         {
@@ -52,9 +54,13 @@ namespace Laba1.Model
         }
         public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
+            }
+            if (obj == this)
+            {
+                return true;
             }
             var parallelepiped = (RectangularParallelepiped)obj;
             if (Point1.Equals(parallelepiped.Point1) && Point2.Equals(parallelepiped.Point2))
@@ -62,6 +68,11 @@ namespace Laba1.Model
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Point1.GetHashCode() ^ Point2.GetHashCode();
         }
     }
 }

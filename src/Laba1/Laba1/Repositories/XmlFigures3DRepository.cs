@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using Laba1.Model;
 
@@ -10,7 +11,6 @@ namespace Laba1.Repositories
     {
         private const string StorageFileName = "figures.xml";
         private List<Figure3D> _figures;
-
         private void ReadFromFile()
         {
             if (_figures != null) return;
@@ -22,7 +22,6 @@ namespace Laba1.Repositories
             var xmlDeserializer = new XmlSerializer(typeof(List<Figure3D>));
             using var fileStream = new FileStream(StorageFileName, FileMode.Open);
             _figures = (List<Figure3D>)xmlDeserializer.Deserialize(fileStream);
-
         }
         private void WriteToFile()
         {
@@ -35,7 +34,7 @@ namespace Laba1.Repositories
             if (figure == null)
                 throw new ArgumentNullException(nameof(figure));
             ReadFromFile();
-            _figures.Insert(index,figure);
+            _figures.Insert(index, figure);
             WriteToFile();
         }
         public void RemoveFigure(int index)
@@ -47,39 +46,39 @@ namespace Laba1.Repositories
         public void RemoveAllFigures()
         {
             ReadFromFile();
-            _figures.RemoveRange(0, _figures.Count);
+            _figures.Clear();
             WriteToFile();
-        }
-        public bool CorrectIndex(int index)
-        {
-            ReadFromFile();
-            if (index < 0)
-            {
-                return false;
-            }
-            if (index < _figures.Count)
-            {
-                return true;
-            }
-            return false;
         }
         public bool CompareFigures(int firstIndex, int secondIndex)
         {
             ReadFromFile();
-            Figure3D firstFigure = _figures[firstIndex];
-            Figure3D secondFigure = _figures[secondIndex];
-            if (firstIndex == secondIndex || firstFigure.Equals(secondFigure))
-            {
-                return true;
-            }
-
-            return false;
+            return _figures[firstIndex].Equals(_figures[secondIndex]);
         }
         public RectangularParallelepiped GetMinFrameParallelepiped(int index)
         {
             ReadFromFile();
-            Figure3D BaseFigure = _figures[index];
-            return BaseFigure.GetMinParallelepiped();
+            return _figures[index].GetMinParallelepiped();
+        }
+        public double TotalVolume()
+        {
+            ReadFromFile();
+            double sumVolume = 0;
+            foreach (var figure in _figures)
+            {
+                sumVolume += figure.GetVolume();
+            }
+            return sumVolume;
+        }
+        public double TotalVolumeWithLinq()
+        {
+            ReadFromFile();
+            double sumVolumeLinq = _figures.Sum(figure => figure.GetVolume());
+            return sumVolumeLinq;
+        }
+        public Figure3D GetFigure(int index)
+        {
+            ReadFromFile();
+            return _figures[index];
         }
         public List<Figure3D> GetFigures()
         {
@@ -88,6 +87,7 @@ namespace Laba1.Repositories
         }
         public int GetCountFigures()
         {
+            ReadFromFile();
             return _figures.Count;
         }
     }

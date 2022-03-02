@@ -19,9 +19,18 @@ namespace Laba1.Commands
         {
 
             int figureIndex = AnsiConsole.Prompt(new TextPrompt<int>(
-                "[white]Enter the index of the shape to find the minimum framing parallelepiped: [/]")
+                "Enter the index of the shape to find the minimum framing parallelepiped: ")
                 .ValidationErrorMessage("[red]Invalid input[/]")
-                .Validate(num => num >= 0));
+                .Validate(ind => (ind >= 0 && ind < _figureRepository.GetCountFigures())));
+            var BaseFigure = _figureRepository.GetFigure(figureIndex);
+            var BaseTable = new Table();
+            BaseTable.AddColumn("Type");
+            BaseTable.AddColumn("Info");
+            BaseTable.AddColumn("Area");
+            BaseTable.AddColumn("Volume");
+            BaseTable.AddRow(BaseFigure.GetType().Name, BaseFigure.ToString(),
+                              BaseFigure.GetArea().ToString(), BaseFigure.GetVolume().ToString());
+            AnsiConsole.Write(BaseTable);
             var table = new Table();
             table.AddColumn("Info");
             table.AddColumn("Area");
@@ -31,13 +40,10 @@ namespace Laba1.Commands
                           MinFramingParallelepiped.ToString(),
                           MinFramingParallelepiped.GetArea().ToString(),
                           MinFramingParallelepiped.GetVolume().ToString());
-            AnsiConsole.WriteLine($"\nThe minimum framing rectangular parallelepiped for the figure under the index {figureIndex} ");
+            AnsiConsole.WriteLine($"\nThe minimum framing rectangular parallelepiped " +
+                $"for the figure under the index {figureIndex} ");
             AnsiConsole.Write(table);
-            
-
             return 0;
         }
-
-        
     }
 }

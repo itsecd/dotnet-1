@@ -1,14 +1,8 @@
-﻿using System;
-using Laba1.Model;
-using System.Collections.Generic;
-using System.Linq;
-using Spectre.Console;
-using Laba1.Repositories;
+﻿using Laba1.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Lab1.Infrastructure;
 using Spectre.Console.Cli;
 using Laba1.Commands;
-
 namespace Laba1
 {
     internal class Program
@@ -29,6 +23,7 @@ namespace Laba1
                 config.AddCommand<RemoveAllFigure3DCommand>("RemoveAll");
                 config.AddCommand<CompareFigures3DCommand>("Compare");
                 config.AddCommand<GetMinParallelepipedCommand>("MinFrame");
+                config.AddCommand<TotalVolumeCollectionCommand>("VolumeAll");
             });
             app.Run(args);
         }

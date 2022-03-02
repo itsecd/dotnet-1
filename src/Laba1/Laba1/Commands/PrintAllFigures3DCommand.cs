@@ -20,7 +20,6 @@ namespace Laba1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] PrintAllFigureSettings settings)
         {
             var figures = _figureRepository.GetFigures();
-
             var table = new Table();
             table.Title("[aqua]3D Figures [/]");
             table.AddColumn("Type");
@@ -39,25 +38,8 @@ namespace Laba1.Commands
                               _figureRepository.GetFigures()[i].GetArea().ToString(),
                               _figureRepository.GetFigures()[i].GetVolume().ToString());
             }
-           
-           
             AnsiConsole.Write(table);
-           
-            double sumV1 = 0;
-            foreach (var figure in figures)
-            {
-                sumV1 += figure.GetVolume();
-            }
-            AnsiConsole.Write(new Markup($"[bold yellow]The total volume of the collection figures(method #1):[/] [white] {sumV1:f3}[/]"));
-            AnsiConsole.WriteLine();
-            double sumV2 = 0;
-            sumV2 = figures.Sum(figure => figure.GetVolume());
-            AnsiConsole.Write(new Markup($"[bold blue]The total volume of the collection figures(method #2):[/] [white] {sumV2:f3} [/]"));
-            AnsiConsole.WriteLine();
             return 0;
         }
-
-
     }
-
 }

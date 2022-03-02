@@ -7,7 +7,10 @@ namespace Laba1.Model
         public Point Centre { get; set; }
         public double Radius { get; set; }
         public double Height { get; set; }
-        Cylinder() { }
+        public Cylinder()
+        {
+            Centre = new Point();
+        }
         public Cylinder(Point centre, double radius, double height)
         {
             Centre = centre;
@@ -22,29 +25,33 @@ namespace Laba1.Model
         }
         public override double GetArea()
         {
-            return (2 * Math.PI * Radius * (Radius + Height));
+            return 2 * Math.PI * Radius * (Radius + Height);
         }
 
         public override double GetVolume()
         {
-            return (Math.PI * Math.Pow(Radius, 2) * Height);
+            return Math.PI * Math.Pow(Radius, 2) * Height;
         }
 
         public override RectangularParallelepiped GetMinParallelepiped()
         {
-            return new RectangularParallelepiped
-                (new(Centre.X + Radius, Centre.Y - Radius, Centre.Z),
-                 new(Centre.X - Radius, Centre.Y + Radius, Centre.Z + Height));
+            return new RectangularParallelepiped(
+                new(Centre.X + Radius, Centre.Y - Radius, Centre.Z),
+                new(Centre.X - Radius, Centre.Y + Radius, Centre.Z + Height));
         }
         public override string ToString()
         {
             return $"Centre: {Centre}\nRadius: {Radius}\nHeight: {Height}\n";
         }
-        public  override bool Equals(object obj)
+        public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
+            }
+            if (obj == this)
+            {
+                return true;
             }
             var cylinder = (Cylinder)obj;
             if (Centre.Equals(cylinder.Centre) && Radius == cylinder.Radius && Height == cylinder.Height)
@@ -52,6 +59,11 @@ namespace Laba1.Model
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Centre.GetHashCode() ^ Radius.GetHashCode() ^ Height.GetHashCode();
         }
     }
 }

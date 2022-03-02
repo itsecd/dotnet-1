@@ -24,5 +24,4 @@ namespace Laba1.Commands
             return 0;
         }
     }
-
  }
