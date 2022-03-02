@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Laba1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
