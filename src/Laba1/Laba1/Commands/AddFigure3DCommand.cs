@@ -36,14 +36,21 @@ namespace Laba1.Commands
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]X coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Y coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Z coordinate for centre:[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Radius:[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Height:[/]"))
+                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Radius:[/]")
+                    .ValidationErrorMessage("[red]Invalid input[/]")
+                    .Validate(num=>num>=0)
+                    ),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Height:[/]")
+                    .ValidationErrorMessage("[red]Invalid input[/]")
+                    .Validate(num => num >=0))
                     ),
                 "Sphere" => new Sphere(
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]X coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Y coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Z coordinate for centre:[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Radius:[/]"))
+                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Radius:[/]")
+                    .ValidationErrorMessage("[red]Invalid input[/]")
+                    .Validate(num => num >= 0))
                     ),
                 _ => null
             };

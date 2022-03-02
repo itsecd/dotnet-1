@@ -27,10 +27,10 @@ namespace Laba1
                 config.AddCommand<PrintAllFigure3DCommand>("Print");
                 config.AddCommand<RemoveFigure3DCommand>("Remove");
                 config.AddCommand<RemoveAllFigure3DCommand>("RemoveAll");
+                config.AddCommand<CompareFigures3DCommand>("Compare");
+                config.AddCommand<GetMinParallelepipedCommand>("MinFrame");
             });
-
             app.Run(args);
-
         }
     }
 }

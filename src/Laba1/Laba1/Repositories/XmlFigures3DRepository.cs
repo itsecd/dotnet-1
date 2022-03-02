@@ -50,10 +50,45 @@ namespace Laba1.Repositories
             _figures.RemoveRange(0, _figures.Count);
             WriteToFile();
         }
+        public bool CorrectIndex(int index)
+        {
+            ReadFromFile();
+            if (index < 0)
+            {
+                return false;
+            }
+            if (index < _figures.Count)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool CompareFigures(int firstIndex, int secondIndex)
+        {
+            ReadFromFile();
+            Figure3D firstFigure = _figures[firstIndex];
+            Figure3D secondFigure = _figures[secondIndex];
+            if (firstIndex == secondIndex || firstFigure.Equals(secondFigure))
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public RectangularParallelepiped GetMinFrameParallelepiped(int index)
+        {
+            ReadFromFile();
+            Figure3D BaseFigure = _figures[index];
+            return BaseFigure.GetMinParallelepiped();
+        }
         public List<Figure3D> GetFigures()
         {
             ReadFromFile();
             return _figures;
+        }
+        public int GetCountFigures()
+        {
+            return _figures.Count;
         }
     }
 }

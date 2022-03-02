@@ -27,12 +27,22 @@ namespace Laba1.Commands
             table.AddColumn("Info");
             table.AddColumn("Area");
             table.AddColumn("Volume");
-            foreach (var figure in figures)
+            for(int i=0; i < _figureRepository.GetCountFigures(); ++i)
             {
-                table.AddRow(figure.GetType().Name, figure.ToString(), figure.GetArea().ToString(), figure.GetVolume().ToString());
+                if (i == 10)
+                {
+                    table.AddRow("...", "...", "...", "...");
+                    break;
+                }
+                table.AddRow(_figureRepository.GetFigures()[i].GetType().Name,
+                              _figureRepository.GetFigures()[i].ToString(),
+                              _figureRepository.GetFigures()[i].GetArea().ToString(),
+                              _figureRepository.GetFigures()[i].GetVolume().ToString());
             }
+           
+           
             AnsiConsole.Write(table);
-
+           
             double sumV1 = 0;
             foreach (var figure in figures)
             {

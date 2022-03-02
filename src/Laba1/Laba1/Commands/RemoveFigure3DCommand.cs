@@ -18,7 +18,9 @@ namespace Laba1.Commands
         }
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveFigureSettings settings)
         {
-            int index = AnsiConsole.Prompt(new TextPrompt<int>("[blue] Enter index of the shape to remove: [/]"));
+            int index = AnsiConsole.Prompt(new TextPrompt<int>("[blue] Enter index of the shape to remove: [/]")
+                                   .ValidationErrorMessage("[red]Invalid input[/]")
+                                   .Validate(num => num >= 0));
             _figureRepository.RemoveFigure(index);
             return 0;
         }

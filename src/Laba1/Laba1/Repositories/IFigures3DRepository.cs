@@ -9,5 +9,10 @@ namespace Laba1.Repositories
         void RemoveFigure(int index);
         List<Figure3D> GetFigures();
         void RemoveAllFigures();
+        bool CompareFigures(int firstIndex, int secondIndex);
+        bool CorrectIndex(int index);
+        int GetCountFigures();
+        RectangularParallelepiped GetMinFrameParallelepiped(int index);
+
     }
 }
