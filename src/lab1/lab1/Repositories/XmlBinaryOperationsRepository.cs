@@ -20,16 +20,16 @@ namespace Lab1.Repositories
                 return;
             }
 
-            var XmlSerializer = new XmlSerializer(typeof(List<BinaryOperation>));
+            var xmlSerializer = new XmlSerializer(typeof(List<BinaryOperation>));
             using var fileStream = new FileStream(_filePath, FileMode.Open);
-            _operations = (List<BinaryOperation>)XmlSerializer.Deserialize(fileStream);
+            _operations = (List<BinaryOperation>)xmlSerializer.Deserialize(fileStream);
         }
 
         private void WriteFile()
         {
-            var XmlSerializer = new XmlSerializer(typeof(List<BinaryOperation>));
+            var xmlSerializer = new XmlSerializer(typeof(List<BinaryOperation>));
             using var fileStream = new FileStream(_filePath, FileMode.Create);
-            XmlSerializer.Serialize(fileStream, _operations);
+            xmlSerializer.Serialize(fileStream, _operations);
         }
 
         public void AddOperation(int index, BinaryOperation operation)

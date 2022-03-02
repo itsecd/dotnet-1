@@ -20,7 +20,7 @@ namespace Lab1.Commands
             => _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         public override int Execute(CommandContext context, Settings settings)
         {
-            if (settings.removeAll)
+            if (settings.RemoveAll)
             {
                 _repository.RemoveAll();
                 return 0;

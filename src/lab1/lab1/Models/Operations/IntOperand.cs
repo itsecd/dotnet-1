@@ -75,7 +75,9 @@ namespace Lab1
 
         public int CompareTo(object obj)
         {
-            return _value.CompareTo(obj);
+            if (obj is IntOperand lb)
+                return _value.CompareTo(lb._value);
+            else throw new ArgumentException($"Expected: {nameof(IntOperand)}. Actual: {nameof(lb)}");
         }
     }
 }
