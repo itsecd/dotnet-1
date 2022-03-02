@@ -3,11 +3,10 @@ using Lab1.Infrastructure;
 using Lab1.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
-using System.IO;
 
 namespace Lab1
 {
-    class Program 
+    class Program
     {
         static void Main(string[] args)
         {

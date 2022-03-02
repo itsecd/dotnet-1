@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lab1.Operations
+﻿namespace Lab1.Operations
 {
     public class Mul : BinaryOperation
     {

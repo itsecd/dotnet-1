@@ -1,8 +1,8 @@
 ﻿using Lab1.Repositories;
+using Spectre.Console;
+using Spectre.Console.Cli;
 using System;
 using System.ComponentModel;
-using Spectre.Console.Cli;
-using Spectre.Console;
 
 namespace Lab1.Commands
 {
@@ -12,12 +12,12 @@ namespace Lab1.Commands
         {
             [CommandOption("--all")]
             [DefaultValue(false)]
-            public bool removeAll { get; init; }
+            public bool RemoveAll { get; init; }
         }
 
         private readonly IBinaryOperationsRepository _repository;
-        public RemoveBinaryOperation(IBinaryOperationsRepository repository) 
-            => _repository = repository ?? throw new ArgumentNullException(nameof(RemoveBinaryOperation));
+        public RemoveBinaryOperation(IBinaryOperationsRepository repository)
+            => _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         public override int Execute(CommandContext context, Settings settings)
         {
             if (settings.removeAll)
@@ -37,7 +37,7 @@ namespace Lab1.Commands
 
                             return ValidationResult.Success();
                         }
-                        catch (ArgumentOutOfRangeException exp)
+                        catch (ArgumentOutOfRangeException)
                         {
                             return ValidationResult.Error();
                         }
@@ -47,6 +47,6 @@ namespace Lab1.Commands
         }
     }
 
-    
+
 }
 

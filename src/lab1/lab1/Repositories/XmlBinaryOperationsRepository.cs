@@ -1,10 +1,6 @@
 ﻿using Lab1.Operations;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Lab1.Repositories
@@ -24,22 +20,22 @@ namespace Lab1.Repositories
                 return;
             }
 
-            var xmlSerialazer = new XmlSerializer(typeof(List<BinaryOperation>));
+            var XmlSerializer = new XmlSerializer(typeof(List<BinaryOperation>));
             using var fileStream = new FileStream(_filePath, FileMode.Open);
-            _operations = (List<BinaryOperation>)xmlSerialazer.Deserialize(fileStream);
+            _operations = (List<BinaryOperation>)XmlSerializer.Deserialize(fileStream);
         }
 
         private void WriteFile()
         {
-            var xmlSerialazer = new XmlSerializer(typeof(List<BinaryOperation>));
+            var XmlSerializer = new XmlSerializer(typeof(List<BinaryOperation>));
             using var fileStream = new FileStream(_filePath, FileMode.Create);
-            xmlSerialazer.Serialize(fileStream,_operations);
+            XmlSerializer.Serialize(fileStream, _operations);
         }
 
         public void AddOperation(int index, BinaryOperation operation)
         {
             ReadFile();
-            _operations.Insert(index,operation);
+            _operations.Insert(index, operation);
             WriteFile();
         }
 
@@ -53,7 +49,7 @@ namespace Lab1.Repositories
         public void RemoveAll()
         {
             ReadFile();
-            _operations.RemoveAll( _ =>  true );
+            _operations.RemoveAll(_ => true);
             WriteFile();
         }
 

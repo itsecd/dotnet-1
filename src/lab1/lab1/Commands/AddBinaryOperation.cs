@@ -1,9 +1,8 @@
-﻿using Lab1.Repositories;
-using System;
-using System.ComponentModel;
-using Spectre.Console.Cli;
+﻿using Lab1.Operations;
+using Lab1.Repositories;
 using Spectre.Console;
-using Lab1.Operations;
+using Spectre.Console.Cli;
+using System;
 
 namespace Lab1.Commands
 {
@@ -14,8 +13,8 @@ namespace Lab1.Commands
         }
 
         private readonly IBinaryOperationsRepository _repository;
-        public AddBinaryOperation(IBinaryOperationsRepository repository) 
-            => _repository = repository ?? throw new ArgumentNullException(nameof(AddBinaryOperation));
+        public AddBinaryOperation(IBinaryOperationsRepository repository)
+            => _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         public override int Execute(CommandContext context, Settings settings)
         {
             var choice = AnsiConsole.Prompt(
@@ -58,6 +57,6 @@ namespace Lab1.Commands
         }
     }
 
-    
+
 }
 

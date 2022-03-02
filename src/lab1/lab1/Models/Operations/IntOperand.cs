@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1
 {
-    public class IntOperand :  IComparable
+    public class IntOperand : IComparable
     {
         private int _value;
         private bool MaxValue { get; set; }
@@ -66,13 +62,13 @@ namespace Lab1
             return op;
         }
 
-    
+
         public override bool Equals(object obj)
         {
             if (obj is not IntOperand op)
                 return false;
             else
-                return this == op ;
+                return this == op;
         }
 
         public override int GetHashCode() => Value.GetHashCode();

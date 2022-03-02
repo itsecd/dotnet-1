@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
-namespace Lab1.Operations
+﻿namespace Lab1.Operations
 {
-    public class Sum: BinaryOperation
+    public class Sum : BinaryOperation
     {
         public override IntOperand Calculate(IntOperand first, IntOperand second) => new IntOperand(first + second);
 

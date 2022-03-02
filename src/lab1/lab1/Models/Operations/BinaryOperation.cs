@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Lab1.Operations
@@ -13,7 +9,7 @@ namespace Lab1.Operations
     [XmlInclude(typeof(Mul))]
     [XmlInclude(typeof(Rem))]
     [Serializable]
-    public abstract class BinaryOperation 
+    public abstract class BinaryOperation
     {
         public abstract IntOperand Calculate(IntOperand first, IntOperand second);
 

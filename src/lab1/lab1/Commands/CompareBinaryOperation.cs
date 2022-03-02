@@ -1,8 +1,7 @@
 ﻿using Lab1.Repositories;
-using System;
-using System.ComponentModel;
-using Spectre.Console.Cli;
 using Spectre.Console;
+using Spectre.Console.Cli;
+using System;
 
 namespace Lab1.Commands
 {
@@ -13,13 +12,12 @@ namespace Lab1.Commands
         }
 
         private readonly IBinaryOperationsRepository _repository;
-        public CompareBinaryOperation(IBinaryOperationsRepository repository) 
-            => _repository = repository ?? throw new ArgumentNullException(nameof(CompareBinaryOperation));
+        public CompareBinaryOperation(IBinaryOperationsRepository repository)
+            => _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         public override int Execute(CommandContext context, Settings settings)
         {
             var operations = _repository.GetAll();
 
-            // Как лучше тут сделать ? 2 раза приходится ходить по списку (долго) для каждого эл.
             var indexFirst = AnsiConsole.Prompt(
                 new TextPrompt<int>("Enter index of first element")
                     .ValidationErrorMessage("[red]That's not a valid index[/]")
@@ -27,7 +25,7 @@ namespace Lab1.Commands
                     {
                         try
                         {
-                            var _ = operations[index]; 
+                            var _ = operations[index];
                             return ValidationResult.Success();
                         }
                         catch (ArgumentOutOfRangeException)
@@ -53,12 +51,12 @@ namespace Lab1.Commands
                         }
                     }));
 
-            AnsiConsole.Write($"Result of compare: {operations[indexFirst].Equals(operations[indexSecond])}" );
+            AnsiConsole.Write($"Result of compare: {operations[indexFirst].Equals(operations[indexSecond])}");
 
             return 0;
         }
     }
 
-    
+
 }
 

@@ -1,8 +1,8 @@
 ﻿using Lab1.Repositories;
+using Spectre.Console;
+using Spectre.Console.Cli;
 using System;
 using System.ComponentModel;
-using Spectre.Console.Cli;
-using Spectre.Console;
 
 namespace Lab1.Commands
 {
@@ -13,12 +13,12 @@ namespace Lab1.Commands
             [CommandOption("-c|--count <COUNT>")]
             [Description("Max visibles elements on screen.")]
             [DefaultValue(10)]
-            public int countVisible { get; set; }
+            public int CountVisible { get; set; }
         }
 
         private readonly IBinaryOperationsRepository _repository;
-        public ShowAllBinaryOperation(IBinaryOperationsRepository repository) 
-            => _repository = repository ?? throw new ArgumentNullException(nameof(ShowAllBinaryOperation));
+        public ShowAllBinaryOperation(IBinaryOperationsRepository repository)
+            => _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         public override int Execute(CommandContext context, Settings settings)
         {
             var operations = _repository.GetAll();
@@ -31,7 +31,7 @@ namespace Lab1.Commands
             {
                 table.AddRow(table.Rows.Count.ToString(), op.ToString());
 
-                if ( table.Rows.Count == settings.countVisible)
+                if (table.Rows.Count == settings.CountVisible)
                 {
                     table.AddRow("...");
                     break;
@@ -44,6 +44,6 @@ namespace Lab1.Commands
         }
     }
 
-    
+
 }
 

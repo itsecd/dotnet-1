@@ -3,10 +3,7 @@ using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
@@ -18,7 +15,7 @@ namespace Lab1.Commands
 
         private readonly IBinaryOperationsRepository _repository;
         public MinBinaryOperation(IBinaryOperationsRepository repository)
-            => _repository = repository ?? throw new ArgumentNullException(nameof(MinBinaryOperation));
+            => _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         public override int Execute(CommandContext context, Settings settings)
         {
             return GetMinLINQ();
@@ -44,16 +41,16 @@ namespace Lab1.Commands
                 new TextPrompt<int>("Enter second integer operand")
                     .ValidationErrorMessage("[red]That's not a valid operand[/]")
                     );
-           
+
             var minResult = operations.Min(v => v.Calculate(new(firstOperand), new(secondOperand)));
 
             var minOp = (from o in operations
-                        where o.Calculate(new(firstOperand), new(secondOperand)) == minResult
-                        select o).FirstOrDefault();
+                         where o.Calculate(new(firstOperand), new(secondOperand)) == minResult
+                         select o).FirstOrDefault();
 
             AnsiConsole.Write($"Minimum binary operation for " +
                 $"operands {firstOperand} and" +
-                $" {secondOperand} : " + minOp.ToString());
+                $" {secondOperand} : " + minOp);
             return 0;
 
         }
@@ -92,20 +89,16 @@ namespace Lab1.Commands
                         minResult = curResult;
                     }
                 }
-                catch (DivideByZeroException)
+                catch (Exception)
                 {
-                    continue;
+                    AnsiConsole.Write($"[red]One of the operations is invalid. Aborting...[/]");
+                    return 0;
                 }
             }
 
-            if (minOp == null)
-            {
-                throw new NullReferenceException(); // Что тут бросать ? и бросать ли
-            }
-
             AnsiConsole.Write($"Minimum binary operation for " +
-                $"operands {firstOperand.ToString()} and" +
-                $" {secondOperand.ToString()} : " + minOp.ToString());
+                $"operands {firstOperand} and" +
+                $" {secondOperand} : " + minOp);
             return 0;
         }
     }
