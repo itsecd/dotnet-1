@@ -3,9 +3,9 @@ namespace Laba1.Model
 {
     public struct Point
     {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Z { get; set; }
+        public double X { get; init; }
+        public double Y { get; init; }
+        public double Z { get; init; }
         public Point(double x, double y, double z)
         {
             X = x;
@@ -23,11 +23,7 @@ namespace Laba1.Model
                 return false;
             }
             var point = (Point)obj;
-            if (X == point.X && Y == point.Y && Z == point.Z)
-            {
-                return true;
-            }
-            return false;
+            return X == point.X && Y == point.Y && Z == point.Z;
         }
         public override int GetHashCode()
         {

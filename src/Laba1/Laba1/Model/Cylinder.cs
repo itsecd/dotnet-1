@@ -4,9 +4,9 @@ namespace Laba1.Model
 {
     public class Cylinder : Figure3D
     {
-        public Point Centre { get; set; }
-        public double Radius { get; set; }
-        public double Height { get; set; }
+        public Point Centre { get; init; }
+        public double Radius { get; init; }
+        public double Height { get; init; }
         public Cylinder()
         {
             Centre = new Point();
@@ -54,11 +54,7 @@ namespace Laba1.Model
                 return true;
             }
             var cylinder = (Cylinder)obj;
-            if (Centre.Equals(cylinder.Centre) && Radius == cylinder.Radius && Height == cylinder.Height)
-            {
-                return true;
-            }
-            return false;
+            return Centre.Equals(cylinder.Centre) && Radius == cylinder.Radius && Height == cylinder.Height;
         }
 
         public override int GetHashCode()

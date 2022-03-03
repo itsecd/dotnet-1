@@ -4,8 +4,8 @@ namespace Laba1.Model
 {
     public class RectangularParallelepiped : Figure3D
     {
-        public Point Point1 { get; set; }
-        public Point Point2 { get; set; }
+        public Point Point1 { get; init; }
+        public Point Point2 { get; init; }
         RectangularParallelepiped()
         {
             Point1 = new Point();
@@ -63,11 +63,7 @@ namespace Laba1.Model
                 return true;
             }
             var parallelepiped = (RectangularParallelepiped)obj;
-            if (Point1.Equals(parallelepiped.Point1) && Point2.Equals(parallelepiped.Point2))
-            {
-                return true;
-            }
-            return false;
+            return Point1.Equals(parallelepiped.Point1) && Point2.Equals(parallelepiped.Point2);
         }
 
         public override int GetHashCode()

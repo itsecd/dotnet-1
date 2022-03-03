@@ -22,24 +22,24 @@ namespace Laba1.Commands
                 "Enter the index of the shape to find the minimum framing parallelepiped: ")
                 .ValidationErrorMessage("[red]Invalid input[/]")
                 .Validate(ind => (ind >= 0 && ind < _figureRepository.GetCountFigures())));
-            var BaseFigure = _figureRepository.GetFigure(figureIndex);
-            var BaseTable = new Table();
-            BaseTable.AddColumn("Type");
-            BaseTable.AddColumn("Info");
-            BaseTable.AddColumn("Area");
-            BaseTable.AddColumn("Volume");
-            BaseTable.AddRow(BaseFigure.GetType().Name, BaseFigure.ToString(),
-                              BaseFigure.GetArea().ToString(), BaseFigure.GetVolume().ToString());
-            AnsiConsole.Write(BaseTable);
+            var baseFigure = _figureRepository.GetFigure(figureIndex);
+            var baseTable = new Table();
+            baseTable.AddColumn("Type");
+            baseTable.AddColumn("Info");
+            baseTable.AddColumn("Area");
+            baseTable.AddColumn("Volume");
+            baseTable.AddRow(baseFigure.GetType().Name, baseFigure.ToString(),
+                              baseFigure.GetArea().ToString(), baseFigure.GetVolume().ToString());
+            AnsiConsole.Write(baseTable);
             var table = new Table();
             table.AddColumn("Info");
             table.AddColumn("Area");
             table.AddColumn("Volume");
-            var MinFramingParallelepiped = _figureRepository.GetMinFrameParallelepiped(figureIndex);
+            var minFramingParallelepiped = _figureRepository.GetMinFrameParallelepiped(figureIndex);
             table.AddRow( 
-                          MinFramingParallelepiped.ToString(),
-                          MinFramingParallelepiped.GetArea().ToString(),
-                          MinFramingParallelepiped.GetVolume().ToString());
+                          minFramingParallelepiped.ToString(),
+                          minFramingParallelepiped.GetArea().ToString(),
+                          minFramingParallelepiped.GetVolume().ToString());
             AnsiConsole.WriteLine($"\nThe minimum framing rectangular parallelepiped " +
                 $"for the figure under the index {figureIndex} ");
             AnsiConsole.Write(table);

@@ -32,10 +32,8 @@ namespace Laba1.Commands
                     table.AddRow("...", "...", "...", "...");
                     break;
                 }
-                table.AddRow(_figureRepository.GetFigures()[i].GetType().Name,
-                              _figureRepository.GetFigures()[i].ToString(),
-                              _figureRepository.GetFigures()[i].GetArea().ToString(),
-                              _figureRepository.GetFigures()[i].GetVolume().ToString());
+                table.AddRow(figures[i].GetType().Name, figures[i].ToString(),
+                             figures[i].GetArea().ToString(), figures[i].GetVolume().ToString());
             }
             AnsiConsole.Write(table);
             return 0;

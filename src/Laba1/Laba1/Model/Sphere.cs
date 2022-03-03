@@ -4,8 +4,8 @@ namespace Laba1.Model
 {
     public class Sphere : Figure3D
     {
-        public Point Centre { get; set; }
-        public double Radius { get; set; }
+        public Point Centre { get; init; }
+        public double Radius { get; init; }
         public Sphere()
         {
             Centre = new Point();
@@ -51,11 +51,7 @@ namespace Laba1.Model
                 return true;
             }
             var sphere = (Sphere)obj;
-            if (Centre.Equals(sphere.Centre) && Radius == sphere.Radius)
-            {
-                return true;
-            }
-            return false;
+            return Centre.Equals(sphere.Centre) && Radius == sphere.Radius;
         }
 
         public override int GetHashCode()

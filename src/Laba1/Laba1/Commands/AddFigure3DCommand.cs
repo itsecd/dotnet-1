@@ -58,7 +58,7 @@ namespace Laba1.Commands
             }
             int index = AnsiConsole.Prompt(new TextPrompt<int>("[blue]Enter the index to insert the shape: [/]")
                .ValidationErrorMessage("[red]Invalid input[/]")
-               .Validate(ind => (ind >= 0 && ind < _figureRepository.GetCountFigures())));
+               .Validate(ind => (ind >= 0 && ind <= _figureRepository.GetCountFigures())));
             _figureRepository.AddFigure(figure, index);
             return 0;
         }
