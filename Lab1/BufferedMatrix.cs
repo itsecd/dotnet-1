@@ -28,6 +28,19 @@ namespace Lab1
             A = new double[H*W];
         }
 
+        public BufferedMatrix(XElement elem)
+        {
+            Width = Int32.Parse(elem.Attribute("width").Value);
+            Height = Int32.Parse(elem.Attribute("height").Value);
+            A = new double[Height*Width];
+            int index = 0;
+            foreach (XElement val in elem.Elements("value"))
+            {
+                A[index] = Double.Parse(val.Value);
+                index += 1;
+            }
+        }
+
         public override double Norm()
         {
             double res = Math.Abs(A[0]);

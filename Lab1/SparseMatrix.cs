@@ -45,9 +45,22 @@ namespace Lab1
             A = new();
         }
 
+        public SparseMatrix(XElement elem)
+        {
+            Width = Int32.Parse(elem.Attribute("width").Value);
+            Height = Int32.Parse(elem.Attribute("height").Value);
+            A = new();
+            foreach (XElement val in elem.Elements("value"))
+            {
+                var indVal = new Tuple<int, int>(Int32.Parse(val.Attribute("i").Value), Int32.Parse(val.Attribute("j").Value));
+                A.Add(indVal, Double.Parse(val.Value));
+            }
+            
+        }
+
         public override double Norm()
         {
-            double res = Math.Abs(this[0,0]);
+            double res = Math.Abs(this[0, 0]);
             foreach (double i in A.Values)
                 if (Math.Abs(i) > res)
                     res = Math.Abs(i);
@@ -56,7 +69,7 @@ namespace Lab1
 
         public override double NormL()
         {
-            double[] n = new[] {Math.Abs(A.Values.Max()), Math.Abs(A.Values.Min())};
+            double[] n = new[] { Math.Abs(A.Values.Max()), Math.Abs(A.Values.Min()) };
             return n.Max();
         }
 
@@ -76,11 +89,11 @@ namespace Lab1
             XElement tmp = new XElement("SparseMatrix");
             tmp.Add(new XAttribute("width", Width));
             tmp.Add(new XAttribute("height", Height));
-            foreach(Tuple<int, int> coord in A.Keys)
+            foreach (Tuple<int, int> coord in A.Keys)
             {
                 XElement tmp1 = new XElement("value");
-                tmp1.Add(new XAttribute("i", coord.Item1 ));
-                tmp1.Add(new XAttribute("j", coord.Item2 ));
+                tmp1.Add(new XAttribute("i", coord.Item1));
+                tmp1.Add(new XAttribute("j", coord.Item2));
                 tmp1.Add(new XText($"{A[coord]}"));
                 tmp.Add(tmp1);
             }

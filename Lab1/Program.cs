@@ -11,17 +11,15 @@ namespace Lab1
         {
             AnsiConsole.Clear();
             MatrixStorage data = new();
+            data.Load();
             Panel warningIndex = new Panel("[#ff7d00]Индекс вышел за границы списка![/]");
             Panel warningSize = new Panel("[#ff7d00]Недопустимый размер матрицы![/]");
             Panel warningEmptyList = new Panel("[#ff7d00]Список пуст![/]");
-            var testmat1 = new SparseMatrix(2,2);
-            testmat1[0,0] = 1.23;
-            testmat1[1,1] = 3.21;
-            data.Insert(testmat1, 0);
-            var testmat2 = new BufferedMatrix(3,3);
-            testmat2[1,1] = 3.45;
-            testmat2[2,2] = 5.43;
-            data.Insert(testmat2, 0);
+            if (data.Count == 0)
+                AnsiConsole.Write(warningEmptyList);
+            else
+                AnsiConsole.Write(data.ToTable());
+            
 
             bool exitApp = false;
             while (!exitApp)

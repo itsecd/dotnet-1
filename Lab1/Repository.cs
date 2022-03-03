@@ -85,10 +85,15 @@ namespace Lab1
 
         public void Load()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Matrix>));
-            using FileStream fd = new FileStream("matrices.xml", FileMode.OpenOrCreate);
-            data = (List<Matrix>)serializer.Deserialize(fd);
-            fd.Close();
+            XDocument tmpDoc = XDocument.Load("matrices.xml");
+            XElement root = tmpDoc.Element("Matrix");
+            foreach (XElement mat in root.Elements())
+            {
+                if (mat.Name == "BufferedMatrix")
+                    data.Add(new BufferedMatrix(mat));
+                if (mat.Name == "SparseMatrix")
+                    data.Add(new SparseMatrix(mat));
+            }
         }
 
         public Table ToTable()
