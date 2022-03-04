@@ -14,10 +14,15 @@ namespace Lab1.Repository
         public MatrixStorage() { data = new(); }
         public void Insert(AbstractMatrix mat, int index = 0)
         {
-            if (data.Count == 0)
-                data.Add(mat);
-            else
-                data.Insert(index, mat);
+            try
+            {
+                if (data.Count == 0)
+                    data.Add(mat);
+                else
+                    data.Insert(index, mat);
+            }
+            catch (ArgumentOutOfRangeException e)
+            { AnsiConsole.WriteException(e); }
         }
 
         public void Update(int index)
@@ -25,25 +30,29 @@ namespace Lab1.Repository
             throw new NotImplementedException("Изменение матриц еще не реализовано.");
         }
 
-        public void Delete(int ind)
+        public void Delete(int index)
         {
-            data.RemoveAt(ind);
-            AnsiConsole.Write(new Panel("[yellow]Матрица удалена[/]"));
-            AnsiConsole.WriteLine();
+            try
+            { data.RemoveAt(index); }
+            catch (ArgumentOutOfRangeException e)
+            { AnsiConsole.WriteException(e); }
         }
 
         public void Clear()
         {
             data.Clear();
-            AnsiConsole.Write(new Panel("[yellow]Список очищен[/]"));
-            AnsiConsole.WriteLine();
         }
 
         public int Compare(int ind1, int ind2)
         {
-            if (data[ind1].Equals(data[ind2]))
-                return 1;
-            return 0;
+            try
+            {
+                if (data[ind1].Equals(data[ind2]))
+                    return 1;
+                return 0;
+            }
+            catch (ArgumentOutOfRangeException e)
+            { AnsiConsole.WriteException(e); return -1; }
         }
 
         public void Dump()

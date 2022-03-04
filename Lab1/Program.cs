@@ -60,14 +60,20 @@ namespace Lab1
                         int indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
                         data.Insert(tmpMat, indIns);
                         break;
+
+
                     case "Удалить матрицу":
                         AnsiConsole.Write(data.ToTable());
                         int indDel = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
                         data.Delete(indDel);
                         break;
+
+
                     case "Очистить список":
                         data.Clear();
                         break;
+
+
                     case "Сравнить две матрицы":
                         AnsiConsole.Write(data.ToTable());
                         int indL = AnsiConsole.Prompt(new TextPrompt<int>("Индекс первой матрицы: "));
@@ -78,12 +84,14 @@ namespace Lab1
                             AnsiConsole.Write(new Panel("[yellow]Матрицы НЕ равны[/]"));
                         if (data.Compare(indL, indR) == -1)
                             AnsiConsole.Write(warningIndex);
-                        AnsiConsole.WriteLine();
                         break;
+
+
                     case "Показать список":
                         AnsiConsole.Write(data.ToTable());
-                        AnsiConsole.WriteLine();
                         break;
+
+                        
                     default:
                         AnsiConsole.Write(new Panel("[red]Выключаюсь...[/]"));
                         AnsiConsole.Write(data.ToTable());
@@ -91,6 +99,7 @@ namespace Lab1
                         exitApp = true;
                         break;
                 }
+                AnsiConsole.WriteLine();
             }
         }
     }
