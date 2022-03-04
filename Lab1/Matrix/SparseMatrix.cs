@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Lab1
+namespace Lab1.Matrix
 {
-    public class SparseMatrix : Matrix
+    public class SparseMatrix : AbstractMatrix
     {
         public Dictionary<Tuple<int, int>, double> A;
         public override double this[int y, int x]

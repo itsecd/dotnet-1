@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Serialization;
 using System.Xml.Linq;
 
-namespace Lab1
+namespace Lab1.Matrix
 {
-    [XmlInclude(typeof(BufferedMatrix))]
-    [XmlInclude(typeof(SparseMatrix))]
-    public abstract class Matrix
+    public abstract class AbstractMatrix
     {
         
         public abstract int Width { get; }

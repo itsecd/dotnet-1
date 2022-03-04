@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Lab1
+namespace Lab1.Matrix
 {
-    public class BufferedMatrix : Matrix
+    public class BufferedMatrix : AbstractMatrix
     {
         public double[] A;
         public override double this[int y, int x]

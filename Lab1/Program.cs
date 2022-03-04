@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
 using Spectre.Console;
+using Lab1.Matrix;
+using Lab1.Repository;
 
 namespace Lab1
 {
@@ -15,10 +15,7 @@ namespace Lab1
             Panel warningIndex = new Panel("[#ff7d00]Индекс вышел за границы списка![/]");
             Panel warningSize = new Panel("[#ff7d00]Недопустимый размер матрицы![/]");
             Panel warningEmptyList = new Panel("[#ff7d00]Список пуст![/]");
-            if (data.Count == 0)
-                AnsiConsole.Write(warningEmptyList);
-            else
-                AnsiConsole.Write(data.ToTable());
+            AnsiConsole.Write(data.ToTable());
             
 
             bool exitApp = false;
@@ -34,42 +31,37 @@ namespace Lab1
                     "Показать список",
                     "Выход"
                 }));
+
+
                 AnsiConsole.Clear();
                 switch (choice)
                 {
                     case "Создать матрицу":
+                        AnsiConsole.Write(data.ToTable());
                         string matType = AnsiConsole.Prompt(new SelectionPrompt<string>()
                         .Title("Выберите тип матрицы:")
                         .AddChoices(new[] {
                             "BufferedMatrix",
                             "SparseMatrix"
                         }));
-                        int tw = AnsiConsole.Prompt(new TextPrompt<int>("Кол-во столбцов: "));
-                        int th = AnsiConsole.Prompt(new TextPrompt<int>("Кол-во строк: "));
+                        int tw = AnsiConsole.Prompt(new TextPrompt<int>("Ширина: "));
+                        int th = AnsiConsole.Prompt(new TextPrompt<int>("Высота: "));
                         if (tw < 1 || th < 1)
                         {
-                            AnsiConsole.Write(warningSize);
-                            AnsiConsole.WriteLine();
+                            AnsiConsole.WriteException(new ArgumentOutOfRangeException("Недопустимый размер матрицы!"));
                             break;
                         }
-                        Matrix tmpMat = matType switch
+                        AbstractMatrix tmpMat = matType switch
                         {
                             "BufferedMatrix" => new BufferedMatrix(th, tw),
                             "SparseMatrix" => new SparseMatrix(th, tw),
                             _ => null
                         };
-                        AnsiConsole.MarkupLine($"Всего матриц в списке: {data.Count}");
                         int indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
                         data.Insert(tmpMat, indIns);
                         break;
                     case "Удалить матрицу":
-                        if (data.Count == 0)
-                        {
-                            AnsiConsole.Write(warningEmptyList);
-                            AnsiConsole.WriteLine();
-                            break;
-                        }
-                        AnsiConsole.MarkupLine($"Всего матриц в списке: {data.Count}");
+                        AnsiConsole.Write(data.ToTable());
                         int indDel = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
                         data.Delete(indDel);
                         break;
@@ -77,7 +69,7 @@ namespace Lab1
                         data.Clear();
                         break;
                     case "Сравнить две матрицы":
-                        AnsiConsole.MarkupLine($"Всего матриц в списке: {data.Count}");
+                        AnsiConsole.Write(data.ToTable());
                         int indL = AnsiConsole.Prompt(new TextPrompt<int>("Индекс первой матрицы: "));
                         int indR = AnsiConsole.Prompt(new TextPrompt<int>("Индекс второй матрицы: "));
                         if (data.Compare(indL, indR) == 1)
@@ -89,22 +81,17 @@ namespace Lab1
                         AnsiConsole.WriteLine();
                         break;
                     case "Показать список":
-                        if (data.Count == 0)
-                        {
-                            AnsiConsole.Write(warningEmptyList);
-                            AnsiConsole.WriteLine();
-                            break;
-                        }
                         AnsiConsole.Write(data.ToTable());
                         AnsiConsole.WriteLine();
                         break;
                     default:
                         AnsiConsole.Write(new Panel("[red]Выключаюсь...[/]"));
+                        AnsiConsole.Write(data.ToTable());
+                        data.Dump();
                         exitApp = true;
                         break;
                 }
             }
-            data.Dump();
         }
     }
 }
