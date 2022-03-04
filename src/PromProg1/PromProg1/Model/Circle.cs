@@ -23,7 +23,7 @@ namespace PromProg1
 
         public override double Square() => Math.PI * Math.Pow(Radius, 2);
 
-        public override string ToString() => $"Circle: Centr{Centr}, radius = {Radius}";
+        public override string ToString() => $"Circle: Center{Centr}, radius = {Radius}";
         public override int GetHashCode()
         {
             return HashCode.Combine(Centr, Radius);
