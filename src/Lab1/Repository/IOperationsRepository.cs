@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lab1.Repository
 {
-    public interface IXmlOperationsRepository
+    public interface IOperationsRepository
     {
         void AddOperation(int index, Operation operation);
         bool CompareOperations(int lhsIndex, int rhsIndex);

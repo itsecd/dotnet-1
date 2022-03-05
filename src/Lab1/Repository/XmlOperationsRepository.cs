@@ -7,7 +7,7 @@ using System;
 
 namespace Lab1.Repository
 {
-    public class XmlOperationsRepository : IXmlOperationsRepository
+    public class XmlOperationsRepository : IOperationsRepository
     {
         private const string StorageFileName = "operations.xml";
 

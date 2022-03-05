@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace Lab1.Model
 {
     public class Mul : Operation
