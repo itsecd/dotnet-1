@@ -6,6 +6,7 @@ using Lab1.Matrix;
 
 namespace Lab1.Repository
 {
+    ///<summary>Класс, реализующий репозиторий для хранения матриц</summary>
     class MatrixStorage : IMatrixRepository
     {
         private List<AbstractMatrix> data;
@@ -42,7 +43,7 @@ namespace Lab1.Repository
         {
             data.Clear();
         }
-
+        ///<summary>Сравнение матриц на равенство</summary>
         public int Compare(int ind1, int ind2)
         {
             try
@@ -77,7 +78,8 @@ namespace Lab1.Repository
                     data.Add(new SparseMatrix(mat));
             }
         }
-
+        ///<summary>Представление элементов в виде таблицы для вывода в консоль</summary>
+        ///<returns>class Spectre.Console.Table</returns>
         public Table ToTable()
         {
             var tempTable = new Table();

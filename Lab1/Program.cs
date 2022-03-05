@@ -9,6 +9,7 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
+            //инициализация
             AnsiConsole.Clear();
             MatrixStorage data = new();
             data.Load();
@@ -18,6 +19,7 @@ namespace Lab1
             AnsiConsole.Write(data.ToTable());
             
 
+            //главный цикл
             bool exitApp = false;
             while (!exitApp)
             {
