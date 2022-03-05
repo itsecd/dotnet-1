@@ -1,4 +1,5 @@
 using Lab1.Matrix;
+using Spectre.Console;
 
 namespace Lab1.Repository
 {
@@ -20,5 +21,6 @@ namespace Lab1.Repository
         void Dump();
         ///<summary>Десериализация из XML-файла</summary>
         void Load();
+        Table ToTable();
     }
 }

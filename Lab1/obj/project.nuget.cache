@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "vcVI2RI5NwNlKW8xum9baLGdjzBuigwrQ5Uueq6AWJVt28ivVVSF/06QRz/RdiNCrZMwwTZtXD3hCJ16xBvdUw==",
+  "dgSpecHash": "H3vgthgpoiSqluVR72GRrkPrxVR4Czj/9Gnldh2qLnksbTjyG/6mGWwUqTjFmIaD4ICjRmbCKrI2wlbx0uQ3Kw==",
   "success": true,
   "projectFilePath": "/home/dimadivan/dotnet-1/Lab1/Lab1.csproj",
   "expectedPackageFiles": [
+    "/home/dimadivan/.nuget/packages/microsoft.extensions.dependencyinjection/5.0.2/microsoft.extensions.dependencyinjection.5.0.2.nupkg.sha512",
+    "/home/dimadivan/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/5.0.0/microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
     "/home/dimadivan/.nuget/packages/spectre.console/0.43.0/spectre.console.0.43.0.nupkg.sha512"
   ],
   "logs": []

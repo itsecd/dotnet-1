@@ -1,7 +1,11 @@
 ﻿using System;
 using Spectre.Console;
+using Spectre.Console.Cli;
 using Lab1.Matrix;
 using Lab1.Repository;
+using Microsoft.Extensions.DependencyInjection;
+using Lab1.Infrastructure;
+using Lab1.Commands;
 
 namespace Lab1
 {
@@ -9,8 +13,20 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IMatrixRepository, MatrixStorage>();
+
+            var registrar = new TypeRegistrar(serviceCollection);
+            var app = new CommandApp(registrar);
+
+            app.Configure(config =>
+            {
+                config.AddCommand<AddMatrixCommand>("add");
+            });
+            app.Run(args);
+
             //инициализация
-            AnsiConsole.Clear();
+            // AnsiConsole.Clear();
             MatrixStorage data = new();
             data.Load();
             Panel warningIndex = new Panel("[#ff7d00]Индекс вышел за границы списка![/]");

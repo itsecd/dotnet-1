@@ -16,3 +16,5 @@
 /home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/Spectre.Console.dll
 /home/dimadivan/dotnet-1/Lab1/obj/Debug/net5.0/Lab1.csproj.CopyComplete
 /home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/ref/Lab1.dll
+/home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/Microsoft.Extensions.DependencyInjection.dll
+/home/dimadivan/dotnet-1/Lab1/bin/Debug/net5.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
