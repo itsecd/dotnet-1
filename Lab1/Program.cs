@@ -23,6 +23,7 @@ namespace Lab1
                 config.AddCommand<ClearRepositoryCommand>("clear");
                 config.AddCommand<PrintRepositoryCommand>("print");
                 config.AddCommand<CompareMatrixCommand>("compare");
+                config.AddCommand<MinNormCommand>("min-norm");
             });
             app.Run(args);
         }
