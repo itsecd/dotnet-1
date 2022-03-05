@@ -3,14 +3,11 @@ using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Lab1.Repositories
 {
-    public class XmlFigureRepository : IXmlFigureRepository
+    public class XmlFigureRepository : IFigureRepository
     {
         private const string StorageFileName = "figure.xml";
         private List<Figure> _figures;
@@ -36,7 +33,7 @@ namespace Lab1.Repositories
             }
         }
 
-        public void AddFigure(Figure figure)
+        public void Add(Figure figure)
         {
             if (figure == null)
                 throw new ArgumentNullException(nameof(figure));
@@ -49,7 +46,7 @@ namespace Lab1.Repositories
 
         }
 
-        public void RemoveFigure(int index)
+        public void RemoveAt(int index)
         {
             ReadFromFile();
             if (index < 0 || index > _figures.Count - 1)
@@ -60,7 +57,7 @@ namespace Lab1.Repositories
             WriteToFile();
         }
 
-        public void RemoveAllFigure()
+        public void RemoveAll()
         {
             ReadFromFile();
 
@@ -69,25 +66,6 @@ namespace Lab1.Repositories
                 _figures.RemoveAt(i);
             }
             WriteToFile();
-        }
-
-        public bool CompareFigures(int index1, int index2)
-        {
-            ReadFromFile();
-            if (index1 < 0 || index2 < 0 || index1 >= _figures.Count || index2 >= _figures.Count)
-            {
-                throw new IndexOutOfRangeException();
-            }
-            else return _figures[index1].Equals(_figures[index2]);
-        }
-
-        public void OuputList()
-        {
-            ReadFromFile();
-            foreach (var p in _figures)
-            {
-                AnsiConsole.WriteLine(p.ToString());
-            }
         }
 
         public List<Figure> GetList()

@@ -1,12 +1,7 @@
 ﻿using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
@@ -17,9 +12,9 @@ namespace Lab1.Commands
 
         }
 
-        private readonly IXmlFigureRepository _figureRepository;
+        private readonly IFigureRepository _figureRepository;
 
-        public RemoveFigureCommand(IXmlFigureRepository figureRepository)
+        public RemoveFigureCommand(IFigureRepository figureRepository)
         {
             _figureRepository = figureRepository;
         }
@@ -27,8 +22,8 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveFigureSettings settings)
         {
             //var figures = _figureRepository.GetList();
-            int index = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Вводите индекс фигура для удаления: [/]"));
-            _figureRepository.RemoveFigure(index);
+            int index = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Введите индекс фигуры для удаления: [/]"));
+            _figureRepository.RemoveAt(index);
             return 0;
         }
     }

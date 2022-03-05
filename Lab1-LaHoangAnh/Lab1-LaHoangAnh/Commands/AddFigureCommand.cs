@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 using Lab1.Mode;
 using Lab1.Repositories;
 using Spectre.Console;
@@ -17,16 +12,16 @@ namespace Lab1.Commands
         {
 
         }
-        private IXmlFigureRepository _figureRepository;
+        private IFigureRepository _figureRepository;
 
-        public AddFigureCommand(IXmlFigureRepository figures)
+        public AddFigureCommand(IFigureRepository figures)
         {
             _figureRepository = figures;
         }
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSetting settings)
         {
             var FigureType = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("Выберите тип фигуры: ").AddChoices("Прямоугольник", "Треугольник", "Круг"));
-            Figure Creat = FigureType switch
+            Figure figure = FigureType switch
             {
                 "Прямоугольник" => new Rectangle(new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Первая точка X = [/]")),
                                                         AnsiConsole.Prompt(new TextPrompt<double>("[red]Первая точка Y = [/]"))),
@@ -48,14 +43,14 @@ namespace Lab1.Commands
                                         AnsiConsole.Prompt(new TextPrompt<double>("[red]Радиус = [/]"))),
                 _ => null
             };
-            if (Creat == null)
+            if (figure == null)
             {
                 AnsiConsole.MarkupLine($"[red]Неизвестный тип фигуры: {FigureType}[/]");
                 return -1;
             }
             else
             {
-                _figureRepository.AddFigure(Creat);
+                _figureRepository.Add(figure);
             }
             return 0;
         }

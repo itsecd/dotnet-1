@@ -1,12 +1,7 @@
 ﻿using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
@@ -14,18 +9,19 @@ namespace Lab1.Commands
     {
         public class CompareSettings : CommandSettings { }
 
-        private readonly IXmlFigureRepository _figuresRepository;
+        private readonly IFigureRepository _figuresRepository;
 
-        public CompareCommand(IXmlFigureRepository fi)
+        public CompareCommand(IFigureRepository fi)
         {
             _figuresRepository = fi;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] CompareSettings settings)
         {
-            int id1 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс первого фигура :[/]"));
-            int id2 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс второго фигура (различен от {id1}):[/]"));
-            AnsiConsole.WriteLine($"Результат сравнения: {_figuresRepository.CompareFigures(id1, id2)}");
+            int id1 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс первой фигуры :[/]"));
+            int id2 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс второй фигуры (отличный от {id1}):[/]"));
+            var List = _figuresRepository.GetList();
+            AnsiConsole.WriteLine($"Результат сравнения: {List[id1].Equals(List[id2])}");
             return 0;
         }
     }

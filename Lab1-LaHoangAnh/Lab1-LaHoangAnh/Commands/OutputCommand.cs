@@ -2,11 +2,7 @@
 using Lab1.Repositories;
 using Spectre.Console.Cli;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
@@ -15,9 +11,9 @@ namespace Lab1.Commands
         public class OutputSettings : CommandSettings
         { }
 
-        private readonly IXmlFigureRepository _figuresRepository;
+        private readonly IFigureRepository _figuresRepository;
 
-        public OutputCommand(IXmlFigureRepository figureRepository)
+        public OutputCommand(IFigureRepository figureRepository)
         {
             _figuresRepository = figureRepository;
         }
