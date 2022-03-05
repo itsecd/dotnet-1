@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Lab1.Repository;
+using Spectre.Console;
 using Lab1.Model;
+using System.Collections.Generic;
 
 namespace Lab1
 {
@@ -7,9 +9,8 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            Operation sum = new Sum();
-            
-            Console.WriteLine(sum.ToString());
+            IXmlOperationsRepository operationRepository = new XmlOperationsRepository();
+
         }
     }
 }
