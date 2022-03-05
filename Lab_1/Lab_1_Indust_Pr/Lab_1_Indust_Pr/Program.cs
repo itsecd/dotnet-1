@@ -35,6 +35,14 @@ namespace Lab_1_Indust_Pr
             var funcMinValue = func.First(x => x.GetDerivative().GetValueFunc(2) == minValue);
             Console.WriteLine(funcMinValue);
             Console.WriteLine(GetMinValueDerivative(func, 2));
+
+            Function cs = new Cos();
+            Console.WriteLine(cs.GetDerivative().GetValueFunc(10));
+
+            Function sn = new Sin();
+            Console.WriteLine(sn.GetValueFunc(10));
+
+
         }
 
         public static Function GetMinValueDerivative(List<Function> func, double arg)
