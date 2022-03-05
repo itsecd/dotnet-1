@@ -27,8 +27,10 @@ namespace Lab_1_Indust_Pr
             {
                 Console.WriteLine(f);
             }
-            var av = func.Max(x => x.GetDerivative().GetValueFunc(2));
-            Console.WriteLine(av);
+
+            var minValue = func.Max(x => x.GetDerivative().GetValueFunc(2));
+            var funcMinValue = func.First(x => x.GetDerivative().GetValueFunc(2) == minValue);
+            Console.WriteLine(funcMinValue);
         }
     }
 }
