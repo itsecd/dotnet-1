@@ -53,12 +53,10 @@ namespace Lab1.Model
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType() == this.GetType())
-            {
-                if (obj.ToString() == this.ToString()) return true;
-                else return false;
-            }
-            else return false;
+            if(obj == null || GetType() != obj.GetType()) return false;
+            if(obj == this) return true;
+            var tritangle = (Tritangle)obj;
+            return A.Equals(tritangle.A) && B.Equals(tritangle.B) && C.Equals(tritangle.C);
         }
     }
 }
