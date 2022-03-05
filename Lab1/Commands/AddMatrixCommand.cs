@@ -24,6 +24,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] AddMatrixSettings settings)
         {
             _data.Load();
+            AnsiConsole.Clear();
             AnsiConsole.Write(_data.ToTable());
             string matType = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Выберите тип матрицы:")
@@ -44,7 +45,14 @@ namespace Lab1.Commands
                 "SparseMatrix" => new SparseMatrix(th, tw),
                 _ => null
             };
-            int indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
+            int indIns = 0;
+            if (_data.Count > 1)
+                indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
+            if (indIns < 0 || indIns > _data.Count - 1)
+            {
+                AnsiConsole.WriteException(new ArgumentOutOfRangeException("Индекс вышел за границы списка!"));
+                return -1;
+            }
             _data.Insert(tmpMat, indIns);
             _data.Dump();
             return 0;

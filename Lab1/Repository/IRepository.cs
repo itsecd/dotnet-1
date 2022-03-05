@@ -22,5 +22,6 @@ namespace Lab1.Repository
         ///<summary>Десериализация из XML-файла</summary>
         void Load();
         Table ToTable();
+        int Compare(int i1, int i2);
     }
 }
