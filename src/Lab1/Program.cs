@@ -1,9 +1,6 @@
 ﻿using Lab1.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Lab1.Infrastructure;
-using Spectre.Console;
-using Lab1.Model;
-using System.Collections.Generic;
 using Spectre.Console.Cli;
 using Lab1.Commands;
 
@@ -22,6 +19,7 @@ namespace Lab1
             app.Configure(config =>
             {
                 config.AddCommand<AddOperationCommand>("add");
+                config.AddCommand<GetAllOperationsCommand>("print");
             });
 
             app.Run(args);
