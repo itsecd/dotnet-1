@@ -18,10 +18,11 @@ namespace Lab_1_Indust_Pr
             Function gg3 = new Constant(5);
 
             Function lin = new LinearFunction(2, 8);
-            //Console.WriteLine(lin.ToString());
-            //Console.WriteLine(lin.GetValueFunc(2));
-            //Console.WriteLine(lin.GetDerivative());
-            //Console.WriteLine(lin);
+            Function qf = new QuadraticFunction(2, 3, 3);
+            Console.WriteLine(qf.ToString());
+            Console.WriteLine(qf.GetValueFunc(2));
+            Console.WriteLine(qf.GetDerivative());
+            Console.WriteLine(qf);
 
             List<Function> func = new() { gg, gg1, lin, gg3};
 

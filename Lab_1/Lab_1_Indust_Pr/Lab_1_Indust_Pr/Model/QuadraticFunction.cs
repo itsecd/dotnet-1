@@ -6,18 +6,25 @@ using System.Threading.Tasks;
 
 namespace Lab_1_Indust_Pr.Model
 {
-    //class QuadraticFunction : Function//ax^2 + bx + c, но я сделаю bx + c как линейную функцию т.к это одно и тоже
-    //{
-        /*
-        public override Function GetDerivative()
+    class QuadraticFunction : Function//ax^2 + bx + c
+    {
+        public double A;
+        public double B;
+        public double C;
+
+        public QuadraticFunction(double a, double b, double c)
         {
-            
+            A = a;
+            B = b;
+            C = c;
         }
 
-        public override double GetValueFunc(double arg)
-        {
-            
-        }
-        */
-    //}
+        //2ax + b производная - линейная функция
+        public override Function GetDerivative() => new LinearFunction(2 * A, B);
+
+        public override double GetValueFunc(double arg) => A * Math.Pow(arg, 2) + B * arg + C;
+
+        public override string ToString() => $"{A}x^2 + {B}x + {C}";
+       
+    }
 }
