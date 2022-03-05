@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Lab1.Mode
+namespace Lab1.Model
 {
     [XmlInclude(typeof(Rectangle))]
     [XmlInclude(typeof(Tritangle))]

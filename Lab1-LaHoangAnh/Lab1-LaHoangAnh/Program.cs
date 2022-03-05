@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lab1.Mode;
+using Lab1.Model;
 using Lab1.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Lab1.Infrastructure;

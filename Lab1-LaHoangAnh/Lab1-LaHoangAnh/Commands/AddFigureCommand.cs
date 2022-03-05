@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Lab1.Mode;
+using Lab1.Model;
 using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;

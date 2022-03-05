@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab1.Mode
+namespace Lab1.Model
 {
     public class Tritangle : Figure
     {

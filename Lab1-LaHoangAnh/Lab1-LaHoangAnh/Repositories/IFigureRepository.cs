@@ -1,4 +1,4 @@
-﻿using Lab1.Mode;
+﻿using Lab1.Model;
 using System.Collections.Generic;
 
 namespace Lab1.Repositories

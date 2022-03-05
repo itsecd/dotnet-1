@@ -1,6 +1,6 @@
 ﻿
 
-namespace Lab1.Mode
+namespace Lab1.Model
 {
     public class Rectangle : Figure
     {

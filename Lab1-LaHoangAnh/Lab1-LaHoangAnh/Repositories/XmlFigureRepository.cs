@@ -1,4 +1,4 @@
-﻿using Lab1.Mode;
+﻿using Lab1.Model;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;

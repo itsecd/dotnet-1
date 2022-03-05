@@ -1,4 +1,4 @@
-﻿using Lab1.Mode;
+﻿using Lab1.Model;
 using Lab1.Repositories;
 using Spectre.Console.Cli;
 using System;
