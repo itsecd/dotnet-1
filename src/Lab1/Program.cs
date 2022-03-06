@@ -20,6 +20,7 @@ namespace Lab1
             {
                 config.AddCommand<AddOperationCommand>("add");
                 config.AddCommand<GetAllOperationsCommand>("print");
+                config.AddCommand<MinOperationCommand>("min operation");
                 config.AddCommand<RemoveOperationCommand>("remove operation");
                 config.AddCommand<RemoveCollectionCommand>("remove all");
             });
