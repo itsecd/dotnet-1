@@ -11,6 +11,7 @@ namespace lab1
             Console.WriteLine(a.GetValue(0, 0));
             Console.WriteLine(a.Height);
             Console.WriteLine(a.Width);
+            Console.WriteLine(a.ToString());
         }
     }
 }
