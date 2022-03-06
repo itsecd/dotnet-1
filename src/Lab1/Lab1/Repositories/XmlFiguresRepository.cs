@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Lab1.Repositories
 {
-    public class XmlFiguresRepository : IXmlFiguresRepository
+    public class XmlFiguresRepository : IFiguresRepository
     {
 
         private string StorageFileName { get; set; } = "C:\\Users\\vabob\\OneDrive\\Рабочий стол\\figure.xml";

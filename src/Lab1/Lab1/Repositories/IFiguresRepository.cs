@@ -2,9 +2,11 @@
 
 namespace Lab1.Repositories
 {
-    public interface IXmlFiguresRepository
+    public interface IFiguresRepository
     {
         void AddFigure(Figure figure);
         void RemoveFigure(int index);
+
+        void PrintScreen();
     }
 }
