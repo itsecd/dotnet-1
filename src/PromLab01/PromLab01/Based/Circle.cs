@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PromLab01
 {
-    internal class Circle : ICalculations
+    public class Circle : Figure, ICalculations
     {
         Point a;
         public Point A 
@@ -36,22 +36,22 @@ namespace PromLab01
             radius = 0;
             a = new Point(0);
         }
-        public double GetArea()
+        public override double GetArea()
         {
             return radius * radius * Math.PI;
         }
 
-        public double GetPerimeter()
+        public override double GetPerimeter()
         {
             return 2*Math.PI * radius;
         }
 
-        public Rectangle GetBorders()
+        public override Rectangle GetBorders()
         {
             return new Rectangle(A, Radius);
         }
 
-        new public string ToString()
+        public override string ToString()
         {
             return "{" + A.ToString() + ";" + "R: " + Radius;
         }

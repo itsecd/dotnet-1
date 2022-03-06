@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PromLab01
 {
-    internal class Rectangle : ICalculations
+    public class Rectangle : Figure, ICalculations
     {
         Point a;
         public Point A
@@ -38,22 +38,22 @@ namespace PromLab01
             this.b = new Point(0);
         }
 
-        public double GetArea()
+        public override double GetArea()
         {
             return Math.Abs(b.X-a.X)*Math.Abs(b.Y-a.Y);
         }
 
-        public double GetPerimeter()
+        public override double GetPerimeter()
         {
             return 2*Math.Abs(b.X - a.X) + 2* Math.Abs(b.Y - a.Y);
         }
 
-        public Rectangle GetBorders()
+        public override Rectangle GetBorders()
         {
             return new Rectangle(a, b);
         }
 
-        new public string ToString()
+        public override string ToString()
         {
             return "{" + a.ToString() + ";" + b.ToString() + "}";
         }

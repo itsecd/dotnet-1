@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PromLab01
 {
-    internal class Triangle : ICalculations
+    public class Triangle : Figure, ICalculations
     {
         Point[] array;
         public Point[] Array
@@ -24,7 +24,7 @@ namespace PromLab01
             Array = new Point[3] { new Point(0), new Point(0), new Point(0) };
         }
 
-        public double GetArea()
+        public override double GetArea()
         {
             return Math.Sqrt(GetPerimeter() 
                 * (GetPerimeter() - Point.GetLength(Array[0], Array[1]))
@@ -32,20 +32,20 @@ namespace PromLab01
                 * (GetPerimeter() - Point.GetLength(Array[2], Array[0])));
         }
 
-        public double GetPerimeter()
+        public override double GetPerimeter()
         {
             return Point.GetLength(Array[0], Array[1]) 
                 + Point.GetLength(Array[1], Array[2]) 
                 + Point.GetLength(Array[2], Array[0]);
         }
 
-        public Rectangle GetBorders()
+        public override Rectangle GetBorders()
         {
             return new Rectangle(new Point(Array.Min(array => array.X), Array.Min(array => array.Y)),
                 new Point(Array.Max(array => array.X), Array.Max(array => array.Y)));
         }
 
-        new public string ToString()
+        public override string ToString()
         {
             return "{" + Array[0].ToString() + ";" + Array[1].ToString()
                 + ";" + Array[2].ToString() + "}";

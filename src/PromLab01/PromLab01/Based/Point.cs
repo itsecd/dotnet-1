@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PromLab01
 {
-    internal struct Point
+    public struct Point
     {
         double x;
         public double X
