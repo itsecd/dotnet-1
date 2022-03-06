@@ -9,6 +9,7 @@ namespace Lab1.Repository
         bool CompareOperations(int lhsIndex, int rhsIndex);
         List<Operation> GetAllOperations();
         string MinOperation(int lhs, int rhs);
+        string MinOperationLinq(int lhs, int rhs);
         void RemoveCollection();
         void RemoveOperation(int index);
     }

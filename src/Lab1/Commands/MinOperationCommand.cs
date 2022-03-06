@@ -2,7 +2,6 @@
 using Spectre.Console;
 using System.Diagnostics.CodeAnalysis;
 using Lab1.Repository;
-using Lab1.Model;
 
 namespace Lab1.Commands
 {
@@ -28,11 +27,12 @@ namespace Lab1.Commands
             var str_rhs = new TextPrompt<int>("[green]Введите правый операнд [/]");
             int rhs = AnsiConsole.Prompt(str_rhs);
 
-            AnsiConsole.MarkupLine($"[green]Минимальная операция для чисел {lhs} и {rhs}: {_operationsRepository.MinElement(lhs, rhs)}[/]");
-
+            AnsiConsole.MarkupLine($"[green]Минимальная операция для чисел {lhs} и {rhs}: {_operationsRepository.MinOperation(lhs, rhs)}[/]");
+            AnsiConsole.MarkupLine($"[green](System.Linq)Минимальная операция для чисел {lhs} и {rhs}: {_operationsRepository.MinOperationLinq(lhs, rhs)}[/]");
 
             return 0;
         }
 
     }
+
 }

@@ -93,5 +93,18 @@ namespace Lab1.Repository
             return minOperation;
         }
 
+        public string MinOperationLinq(int lhs, int rhs)
+        {
+            ReadFromFile();
+
+            var minOperation = "Not operations";
+
+            minOperation = _operations.Min(operation => operation
+           .Compute(lhs, rhs))
+           .ToString();
+
+            return minOperation;
+        }
+
     }
 }
