@@ -37,12 +37,16 @@ namespace Lab_1_Indust_Pr
             Console.WriteLine(GetMinValueDerivative(func, 2));
 
             Function cs = new Cos();
-            Console.WriteLine(cs.GetDerivative().GetValueFunc(10));
+            Console.WriteLine(cs.GetValueFunc(-10));
 
             Function sn = new Sin();
+            Function sin = new Sin();
             Console.WriteLine(sn.GetValueFunc(10));
 
+            Function test1 = new QuadraticFunction(1, 2, 3);
 
+            Function test2 = new QuadraticFunction(1, 2, 3);
+            Console.WriteLine(sn.Equals(sin));
         }
 
         public static Function GetMinValueDerivative(List<Function> func, double arg)

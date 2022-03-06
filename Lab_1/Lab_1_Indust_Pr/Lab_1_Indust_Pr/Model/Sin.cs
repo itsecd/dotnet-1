@@ -14,7 +14,7 @@ namespace Lab_1_Indust_Pr.Model
 
         public override Function GetDerivative() => new Cos();
 
-        public override double GetValueFunc(double arg)//радианы
+        public override double GetValueFunc(double arg)//градусы в радианы
         {
             var x = arg * Math.PI / 180;
             if (Sign) return Math.Sin(x);
@@ -26,6 +26,16 @@ namespace Lab_1_Indust_Pr.Model
             if (Sign) return $"Sin(x)";
             else return $"-Sin(x)";
         }
- 
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Sin func)
+            {
+                return Sign == func.Sign;
+            }
+            return false;
+        }
+
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 }

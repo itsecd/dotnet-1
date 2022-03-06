@@ -15,8 +15,21 @@ namespace Lab_1_Indust_Pr.Model
             return MySin;
         }
 
-        public override double GetValueFunc(double arg) => Math.Cos(arg);
+        public override double GetValueFunc(double arg)
+        {
+            var x = arg * Math.PI / 180;
+            return Math.Cos(x);
+        }
 
         public override string ToString() => $"Cos(x)";
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Cos func)
+                return true;
+            return false;
+        }
+
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 }

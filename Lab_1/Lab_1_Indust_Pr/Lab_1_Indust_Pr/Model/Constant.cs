@@ -20,5 +20,16 @@ namespace Lab_1_Indust_Pr.Model
         public override double GetValueFunc(double arg) => 0.0;
         
         public override string ToString() => $"{ValueConst}";
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Constant c)
+            {
+                return ValueConst == c.ValueConst;
+            }
+            return false;
+        }
+
+        public override int GetHashCode() => ValueConst.GetHashCode();
     }
 }

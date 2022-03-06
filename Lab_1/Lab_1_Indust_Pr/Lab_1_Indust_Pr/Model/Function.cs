@@ -11,5 +11,11 @@ namespace Lab_1_Indust_Pr.Model
         public abstract double GetValueFunc(double arg);
 
         public abstract Function GetDerivative();
+
+        public abstract override string ToString();
+
+        public abstract override bool Equals(object obj);
+        
+        public abstract override int GetHashCode();
     }
 }

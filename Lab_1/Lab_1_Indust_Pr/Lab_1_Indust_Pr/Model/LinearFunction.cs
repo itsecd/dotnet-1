@@ -22,5 +22,16 @@ namespace Lab_1_Indust_Pr.Model
         public override LinearFunction GetDerivative() => new LinearFunction(K, 0);
 
         public override string ToString() => $"{K}x + {B}";
+
+        public override bool Equals(object obj)
+        {
+            if (obj is LinearFunction func)
+            {
+                return K == func.K && B == func.B;
+            }
+            return false;
+        }
+
+        public override int GetHashCode() => (K, B).GetHashCode();
     }
 }

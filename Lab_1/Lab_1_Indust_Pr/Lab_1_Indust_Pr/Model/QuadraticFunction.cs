@@ -25,6 +25,17 @@ namespace Lab_1_Indust_Pr.Model
         public override double GetValueFunc(double arg) => A * Math.Pow(arg, 2) + B * arg + C;
 
         public override string ToString() => $"{A}x^2 + {B}x + {C}";
-       
+
+        public override bool Equals(object obj)
+        {
+            if (obj is QuadraticFunction func)
+            {
+                return A == func.A && B == func.B && C == func.C;
+            }
+            return false;
+        }
+
+        public override int GetHashCode() => (A, B, C).GetHashCode();
+
     }
 }
