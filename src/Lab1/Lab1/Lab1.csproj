@@ -9,8 +9,4 @@
     <PackageReference Include="Spectre.Console" Version="0.43.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="view\" />
-  </ItemGroup>
-
 </Project>

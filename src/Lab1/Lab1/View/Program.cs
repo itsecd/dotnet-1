@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Formats.Asn1;
 using Lab1.Model;
+using Lab1.Repositories;
 using Lab1.Shapes;
 using Microsoft.VisualBasic;
 using Spectre.Console;
@@ -28,6 +29,7 @@ namespace Lab1
             table.AddColumn("SurfaceArea");
             table.AddColumn("Min. Framing Parallelepiped");
             List<Figure> figureList = new List<Figure>();
+            var figuresRepository = new XmlFiguresRepository(); 
             while (flag)
             {
                 var mainMenu = AnsiConsole.Prompt(new SelectionPrompt<string>()
@@ -72,7 +74,7 @@ namespace Lab1
                             _ => throw new NotImplementedException()
                         };
                         AnsiConsole.Clear();
-                        figureList.Add(figure);
+                        figuresRepository.AddFigure(figure);
                         flag = false;
                         break;
 
@@ -80,14 +82,9 @@ namespace Lab1
                         flag = false;
                         break;
                 }
+                figuresRepository.PrintScreen();
             }
-            foreach (var tmp in figureList)
-            {
-                RectangularParallelepiped das = tmp.GetMinimalFramingParalelepiped;
-                table.AddRow(tmp.GetType().Name, tmp.ToString(), tmp.GetVolume().ToString(),
-                    tmp.GetSurfaceArea().ToString(),tmp.GetMinimalFramingParalelepiped);
-            }
-            AnsiConsole.Write(table);
+            
         }
     }
 }

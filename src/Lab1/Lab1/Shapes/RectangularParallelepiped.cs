@@ -9,42 +9,42 @@ namespace Lab1.Shapes
 {
     public class RectangularParallelepiped : Figure
     {
-        public Point _point { get; set; }
+        public Point _vertex{ get; set; }
 
-        public Point _point2 { get; set; }
+        public Point _secondVertex { get; set; }
 
         public RectangularParallelepiped()
         {
-            _point = new Point();
-            _point2 = new Point();
+            _vertex = new Point();
+            _secondVertex = new Point();
         }
 
-        public RectangularParallelepiped(Point point, Point point2)
+        public RectangularParallelepiped(Point vertex, Point secondVertex)
         {
-            _point = point;
-            _point2 = point2;
+            _vertex = vertex;
+            _secondVertex = secondVertex;
         }
 
         public double GetWidth()
         {
-            return Math.Abs(_point._x - _point2._x);
+            return Math.Abs(_vertex._x - _secondVertex._x);
         }
 
         public double GetLength()
         {
-            return Math.Abs(_point._y - _point2._y);
+            return Math.Abs(_vertex._y - _secondVertex._y);
         }
 
         public double GetHigth()
         {
-            return Math.Abs(_point._z - _point2._z);
+            return Math.Abs(_vertex._z - _secondVertex._z);
         }
 
         public override RectangularParallelepiped GetMinimalFramingParalelepiped()
         {
             return new RectangularParallelepiped(
-                new Point(_point._x, _point._y,_point._z),
-                new Point(_point2._x, _point2._y, _point2._z)
+                new Point(_vertex._x, _vertex._y,_vertex._z),
+                new Point(_secondVertex._x, _secondVertex._y, _secondVertex._z)
                 );
         }
 
@@ -60,7 +60,7 @@ namespace Lab1.Shapes
 
         public override string ToString()
         {
-            return "1: " + _point + "2: " + _point2;
+            return "1: " + _vertex + "2: " + _secondVertex;
         }
 
         public override bool Equals(Object obj) // исправить
@@ -68,8 +68,8 @@ namespace Lab1.Shapes
             try
             {
                 RectangularParallelepiped rectangularCuboid = obj as RectangularParallelepiped;
-                return rectangularCuboid._point.Equals(_point) &&
-                rectangularCuboid._point2.Equals(_point2);
+                return rectangularCuboid._vertex.Equals(_vertex) &&
+                rectangularCuboid._secondVertex.Equals(_secondVertex);
             }
             catch (Exception)
             {
@@ -79,7 +79,7 @@ namespace Lab1.Shapes
 
         public override int GetHashCode()
         {
-            return _point.GetHashCode() ^ _point2.GetHashCode();
+            return _vertex.GetHashCode() ^ _secondVertex.GetHashCode();
         }
     }
 }
