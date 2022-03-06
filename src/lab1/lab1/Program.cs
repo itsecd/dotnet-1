@@ -1,4 +1,5 @@
 ﻿using System;
+using lab1.Model;
 
 namespace lab1
 {
@@ -6,7 +7,10 @@ namespace lab1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BufferedMatrix a = new BufferedMatrix(5, 5);
+            Console.WriteLine(a.GetValue(0, 0));
+            Console.WriteLine(a.Height);
+            Console.WriteLine(a.Width);
         }
     }
 }
