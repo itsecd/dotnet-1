@@ -11,13 +11,18 @@ using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
-    public class AddMatrixCommands : Command<AddMatrixCommands.AddMatrixSettings>
+    public class AddMatrixCommand : Command<AddMatrixCommand.AddMatrixSettings>
     {
         public class AddMatrixSettings : CommandSettings
         {
         }
 
         private readonly IMatricesRepository _matricesRepository;
+
+        public AddMatrixCommand(IMatricesRepository matricesRepository)
+        {
+            _matricesRepository = matricesRepository;
+        }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] AddMatrixSettings settings)
         {
