@@ -31,7 +31,7 @@ namespace Lab1.Model
             {
                 return "indefinitely";
             }
-            return $"y'= {1 / Math.Log(BaseLog)}*x^-1";
+            return $"y'= {Math.Round(1 / Math.Log(BaseLog), 5)}*x^-1";
         }
 
         public override string ToString()

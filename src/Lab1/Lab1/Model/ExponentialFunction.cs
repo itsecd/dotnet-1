@@ -31,7 +31,7 @@ namespace Lab1.Model
             {
                 return "y'= 0";
             }
-            return $"y'= {BaseOfDegree}^x*{Math.Log(BaseOfDegree)}";
+            return $"y'= {BaseOfDegree}^x*{Math.Round(Math.Log(BaseOfDegree), 5)}";
         }
 
         public override string ToString()

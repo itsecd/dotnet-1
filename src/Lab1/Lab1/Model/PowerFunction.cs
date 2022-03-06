@@ -2,7 +2,7 @@
 
 namespace Lab1.Model
 {
-    internal class PowerFunction
+    internal class PowerFunction: Function
     {
         public double Сoefficient { get; set; }
 
@@ -20,12 +20,12 @@ namespace Lab1.Model
             Degree = degree; 
         }
 
-        public dynamic Calculation(double x)
+        public override dynamic Calculate(double x)
         {
             return Сoefficient * Math.Pow(x, Degree);
         } 
 
-        public string Derivative()
+        public override string Derivative()
         {
             if (Degree == 0 || Сoefficient == 0) 
             { 
@@ -52,7 +52,7 @@ namespace Lab1.Model
             {
                 return $"y= {Сoefficient}";
             }  
-            return $"y= {Сoefficient}x^{Degree}";
+            return $"y = {Сoefficient}x^{Degree}";
         }
 
         public override bool Equals(Object obj)
