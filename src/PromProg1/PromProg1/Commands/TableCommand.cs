@@ -11,27 +11,27 @@ namespace PromProg1
         {
         }
 
-        private readonly IFigureRepository figureRepository;
+        private readonly IFigureRepository _figureRepository;
 
-        public TableCommand(IFigureRepository controller)
+        public TableCommand(IFigureRepository figureRepository)
         {
-            figureRepository = controller;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] ViewTableSettings settings)
         {
-            figureRepository.OpenFile(figureRepository.StorageFileName);
+            _figureRepository.OpenFile(_figureRepository.StorageFileName);
             Table table = new();
             AnsiConsole.Write("Entered data:");
             table.AddColumns("Index", "Type", "Info", "Square", "Perimeter", "FramingRectangle");
-            for (int indexTable = 0; indexTable < figureRepository._figures.Count; indexTable++)
+            for (int indexTable = 0; indexTable < _figureRepository.Figures.Count; indexTable++)
             {
                 if (indexTable > 10)
                 {
                     table.AddRow("...", "...", "...", "...", "...", "...");
                     break;
                 }
-                table = AddRowToTable(table, indexTable, figureRepository._figures[indexTable]);
+                table = AddRowToTable(table, indexTable, _figureRepository.Figures[indexTable]);
                 AnsiConsole.WriteLine();
             }
             AnsiConsole.Write(table);

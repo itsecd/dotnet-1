@@ -9,18 +9,18 @@ namespace PromProg1
         {
         }
 
-        private readonly IFigureRepository figureRepository;
+        private readonly IFigureRepository _figureRepository;
 
-        public DeleteAllCommand(IFigureRepository _figureRepository)
+        public DeleteAllCommand(IFigureRepository figureRepository)
         {
-            figureRepository = _figureRepository;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] DeleteAllCommandSettings settings)
         {
-            figureRepository.OpenFile(figureRepository.StorageFileName);
-            figureRepository.DeleteAll();              
-            figureRepository.SaveFile(figureRepository.StorageFileName);
+            _figureRepository.OpenFile(_figureRepository.StorageFileName);
+            _figureRepository.DeleteAll();
+            _figureRepository.SaveFile(_figureRepository.StorageFileName);
             return 0;
         }
     }

@@ -10,18 +10,18 @@ namespace PromProg1
         {
         }
 
-        private readonly IFigureRepository figureRepository;
+        private readonly IFigureRepository _figureRepository;
 
-        public SumCommands(IFigureRepository _figureRepository)
+        public SumCommands(IFigureRepository figureRepository)
         {
-            figureRepository = _figureRepository;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] SumSquareCommandSettings settings)
         {
-            figureRepository.OpenFile(figureRepository.StorageFileName);
-            AnsiConsole.Write("Total area of all shapes:\n" + figureRepository.Summa());
-            AnsiConsole.Write("\nTotal area of all shapes with System.Linq:\n" + figureRepository.SumSystemLinq());
+            _figureRepository.OpenFile(_figureRepository.StorageFileName);
+            AnsiConsole.Write("Total area of all shapes:\n" + _figureRepository.Summa());
+            AnsiConsole.Write("\nTotal area of all shapes with System.Linq:\n" + _figureRepository.SumSystemLinq());
             Console.ReadLine();
             return 0;
         }

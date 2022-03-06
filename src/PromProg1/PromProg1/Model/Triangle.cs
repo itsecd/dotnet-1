@@ -13,7 +13,7 @@ namespace PromProg1
         public Point[] Vertex { get; init; }
         public Triangle()
         {
-            Vertex = new Point[0];
+            Vertex = Array.Empty<Point>();
         }
 
         public Triangle(Point a, Point b, Point c)
@@ -24,10 +24,10 @@ namespace PromProg1
         private double B => Vertex[0].DistanceTo(Vertex[2]);
         private double C => Vertex[2].DistanceTo(Vertex[1]);
 
-        public override Rectangle FramingRectangle() => new(new Point(Vertex.Min(arr_vertexes => arr_vertexes.X),
-                Vertex.Min(arr_vertexes => arr_vertexes.Y)),
-            new Point(Vertex.Max(arr_vertexes => arr_vertexes.X),
-                Vertex.Max(arr_vertexes => arr_vertexes.Y)));
+        public override Rectangle FramingRectangle() => new(new Point(Vertex.Min(arrVertexes => arrVertexes.X),
+                Vertex.Min(arrVertexes => arrVertexes.Y)),
+            new Point(Vertex.Max(arrVertexes => arrVertexes.X),
+                Vertex.Max(arrVertexes => arrVertexes.Y)));
 
         public override double Perimeter() => A + B + C;
 

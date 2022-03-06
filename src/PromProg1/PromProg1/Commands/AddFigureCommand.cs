@@ -11,31 +11,31 @@ namespace PromProg1
         public class AddFigureSettings : CommandSettings { }
         
 
-        private readonly IFigureRepository figureRepository;
+        private readonly IFigureRepository _figureRepository;
 
-        public AddFigureCommand(IFigureRepository _figureRepository)
+        public AddFigureCommand(IFigureRepository figureRepository)
         {
-            figureRepository = _figureRepository;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSettings settings)
         {
-            var a = 0;
-            while (a != -1)
+            var exit = 0;
+            while (exit != -1)
             {
-                figureRepository.OpenFile(figureRepository.StorageFileName);
+                _figureRepository.OpenFile(_figureRepository.StorageFileName);
                 var add = AnsiConsole.Prompt(new SelectionPrompt<string>()
                                 .Title("What do you want to add?")
                                 .AddChoices("Rectangle", "Circle", "Triangle", "Exit"));
                 if (add != "Exit")
                 {
-                    if (figureRepository._figures.Count == 0)
+                    if (_figureRepository.Figures.Count == 0)
                     {
                         AnsiConsole.Write("For the program to work, enter index 0\n");
                     }
                     else
                     {
-                        AnsiConsole.Write("Past used index:{0}\n", figureRepository._figures.Count - 1);
+                        AnsiConsole.Write("Past used index:{0}\n", _figureRepository.Figures.Count - 1);
                     }
                     
                     
@@ -43,26 +43,26 @@ namespace PromProg1
                 int indexAdd = AnsiConsole.Prompt(new TextPrompt<int>(" Index :"));
 
 
-                if (figureRepository.CheckIndex(indexAdd) || indexAdd == figureRepository._figures.Count)
+                if (_figureRepository.CheckIndex(indexAdd) || indexAdd == _figureRepository.Figures.Count)
                 {
                     switch (add)
                     {
                         case "Rectangle":
-                            figureRepository.AddRectangle(
+                            _figureRepository.AddRectangle(
                                 indexAdd,
                                 FirstPointCoordinate(),
                                 SecondPointCoordinate());
                             Console.Clear();
                             break;
                         case "Circle":
-                            figureRepository.AddCircle(
+                            _figureRepository.AddCircle(
                                 indexAdd,
                                 FirstPointCoordinate(),
                                 AnsiConsole.Prompt(new TextPrompt<double>("Radius :")));
                             Console.Clear();
                             break;
                         case "Triangle":
-                            figureRepository.AddTriangle(
+                            _figureRepository.AddTriangle(
                                 indexAdd,
                                 FirstPointCoordinate(),
                                 SecondPointCoordinate(),
@@ -72,7 +72,7 @@ namespace PromProg1
 
 
                         case "Exit":
-                            a = -1;
+                            exit = -1;
                             break;
 
                         default:
@@ -84,7 +84,7 @@ namespace PromProg1
                     AnsiConsole.Write("Incorrect index");
                     Console.ReadLine();
                 }
-                figureRepository.SaveFile(figureRepository.StorageFileName);
+                _figureRepository.SaveFile(_figureRepository.StorageFileName);
             }
            
             return 0;

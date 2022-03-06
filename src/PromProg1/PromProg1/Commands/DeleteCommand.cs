@@ -11,18 +11,18 @@ namespace PromProg1
         {
         }
 
-        private readonly IFigureRepository figureRepository;
+        private readonly IFigureRepository _figureRepository;
 
-        public DeleteCommand(IFigureRepository _figureRepository)
+        public DeleteCommand(IFigureRepository figureRepository)
         {
-            figureRepository = _figureRepository;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] DeleteCommandSettings settings)
         {
-            figureRepository.OpenFile(figureRepository.StorageFileName);
-            figureRepository.DeleteFigure(AnsiConsole.Prompt(new TextPrompt<int>("Delete Index :")));    
-            figureRepository.SaveFile(figureRepository.StorageFileName);
+            _figureRepository.OpenFile(_figureRepository.StorageFileName);
+            _figureRepository.DeleteFigure(AnsiConsole.Prompt(new TextPrompt<int>("Delete Index :")));
+            _figureRepository.SaveFile(_figureRepository.StorageFileName);
             return 0;
         }
     }
