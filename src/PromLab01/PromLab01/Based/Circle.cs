@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PromLab01
 {
+    [Serializable]
+    [XmlRoot("Circle")]
     public class Circle : Figure, ICalculations
     {
+        [XmlElement("CenterPoint")]
         Point a;
         public Point A 
         {
@@ -15,6 +19,7 @@ namespace PromLab01
             set { a = value; }
         }
 
+        [XmlElement("Radius")]
         double radius;
         public double Radius 
         { 

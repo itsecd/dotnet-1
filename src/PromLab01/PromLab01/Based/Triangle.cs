@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PromLab01
 {
+    [Serializable]
+    [XmlRoot("Triangle")]
     public class Triangle : Figure, ICalculations
     {
+        [XmlElement("Sides")]
         Point[] array;
         public Point[] Array
         {

@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace PromLab01
 {
-    public class XmlFigureRepository
+    public class XmlFigureRepository : IXmlFigureRepository
     {
         public string StorageFileName { get; set; } = "figures.xml";
         public List<Figure> Figures { set; get; }
@@ -84,14 +84,14 @@ namespace PromLab01
             }
             try
             {
-                XmlSerializer formatter = new(typeof(List<Figure>));
+                XmlSerializer file = new(typeof(List<Figure>));
                 FileStream stream = new(path, FileMode.OpenOrCreate);
-                Figures = (List<Figure>)formatter.Deserialize(stream);
+                Figures = (List<Figure>)file.Deserialize(stream);
                 stream.Close();
             }
             catch (Exception)
             {
-                Console.Write("File don't open\n");
+                Console.Write("File can't be opened\n");
                 Console.ReadLine();
             }
         }
@@ -107,7 +107,7 @@ namespace PromLab01
             }
             catch (Exception)
             {
-                Console.Write("File don't save\n");
+                Console.Write("File can't be saved\n");
                 Console.ReadLine();
             }
 

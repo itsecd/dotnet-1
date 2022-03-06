@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PromLab01
 {
+    [Serializable]
+    [XmlRoot("Point")]
     public struct Point
     {
+        [XmlElement("X")]
         double x;
         public double X
         {
@@ -15,6 +19,7 @@ namespace PromLab01
             set { x = value; }
         }
 
+        [XmlElement("Y")]
         double y;
         public double Y
         {

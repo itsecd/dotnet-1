@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PromLab01
 {
+    [Serializable]
+    [XmlRoot("Rectangle")]
     public class Rectangle : Figure, ICalculations
     {
+        [XmlElement("FirstPoint")]
         Point a;
         public Point A
         {
             get { return a; }
             set { a = value; }
         }
+
+        [XmlElement("SecondPoint")]
         Point b;
         public Point B
         {
