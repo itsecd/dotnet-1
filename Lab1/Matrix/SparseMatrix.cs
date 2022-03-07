@@ -38,22 +38,22 @@ namespace Lab1.Matrix
             Width = 1;
             A = new();
         }
-        public SparseMatrix(int H, int W)
+        public SparseMatrix(int newHeight, int newWidth)
         {
-            Height = H;
-            Width = W;
+            Height = newHeight;
+            Width = newWidth;
             A = new();
         }
 
         public SparseMatrix(XElement elem)
         {
-            Width = Int32.Parse(elem.Attribute("width").Value);
-            Height = Int32.Parse(elem.Attribute("height").Value);
+            Width = int.Parse(elem.Attribute("width").Value);
+            Height = int.Parse(elem.Attribute("height").Value);
             A = new();
             foreach (XElement val in elem.Elements("value"))
             {
-                var indVal = new Tuple<int, int>(Int32.Parse(val.Attribute("i").Value), Int32.Parse(val.Attribute("j").Value));
-                A.Add(indVal, Double.Parse(val.Value));
+                var indVal = new Tuple<int, int>(int.Parse(val.Attribute("i").Value), int.Parse(val.Attribute("j").Value));
+                A.Add(indVal, double.Parse(val.Value));
             }
             
         }
@@ -86,18 +86,18 @@ namespace Lab1.Matrix
         public override int GetHashCode() => HashCode.Combine(A, Height, Width);
         public override XElement ToXml()
         {
-            XElement tmp = new XElement("SparseMatrix");
-            tmp.Add(new XAttribute("width", Width));
-            tmp.Add(new XAttribute("height", Height));
+            XElement elem = new XElement("SparseMatrix");
+            elem.Add(new XAttribute("width", Width));
+            elem.Add(new XAttribute("height", Height));
             foreach (Tuple<int, int> coord in A.Keys)
             {
-                XElement tmp1 = new XElement("value");
-                tmp1.Add(new XAttribute("i", coord.Item1));
-                tmp1.Add(new XAttribute("j", coord.Item2));
-                tmp1.Add(new XText($"{A[coord]}"));
-                tmp.Add(tmp1);
+                XElement valElem = new XElement("value");
+                valElem.Add(new XAttribute("i", coord.Item1));
+                valElem.Add(new XAttribute("j", coord.Item2));
+                valElem.Add(new XText($"{A[coord]}"));
+                elem.Add(valElem);
             }
-            return tmp;
+            return elem;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Lab1.Commands
 
         }
 
-        private IMatrixRepository _data;
+        private readonly IMatrixRepository _data;
 
         public MinNormCommand(IMatrixRepository data)
         {
@@ -25,8 +25,13 @@ namespace Lab1.Commands
         {
             _data.Load();
             AnsiConsole.Clear();
-            double minNorm = _data[0].Norm();
             AbstractMatrix minMat = null;
+            if (_data.Count == 0)
+            {
+                AnsiConsole.WriteException(new FieldAccessException("Список пуст!"));
+                return -1;
+            }
+            double minNorm = _data[0].Norm();
             int minInd = 0;
             for (int i = 0; i < _data.Count; i++)
             {
@@ -37,7 +42,12 @@ namespace Lab1.Commands
                     minInd = i;
                 }
             }
-            AnsiConsole.Write(new Panel($"{minInd} {minMat.ToString()}"));
+            if (minMat == null)
+            {
+                AnsiConsole.WriteException(new ArgumentNullException(nameof(minMat), "Матрица не может быть равна null!"));
+                return -1;
+            }
+            AnsiConsole.Write(new Panel($"{minInd} {minMat}"));
             return 0;
         }
     }

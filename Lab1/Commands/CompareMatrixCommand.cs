@@ -13,7 +13,7 @@ namespace Lab1.Commands
 
         }
 
-        private IMatrixRepository _data;
+        private readonly IMatrixRepository _data;
 
         public CompareMatrixCommand(IMatrixRepository data)
         {
@@ -29,12 +29,12 @@ namespace Lab1.Commands
             int indR = AnsiConsole.Prompt(new TextPrompt<int>("Индекс 2: "));
             if (indL < 0 || indL > _data.Count - 1)
             {
-                AnsiConsole.WriteException(new ArgumentOutOfRangeException("Индекс 1 вышел за границы списка!"));
+                AnsiConsole.WriteException(new IndexOutOfRangeException($"Индекс 1 вышел за границы [0 : {_data.Count - 1}]!"));
                 return -1;
             }
             if (indR < 0 || indR > _data.Count - 1)
             {
-                AnsiConsole.WriteException(new ArgumentOutOfRangeException("Индекс 2 вышел за границы списка!"));
+                AnsiConsole.WriteException(new IndexOutOfRangeException($"Индекс 2 вышел за границы [0 : {_data.Count - 1}]!"));
                 return -1;
             }
             if (_data.Compare(indL, indR) == 1)

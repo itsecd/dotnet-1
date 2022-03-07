@@ -10,7 +10,7 @@ namespace Lab1.Matrix
         public override double this[int y, int x]
         {
             get => A[y * Height + x];
-            set {A[y * Height + x] = value;}
+            set => A[y * Height + x] = value;
         }
         public override int Width { get; }
         public override int Height { get; }
@@ -21,22 +21,22 @@ namespace Lab1.Matrix
             Width = 1;
             A = new double[1];
         }
-        public BufferedMatrix(int H, int W)
+        public BufferedMatrix(int newHeight, int newWidth)
         {
-            Height = H;
-            Width = W;
-            A = new double[H*W];
+            Height = newHeight;
+            Width = newWidth;
+            A = new double[Height*Width];
         }
 
         public BufferedMatrix(XElement elem)
         {
-            Width = Int32.Parse(elem.Attribute("width").Value);
-            Height = Int32.Parse(elem.Attribute("height").Value);
+            Width = int.Parse(elem.Attribute("width").Value);
+            Height = int.Parse(elem.Attribute("height").Value);
             A = new double[Height*Width];
             int index = 0;
             foreach (XElement val in elem.Elements("value"))
             {
-                A[index] = Double.Parse(val.Value);
+                A[index] = double.Parse(val.Value);
                 index += 1;
             }
         }
@@ -59,7 +59,7 @@ namespace Lab1.Matrix
         public override string ToString() => $"BufferedMatrix [[{Height}x{Width}]]";
         public override bool Equals(object obj)
         {
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
                 return false;
             var tmp = obj as BufferedMatrix;
             if (tmp.Width != Width || tmp.Height != Height)
@@ -69,16 +69,16 @@ namespace Lab1.Matrix
         public override int GetHashCode() => HashCode.Combine(A, Height, Width);
         public override XElement ToXml()
         {
-            XElement tmp = new XElement("BufferedMatrix");
-            tmp.Add(new XAttribute("width", Width));
-            tmp.Add(new XAttribute("height", Height));
+            XElement elem = new XElement("BufferedMatrix");
+            elem.Add(new XAttribute("width", Width));
+            elem.Add(new XAttribute("height", Height));
             foreach (double val in A)
             {
-                var tmp1 = new XElement("value");
-                tmp1.Add(new XText($"{val}"));
-                tmp.Add(tmp1);
+                var valElem = new XElement("value");
+                valElem.Add(new XText($"{val}"));
+                elem.Add(valElem);
             }
-            return tmp;
+            return elem;
         }
     }
 }

@@ -9,18 +9,18 @@ namespace Lab1.Repository
     ///<summary>Класс, реализующий репозиторий для хранения матриц</summary>
     class MatrixStorage : IMatrixRepository
     {
-        private List<AbstractMatrix> data;
-        public AbstractMatrix this[int index] { get => data[index]; }
-        public int Count { get => data.Count; }
-        public MatrixStorage() { data = new(); }
+        private List<AbstractMatrix> _data;
+        public AbstractMatrix this[int index] => _data[index];
+        public int Count => _data.Count;
+        public MatrixStorage() { _data = new(); }
         public void Insert(AbstractMatrix mat, int index = 0)
         {
             try
             {
-                if (data.Count == 0)
-                    data.Add(mat);
+                if (_data.Count == 0)
+                    _data.Add(mat);
                 else
-                    data.Insert(index, mat);
+                    _data.Insert(index, mat);
             }
             catch (ArgumentOutOfRangeException e)
             { AnsiConsole.WriteException(e); }
@@ -34,21 +34,25 @@ namespace Lab1.Repository
         public void Delete(int index)
         {
             try
-            { data.RemoveAt(index); }
+            {
+                _data.RemoveAt(index);
+            }
             catch (ArgumentOutOfRangeException e)
-            { AnsiConsole.WriteException(e); }
+            {
+                AnsiConsole.WriteException(e);
+            }
         }
 
         public void Clear()
         {
-            data.Clear();
+            _data.Clear();
         }
         ///<summary>Сравнение матриц на равенство</summary>
         public int Compare(int ind1, int ind2)
         {
             try
             {
-                if (data[ind1].Equals(data[ind2]))
+                if (_data[ind1].Equals(_data[ind2]))
                     return 1;
                 return 0;
             }
@@ -61,7 +65,7 @@ namespace Lab1.Repository
             XDocument tmpDoc = XDocument.Load("matrices.xml");
             XElement root = tmpDoc.Element("Matrix");
             root.RemoveNodes();
-            foreach (AbstractMatrix mat in data)
+            foreach (AbstractMatrix mat in _data)
                 root.Add(mat.ToXml());
             tmpDoc.Save("matrices.xml");
         }
@@ -73,9 +77,9 @@ namespace Lab1.Repository
             foreach (XElement mat in root.Elements())
             {
                 if (mat.Name == "BufferedMatrix")
-                    data.Add(new BufferedMatrix(mat));
+                    _data.Add(new BufferedMatrix(mat));
                 if (mat.Name == "SparseMatrix")
-                    data.Add(new SparseMatrix(mat));
+                    _data.Add(new SparseMatrix(mat));
             }
         }
         ///<summary>Представление элементов в виде таблицы для вывода в консоль</summary>
@@ -83,13 +87,13 @@ namespace Lab1.Repository
         public Table ToTable()
         {
             var tempTable = new Table();
-            tempTable.AddColumns(new[] { "№", "Матрица" });
-            for (int i = 0; i < data.Count && i != 10; i++)
-                tempTable.AddRow(new[] { $"[bold blue]{i}[/]", data[i].ToString() });
-            if (data.Count > 10)
-                tempTable.AddRow(new[] { "...", "..." });
-            if (data.Count == 0)
-                tempTable.AddRow(new[] { "[red]-[/]", "[red]-[/]" });
+            tempTable.AddColumns("№", "Матрица");
+            for (int i = 0; i < _data.Count && i != 10; i++)
+                tempTable.AddRow($"[bold blue]{i}[/]", _data[i].ToString());
+            if (_data.Count > 10)
+                tempTable.AddRow("...", "...");
+            if (_data.Count == 0)
+                tempTable.AddRow("[red]-[/]", "[red]-[/]");
             return tempTable;
         }
     }

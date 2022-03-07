@@ -14,7 +14,7 @@ namespace Lab1.Commands
 
         }
 
-        private IMatrixRepository _data;
+        private readonly IMatrixRepository _data;
 
         public AddMatrixCommand(IMatrixRepository data)
         {
@@ -27,16 +27,21 @@ namespace Lab1.Commands
             AnsiConsole.Clear();
             AnsiConsole.Write(_data.ToTable());
             string matType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-            .Title("Выберите тип матрицы:")
-            .AddChoices(new[] {
-                "BufferedMatrix",
-                "SparseMatrix"
+                .Title("Выберите тип матрицы:")
+                .AddChoices(new[] {
+                    "BufferedMatrix",
+                    "SparseMatrix"
             }));
             int tw = AnsiConsole.Prompt(new TextPrompt<int>("Ширина: "));
             int th = AnsiConsole.Prompt(new TextPrompt<int>("Высота: "));
-            if (tw < 1 || th < 1)
+            if (tw < 1)
             {
-                AnsiConsole.WriteException(new ArgumentOutOfRangeException("Недопустимый размер матрицы!"));
+                AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(tw), tw, "Ширина матрицы должна быть не меньше единицы!"));
+                return -1;
+            }
+            if (th < 1)
+            {
+                AnsiConsole.WriteException(new ArgumentOutOfRangeException(nameof(th), th, "Высота матрицы должна быть не меньше единицы!"));
                 return -1;
             }
             AbstractMatrix tmpMat = matType switch
@@ -50,7 +55,7 @@ namespace Lab1.Commands
                 indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
             if (indIns < 0 || indIns > _data.Count - 1)
             {
-                AnsiConsole.WriteException(new ArgumentOutOfRangeException("Индекс вышел за границы списка!"));
+                AnsiConsole.WriteException(new IndexOutOfRangeException($"Индекс вышел за границы [0 : {_data.Count - 1}]"));
                 return -1;
             }
             _data.Insert(tmpMat, indIns);

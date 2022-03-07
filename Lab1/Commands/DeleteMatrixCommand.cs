@@ -13,7 +13,7 @@ namespace Lab1.Commands
 
         }
 
-        private IMatrixRepository _data;
+        private readonly IMatrixRepository _data;
 
         public DeleteMatrixCommand(IMatrixRepository data)
         {
@@ -28,7 +28,7 @@ namespace Lab1.Commands
             int indDel = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
             if (indDel < 0 || indDel > _data.Count - 1)
             {
-                AnsiConsole.WriteException(new ArgumentOutOfRangeException("Индекс вышел за границы списка!"));
+                AnsiConsole.WriteException(new IndexOutOfRangeException($"Индекс вышел за границы [0 : {_data.Count - 1}]!"));
                 return -1;
             }
             _data.Delete(indDel);

@@ -16,8 +16,6 @@ namespace Lab1.Matrix
         ///<summary>Норма максимума модуля (LINQ)</summary>
         public abstract double NormL();
         public override string ToString() => $"Matrix [[{Height}x{Width}]]";
-        public override bool Equals(object obj) => base.Equals(obj);
-        public override int GetHashCode() => base.GetHashCode();
         ///<summary>XML - представление матрицы, используемое для сериализации</summary>
         ///<returns>class System.Xml.Linq.XElement</returns>
         public abstract XElement ToXml();

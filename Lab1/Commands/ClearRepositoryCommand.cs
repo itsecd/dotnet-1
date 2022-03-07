@@ -12,7 +12,7 @@ namespace Lab1.Commands
 
         }
 
-        private IMatrixRepository _data;
+        private readonly IMatrixRepository _data;
 
         public ClearRepositoryCommand(IMatrixRepository data)
         {
