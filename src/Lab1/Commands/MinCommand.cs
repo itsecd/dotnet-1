@@ -2,6 +2,8 @@
 using Spectre.Console;
 using System.Diagnostics.CodeAnalysis;
 using Lab1.Repository;
+using Lab1.Model;
+using System.Linq;
 
 namespace Lab1.Commands
 {
@@ -21,18 +23,50 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] MinSettings settings)
         {
-            var strLhs = new TextPrompt<int>("[green]Введите левый операнд [/]");
+            var strLhs = new TextPrompt<int>("[LightGreen]Введите левый операнд [/]");
             int lhs = AnsiConsole.Prompt(strLhs);
 
-            var strRhs = new TextPrompt<int>("[green]Введите правый операнд [/]");
+            var strRhs = new TextPrompt<int>("[LightGreen]Введите правый операнд [/]");
             int rhs = AnsiConsole.Prompt(strRhs);
 
-            /*AnsiConsole.MarkupLine($"[green]Минимальная операция для чисел {lhs} и {rhs}: {_operationsRepository.MinOperation(lhs, rhs)}[/]");
-            AnsiConsole.MarkupLine($"[green](System.Linq)Минимальная операция для чисел {lhs} и {rhs}: {_operationsRepository.MinOperationLinq(lhs, rhs)}[/]");*/
+            MinNotLinq(lhs, rhs);
+            MinLinq(lhs, rhs);
 
             return 0;
         }
 
+        private int MinNotLinq(int lhs, int rhs)
+        {
+            int minValue = int.MaxValue;
+            Operation minOperation = new Sub();
+
+            foreach (var operation in _operationsRepository.GetAll())
+            {
+                if (operation.Compute(lhs, rhs) < minValue)
+                {
+                    minOperation = operation;
+                    minValue = operation.Compute(lhs, rhs);
+                }
+
+            }
+
+            AnsiConsole.MarkupLine($"[green]Минимальная операция для чисел {lhs} и {rhs}: {minOperation} = {minValue}[/]");
+
+            return 0;
+        }
+
+        private int MinLinq(int lhs, int rhs)
+        {
+            int minValue = int.MaxValue;
+            var operations = _operationsRepository.GetAll();
+
+            minValue = operations.Min(operation => operation.Compute(lhs, rhs));
+            var minOperation = operations.First(operation => (operation.Compute(lhs, rhs) == minValue));
+
+            AnsiConsole.MarkupLine($"[green](System.Linq)Минимальная операция для чисел {lhs} и {rhs}: {minOperation} = {minValue}[/]");
+
+            return 0;
+        }
     }
 
 }
