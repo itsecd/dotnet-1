@@ -11,18 +11,18 @@ namespace Lab1
         static void Main(string[] args)
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton<IOperationsRepository, XmlOperationsRepository>();
+            serviceCollection.AddSingleton<IOperationRepository, XmlOperationRepository>();
 
             var registrar = new TypeRegistrar(serviceCollection);
             var app = new CommandApp(registrar);
 
             app.Configure(config =>
             {
-                config.AddCommand<AddOperationCommand>("add");
+                config.AddCommand<AddOperationCommand>("insert");
                 config.AddCommand<GetAllOperationsCommand>("print");
-                config.AddCommand<MinOperationCommand>("min operation");
+                config.AddCommand<MinOperationCommand>("min");
                 config.AddCommand<RemoveOperationCommand>("remove operation");
-                config.AddCommand<RemoveCollectionCommand>("remove all");
+                config.AddCommand<RemoveCollectionCommand>("clear");
             });
 
             app.Run(args);

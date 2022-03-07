@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Linq;
 using System;
+using Spectre.Console;
 
 namespace Lab1.Repository
 {
-    public class XmlOperationsRepository : IOperationsRepository
+    public class XmlOperationRepository : IOperationRepository
     {
         private const string StorageFileName = "operations.xml";
 
@@ -35,7 +36,7 @@ namespace Lab1.Repository
             xmlSerializer.Serialize(fileStream, _operations);
         }
 
-        public void AddOperation(int index, Operation operation)
+        public void Insert(int index, Operation operation)
         {
             if (operation == null)
                 throw new ArgumentNullException(nameof(operation));
@@ -46,14 +47,14 @@ namespace Lab1.Repository
 
         }
 
-        public void RemoveOperation(int index)
+        public void RemoveAt(int index)
         {
             ReadFromFile();
             _operations.RemoveAt(index);
             WriteToFile();
         }
 
-        public void RemoveCollection()
+        public void Clear()
         {
             ReadFromFile();
             _operations.Clear();
@@ -68,43 +69,12 @@ namespace Lab1.Repository
             return false;
         }
 
-        public List<Operation> GetAllOperations()
+        public List<Operation> GetAll()
         {
             ReadFromFile();
             return _operations;
         }
 
-        public string MinOperation(int lhs, int rhs)
-        {
-            ReadFromFile();
-
-            int minValue = int.MaxValue;
-            var minOperation = "Not operations";
-
-            foreach (var operation in _operations)
-            {
-                if (operation.Compute(lhs, rhs) < minValue)
-                {
-                    minOperation = operation.ToString();
-                    minValue = operation.Compute(lhs, rhs);
-                }
-
-            }
-            return minOperation;
-        }
-
-        public string MinOperationLinq(int lhs, int rhs)
-        {
-            ReadFromFile();
-
-            var minOperation = "Not operations";
-
-            minOperation = _operations.Min(operation => operation
-           .Compute(lhs, rhs))
-           .ToString();
-
-            return minOperation;
-        }
 
     }
 }
