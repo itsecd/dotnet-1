@@ -21,11 +21,11 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] MinOperationSettings settings)
         {
-            var str_lhs = new TextPrompt<int>("[green]Введите левый операнд [/]");
-            int lhs = AnsiConsole.Prompt(str_lhs);
+            var strLhs = new TextPrompt<int>("[green]Введите левый операнд [/]");
+            int lhs = AnsiConsole.Prompt(strLhs);
 
-            var str_rhs = new TextPrompt<int>("[green]Введите правый операнд [/]");
-            int rhs = AnsiConsole.Prompt(str_rhs);
+            var strRhs = new TextPrompt<int>("[green]Введите правый операнд [/]");
+            int rhs = AnsiConsole.Prompt(strRhs);
 
             AnsiConsole.MarkupLine($"[green]Минимальная операция для чисел {lhs} и {rhs}: {_operationsRepository.MinOperation(lhs, rhs)}[/]");
             AnsiConsole.MarkupLine($"[green](System.Linq)Минимальная операция для чисел {lhs} и {rhs}: {_operationsRepository.MinOperationLinq(lhs, rhs)}[/]");

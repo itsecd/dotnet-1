@@ -42,8 +42,8 @@ namespace Lab1.Commands
                 return -1;
             }
 
-            var str_index = new TextPrompt<int>("[green]Введите индекс, по которому вставить операцию: [/]");
-            int index = AnsiConsole.Prompt(str_index);
+            var strIndex = new TextPrompt<int>("[green]Введите индекс, по которому вставить операцию: [/]");
+            int index = AnsiConsole.Prompt(strIndex);
 
             _operationsRepository.AddOperation(index, operation);
 

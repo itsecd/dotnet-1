@@ -22,8 +22,8 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveOperationSettings settings)
         {
-            var str_index = new TextPrompt<int>("[orange]Введите индекс операции, которую хотите удалить: [/]");
-            int index = AnsiConsole.Prompt(str_index);
+            var strIndex = new TextPrompt<int>("[orange]Введите индекс операции, которую хотите удалить: [/]");
+            int index = AnsiConsole.Prompt(strIndex);
             _operationsRepository.RemoveOperation(index);
 
             return 0;
