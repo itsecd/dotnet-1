@@ -17,17 +17,10 @@ namespace Lab1.Repository
         public MatrixStorage() { _data = new(); }
         public void Insert(AbstractMatrix mat, int index = 0)
         {
-            try
-            {
-                if (_data.Count == 0)
-                    _data.Add(mat);
-                else
-                    _data.Insert(index, mat);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                AnsiConsole.WriteException(e);
-            }
+            if (_data.Count == 0)
+                _data.Add(mat);
+            else
+                _data.Insert(index, mat);
         }
 
         public void Update(int index)
@@ -68,31 +61,35 @@ namespace Lab1.Repository
 
         public void Dump()
         {
-            XDocument tmpDoc = XDocument.Load("matrices.xml");
-            XElement root = tmpDoc.Element("Matrix");
-            root.RemoveNodes();
+            XDocument tmpDoc = new XDocument();
+            XElement root = new XElement("Matrix");
             foreach (AbstractMatrix mat in _data)
+            {
                 root.Add(mat.ToXml());
+            }
+            tmpDoc.Add(root);
             tmpDoc.Save("matrices.xml");
         }
 
         public void Load()
         {
-            if (!File.Exists("matrices.xml"))
+            if (File.Exists("matrices.xml"))
             {
-                using (StreamWriter sw = new StreamWriter("matrices.xml"))
+                XDocument tmpDoc = XDocument.Load("matrices.xml");
+                foreach (XElement mat in tmpDoc.Element("Matrix").Elements())
                 {
-                    sw.Write("<xml version=\"1.0\" encoding=\"utf-8\">\n<Matrix>\n</Matrix>");
+                    if (mat.Name == "BufferedMatrix")
+                        _data.Add(new BufferedMatrix(mat));
+                    if (mat.Name == "SparseMatrix")
+                        _data.Add(new SparseMatrix(mat));
                 }
             }
-            XDocument tmpDoc = XDocument.Load("matrices.xml");
-            XElement root = tmpDoc.Element("Matrix");
-            foreach (XElement mat in root.Elements())
+            else
             {
-                if (mat.Name == "BufferedMatrix")
-                    _data.Add(new BufferedMatrix(mat));
-                if (mat.Name == "SparseMatrix")
-                    _data.Add(new SparseMatrix(mat));
+                XDocument tmpDoc = new XDocument();
+                XElement root = new XElement("Matrix");
+                tmpDoc.Add(root);
+                tmpDoc.Save("matrices.xml");
             }
         }
         ///<summary>Представление элементов в виде таблицы для вывода в консоль</summary>

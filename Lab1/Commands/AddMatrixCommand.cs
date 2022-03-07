@@ -58,7 +58,15 @@ namespace Lab1.Commands
                 AnsiConsole.WriteException(new IndexOutOfRangeException($"Индекс вышел за границы [0 : {_data.Count - 1}]"));
                 return -1;
             }
-            _data.Insert(tmpMat, indIns);
+            try
+            {
+                _data.Insert(tmpMat, indIns);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                AnsiConsole.WriteException(e);
+                return -1;
+            }
             _data.Dump();
             return 0;
         }
