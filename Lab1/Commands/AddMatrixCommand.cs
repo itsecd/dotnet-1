@@ -53,7 +53,7 @@ namespace Lab1.Commands
             int indIns = 0;
             if (_data.Count > 1)
                 indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
-            if (indIns < 0 || indIns > _data.Count - 1)
+            if (indIns < 0 || indIns > _data.Count - 1 && _data.Count > 1)
             {
                 AnsiConsole.WriteException(new IndexOutOfRangeException($"Индекс вышел за границы [0 : {_data.Count - 1}]"));
                 return -1;

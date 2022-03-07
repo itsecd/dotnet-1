@@ -12,6 +12,7 @@ namespace Lab1.Repository
     class MatrixStorage : IMatrixRepository
     {
         private readonly List<AbstractMatrix> _data;
+        private const string filePath = "matrices.xml";
         public AbstractMatrix this[int index] => _data[index];
         public int Count => _data.Count;
         public MatrixStorage() { _data = new(); }
@@ -54,14 +55,14 @@ namespace Lab1.Repository
                 root.Add(mat.ToXml());
             }
             tmpDoc.Add(root);
-            tmpDoc.Save("matrices.xml");
+            tmpDoc.Save(filePath);
         }
 
         public void Load()
         {
-            if (File.Exists("matrices.xml"))
+            if (File.Exists(filePath))
             {
-                XDocument tmpDoc = XDocument.Load("matrices.xml");
+                XDocument tmpDoc = XDocument.Load(filePath);
                 foreach (XElement mat in tmpDoc.Element("Matrix").Elements())
                 {
                     if (mat.Name == "BufferedMatrix")
