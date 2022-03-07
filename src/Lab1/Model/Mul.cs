@@ -6,13 +6,7 @@ namespace Lab1.Model
 
         public override int Compute(int lhs, int rhs) => lhs * rhs;
 
-        public override bool Equals(object obj)
-        {
-            if (obj is not Mul)
-                return false;
-            else
-                return true;
-        }
+        public override bool Equals(object obj) => obj is Mul;
 
         public override int GetHashCode() => GetType().GetHashCode();
 
