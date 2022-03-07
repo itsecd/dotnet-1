@@ -61,14 +61,6 @@ namespace Lab1.Repository
             WriteToFile();
         }
 
-        public bool CompareOperations(int lhsIndex, int rhsIndex)
-        {
-            ReadFromFile();
-            if (_operations[lhsIndex].Equals(_operations[rhsIndex]))
-                return true;
-            return false;
-        }
-
         public List<Operation> GetAll()
         {
             ReadFromFile();

@@ -20,6 +20,7 @@ namespace Lab1
             {
                 config.AddCommand<InsertCommand>("insert");
                 config.AddCommand<GetAllCommand>("print");
+                config.AddCommand<CompareCommand>("compare");
                 config.AddCommand<MinCommand>("min");
                 config.AddCommand<RemoveAtCommand>("remove operation");
                 config.AddCommand<ClearCommand>("clear");
