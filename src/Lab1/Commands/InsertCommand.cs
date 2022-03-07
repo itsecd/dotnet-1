@@ -6,21 +6,21 @@ using Lab1.Model;
 
 namespace Lab1.Commands
 {
-    public class AddOperationCommand : Command<AddOperationCommand.AddOperationSettings>
+    public class InsertCommand : Command<InsertCommand.InsertSettings>
     {
 
-        public class AddOperationSettings : CommandSettings
+        public class InsertSettings : CommandSettings
         {
         }
 
-        private readonly IOperationsRepository _operationsRepository;
+        private readonly IOperationRepository _operationRepository;
 
-        public AddOperationCommand(IOperationsRepository operationsRepository)
+        public InsertCommand(IOperationRepository operationsRepository)
         {
-            _operationsRepository = operationsRepository;
+            _operationRepository = operationsRepository;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] AddOperationSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] InsertSettings settings)
         {
             var operationType = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("Выберите тип операции: ")
@@ -45,7 +45,7 @@ namespace Lab1.Commands
             var strIndex = new TextPrompt<int>("[green]Введите индекс, по которому вставить операцию: [/]");
             int index = AnsiConsole.Prompt(strIndex);
 
-            _operationsRepository.AddOperation(index, operation);
+            _operationRepository.Insert(index, operation);
 
             return 0;
         }

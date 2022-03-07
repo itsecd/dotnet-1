@@ -18,11 +18,11 @@ namespace Lab1
 
             app.Configure(config =>
             {
-                config.AddCommand<AddOperationCommand>("insert");
-                config.AddCommand<GetAllOperationsCommand>("print");
-                config.AddCommand<MinOperationCommand>("min");
-                config.AddCommand<RemoveOperationCommand>("remove operation");
-                config.AddCommand<RemoveCollectionCommand>("clear");
+                config.AddCommand<InsertCommand>("insert");
+                config.AddCommand<GetAllCommand>("print");
+                config.AddCommand<MinCommand>("min");
+                config.AddCommand<RemoveAtCommand>("remove operation");
+                config.AddCommand<ClearCommand>("clear");
             });
 
             app.Run(args);

@@ -5,23 +5,23 @@ using Lab1.Repository;
 
 namespace Lab1.Commands
 {
-    public class GetAllOperationsCommand : Command<GetAllOperationsCommand.GetAllOperationsSettings>
+    public class GetAllCommand : Command<GetAllCommand.GetAllSettings>
     {
 
-        public class GetAllOperationsSettings : CommandSettings
+        public class GetAllSettings : CommandSettings
         {
         }
 
-        private readonly IOperationsRepository _operationsRepository;
+        private readonly IOperationRepository _operationsRepository;
 
-        public GetAllOperationsCommand(IOperationsRepository operationsRepository)
+        public GetAllCommand(IOperationRepository operationsRepository)
         {
             _operationsRepository = operationsRepository;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] GetAllOperationsSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] GetAllSettings settings)
         {
-            var operations = _operationsRepository.GetAllOperations();
+            var operations = _operationsRepository.GetAll();
 
             var table = new Table();
             table.AddColumn("Тип операции");
