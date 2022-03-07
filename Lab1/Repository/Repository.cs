@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using Spectre.Console;
@@ -9,7 +11,7 @@ namespace Lab1.Repository
     ///<summary>Класс, реализующий репозиторий для хранения матриц</summary>
     class MatrixStorage : IMatrixRepository
     {
-        private List<AbstractMatrix> _data;
+        private readonly List<AbstractMatrix> _data;
         public AbstractMatrix this[int index] => _data[index];
         public int Count => _data.Count;
         public MatrixStorage() { _data = new(); }
@@ -23,7 +25,9 @@ namespace Lab1.Repository
                     _data.Insert(index, mat);
             }
             catch (ArgumentOutOfRangeException e)
-            { AnsiConsole.WriteException(e); }
+            {
+                AnsiConsole.WriteException(e);
+            }
         }
 
         public void Update(int index)
@@ -57,7 +61,9 @@ namespace Lab1.Repository
                 return 0;
             }
             catch (ArgumentOutOfRangeException e)
-            { AnsiConsole.WriteException(e); return -1; }
+            {
+                AnsiConsole.WriteException(e); return -1;
+            }
         }
 
         public void Dump()
@@ -72,6 +78,13 @@ namespace Lab1.Repository
 
         public void Load()
         {
+            if (!File.Exists("matrices.xml"))
+            {
+                using (StreamWriter sw = new StreamWriter("matrices.xml"))
+                {
+                    sw.Write("<xml version=\"1.0\" encoding=\"utf-8\">\n<Matrix>\n</Matrix>");
+                }
+            }
             XDocument tmpDoc = XDocument.Load("matrices.xml");
             XElement root = tmpDoc.Element("Matrix");
             foreach (XElement mat in root.Elements())
