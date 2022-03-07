@@ -2,7 +2,7 @@
 
 namespace Lab1.Model
 {
-    internal class PowerFunction: Function
+    public class PowerFunction: Function
     {
         public double Сoefficient { get; set; }
 

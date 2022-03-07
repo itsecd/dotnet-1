@@ -2,7 +2,7 @@
 
 namespace Lab1.Model
 {
-    internal class LogarithmFunction : Function
+    public class LogarithmFunction : Function
     {
         public double BaseLog { get; set; }
 

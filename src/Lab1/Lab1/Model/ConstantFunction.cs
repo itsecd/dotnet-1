@@ -1,6 +1,6 @@
 ﻿namespace Lab1.Model
 {
-    internal class ConstantFunction : Function
+    public class ConstantFunction : Function
     {
         public double C { get; set; }
 

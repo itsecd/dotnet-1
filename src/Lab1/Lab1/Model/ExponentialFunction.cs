@@ -2,7 +2,7 @@
 
 namespace Lab1.Model
 {
-    internal class ExponentialFunction : Function
+    public class ExponentialFunction : Function
     {
         public double BaseOfDegree { get; set; }
 
