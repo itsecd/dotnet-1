@@ -1,37 +1,55 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using Xunit;
 
 namespace Lab1.Model.Tests
 {
     public class IntDivTests
     {
-        [Fact]
-        public void ComputeTest()
+
+        public static IEnumerable<object[]> TestData()
         {
-            var lhs = 12;
-            var rhs = 3;
-            var obj1 = new IntDiv();
-            var executed = 4;
-            var actual = obj1.Compute(lhs, rhs);
-            Assert.Equal(executed, actual);
+            yield return new object[] { 2, 5, 2, new IntDiv() };
+            yield return new object[] { 1, 7, 4, new IntDiv() };
+            yield return new object[] { -2, 5, -2, new IntDiv() };
+            yield return new object[] { 4, 20, 5, new IntDiv() };
+        }
+
+        [Theory]
+        [MemberData(nameof(TestData))]
+        public void ComputeTest(int expected, int lhs, int rhs, IntDiv div)
+        {
+            var actual = div.Compute(lhs, rhs);
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void ToStringTest()
         {
-            var obj1 = new IntDiv();
-            var executed = "IntDiv";
-            var actual = obj1.ToString();
-            Assert.Equal(executed, actual);
+            var div = new IntDiv();
+            var expected = "IntDiv";
+
+            var actual = div.ToString();
+
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void EqualsTest()
+        public static IEnumerable<object[]> TestData1()
         {
-            var obj1 = new IntDiv();
-            var obj2 = new IntDiv();
-            var executed = true;
+            yield return new object[] { true, new IntDiv(), new IntDiv() };
+            yield return new object[] { false, new IntDiv(), new DivRemainder() };
+            yield return new object[] { false, new IntDiv(), new Sum() };
+            yield return new object[] { false, new IntDiv(), new Sub() };
+            yield return new object[] { false, new IntDiv(), new Mul() };
+        }
+
+        [Theory]
+        [MemberData(nameof(TestData1))]
+        public void EqualsTest(bool expected, IntDiv obj1, Operation obj2)
+        {
             var actual = obj1.Equals(obj2);
-            Assert.Equal(executed, actual);
+
+            Assert.Equal(expected, actual);
         }
     }
 }

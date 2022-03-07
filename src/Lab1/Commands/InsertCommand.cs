@@ -26,7 +26,7 @@ namespace Lab1.Commands
                 .Title("Выберите тип операции: ")
                 .AddChoices("Сложение", "Вычитание", "Умножение", "Целочисленное деление", "Остаток от деления"));
 
-            Operation operation = operationType switch
+            Operation? operation = operationType switch
             {
                 "Сложение" => new Sum(),
                 "Вычитание" => new Sub(),

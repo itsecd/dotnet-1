@@ -1,37 +1,54 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using Xunit;
 
 namespace Lab1.Model.Tests
 {
     public class MulTests
     {
-        [Fact]
-        public void ComputeTest()
+        public static IEnumerable<object[]> TestData()
         {
-            var lhs = 5;
-            var rhs = 10;
-            var obj1 = new Mul();
-            var executed = 50;
-            var actual = obj1.Compute(lhs, rhs);
-            Assert.Equal(executed, actual);
+            yield return new object[] { 10, 5, 2, new Mul() };
+            yield return new object[] { 28, -7, -4, new Mul() };
+            yield return new object[] { -10, 5, -2, new Mul() };
+            yield return new object[] { 0, 20, 0, new Mul() };
+        }
+
+        [Theory]
+        [MemberData(nameof(TestData))]
+        public void ComputeTest(int expected, int lhs, int rhs, Mul mul)
+        {
+            var actual = mul.Compute(lhs, rhs);
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void ToStringTest()
         {
-            var obj1 = new Mul();
-            var executed = "Mul";
-            var actual = obj1.ToString();
-            Assert.Equal(executed, actual);
+            var mul = new Mul();
+            var expected = "Mul";
+
+            var actual = mul.ToString();
+
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void EqualsTest()
+        public static IEnumerable<object[]> TestData1()
         {
-            var obj1 = new Mul();
-            var obj2 = new Mul();
-            var executed = true;
+            yield return new object[] { true, new Mul(), new Mul() };
+            yield return new object[] { false, new Mul(), new Sum() };
+            yield return new object[] { false, new Mul(), new IntDiv() };
+            yield return new object[] { false, new Mul(), new Sub() };
+            yield return new object[] { false, new Mul(), new DivRemainder() };
+        }
+
+        [Theory]
+        [MemberData(nameof(TestData1))]
+        public void EqualsTest(bool expected, Mul obj1, Operation obj2)
+        {
             var actual = obj1.Equals(obj2);
-            Assert.Equal(executed, actual);
+
+            Assert.Equal(expected, actual);
         }
     }
 }

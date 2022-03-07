@@ -1,37 +1,55 @@
-﻿using Xunit;
+﻿using System.Collections.Generic;
+using Xunit;
 
 namespace Lab1.Model.Tests
 {
     public class DivRemainderTests
     {
-        [Fact]
-        public void ComputeTest()
+
+        public static IEnumerable<object[]> TestData()
         {
-            var lhs = 5;
-            var rhs = 2;
-            var obj1 = new DivRemainder();
-            var executed = 1;
-            var actual = obj1.Compute(lhs, rhs);
-            Assert.Equal(executed, actual);
+            yield return new object[] { 1, 5, 2, new DivRemainder() };
+            yield return new object[] { 3, 7, 4, new DivRemainder() };
+            yield return new object[] { 1, 5, -2, new DivRemainder() };
+            yield return new object[] { 0, 20, 10, new DivRemainder() };
+        }
+
+        [Theory]
+        [MemberData(nameof(TestData))]
+        public void ComputeTest(int expected, int lhs, int rhs, DivRemainder DivRem)
+        { 
+            var actual = DivRem.Compute(lhs, rhs);
+
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
         public void ToStringTest()
         {
-            var obj1 = new DivRemainder();
-            var executed = "DivRemainder";
-            var actual = obj1.ToString();
-            Assert.Equal(executed, actual);
+            var DivRem= new DivRemainder();
+            var expected = "DivRemainder";
+
+            var actual = DivRem.ToString();
+
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void EqualsTest()
+        public static IEnumerable<object[]> TestData1()
         {
-            var obj1 = new DivRemainder();
-            var obj2 = new DivRemainder();
-            var executed = true;
+            yield return new object[] { true, new DivRemainder(), new DivRemainder() };
+            yield return new object[] { false, new DivRemainder(), new Sum() };
+            yield return new object[] { false, new DivRemainder(), new IntDiv() };
+            yield return new object[] { false, new DivRemainder(), new Sub() };
+            yield return new object[] { false, new DivRemainder(), new Mul() };
+        }
+
+        [Theory]
+        [MemberData(nameof(TestData1))]
+        public void EqualsTest(bool expected, DivRemainder obj1, Operation obj2)
+        {
             var actual = obj1.Equals(obj2);
-            Assert.Equal(executed, actual);
+
+            Assert.Equal(expected, actual);
         }
     }
 }
