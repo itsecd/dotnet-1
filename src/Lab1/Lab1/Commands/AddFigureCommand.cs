@@ -5,67 +5,65 @@ using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
 using System.Diagnostics.CodeAnalysis;
-namespace Lab1.Commands {
+namespace Lab1.Commands
+{
     public class AddFigureCommand : Command<AddFigureCommand.AddFigureSettings>
     {
         private readonly IFiguresRepository _figuresRepository;
-        public class AddFigureSettings : CommandSettings{}
+        public class AddFigureSettings : CommandSettings { }
 
-        public  AddFigureCommand(IFiguresRepository figuresRepository)
+        public AddFigureCommand(IFiguresRepository figuresRepository)
         {
             _figuresRepository = figuresRepository;
         }
 
-    public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSettings settings)
         {
-            string textMenu;
-            var mainMenu = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("[green]Choose your next action: [/]")
-                .PageSize(10)
-                .AddChoices("Create a shape", "Delete object by index",
-                "Delete all objects", "Compare object by index",
-                "Output container", "Exit"));
+            /*            string textMenu;
+                        var mainMenu = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                            .Title("[green]Choose your next action: [/]")
+                            .PageSize(10)
+                            .AddChoices("Create a shape", "Delete object by index",
+                            "Delete all objects", "Compare object by index",
+                            "Output container", "Exit"));
 
-            switch (mainMenu)
-            {
-                case "Create a shape":
-                    textMenu = AnsiConsole.Prompt(
+                        switch (mainMenu)
+                        {
+                            case "Create a shape":*/
+            string textMenu;
+            textMenu = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
                         .Title("Choose a shape type")
                         .PageSize(10)
                         .AddChoices("Ball", "Cylinder",
                         "Rectangular Parallepiped"));
-                    Figure figure = textMenu switch
-                    {
-                        "Ball" => new Ball(new Point(
-                         AnsiConsole.Ask<int>("Enter the X coordinate:")
-                        , AnsiConsole.Ask<int>("Enter the Y coordinate:")
-                        , AnsiConsole.Ask<int>("Enter the Z coordinate"))
-                        , AnsiConsole.Ask<int>("Enter the radius of the ball:")),
+            Figure figure = textMenu switch
+            {
+                "Ball" => new Ball(new Point(
+                 AnsiConsole.Ask<int>("Enter the X coordinate:")
+                , AnsiConsole.Ask<int>("Enter the Y coordinate:")
+                , AnsiConsole.Ask<int>("Enter the Z coordinate"))
+                , AnsiConsole.Ask<int>("Enter the radius of the ball:")),
 
-                        "Cylinder" => new Cylinder(new Point(
-                          AnsiConsole.Ask<int>("Enter the X coordinate:")
-                        , AnsiConsole.Ask<int>("Enter the Y coordinate:")
-                        , AnsiConsole.Ask<int>("Enter the Z coordinate"))
-                        , AnsiConsole.Ask<int>("Enter the height of the ball:")
-                        , AnsiConsole.Ask<int>("Enter the radius of the ball:")),
+                "Cylinder" => new Cylinder(new Point(
+                  AnsiConsole.Ask<int>("Enter the X coordinate:")
+                , AnsiConsole.Ask<int>("Enter the Y coordinate:")
+                , AnsiConsole.Ask<int>("Enter the Z coordinate"))
+                , AnsiConsole.Ask<int>("Enter the height of the ball:")
+                , AnsiConsole.Ask<int>("Enter the radius of the ball:")),
 
-                        "Rectangular Parallepiped" => new RectangularParallelepiped(new Point(
-                          AnsiConsole.Ask<int>("Enter the X coordinate:")
-                        , AnsiConsole.Ask<int>("Enter the Y coordinate:")
-                        , AnsiConsole.Ask<int>("Enter the Z coordinate"))
-                        , new Point(
-                          AnsiConsole.Ask<int>("Enter the X coordinate:")
-                        , AnsiConsole.Ask<int>("Enter the Y coordinate:")
-                        , AnsiConsole.Ask<int>("Enter the Z coordinate"))),
-                        _ => throw new NotImplementedException()
-                    };
-                    AnsiConsole.Clear();
-                    _figuresRepository.AddFigure(figure);
-                    break;
-
-            }
-            _figuresRepository.PrintScreen();
+                "Rectangular Parallepiped" => new RectangularParallelepiped(new Point(
+                  AnsiConsole.Ask<int>("Enter the X coordinate:")
+                , AnsiConsole.Ask<int>("Enter the Y coordinate:")
+                , AnsiConsole.Ask<int>("Enter the Z coordinate"))
+                , new Point(
+                  AnsiConsole.Ask<int>("Enter the X coordinate:")
+                , AnsiConsole.Ask<int>("Enter the Y coordinate:")
+                , AnsiConsole.Ask<int>("Enter the Z coordinate"))),
+                _ => throw new NotImplementedException()
+            };
+            AnsiConsole.Clear();
+            _figuresRepository.AddFigure(figure);
             return 0;
         }
     }

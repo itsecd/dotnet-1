@@ -27,7 +27,13 @@ namespace Lab1
 
             app.Configure(config =>
             {
-                config.AddCommand<AddFigureCommand>("add");
+                config.AddCommand<AddFigureCommand>("Add");
+                config.AddCommand<DeleteFigureCommand>("Delete");
+                config.AddCommand<DeleteAllFigureCommand>("DeleteAll");
+                config.AddCommand<CompareFigureCommand>("Compare");
+                config.AddCommand<ViewTableCommand>("ViewTable");
+                config.AddCommand<SumFigureCommand>("Sum");
+
             });
             
             app.Run(args);

@@ -4,6 +4,7 @@ using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace Lab1.Repositories
@@ -55,12 +56,14 @@ namespace Lab1.Repositories
             WriteFile();
         }
 
-        public void ClearAllFigure()
+        public void DeleteAllFigure()
         {
             ReadFile();
             _figuresList.Clear();
             WriteFile();
         }
+
+
 
         public void PrintScreen()
         {
@@ -106,6 +109,23 @@ namespace Lab1.Repositories
                 }
             }
             return false;
+        }
+
+        public double Sum()
+        {
+            ReadFile();
+            double sum = 0;
+            foreach (Figure figure in _figuresList)
+            {
+                sum += figure.GetVolume();
+            }
+            return sum;
+        }
+
+        public double SumSystemLinq()
+        {
+            ReadFile();
+            return _figuresList.Sum(f => f.GetVolume());
         }
 
     }
