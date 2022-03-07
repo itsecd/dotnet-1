@@ -30,14 +30,7 @@ namespace Lab1.Repository
 
         public void Delete(int index)
         {
-            try
-            {
-                _data.RemoveAt(index);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                AnsiConsole.WriteException(e);
-            }
+            _data.RemoveAt(index);
         }
 
         public void Clear()
@@ -47,16 +40,9 @@ namespace Lab1.Repository
         ///<summary>Сравнение матриц на равенство</summary>
         public int Compare(int ind1, int ind2)
         {
-            try
-            {
-                if (_data[ind1].Equals(_data[ind2]))
-                    return 1;
-                return 0;
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                AnsiConsole.WriteException(e); return -1;
-            }
+            if (_data[ind1].Equals(_data[ind2]))
+                return 1;
+            return 0;
         }
 
         public void Dump()
@@ -83,13 +69,6 @@ namespace Lab1.Repository
                     if (mat.Name == "SparseMatrix")
                         _data.Add(new SparseMatrix(mat));
                 }
-            }
-            else
-            {
-                XDocument tmpDoc = new XDocument();
-                XElement root = new XElement("Matrix");
-                tmpDoc.Add(root);
-                tmpDoc.Save("matrices.xml");
             }
         }
         ///<summary>Представление элементов в виде таблицы для вывода в консоль</summary>

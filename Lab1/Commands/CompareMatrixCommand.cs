@@ -37,10 +37,18 @@ namespace Lab1.Commands
                 AnsiConsole.WriteException(new IndexOutOfRangeException($"Индекс 2 вышел за границы [0 : {_data.Count - 1}]!"));
                 return -1;
             }
-            if (_data.Compare(indL, indR) == 1)
-                AnsiConsole.Write(new Panel("[yellow]Матрицы равны[/]"));
-            if (_data.Compare(indL, indR) == 0)
-                AnsiConsole.Write(new Panel("[yellow]Матрицы НЕ равны[/]"));
+            try
+            {
+                if (_data.Compare(indL, indR) == 1)
+                    AnsiConsole.Write(new Panel("[yellow]Матрицы равны[/]"));
+                if (_data.Compare(indL, indR) == 0)
+                    AnsiConsole.Write(new Panel("[yellow]Матрицы НЕ равны[/]"));
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                AnsiConsole.WriteException(e);
+                return -1;
+            }
             return 0;
         }
     }
