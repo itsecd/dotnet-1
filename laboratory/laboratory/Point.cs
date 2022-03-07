@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace промышленное_програмирование_LUB1.model
+namespace laboratory.model
 {
     public struct Point
     {
-        public double X { get; set; }
-        public double Y { get; set; }
+        public double X { get; init; }
+        public double Y { get; init; }
 
         public Point(double x, double y) { X = x; Y = y; }
 
-        public double distance(Point second)
+        public double Distance(Point second)
         {
             return Math.Sqrt(Math.Pow((X - second.X), 2) + Math.Pow((Y - second.Y), 2));
         }

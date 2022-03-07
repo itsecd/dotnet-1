@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace промышленное_програмирование_LUB1.model
+namespace laboratory.model
 {
     public class Circle : Figure
     {
@@ -18,16 +18,28 @@ namespace промышленное_програмирование_LUB1.model
             Radius = r;
         }
 
-        public override double perimeter() => 2 * Math.PI * Radius;
+        public override double Perimeter() => 2 * Math.PI * Radius;
 
-        public override Rectangle framing_rectangle() => new(new Point(Center.X - Radius, Center.Y - Radius),
+        public override Rectangle FramingRectangle() => new(new Point(Center.X - Radius, Center.Y - Radius),
                                                             new Point(Center.X + Radius, Center.Y + Radius));
 
-        public override double square() => Math.PI * Math.Pow(Radius, 2);
+        public override double Square() => Math.PI * Math.Pow(Radius, 2);
 
         public override string ToString() => $"{Center}, {Radius}";
 
-        public override bool Equals(object? obj)
+        public bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            Rectangle personObj = obj as Rectangle;
+            if (personObj == null)
+                return false;
+            else
+                return Equals(personObj);
+        }
+
+        public override bool Equals(Figure obj)
         {
             if (obj is not Circle other)
                 return false;

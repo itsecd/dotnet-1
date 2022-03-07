@@ -3,27 +3,27 @@ using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace промышленное_програмирование_LUB1.Command
+namespace laboratory.Command
 {
     public class PrintFigureCommand : Command<PrintFigureCommand.PrintFigureSettings>
     {
-        private readonly IMenu _figure;
+        private readonly IRepository FigureRepository;
 
-        public PrintFigureCommand(IMenu figure)
+        public PrintFigureCommand(IRepository figure)
         {
-            _figure = figure;
+            FigureRepository = figure;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] PrintFigureSettings settings)
         {
             var table = new Table();
             table.AddColumn("Type");
-            table.AddColumn("Element's");
-            table.AddColumn("Squere");
-            table.AddColumn("Leght");
-            foreach (var obj in _figure.GetAll())
+            table.AddColumn("Element");
+            table.AddColumn("Square");
+            table.AddColumn("Perimeter");
+            foreach (var obj in FigureRepository.GetAll())
             {
-                table.AddRow(obj.GetType().Name, obj.ToString(), obj.square().ToString(), obj.perimeter().ToString());
+                table.AddRow(obj.GetType().Name, obj.ToString(), obj.Square().ToString(), obj.Perimeter().ToString());
                 if (table.Rows.Count() == 10)
                 {
                     table.AddRow("...", "...", "...", "...");
