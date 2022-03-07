@@ -6,7 +6,7 @@ namespace lab1.Model
 {
     public class BufferedMatrix : IMatrix
     {
-        private double[,] _matrix;
+        private readonly double[,] _matrix;
 
         public int Width { get; init; }
 
@@ -16,18 +16,18 @@ namespace lab1.Model
         {
             Height = height;
             Width = width;
-            _matrix = new double[height,width];
+            _matrix = new double[height, width];
         }
 
         public double GetAbsMax()
         {
-            var tmp = Math.Abs(_matrix[0, 0]);
-            foreach(var num in _matrix)
+            var max = Double.NegativeInfinity;
+            foreach (var num in _matrix)
             {
-                if (Math.Abs(num) > tmp)
-                    tmp = Math.Abs(num);
+                if (Math.Abs(num) > max)
+                    max = Math.Abs(num);
             }
-            return tmp;
+            return max;
 
         }
 
@@ -61,13 +61,13 @@ namespace lab1.Model
                 return false;
             }
             var tmp = (BufferedMatrix)obj;
-            if (tmp.Height!=Height || tmp.Width!=Width)
+            if (tmp.Height != Height || tmp.Width != Width)
             {
                 return false;
             }
             for (int i = 0; i < Height; i++)
                 for (int j = 0; j < Width; j++)
-                    if (_matrix[i,j] != tmp.GetValue(i, j))
+                    if (_matrix[i, j] != tmp.GetValue(i, j))
                         return false;
             return true;
         }
@@ -87,6 +87,19 @@ namespace lab1.Model
             }
 
             return sb.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            int tmp = 1;
+            double hash = Height + Width;
+            for (int i = 0; i < Height; ++i)
+                for (int j = 0; j < Width; ++j)
+                {
+                    hash += tmp * i + tmp * j + _matrix[i, j];
+                    ++tmp;
+                }
+            return (int)Math.Round(hash);
         }
     }
 }
