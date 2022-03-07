@@ -1,8 +1,6 @@
-﻿using Spectre.Console.Cli;
-using Spectre.Console;
+﻿using Lab1.Repository;
+using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
-using Lab1.Repository;
-using Lab1.Model;
 
 namespace Lab1.Commands
 {

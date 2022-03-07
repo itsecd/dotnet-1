@@ -1,10 +1,8 @@
-﻿using System.IO;
-using Lab1.Model;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-using System.Linq;
+﻿using Lab1.Model;
 using System;
-using Spectre.Console;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace Lab1.Repository
 {

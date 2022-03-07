@@ -1,5 +1,4 @@
 ﻿using Xunit;
-using Lab1.Model;
 
 namespace Lab1.Model.Tests
 {
