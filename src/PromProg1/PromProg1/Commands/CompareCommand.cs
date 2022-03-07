@@ -31,7 +31,7 @@ namespace PromProg1
                 tableEquals = AddRowToTable(tableEquals, index2, _figureRepository.Figures[index2]);
                 AnsiConsole.Write(tableEquals);
                 AnsiConsole.Write("\nSquare is larger for the element with the index" + _figureRepository.CompareSquare(index1, index2));
-                AnsiConsole.Write("\nPerimeteris larger for the element with the index " + _figureRepository.ComparePerimeter(index1, index2));
+                AnsiConsole.Write("\nPerimeter is larger for the element with the index " + _figureRepository.ComparePerimeter(index1, index2));
                 Console.ReadLine();
             }
             else

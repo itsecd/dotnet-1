@@ -20,8 +20,8 @@ namespace PromProg1
 
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSettings settings)
         {
-            var exit = 0;
-            while (exit != -1)
+            bool exit = false;
+            while (!exit)
             {
                 _figureRepository.OpenFile(_figureRepository.StorageFileName);
                 var add = AnsiConsole.Prompt(new SelectionPrompt<string>()
@@ -72,11 +72,10 @@ namespace PromProg1
 
 
                         case "Exit":
-                            exit = -1;
+                            exit = true;
                             break;
 
-                        default:
-                            break;
+                     
                     };
                 }
                 else
