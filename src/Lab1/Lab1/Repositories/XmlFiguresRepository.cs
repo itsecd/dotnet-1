@@ -12,7 +12,7 @@ namespace Lab1.Repositories
     public class XmlFiguresRepository : IFiguresRepository
     {
 
-        private string StorageFileName { get; set; } = "C:\\Users\\vabob\\OneDrive\\Рабочий стол\\figure.xml";
+        private string StorageFileName { get; set; } = "figure.xml";
 
         private List<Figure> _figuresList;
 

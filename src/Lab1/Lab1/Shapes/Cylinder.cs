@@ -6,66 +6,62 @@ namespace Lab1.Shapes
     public class Cylinder : Figure
     {
 
-        public Point _centre { get; set; }
+        public Point Centre { get; init; }
 
-        public int _radius { get; set; }
+        public int Radius { get; init; }
 
-        public int _height { get; set; }
+        public int Height { get; init; }
 
         public Cylinder()
         {
-            _radius = 0;
-            _height = 0;
-            _centre = new Point();
+            Radius = 0;
+            Height = 0;
+            Centre = new Point();
         }
 
         public Cylinder(Point centre, int radius, int height)
         {
-            _centre = centre;
-            _radius = radius;
-            _height = height;
+            Centre = centre;
+            Radius = radius;
+            Height = height;
         }
 
         public override RectangularParallelepiped GetMinimalFramingParalelepiped()
         {
             return new RectangularParallelepiped(
-                new Point(_centre._x + _radius, _centre._y + _radius, _centre._z),
-                new Point(_centre._x - _radius, _centre._y - _radius, _centre._z + _height)
+                new Point(Centre.X + Radius, Centre.Y + Radius, Centre.Z),
+                new Point(Centre.X - Radius, Centre.Y - Radius, Centre.Z + Height)
                 );
         }
 
         public override double GetSurfaceArea()
         {
-            return 2 * Math.PI * _radius * (_height + _radius);
+            return 2 * Math.PI * Radius * (Height + Radius);
         }
 
         public override double GetVolume()
         {
-            return Math.PI * Math.Pow(_radius, 2) * _height;
+            return Math.PI * Math.Pow(Radius, 2) * Height;
         }
         public override string ToString()
         {
-            return "Centre: " + _centre + "Radius: " + _radius + "\nHeight: " + _height;
+            return "Centre: " + Centre + "Radius: " + Radius + "\nHeight: " + Height;
         }
 
         public override bool Equals(Object obj)
         {
-            try
+            if (obj is Cylinder cylinder)
             {
-                Cylinder cylinder = obj as Cylinder;
-                return cylinder._centre.Equals(_centre) &&
-                    cylinder._radius == _radius &&
-                    cylinder._radius == _radius;
+                return cylinder.Centre.Equals(Centre) &&
+                    cylinder.Radius == Radius &&
+                    cylinder.Height == Height;
             }
-            catch (Exception)
-            {
-                throw new NullReferenceException();
-            }
+            return false;
         }
 
-        public override int GetHashCode()
+        public  override int GetHashCode()
         {
-            return _centre.GetHashCode() ^ _radius.GetHashCode() ^ _height.GetHashCode();
+            return Centre.GetHashCode() ^ Radius.GetHashCode() ^ Height.GetHashCode();
         }
     }
 }

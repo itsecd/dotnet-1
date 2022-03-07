@@ -19,8 +19,7 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSettings settings)
         {
-            string textMenu;
-            textMenu = AnsiConsole.Prompt(
+            string textMenu = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
                         .Title("Choose a shape type")
                         .PageSize(10)
@@ -29,26 +28,26 @@ namespace Lab1.Commands
             Figure figure = textMenu switch
             {
                 "Ball" => new Ball(new Point(
-                 AnsiConsole.Ask<int>("Enter the X coordinate:")
-                , AnsiConsole.Ask<int>("Enter the Y coordinate:")
-                , AnsiConsole.Ask<int>("Enter the Z coordinate"))
-                , AnsiConsole.Ask<int>("Enter the radius of the ball:")),
+                    AnsiConsole.Ask<int>("Enter the X coordinate:")
+                    , AnsiConsole.Ask<int>("Enter the Y coordinate:")
+                    , AnsiConsole.Ask<int>("Enter the Z coordinate"))
+                    , AnsiConsole.Ask<int>("Enter the radius of the ball:")),
 
                 "Cylinder" => new Cylinder(new Point(
-                  AnsiConsole.Ask<int>("Enter the X coordinate:")
-                , AnsiConsole.Ask<int>("Enter the Y coordinate:")
-                , AnsiConsole.Ask<int>("Enter the Z coordinate"))
-                , AnsiConsole.Ask<int>("Enter the height of the ball:")
-                , AnsiConsole.Ask<int>("Enter the radius of the ball:")),
+                    AnsiConsole.Ask<int>("Enter the X coordinate:")
+                    , AnsiConsole.Ask<int>("Enter the Y coordinate:")
+                    , AnsiConsole.Ask<int>("Enter the Z coordinate"))
+                    , AnsiConsole.Ask<int>("Enter the height of the ball:")
+                    , AnsiConsole.Ask<int>("Enter the radius of the ball:")),
 
                 "Rectangular Parallepiped" => new RectangularParallelepiped(new Point(
-                  AnsiConsole.Ask<int>("Enter the X coordinate:")
-                , AnsiConsole.Ask<int>("Enter the Y coordinate:")
-                , AnsiConsole.Ask<int>("Enter the Z coordinate"))
+                    AnsiConsole.Ask<int>("Enter the X coordinate:")
+                    , AnsiConsole.Ask<int>("Enter the Y coordinate:")
+                    , AnsiConsole.Ask<int>("Enter the Z coordinate"))
                 , new Point(
-                  AnsiConsole.Ask<int>("Enter the X coordinate:")
-                , AnsiConsole.Ask<int>("Enter the Y coordinate:")
-                , AnsiConsole.Ask<int>("Enter the Z coordinate"))),
+                    AnsiConsole.Ask<int>("Enter the X coordinate:")
+                    , AnsiConsole.Ask<int>("Enter the Y coordinate:")
+                    , AnsiConsole.Ask<int>("Enter the Z coordinate"))),
                 _ => throw new NotImplementedException()
             };
             AnsiConsole.Clear();

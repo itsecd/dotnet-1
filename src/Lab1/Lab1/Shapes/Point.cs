@@ -2,33 +2,36 @@
 {
     public struct Point
     {
-        public int _x { get; set; }
-        public int _y { get; set; }
-        public int _z { get; set; }
+        public int X { get; init; }
+        public int Y { get; init; }
+        public int Z { get; init; }
 
         public Point(int x, int y, int z)
         {
-            _x = x;
-            _y = y;
-            _z = z;
+            X = x;
+            Y = y;
+            Z = z;
         }
 
-        public override int GetHashCode()
+        public  override int GetHashCode()
         {
-            return _x.GetHashCode() ^ _y.GetHashCode() ^ _z.GetHashCode();
+            return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
         }
 
         public override string ToString()
         {
-            return "x: " + _x + " y: " + _y + " z: " + _z;
+            return "x: " + X + " y: " + Y + " z: " + Z;
         }
 
         public override bool Equals(object obj)
         {
-            return obj is Point point &&
-                   _x == point._x &&
-                   _y == point._y &&
-                   _z == point._z;
+            if (obj is Point point)
+            {
+                return X == point.X &&
+                   Y == point.Y &&
+                   Z == point.Z;
+            }
+            return false;
         }
 
 

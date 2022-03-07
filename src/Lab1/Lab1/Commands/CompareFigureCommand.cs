@@ -22,7 +22,7 @@ namespace Lab1.Commands
             int firstFigure = AnsiConsole.Ask<int>(" Enter the first index of the shape you want to compare");
             int secondFigure = AnsiConsole.Ask<int>(" Enter the second index of the shape you want to compare");
             AnsiConsole.Clear();
-            if (_figuresRepository.CompareFigure(firstFigure, secondFigure) == true)
+            if (_figuresRepository.CompareFigure(firstFigure, secondFigure))
             {
                 AnsiConsole.WriteLine("The figures are similar");
             }

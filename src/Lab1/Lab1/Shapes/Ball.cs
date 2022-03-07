@@ -6,62 +6,57 @@ namespace Lab1.Shapes
     public class Ball : Figure
     {
 
-        public Point _centre { get; set; }
+        public Point Centre { get; init; }
 
-        public int _radius { get; set; }
+        public int Radius { get; init; }
 
         public Ball()
         {
-            _radius = 0;
-            _centre = new Point();
+            Radius = 0;
+            Centre = new Point();
         }
 
         public Ball(Point centre, int radius)
         {
-            _centre = centre;
-            _radius = radius;
+            Centre = centre;
+            Radius = radius;
         }
 
         public override RectangularParallelepiped GetMinimalFramingParalelepiped()
         {
             return new RectangularParallelepiped(
-                new Point(_centre._x + _radius, _centre._y + _radius, _centre._z + _radius),
-                new Point(_centre._x - _radius, _centre._y - _radius, _centre._z- _radius)
+                new Point(Centre.X + Radius, Centre.Y + Radius, Centre.Z + Radius),
+                new Point(Centre.X - Radius, Centre.Y - Radius, Centre.Z - Radius)
                 );
         }
 
         public override double GetSurfaceArea()
         {
-            return 4 * Math.PI * Math.Pow(_radius, 2);
+            return 4 * Math.PI * Math.Pow(Radius, 2);
         }
 
         public override double GetVolume()
         {
-            return 4 / 3.0 * Math.PI * Math.Pow(_radius, 3);
+            return 4 / 3.0 * Math.PI * Math.Pow(Radius, 3);
         }
 
         public override string ToString()
         {
-            return "Centre: " + _centre + "Radius: " + _radius;
+            return "Centre: " + Centre + "Radius: " + Radius;
         }
 
         public override bool Equals(Object obj)
         {
-            try
+            if (obj is Ball ball)
             {
-                Ball sphere = obj as Ball;
-                return sphere._centre.Equals(_centre) &&
-                    sphere._radius == _radius;
+                return ball.Centre.Equals(Centre) && ball.Radius == Radius;
             }
-            catch (Exception)
-            {
-                throw new NullReferenceException();
-            }
+            return false;
         }
 
-        public override int GetHashCode()
+        public  override int GetHashCode()
         {
-            return _centre.GetHashCode() ^ _radius.GetHashCode();
+            return Centre.GetHashCode() ^ Radius.GetHashCode();
         }
 
     }

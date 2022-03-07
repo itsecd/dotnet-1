@@ -5,77 +5,73 @@ namespace Lab1.Shapes
 {
     public class RectangularParallelepiped : Figure
     {
-        public Point _vertex{ get; set; }
+        public Point Vertex{ get; init; }
 
-        public Point _secondVertex { get; set; }
+        public Point SecondVertex { get; init; }
 
         public RectangularParallelepiped()
         {
-            _vertex = new Point();
-            _secondVertex = new Point();
+            Vertex = new Point();
+            SecondVertex = new Point();
         }
 
         public RectangularParallelepiped(Point vertex, Point secondVertex)
         {
-            _vertex = vertex;
-            _secondVertex = secondVertex;
+            Vertex = vertex;
+            SecondVertex = secondVertex;
         }
 
         public double GetWidth()
         {
-            return Math.Abs(_vertex._x - _secondVertex._x);
+            return Math.Abs(Vertex.X - SecondVertex.X);
         }
 
         public double GetLength()
         {
-            return Math.Abs(_vertex._y - _secondVertex._y);
+            return Math.Abs(Vertex.Y - SecondVertex.Y);
         }
 
-        public double GetHigth()
+        public double GetHeigth()
         {
-            return Math.Abs(_vertex._z - _secondVertex._z);
+            return Math.Abs(Vertex.Z - SecondVertex.Z);
         }
 
         public override RectangularParallelepiped GetMinimalFramingParalelepiped()
         {
             return new RectangularParallelepiped(
-                new Point(_vertex._x, _vertex._y,_vertex._z),
-                new Point(_secondVertex._x, _secondVertex._y, _secondVertex._z)
+                new Point(Vertex.X, Vertex.Y,Vertex.Z),
+                new Point(SecondVertex.X, SecondVertex.Y, SecondVertex.Z)
                 );
         }
 
         public override double GetSurfaceArea()
         {
-            return 2 * (GetHigth() * GetWidth() + GetWidth() * GetLength() + GetLength() * GetHigth());
+            return 2 * (GetHeigth() * GetWidth() + GetWidth() * GetLength() + GetLength() * GetHeigth());
         }
 
         public override double GetVolume()
         {
-            return GetHigth() * GetWidth() * GetLength();
+            return GetHeigth() * GetWidth() * GetLength();
         }
 
         public override string ToString()
         {
-            return "1: " + _vertex + "2: " + _secondVertex;
+            return "1: " + Vertex + "2: " + SecondVertex;
         }
 
         public override bool Equals(Object obj)
         {
-            try
+            if (obj is RectangularParallelepiped rectangularParallelepiped)
             {
-                RectangularParallelepiped rectangularCuboid = obj as RectangularParallelepiped;
-                return rectangularCuboid._vertex.Equals(_vertex) &&
-                rectangularCuboid._secondVertex.Equals(_secondVertex);
+                return rectangularParallelepiped.Vertex.Equals(Vertex) &&
+                    rectangularParallelepiped.SecondVertex.Equals(SecondVertex);
             }
-            catch (Exception)
-            {
-                throw new NullReferenceException();
-            }
+            return false;
         }
 
-        public override int GetHashCode()
+        public  override int GetHashCode()
         {
-            return _vertex.GetHashCode() ^ _secondVertex.GetHashCode();
+            return Vertex.GetHashCode() ^ SecondVertex.GetHashCode();
         }
     }
 }
