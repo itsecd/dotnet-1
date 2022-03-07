@@ -6,7 +6,7 @@ namespace lab1.Model
 {
     public class BufferedMatrix : IMatrix
     {
-        private readonly double[,] _matrix;
+        private double[,] _matrix;
 
         public int Width { get; init; }
 
@@ -21,13 +21,14 @@ namespace lab1.Model
 
         public double GetAbsMax()
         {
-            var max = Double.NegativeInfinity;
+            var tmp = Math.Abs(_matrix[0, 0]);
             foreach(var num in _matrix)
             {
-                if (Math.Abs(num) > max)
-                    max = Math.Abs(num);
+                if (Math.Abs(num) > tmp)
+                    tmp = Math.Abs(num);
             }
-            return max;
+            return tmp;
+
         }
 
         public double GetValue(int height, int width)
@@ -86,19 +87,6 @@ namespace lab1.Model
             }
 
             return sb.ToString();
-        }
-
-        public override int GetHashCode()
-        {
-            int tmp = 1;
-            double hash = Height + Width;
-            for (int i = 0; i < Height; ++i)
-                for (int j = 0; j < Width; ++j)
-                { 
-                    hash += tmp * i + tmp * j + _matrix[i, j];
-                    ++tmp;
-                }
-            return (int)Math.Round(hash);
         }
     }
 }
