@@ -1,31 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace lab1.Model
 {
-    public class BufferedMatrix : IMatrix
+    class SparseMatrix : IMatrix
     {
-        private readonly double[,] _matrix;
 
+        private readonly Dictionary<Tuple<int, int>, double> _matrix;
         public int Width { get; init; }
-
         public int Height { get; init; }
 
-        public BufferedMatrix(int height, int width)
+        public SparseMatrix(int height, int width)
         {
             Height = height;
             Width = width;
-            _matrix = new double[height,width];
+            _matrix = new Dictionary<Tuple<int, int>, double>();
+        }
+
+        public SparseMatrix(double[,] matrix)
+        {
+            Height = matrix.GetUpperBound(0) + 1;
+            Width = matrix.GetUpperBound(1) + 1;
+            _matrix = new Dictionary<Tuple<int, int>, double>();
+            for(int i = 0;i<Height;++i)
+                for(int j=0;j<Width;++j)
+                {
+                    if (matrix[i, j] != 0)
+                        _matrix.Add(new Tuple<int, int>(i, j), matrix[i, j]);
+                }
         }
 
         public double GetAbsMax()
         {
             var max = Double.NegativeInfinity;
-            foreach(var num in _matrix)
+            foreach (var num in _matrix)
             {
-                if (Math.Abs(num) > max)
-                    max = Math.Abs(num);
+                if (Math.Abs(num.Value) > max)
+                    max = Math.Abs(num.Value);
             }
             return max;
         }
@@ -36,7 +50,7 @@ namespace lab1.Model
                 throw new ArgumentOutOfRangeException(nameof(height), $"Height must be not bigger than {Height}");
             if (width >= Width)
                 throw new ArgumentOutOfRangeException(nameof(width), $"Width must be not bigger than {Width}");
-            return _matrix[height, width];
+            return _matrix.ContainsKey(new Tuple<int, int>(height, width)) ? _matrix[new Tuple<int, int>(height, width)] : 0;
         }
 
         public void SetValue(int height, int width, double value)
@@ -45,7 +59,9 @@ namespace lab1.Model
                 throw new ArgumentOutOfRangeException(nameof(height), $"Height must be not bigger than {Height}");
             if (width >= Width)
                 throw new ArgumentOutOfRangeException(nameof(width), $"Width must be not bigger than {Width}");
-            _matrix[Height, width] = value;
+            if (value == 0 && _matrix.ContainsKey(new Tuple<int, int>(height, width)))
+                _matrix.Remove(new Tuple<int, int>(height, width));
+            _matrix[new Tuple<int, int>(height, width)] = value;
         }
 
         public override bool Equals(object obj)
@@ -55,19 +71,20 @@ namespace lab1.Model
             {
                 return true;
             }
-            if (obj is not BufferedMatrix)
+            if (obj is not SparseMatrix)
             {
                 return false;
             }
-            var tmp = (BufferedMatrix)obj;
-            if (tmp.Height!=Height || tmp.Width!=Width)
+            var tmp = (SparseMatrix)obj;
+            if (tmp.Height != Height || tmp.Width != Width)
             {
                 return false;
             }
-            for (int i = 0; i < Height; i++)
-                for (int j = 0; j < Width; j++)
-                    if (_matrix[i,j] != tmp.GetValue(i, j))
-                        return false;
+            foreach(var ((i,j), value) in _matrix)
+            {
+                if (tmp.GetValue(i, j) != value)
+                    return false;
+            }
             return true;
         }
 
@@ -79,7 +96,10 @@ namespace lab1.Model
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    sb.Append($"{_matrix[i, j]} ");
+                    if (_matrix.ContainsKey(new Tuple<int, int>(i, j)))
+                        sb.Append($"{_matrix[new Tuple<int, int>(i, j)]} ");
+                    else
+                        sb.Append("0 ");
                 }
 
                 sb.AppendLine();
@@ -92,12 +112,11 @@ namespace lab1.Model
         {
             int tmp = 1;
             double hash = Height + Width;
-            for (int i = 0; i < Height; ++i)
-                for (int j = 0; j < Width; ++j)
-                { 
-                    hash += tmp * i + tmp * j + _matrix[i, j];
-                    ++tmp;
-                }
+            foreach (var ((i, j), value) in _matrix)
+            {
+                hash += tmp * i + tmp * j + value;
+                ++tmp;
+            }
             return (int)Math.Round(hash);
         }
     }
