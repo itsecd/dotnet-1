@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Formats.Asn1;
-using Lab1.Commands;
+﻿using Lab1.Commands;
 using Lab1.Infrastructure;
-using Lab1.Model;
 using Lab1.Repositories;
-using Lab1.Shapes;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualBasic;
-using Spectre.Console;
 using Spectre.Console.Cli;
 
 namespace Lab1

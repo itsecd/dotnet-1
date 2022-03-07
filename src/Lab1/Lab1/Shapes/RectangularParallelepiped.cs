@@ -1,9 +1,5 @@
 ﻿using Lab1.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Shapes
 {
@@ -63,7 +59,7 @@ namespace Lab1.Shapes
             return "1: " + _vertex + "2: " + _secondVertex;
         }
 
-        public override bool Equals(Object obj) // исправить
+        public override bool Equals(Object obj)
         {
             try
             {

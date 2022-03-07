@@ -19,17 +19,6 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSettings settings)
         {
-            /*            string textMenu;
-                        var mainMenu = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                            .Title("[green]Choose your next action: [/]")
-                            .PageSize(10)
-                            .AddChoices("Create a shape", "Delete object by index",
-                            "Delete all objects", "Compare object by index",
-                            "Output container", "Exit"));
-
-                        switch (mainMenu)
-                        {
-                            case "Create a shape":*/
             string textMenu;
             textMenu = AnsiConsole.Prompt(
                         new SelectionPrompt<string>()
