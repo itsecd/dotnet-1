@@ -2,11 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\sourcecode",
-    "\\sourcecode\\Lab1cs",
-    "\\sourcecode\\Lab1cs\\Lab1cs",
-    "\\sourcecode\\Lab1cs\\Lab1cs\\Commands",
-    "\\sourcecode\\Lab1cs\\Lab1cs\\Reposity"
+    "\\sourcecode\\Lab1",
+    "\\sourcecode\\Lab1\\Lab1",
+    "\\sourcecode\\Lab1\\Lab1\\bin"
   ],
-  "SelectedNode": "\\sourcecode\\Lab1cs\\Lab1cs\\Commands\\RemoveFigure.cs",
+  "SelectedNode": "\\sourcecode\\Lab1\\Lab1\\Commands",
   "PreviewInSolutionExplorer": false
 }
