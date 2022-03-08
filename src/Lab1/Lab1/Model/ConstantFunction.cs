@@ -40,7 +40,7 @@
 
         public override int GetHashCode()
         {
-            return C.GetHashCode();
+            return nameof(ConstantFunction).GetHashCode();
         }
     }
 }

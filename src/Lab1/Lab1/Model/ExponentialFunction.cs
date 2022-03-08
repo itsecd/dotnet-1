@@ -18,7 +18,7 @@ namespace Lab1.Model
 
         public override dynamic Calculate(double x)
         {
-            if ((BaseOfDegree <= 0) || (BaseOfDegree == 1))
+            if (BaseOfDegree <= 0 || BaseOfDegree == 1)
             {
                 return "indefinitely";
             }
@@ -27,7 +27,7 @@ namespace Lab1.Model
 
         public override string Derivative()
         {
-            if ((BaseOfDegree <= 0) || (BaseOfDegree == 1))
+            if (BaseOfDegree <= 0 || BaseOfDegree == 1)
             {
                 return "y'= 0";
             }
@@ -50,7 +50,7 @@ namespace Lab1.Model
 
         public override int GetHashCode()
         {
-            return BaseOfDegree.GetHashCode();
+            return nameof(ExponentialFunction).GetHashCode();
         }
     }
 }

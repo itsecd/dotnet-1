@@ -18,7 +18,7 @@ namespace Lab1.Model
 
         public override dynamic Calculate(double x)
         {
-            if ((x <= 0) || (BaseLog <= 0) || (BaseLog == 1))
+            if (x <= 0 || BaseLog <= 0 || BaseLog == 1)
             {
                 return "indefinitely";
             }
@@ -27,7 +27,7 @@ namespace Lab1.Model
 
         public override string Derivative()
         {
-            if ((BaseLog <= 0) || (BaseLog == 1))
+            if (BaseLog <= 0 || BaseLog == 1)
             {
                 return "indefinitely";
             }
@@ -50,7 +50,7 @@ namespace Lab1.Model
 
         public override int GetHashCode()
         {
-            return BaseLog.GetHashCode();
+            return nameof(LogarithmFunction).GetHashCode();
         }
     }
 }

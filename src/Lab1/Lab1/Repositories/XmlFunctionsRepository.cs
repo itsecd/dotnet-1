@@ -55,7 +55,7 @@ namespace Lab1.Repositories
 
             ReadFromFile();
 
-            if ((_functions.Count == 0) || (!_functions[index].Equals(function)))
+            if (_functions.Count == 0 || !_functions[index].Equals(function))
             {
                 _functions.Insert(index, function);
                 WriteToFile();

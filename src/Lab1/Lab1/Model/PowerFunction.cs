@@ -44,7 +44,7 @@ namespace Lab1.Model
             {
                 return $"y= 0";
             }             
-            if ((Сoefficient == 1) && (Degree != 0))
+            if (Сoefficient == 1 && Degree != 0)
             {
                 return $"y= x^{Degree}";
             }           
@@ -61,12 +61,12 @@ namespace Lab1.Model
             {
                 return false;
             }
-            return (Сoefficient == other.Сoefficient) && (Degree == other.Degree);
+            return Сoefficient == other.Сoefficient && Degree == other.Degree;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Сoefficient, Degree);
+            return nameof(PowerFunction).GetHashCode();
         }
     }
 }
