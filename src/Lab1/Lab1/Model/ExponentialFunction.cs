@@ -4,7 +4,7 @@ namespace Lab1.Model
 {
     public class ExponentialFunction : Function
     {
-        public double BaseOfDegree { get; set; }
+        private readonly double BaseOfDegree;
 
         public ExponentialFunction()
         {
@@ -50,7 +50,7 @@ namespace Lab1.Model
 
         public override int GetHashCode()
         {
-            return nameof(ExponentialFunction).GetHashCode();
+            return BaseOfDegree.GetHashCode();
         }
     }
 }
