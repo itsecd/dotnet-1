@@ -14,9 +14,9 @@ namespace Lab1.Repositories
 
         private string StorageFileName { get; set; } = "figure.xml";
 
-        private List<Figure> _figuresList;
+        public List<Figure> _figuresList { get; set; }
 
-        private void ReadFile()
+        public  void ReadFile()
         {
             if (_figuresList != null) return;
 
@@ -33,7 +33,7 @@ namespace Lab1.Repositories
 
 
 
-        private void WriteFile()
+        public void WriteFile()
         {
             var xmlSerializer = new XmlSerializer(typeof(List<Figure>));
             using var fileStream = new FileStream(StorageFileName, FileMode.Create);
@@ -61,32 +61,6 @@ namespace Lab1.Repositories
             ReadFile();
             _figuresList.Clear();
             WriteFile();
-        }
-
-
-
-        public void PrintScreen()
-        {
-            ReadFile();
-
-            var table = new Table().Centered();
-
-            var rule = new Rule("[#0eef59]Main menu[/]")
-            {
-                Style = Style.Parse("#0eef59")
-            };
-            AnsiConsole.Write(rule);
-            table.AddColumn("Type");
-            table.AddColumn("Coords");
-            table.AddColumn("Volume");
-            table.AddColumn("SurfaceArea");
-            table.AddColumn("Min. Framing Parallelepiped");
-            foreach (var figure in _figuresList)
-            {
-                table.AddRow(figure.GetType().Name, figure.ToString(), figure.GetVolume().ToString(),
-                   figure.GetSurfaceArea().ToString(), figure.GetMinimalFramingParalelepiped().ToString());
-            }
-            AnsiConsole.Write(table);
         }
 
         public bool CompareFigure(int x, int y)
