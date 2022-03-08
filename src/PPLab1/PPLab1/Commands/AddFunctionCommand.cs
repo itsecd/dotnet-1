@@ -52,7 +52,7 @@ namespace PPLab1.Commands
                 return -1;
             }
             _functionsRepository.AddFunction(newFunction);
-            AnsiConsole.MarkupLine($"[skyblue1]Done![/]");
+            AnsiConsole.MarkupLine($"[skyblue1]The insertion is done at the end of the list.[/]");
             return 0;
         } 
     }

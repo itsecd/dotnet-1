@@ -1,7 +1,4 @@
-﻿using System;
-
-
-namespace PPLab1.Model
+﻿namespace PPLab1.Model
 {
     public struct Data
     {

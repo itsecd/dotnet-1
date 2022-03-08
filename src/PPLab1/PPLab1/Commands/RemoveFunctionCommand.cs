@@ -1,5 +1,4 @@
-﻿using PPLab1.Model;
-using PPLab1.Repositories;
+﻿using PPLab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
@@ -29,7 +28,5 @@ namespace PPLab1.Commands
 
             return 0;
         }
-
-        
     }
 }

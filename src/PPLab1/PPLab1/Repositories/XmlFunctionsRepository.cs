@@ -1,5 +1,4 @@
 ﻿using PPLab1.Model;
-using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -51,8 +50,6 @@ namespace PPLab1.Repositories
                 }
                 else
                 {
-                    AnsiConsole.MarkupLine($"[skyblue1]Function already exists for this index.[/]" +
-                        $"[skyblue1]The insertion is done at the end of the list.[/]");
                     ReadFromFile();
                     _functions.Add(function);
                     WriteToFile();

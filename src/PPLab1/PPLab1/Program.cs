@@ -1,11 +1,4 @@
-﻿using PPLab1.Model;
-using PPLab1.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Spectre.Console;
-using System.Xml.Serialization;
-using System.IO;
+﻿using PPLab1.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using PPLab1.Infrastructure;
 using Spectre.Console.Cli;
