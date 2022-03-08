@@ -13,9 +13,9 @@ namespace PPLab1.Model
             Elems = new Data(elems.A, elems.Coeff);
         }
 
-        public ExpFunct(int A, int Coeff)
+        public ExpFunct(int exponent, int coefficient)
         {
-            Elems = new Data(A, Coeff);
+            Elems = new Data(exponent, coefficient);
         }
 
         public override double? CalculationFunction(double value)

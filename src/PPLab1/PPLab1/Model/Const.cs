@@ -1,5 +1,4 @@
 using System;
-using Spectre.Console;
 
 namespace PPLab1.Model
 {
@@ -14,9 +13,9 @@ namespace PPLab1.Model
             Elems = new Data(elems.A, elems.Coeff);
         }
 
-        public Const(int Coeff) 
+        public Const(int coefficient) 
         { 
-            Elems = new Data(1, Coeff);
+            Elems = new Data(1, coefficient);
         }
 
         public override double? CalculationFunction(double value) { return Elems.Coeff; }

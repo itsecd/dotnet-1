@@ -1,8 +1,6 @@
-﻿using PPLab1.Model;
-using PPLab1.Repositories;
+﻿using PPLab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 

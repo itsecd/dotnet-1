@@ -12,9 +12,9 @@ namespace PPLab1.Model
         {
             Elems = new Data(elems.A, elems.Coeff);
         }
-        public LogFunct(int A, int Coeff)
+        public LogFunct(int basis, int coefficient)
         {
-            Elems = new Data(A, Coeff);
+            Elems = new Data(basis, coefficient);
         }
 
         public override double? CalculationFunction(double value)
