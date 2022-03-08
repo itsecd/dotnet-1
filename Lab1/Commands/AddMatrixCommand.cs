@@ -50,22 +50,27 @@ namespace Lab1.Commands
                 "SparseMatrix" => new SparseMatrix(th, tw),
                 _ => null
             };
-            int indIns = 0;
-            if (_data.Count > 1)
-                indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
-            if (indIns < 0 || indIns > _data.Count - 1 && _data.Count > 1)
+            if (_data.Count == 0)
             {
-                AnsiConsole.WriteException(new IndexOutOfRangeException($"Индекс вышел за границы [0 : {_data.Count - 1}]"));
-                return -1;
+                _data.Insert(tmpMat);
             }
-            try
+            else
             {
-                _data.Insert(tmpMat, indIns);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                AnsiConsole.WriteException(e);
-                return -1;
+                int indIns = AnsiConsole.Prompt(new TextPrompt<int>("Индекс: "));
+                if (indIns < 0 || indIns >= _data.Count)
+                {
+                    AnsiConsole.WriteException(new IndexOutOfRangeException($"Индекс вышел за границы [0 : {_data.Count - 1}]"));
+                    return -1;
+                }
+                try
+                {
+                    _data.Insert(tmpMat, indIns);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    AnsiConsole.WriteException(e);
+                    return -1;
+                }
             }
             _data.Dump();
             return 0;
