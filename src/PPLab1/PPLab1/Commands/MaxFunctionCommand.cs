@@ -35,17 +35,15 @@ namespace PPLab1.Commands
                 return 0;
             }
              
-            var max_result = functions.Max(f => f.CalculationFunction(value) != null ? f.CalculationFunction(value) : int.MinValue);
+            var maxResult = functions.Max(f => f.CalculationFunction(value) ?? int.MinValue);
        
             var res = (from func in functions
-                       where func.CalculationFunction(value) == max_result
+                       where func.CalculationFunction(value) == maxResult
                        select func).FirstOrDefault();
 
-            AnsiConsole.MarkupLine($"[seagreen1]Max function is { res.ToString()}[/]"); 
+            AnsiConsole.MarkupLine($"[seagreen1]Max function is {res}[/]"); 
 
             return 0;
-        }
-
-        
+        } 
     }
 }

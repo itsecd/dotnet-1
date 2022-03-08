@@ -54,8 +54,6 @@ namespace PPLab1.Commands
             _functionsRepository.AddFunction(newFunction);
             AnsiConsole.MarkupLine($"[skyblue1]Done![/]");
             return 0;
-        }
-
-        
+        } 
     }
 }
