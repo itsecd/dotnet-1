@@ -4,9 +4,9 @@ namespace Lab1.Model
 {
     public class PowerFunction: Function
     {
-        public double Сoefficient { get; set; }
+        private readonly double Сoefficient;
 
-        public double Degree { get; set; }
+        private readonly double Degree;
 
         public PowerFunction() 
         {
@@ -66,7 +66,7 @@ namespace Lab1.Model
 
         public override int GetHashCode()
         {
-            return nameof(PowerFunction).GetHashCode();
+            return HashCode.Combine(Сoefficient, Degree);
         }
     }
 }

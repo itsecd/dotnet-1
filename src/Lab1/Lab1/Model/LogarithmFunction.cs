@@ -4,7 +4,7 @@ namespace Lab1.Model
 {
     public class LogarithmFunction : Function
     {
-        public double BaseLog { get; set; }
+        private readonly double BaseLog;
 
         public LogarithmFunction()
         {
@@ -50,7 +50,7 @@ namespace Lab1.Model
 
         public override int GetHashCode()
         {
-            return nameof(LogarithmFunction).GetHashCode();
+            return BaseLog.GetHashCode();
         }
     }
 }

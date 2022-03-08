@@ -2,7 +2,7 @@
 {
     public class ConstantFunction : Function
     {
-        public double C { get; set; }
+        private readonly double C;
 
         public ConstantFunction() 
         { 
@@ -40,7 +40,7 @@
 
         public override int GetHashCode()
         {
-            return nameof(ConstantFunction).GetHashCode();
+            return C.GetHashCode();
         }
     }
 }
