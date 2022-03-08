@@ -31,7 +31,7 @@ namespace Lab1.Shapes
             return Math.Abs(Vertex.Y - SecondVertex.Y);
         }
 
-        public double GetHeigth()
+        public double GetHeight()
         {
             return Math.Abs(Vertex.Z - SecondVertex.Z);
         }
@@ -46,12 +46,12 @@ namespace Lab1.Shapes
 
         public override double GetSurfaceArea()
         {
-            return 2 * (GetHeigth() * GetWidth() + GetWidth() * GetLength() + GetLength() * GetHeigth());
+            return 2 * (GetHeight() * GetWidth() + GetWidth() * GetLength() + GetLength() * GetHeight());
         }
 
         public override double GetVolume()
         {
-            return GetHeigth() * GetWidth() * GetLength();
+            return GetHeight() * GetWidth() * GetLength();
         }
 
         public override string ToString()

@@ -37,8 +37,8 @@ namespace Lab1.Commands
                     AnsiConsole.Ask<int>("Enter the X coordinate:")
                     , AnsiConsole.Ask<int>("Enter the Y coordinate:")
                     , AnsiConsole.Ask<int>("Enter the Z coordinate"))
-                    , AnsiConsole.Ask<int>("Enter the height of the ball:")
-                    , AnsiConsole.Ask<int>("Enter the radius of the ball:")),
+                    , AnsiConsole.Ask<int>("Enter the radius of the cylinder:")
+                    , AnsiConsole.Ask<int>("Enter the height of the cylinder:")),
 
                 "Rectangular Parallepiped" => new RectangularParallelepiped(new Point(
                     AnsiConsole.Ask<int>("Enter the X coordinate:")
