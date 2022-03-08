@@ -1,4 +1,4 @@
-﻿using Lab1.Reposity;
+﻿using Lab1.Repository;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 

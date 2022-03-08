@@ -4,30 +4,31 @@ namespace Lab1.Model
 {
     public class Cylinder : Figure
     {
-        public Point point { get; set; }
-        public double pi = 3.14;
-        public double radius;
+        public Point center { get; set; }
+        public readonly double pi = Math.PI;
+        private double radius;
+        private double height;
+        public double RadiusCylinder
+        {
+            get => radius;
+            set { radius = value;}
+        }
+        public double HeightCylinder
+        {
+            get => height;
+            set { height = value; }
+        }
         public Cylinder()
         {
-            point = new Point(0, 0, 0);
-            radius = 0;
-            height = 0;
         }
-        public Cylinder(Point point1, double r, double h)
+        public Cylinder(Point Center, double r, double h)
         {
-            point = point1;
+            center = Center;
             radius = r;
             height = h;
         }
 
-        public Cylinder(double x, double y, double z, double r, double h)
-        {
-            point = new Point(x, y, z);
-            radius = r;
-            height = h;
-        }
-
-        public override double acreage()
+        public override double SurfaceArea()
         {
             return 2 * pi * radius * radius + 2 * pi * radius * height;
         }
@@ -38,7 +39,7 @@ namespace Lab1.Model
         }
         public override string ToString()
         {
-            return "(" + point.X + "," + point.Y + "," + point.Z + ")" + " " + "Radius: " + radius + " " + "Height: " + height;
+            return "(" + point.x + "," + point.y + "," + point.z + ")" + " " + "Radius: " + radius + " " + "Height: " + height;
         }
         public override bool Equals(object obj)
         {
@@ -49,7 +50,7 @@ namespace Lab1.Model
             else
             {
                 Cylinder c = (Cylinder)obj;
-                return point.Equals(c.point) && radius == c.radius && height == c.height;
+                return center.Equals(c.center) && radius == c.radius && height == c.height;
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using Lab1.Reposity;
+﻿using Lab1.Repository;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 
@@ -17,7 +17,17 @@ namespace Lab1.Commands
         }
         public override int Execute([NotNull] CommandContext context, [NotNull] FigureCommands.AddFigureCommand settings)
         {
-            _figureRepository.PrintScreen();
+            var figure = _figureRepository.getFigure();
+            var table = new Table();
+            table.AddColumn("Type Figure");
+            table.AddColumn("Coords");
+            table.AddColumn("SurfaceArea");
+            table.AddColumn("Volume");
+            foreach (var elem in figure)
+            {
+                table.AddRow(elem.GetType().Name, elem.ToString(), elem.SurfaceArea().ToString(), elem.volume().ToString());
+            }
+            AnsiConsole.Write(table);
             return 0;
         }
     }

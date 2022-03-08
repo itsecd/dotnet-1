@@ -4,41 +4,43 @@ namespace Lab1.Model
 {
     public class Rectangular : Figure
     {
-        public Point Point1 { get; set; }
-        public Point Point2 { get; set; }
-        public double height;
-        public double A => Math.Abs(Point1.X - Point2.X);
-        public double B => Math.Abs(Point1.Y - Point2.Y);
+        public Point Vertex1 { get; set; }
+        public Point Vertex2 { get; set; }
+        private double height;
+        public double Length => Math.Abs(Vertex1.X - Vertex2.X);
+        public double Width => Math.Abs(Vetrex1.Y - Vertex2.Y);
+
+        public double Height
+        {
+            get => height;
+            set { height = value; }
+        }
 
         public Rectangular()
         {
          
         }
-        public Rectangular(Point point1, Point point2)
+
+        public Rectangular(Point vertex1, Point vertex2)
         {
-            Point1 = point1;
-            Point2 = point2;
+            Vertex1 = vertex1;
+            Vertex2 = vertex2;
         }
-        public Rectangular(double x1, double y1, double z1, double x2, double y2, double z2)
+
+        public override double SurfaceArea()
         {
-            Point1 = new Point(x1, y1, z1);
-            Point2 = new Point(x2, y2, z2);
-            Point2 = new Point(x2, y2, z2);
-        }
-        public override double acreage()
-        {
-            return 2 * A * B + 2 * A * height + 2 * B * height;
+            return 2 * Length * Width + 2 * Length * Height + 2 * Width * Height;
         }
 
         public override double volume()
         {
-            return A * B * height;
+            return Length * Width * Height;
         }
         public override string ToString()
         {
-            return "(" + Point1.X + "," + Point1.Y + "," + Point1.Z + ")" + " "
-                   + "(" + Point2.X + "," + Point2.Y + "," + Point2.Z + ")" + " "
-                   + "height: " + height;
+            return "(" + Vertex1.x + "," + Vertex1.y + "," + Vertex1.z + ")" + " "
+                   + "(" + Vertex2.x + "," + Vertex2.y + "," + Vertex2.z + ")" + " "
+                   + "height: " + Height;
 
         }
         public override bool Equals(object obj)
@@ -50,7 +52,7 @@ namespace Lab1.Model
             else
             {
                 Rectangular rec = (Rectangular)obj;
-                return Point1.Equals(rec.Point1) && Point2.Equals(rec.Point2) && height == rec.height;
+                return Vertex1.Equals(rec.Vertex1) && Vertex2.Equals(rec.Vertex2) && Height == rec.Height;
             }
         }
     }

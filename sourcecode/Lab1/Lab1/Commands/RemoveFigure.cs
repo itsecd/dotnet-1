@@ -1,4 +1,4 @@
-﻿using Lab1.Reposity;
+﻿using Lab1.Repository;
 using Spectre.Console.Cli;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveFigureCommand settings)
         {
             Console.Write("Index = ");
-            var index = int.Parse(Console.ReadLine());
+            var index = AnsiConsole.Ask<int>("[green]Index = [/]");
             _figureRepository.RemoveFigure(index);
             return 0;
         }

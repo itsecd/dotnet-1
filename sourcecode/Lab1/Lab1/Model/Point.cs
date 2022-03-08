@@ -8,9 +8,19 @@ namespace Lab1.Model
 {
     public struct Point
     {
-        public double X;
-        public double Y;
-        public double Z;
+        private double X;
+        private double Y;
+        private double Z;
+        public double x
+        {
+            get => X;
+            set { X = value; }
+        }
+        public double y
+        {
+            get => Y;
+            set { Y = value; }
+        }
         public Point(double x, double y, double z)
         {
             X = x;
