@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lab_1_Indust_Pr.Model
+﻿namespace Lab1.Model
 {
     class QuadraticFunction : Function//ax^2 + bx + c
     {
@@ -22,7 +16,7 @@ namespace Lab_1_Indust_Pr.Model
         //2ax + b производная - линейная функция
         public override Function GetDerivative() => new LinearFunction(2 * A, B);
 
-        public override double GetValueFunc(double arg) => A * Math.Pow(arg, 2) + B * arg + C;
+        public override double Compute(double arg) => A * Math.Pow(arg, 2) + B * arg + C;
 
         public override string ToString() => $"{A}x^2 + {B}x + {C}";
 

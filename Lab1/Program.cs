@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Lab_1_Indust_Pr.Model;
-using System.Linq;
-using Spectre.Console;
+﻿using Lab1.Model;
 
-namespace Lab_1_Indust_Pr
+namespace Lab1
 {
 
     class Program
@@ -19,7 +15,7 @@ namespace Lab_1_Indust_Pr
 
             Function lin = new LinearFunction(2, 8);
             Function qf = new QuadraticFunction(2, 3, 3);
-            
+
 
             List<Function> func = new List<Function> { gg, lin, qf, gg3 };
 
@@ -43,8 +39,8 @@ namespace Lab_1_Indust_Pr
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'c' :[/]"))
                 ),
-                "Синус" => new Sin(), 
-                "Косинус" => new Cos(), 
+                "Синус" => new Sin(),
+                "Косинус" => new Cos(),
                 _ => null
             };
             if (addFunc == null)
@@ -91,12 +87,12 @@ namespace Lab_1_Indust_Pr
             double min = double.MaxValue;
             foreach (Function elem in func)
             {
-                if (elem.GetDerivative().GetValueFunc(arg) < min)
-                    min = elem.GetDerivative().GetValueFunc(arg);
+                if (elem.GetDerivative().Compute(arg) < min)
+                    min = elem.GetDerivative().Compute(arg);
             }
             foreach (Function elem in func)
             {
-                if (elem.GetDerivative().GetValueFunc(arg) == min)
+                if (elem.GetDerivative().Compute(arg) == min)
                     return elem;
             }
             throw new Exception("Unreal ERROR");

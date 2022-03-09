@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lab_1_Indust_Pr.Model
+﻿namespace Lab1.Model
 {
     class Constant : Function
     {
-        public double ValueConst { get; set; } = 1;
+        public double ValueConst { get; } = 1;
+
+        public Constant() { }
 
         public Constant(double value)
         {
             ValueConst = value;
         }
 
-        public override Constant GetDerivative() => new Constant(0);//производная
+        public override Constant GetDerivative() => new Constant(0);
 
-        public override double GetValueFunc(double arg) => 0.0;
-        
+        public override double Compute(double arg) => ValueConst;
+
         public override string ToString() => $"{ValueConst}";
 
         public override bool Equals(object obj)
