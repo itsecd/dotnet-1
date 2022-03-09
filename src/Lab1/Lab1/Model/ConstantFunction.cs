@@ -2,7 +2,7 @@
 {
     public class ConstantFunction : Function
     {
-        private readonly double C;
+        public double C { get; init; }
 
         public ConstantFunction() 
         { 

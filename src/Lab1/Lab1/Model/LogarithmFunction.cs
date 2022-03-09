@@ -4,7 +4,7 @@ namespace Lab1.Model
 {
     public class LogarithmFunction : Function
     {
-        private readonly double BaseLog;
+        public double BaseLog { get; init; }
 
         public LogarithmFunction()
         {

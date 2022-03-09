@@ -4,7 +4,7 @@ namespace Lab1.Model
 {
     public class ExponentialFunction : Function
     {
-        private readonly double BaseOfDegree;
+        public double BaseOfDegree { get; init; }
 
         public ExponentialFunction()
         {

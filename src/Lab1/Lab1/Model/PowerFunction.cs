@@ -4,9 +4,9 @@ namespace Lab1.Model
 {
     public class PowerFunction: Function
     {
-        private readonly double Сoefficient;
+        public double Сoefficient { get; init; }
 
-        private readonly double Degree;
+        public double Degree { get; init; }
 
         public PowerFunction() 
         {
