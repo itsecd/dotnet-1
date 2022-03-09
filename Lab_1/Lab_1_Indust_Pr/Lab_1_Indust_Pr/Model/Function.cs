@@ -8,6 +8,11 @@ namespace Lab_1_Indust_Pr.Model
 {
     abstract class Function
     {
+        /// <summary>
+        /// Get Value function with with the specified argument
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
         public abstract double GetValueFunc(double arg);
 
         public abstract Function GetDerivative();

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Lab_1_Indust_Pr.Model;
 using System.Linq;
+using Spectre.Console;
 
 namespace Lab_1_Indust_Pr
 {
 
     class Program
     {
-        
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -19,18 +19,53 @@ namespace Lab_1_Indust_Pr
 
             Function lin = new LinearFunction(2, 8);
             Function qf = new QuadraticFunction(2, 3, 3);
-            Console.WriteLine(qf.ToString());
-            Console.WriteLine(qf.GetValueFunc(2));
-            Console.WriteLine(qf.GetDerivative());
-            Console.WriteLine(qf);
+            
 
-            List<Function> func = new() { gg, gg1, lin, gg3};
+            List<Function> func = new List<Function> { gg, lin, qf, gg3 };
 
+            func.Insert(4, gg2);
+
+            var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                .Title("Выберите тип функции: ")
+                .AddChoices("Константа", "Линейная функция", "Квадратичная функция", "Синус", "Косинус"));
+
+            Function addFunc = figureType switch
+            {
+                "Константа" => new Constant(
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter value 'c' :[/]"))
+                ),
+                "Линейная функция" => new LinearFunction(
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'k' :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]"))
+                ),
+                "Квадратичная функция" => new QuadraticFunction(
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'a' :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'c' :[/]"))
+                ),
+                "Синус" => new Sin(), 
+                "Косинус" => new Cos(), 
+                _ => null
+            };
+            if (addFunc == null)
+            {
+                AnsiConsole.MarkupLine($"[green]Неизвестный тип функции[/]");
+            }
+            func.Add(addFunc);
+
+            //var textPrompt = new TextPrompt<double>("[red]Enter a real number:[/]");
+            //double val = AnsiConsole.Prompt(textPrompt);
+
+            var table = new Table();
+            table.AddColumns("Function", "Data", "Derivative");
             foreach (Function f in func)
             {
-                Console.WriteLine(f);
+                table.AddRow(f.GetType().Name, f.ToString(), f.GetDerivative().ToString());
+                //AnsiConsole.Write(new Markup($"[mediumorchid]Function ::: [/][lime]{f}[/]\n"));
             }
+            AnsiConsole.Write(table);
 
+            /*
             var minValue = func.Min(x => x.GetDerivative().GetValueFunc(2));
             var funcMinValue = func.First(x => x.GetDerivative().GetValueFunc(2) == minValue);
             Console.WriteLine(funcMinValue);
@@ -47,6 +82,7 @@ namespace Lab_1_Indust_Pr
 
             Function test2 = new QuadraticFunction(1, 2, 3);
             Console.WriteLine(sn.Equals(sin));
+            */
         }
 
         public static Function GetMinValueDerivative(List<Function> func, double arg)
