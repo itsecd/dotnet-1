@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Lab1.Infrastructure;
 using Spectre.Console.Cli;
 using Lab1.Commands;
+using Lab1.Model;
+using System;
 
 namespace Lab1
 {
