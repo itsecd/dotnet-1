@@ -1,6 +1,6 @@
 ﻿namespace Lab1.Model
 {
-    class LinearFunction : Function // y = kx + b
+    public class LinearFunction : Function // y = kx + b
     {
         public double Linear { get; } = 1;
         public double Const { get; } = 0;
@@ -14,7 +14,7 @@
 
         public override double Compute(double arg) => Linear * arg + Const;
 
-        public override LinearFunction GetDerivative() => new Constant(linear);
+        public override Function GetDerivative() => new Constant(Linear);
 
         public override string ToString() => $"{Linear}x + {Const}";
 

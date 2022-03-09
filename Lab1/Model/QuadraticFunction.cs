@@ -1,11 +1,14 @@
-﻿namespace Lab1.Model
-{
-    class QuadraticFunction : Function//ax^2 + bx + c
-    {
-        public double A;
-        public double B;
-        public double C;
+﻿using System;
 
+namespace Lab1.Model
+{
+    public class QuadraticFunction : Function//ax^2 + bx + c
+    {
+        public double A { get; } = 1;
+        public double B { get; } = 1;
+        public double C { get; } = 1;
+
+        public QuadraticFunction() { }
         public QuadraticFunction(double a, double b, double c)
         {
             A = a;

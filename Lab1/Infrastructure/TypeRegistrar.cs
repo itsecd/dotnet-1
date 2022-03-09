@@ -1,3 +1,8 @@
+using Spectre.Console.Cli;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
+
 namespace Lab1.Infrastructure
 {
     public sealed class TypeRegistrar : ITypeRegistrar

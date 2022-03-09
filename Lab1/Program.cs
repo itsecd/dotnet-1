@@ -1,4 +1,9 @@
 ﻿using Lab1.Model;
+using System;
+using Spectre.Console;
+using System.Linq;
+using System.Collections.Generic;
+using Lab1.Services;
 
 namespace Lab1
 {
@@ -7,6 +12,17 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
+            var repos = new XmlStorageRepository();
+            //foreach (var function in repos.GetAll())
+            //{
+            //    Console.WriteLine(function);
+            //}
+            repos.Insert(0, new Constant(12));
+            foreach (var function in repos.GetAll())
+            {
+                Console.WriteLine(function);
+            }
+            /*
             Console.WriteLine("Hello World!");
             Function gg = new Constant(2);
             Function gg1 = new Constant(3);
@@ -39,8 +55,8 @@ namespace Lab1
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'c' :[/]"))
                 ),
-                "Синус" => new Sin(),
-                "Косинус" => new Cos(),
+                //"Синус" => new Sin(),
+                //"Косинус" => new Cos(),
                 _ => null
             };
             if (addFunc == null)
@@ -59,7 +75,7 @@ namespace Lab1
                 table.AddRow(f.GetType().Name, f.ToString(), f.GetDerivative().ToString());
                 //AnsiConsole.Write(new Markup($"[mediumorchid]Function ::: [/][lime]{f}[/]\n"));
             }
-            AnsiConsole.Write(table);
+            AnsiConsole.Write(table);*/
 
             /*
             var minValue = func.Min(x => x.GetDerivative().GetValueFunc(2));

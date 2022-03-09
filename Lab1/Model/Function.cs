@@ -1,12 +1,21 @@
-﻿namespace Lab1.Model
+﻿using System.Xml.Serialization;
+
+namespace Lab1.Model
 {
-    internal abstract class Function
+    [XmlInclude(typeof(Constant))]
+    [XmlInclude(typeof(LinearFunction))]
+    [XmlInclude(typeof(QuadraticFunction))]
+    [XmlInclude(typeof(Sin))]
+    [XmlInclude(typeof(Cos))]
+    public abstract class Function
     {
+        
         /// <summary>
         /// Get Value function with with the specified argument
         /// </summary>
         /// <param name="arg"></param>
         /// <returns></returns>
+        
         public abstract double Compute(double arg);
 
         public abstract Function GetDerivative();

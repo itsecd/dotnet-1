@@ -1,10 +1,14 @@
-﻿namespace Lab1.Model
+﻿using System;
+
+namespace Lab1.Model
 {
-    class Cos : Function
+    public class Cos : Function
     {
         public double Amplitude { get; } = 1;
         public double Omega { get; } = 1;
         public double Phase { get; } = 1;
+
+        public Cos() { }
 
         public Cos(double amplitude, double omega, double phase)
         {

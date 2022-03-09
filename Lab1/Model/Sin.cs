@@ -1,10 +1,14 @@
-﻿namespace Lab1.Model
+﻿using System;
+
+namespace Lab1.Model
 {
-    class Sin : Function
+    public class Sin : Function
     {
         public double Amplitude { get; } = 1;
         public double Omega { get; } = 1;
         public double Phase { get; } = 1;
+
+        public Sin() { }
 
         public Sin(double amplitude, double omega, double phase)
         {
@@ -21,10 +25,10 @@
 
         public override bool Equals(object obj)
         {
-            if (obj is Sin func)
-            {
-                return Sign == func.Sign;
-            }
+            //if (obj is Sin func)
+            //{
+            //    return Sign == func.Sign;
+            //}
             return false;
         }
 

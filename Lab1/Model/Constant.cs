@@ -1,8 +1,8 @@
 ﻿namespace Lab1.Model
 {
-    class Constant : Function
+    public class Constant : Function
     {
-        public double ValueConst { get; } = 1;
+        public double ValueConst { get; set; } = 1;
 
         public Constant() { }
 
