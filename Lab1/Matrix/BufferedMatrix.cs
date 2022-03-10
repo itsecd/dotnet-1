@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Xml.Linq;
+using Spectre.Console;
 
 namespace Lab1.Matrix
 {
@@ -79,6 +80,20 @@ namespace Lab1.Matrix
                 elem.Add(valElem);
             }
             return elem;
+        }
+        public override Table ToTable()
+        {
+            var tempTable = new Table();
+            for (int i = 0; i < Width; i++)
+                tempTable.AddColumn("");
+            for (int i = 0; i < Height; i++)
+            {
+                string[] newrow = new string[Width];
+                for (int j = 0; j < Width; j++)
+                    newrow[j] = this[i,j].ToString();
+                tempTable.AddRow(newrow);
+            }
+            return tempTable;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Xml.Linq;
+using Spectre.Console;
 
 namespace Lab1.Matrix
 {
@@ -19,5 +20,7 @@ namespace Lab1.Matrix
         ///<summary>XML - представление матрицы, используемое для сериализации</summary>
         ///<returns>class System.Xml.Linq.XElement</returns>
         public abstract XElement ToXml();
+
+        public abstract Table ToTable();
     }
 }

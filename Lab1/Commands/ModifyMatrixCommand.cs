@@ -40,13 +40,29 @@ namespace Lab1.Commands
                 }
                 if (indMod == -1)
                     break;
-                AnsiConsole.MarkupLine("Режим редактирования. Формат ввода: i;j;value.\nДля выхода введите 'q'.");
                 while (true)
                 {
+                    AnsiConsole.Clear();
+                    AnsiConsole.Write(_data[indMod].ToTable());
+                    AnsiConsole.MarkupLine("Режим редактирования. Формат ввода: i_j_value.\nДля выхода введите 'q'.");
                     string userinput = AnsiConsole.Prompt(new TextPrompt<string>(">>>"));
-                    
+                    if (userinput.Contains('q'))
+                        break;
+                    try
+                    {
+                        var inputarr = userinput.Split('_', 3);
+                        int i = int.Parse(inputarr[0]);
+                        int j = int.Parse(inputarr[1]);
+                        double val = double.Parse(inputarr[2]);
+                        _data[indMod][i, j] = val;
+                    }
+                    catch
+                    {
+                        AnsiConsole.MarkupLine("[red]Неверный ввод. Формат ввода: i_j_value. Для выхода введите 'q'.[/]");
+                    }
                 }
             }
+            _data.Dump();
             return 0;
         }
     }

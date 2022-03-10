@@ -24,6 +24,7 @@ namespace Lab1
                 config.AddCommand<PrintRepositoryCommand>("print");
                 config.AddCommand<CompareMatrixCommand>("compare");
                 config.AddCommand<MinNormCommand>("min-norm");
+                config.AddCommand<ModifyMatrixCommand>("modify");
             });
             app.Run(args);
         }
