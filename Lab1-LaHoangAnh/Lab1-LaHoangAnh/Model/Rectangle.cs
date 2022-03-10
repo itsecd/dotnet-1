@@ -4,10 +4,10 @@ namespace Lab1.Model
 {
     public class Rectangle : Figure
     {
-        public Point A { get; init; }
-        public Point B { get; init; }
-        public Point C { get; init; }
-        public Point D { get; init; }
+        public Point A { get;  }
+        public Point B { get;  }
+        public Point C { get;  }
+        public Point D { get;  }
 
 
         public Rectangle()
@@ -25,37 +25,18 @@ namespace Lab1.Model
             D = d;
         }
 
-        public override double Perimeter()
-        {
-           
-            return A.Distance(B) + B.Distance(C) + C.Distance(D) + D.Distance(A);
-            
-        }
+        public override double Perimeter() => A.Distance(B) + B.Distance(C) + C.Distance(D) + D.Distance(A);
 
-        public override double Square()
-        {
-   
-            return A.Distance(B) * B.Distance(C);
-            
-        }
+        public override double Square() => A.Distance(B) * B.Distance(C);
 
-        public override Rectangle MinBoundingFigure()
-        {
-            return this;
-        }
+        public override Rectangle MinBoundingFigure() => this;
 
-        public override string ToString()
-        {
-            
-            return $"Rectangle: ({A.ToString()},{B.ToString()},{C.ToString()},{D.ToString()})";
-        }
+        public override string ToString() => $"Rectangle: ({A.ToString()},{B.ToString()},{C.ToString()},{D.ToString()})";
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj == null || GetType() != obj.GetType()) return false;
-            if(obj == this) return true;
-            var rectangle = (Rectangle)obj;
-            return A.Equals(rectangle.A) && B.Equals(rectangle.B) && C.Equals(rectangle.C);
+            if (obj is Rectangle rectangle) return rectangle.A.Equals(A) && rectangle.B.Equals(B) && rectangle.C.Equals(C) && rectangle.D.Equals(D);
+            else return false;
         }
     }
 }

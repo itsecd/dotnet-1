@@ -24,19 +24,14 @@ namespace Lab1.Model
         public Point(double x, double y) { X = x; Y = y; }
 
 
-        public double Distance(Point A)
-        {
-            return Math.Sqrt((A.X - X) * (A.X - X) + (A.Y - Y) * (A.Y - Y));
-        }
+        public double Distance(Point A) => Math.Sqrt((A.X - X) * (A.X - X) + (A.Y - Y) * (A.Y - Y));
 
-
-        public override string ToString()
+        public override string ToString() => $"[{X},{Y}]";
+        public override bool Equals(object? obj)
         {
-            return $"[{X},{Y}]";
+            if (obj is Point point) return point.X == X && point.Y == Y;
+            else return false;
         }
 
     }
-
-
-
 }

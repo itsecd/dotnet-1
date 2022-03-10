@@ -4,8 +4,8 @@ namespace Lab1.Model
 {
     public class Circle : Figure
     {
-        public Point Center { get; init; }
-        private double Radius { get; init; }
+        public Point Center { get;  }
+        private double Radius { get;  }
         public Circle() { }
 
         public Circle(Point center, double r)
@@ -14,15 +14,9 @@ namespace Lab1.Model
             Radius = r;
         }
 
-        public override double Perimeter()
-        {
-            return Math.PI * 2 * Radius;
-        }
+        public override double Perimeter() => Math.PI * 2 * Radius;
 
-        public override double Square()
-        {
-            return Math.PI * Radius * Radius;
-        }
+        public override double Square() => Math.PI * Radius * Radius;
 
         public override Rectangle MinBoundingFigure()
         {
@@ -30,17 +24,12 @@ namespace Lab1.Model
             return Result;
         }
 
-        public override string ToString()
-        {
-            return $"Circle: ({Center.ToString()}, {Radius})";
-        }
+        public override string ToString() => $"Circle: ({Center.ToString()}, {Radius})";
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj == null || GetType() != obj.GetType()) return false;
-            if(obj == this) return true;
-            var circle = (Circle)obj;
-            return Center.Equals(circle.Center) && Radius == circle.Radius;
+            if (obj is Circle c) return c.Center.Equals(Center) && c.Radius == Radius;
+            else return false;
         }
 
     }

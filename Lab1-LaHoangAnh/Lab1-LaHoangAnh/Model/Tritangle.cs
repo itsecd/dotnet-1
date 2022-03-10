@@ -4,9 +4,9 @@ namespace Lab1.Model
 {
     public class Tritangle : Figure
     {
-        public Point A { get; init; }
-        public Point B { get; init; }
-        public Point C { get; init; }
+        public Point A { get; }
+        public Point B { get; }
+        public Point C { get; }
 
         public Tritangle()
         {
@@ -22,16 +22,9 @@ namespace Lab1.Model
             C = c;
         }
 
-        public override double Perimeter()
-        {
-            return A.Distance(B) + B.Distance(C) + C.Distance(A);
-        }
+        public override double Perimeter() => A.Distance(B) + B.Distance(C) + C.Distance(A);
 
-        public override double Square()
-        {
-           
-            return Math.Sqrt(Perimeter() / 2 * (Perimeter() / 2 - A.Distance(B)) * (Perimeter() / 2 - B.Distance(C)) * (Perimeter() / 2 - C.Distance(A)));
-        }
+        public override double Square() => Math.Sqrt(Perimeter() / 2 * (Perimeter() / 2 - A.Distance(B)) * (Perimeter() / 2 - B.Distance(C)) * (Perimeter() / 2 - C.Distance(A)));
 
         public override Rectangle MinBoundingFigure()
         {
@@ -45,18 +38,12 @@ namespace Lab1.Model
 
             return Result;
         }
-        public override string ToString()
-        {
-            
-            return $"Tritangle: ({A.ToString()}, {B.ToString()}, {C.ToString()})";
-        }
+        public override string ToString() => $"Tritangle: ({A.ToString()}, {B.ToString()}, {C.ToString()})";
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if(obj == null || GetType() != obj.GetType()) return false;
-            if(obj == this) return true;
-            var tritangle = (Tritangle)obj;
-            return A.Equals(tritangle.A) && B.Equals(tritangle.B) && C.Equals(tritangle.C);
+            if (obj is Tritangle tritangle) return tritangle.A.Equals(A) && tritangle.B.Equals(B) && tritangle.C.Equals(C);
+            else return false;
         }
     }
 }
