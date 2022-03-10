@@ -41,7 +41,6 @@ namespace laboratory.Command
                 case "no":
                     break;
             }
-            FigureRepository.Serialize("figure.xml");
             return 0;
 
         }

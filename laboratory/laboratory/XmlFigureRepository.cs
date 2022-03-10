@@ -11,9 +11,11 @@ namespace laboratory
     {
         private List<Figure> Figures = new();
 
+        private string FileName = "figure.xml";
+
         public XmlFigureRepository()
         {
-            Deserialize("figure.xml");
+            Deserialize();
         }
 
         public int Count() => Figures.Count();
@@ -23,37 +25,38 @@ namespace laboratory
             if (index >= Figures.Count)
             {
                 Figures.Add(obj);
-                return;
             }
-            if (index >= 0)
+            else
                 Figures.Insert(index, obj);
-
+            Serialize();
         }
 
         public void RemoveAt(int index)
         {
             Figures.RemoveAt(index);
+            Serialize();
         }
 
         public void Clear()
         {
             Figures.Clear();
+            Serialize();
         }
 
-        public void Serialize(string path)
+        private void Serialize()
         {
             var xml = new XmlSerializer(typeof(List<Figure>));
-            using (var filestream = new FileStream(path, FileMode.Create))
+            using (var filestream = new FileStream(FileName, FileMode.Create))
             {
                 xml.Serialize(filestream, Figures);
             }
         }
 
-        public void Deserialize(string path)
+        private void Deserialize()
         {
-            if (!File.Exists(path)) return;
+            if (!File.Exists(FileName)) return;
             var xml = new XmlSerializer(typeof(List<Figure>));
-            using var filestream = File.OpenRead(path);
+            using var filestream = File.OpenRead(FileName);
             Figures = (List<Figure>)xml.Deserialize(filestream);
         }
 

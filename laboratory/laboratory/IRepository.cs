@@ -14,9 +14,5 @@ namespace laboratory
         void RemoveAt(int index);
 
         void Clear();
-
-        void Serialize(string path);
-
-        void Deserialize(string path);
     }
 }

@@ -72,7 +72,6 @@ namespace laboratory.Command
                     FigureRepository.Insert(index, obj);
                     break;
             }
-            FigureRepository.Serialize("figure.xml");
             return 0;
 
         }

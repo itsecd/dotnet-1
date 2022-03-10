@@ -36,7 +36,6 @@ namespace laboratory.Command
                     FigureRepository.Clear();
                     break;
             }
-            FigureRepository.Serialize("figure.xml");
             return 0;
         }
 
