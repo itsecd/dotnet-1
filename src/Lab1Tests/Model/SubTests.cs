@@ -7,17 +7,19 @@ namespace Lab1.Model.Tests
     {
         public static IEnumerable<object[]> TestData()
         {
-            yield return new object[] { 3, 5, 2, new Sub() };
-            yield return new object[] { -3, -7, -4, new Sub() };
-            yield return new object[] { 7, 5, -2, new Sub() };
-            yield return new object[] { 20, 20, 0, new Sub() };
+            yield return new object[] { 3, 5, 2 };
+            yield return new object[] { -3, -7, -4 };
+            yield return new object[] { 7, 5, -2 };
+            yield return new object[] { 20, 20, 0 };
         }
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public void ComputeTest(int expected, int lhs, int rhs, Sub sub)
+        public void ComputeTest(int expected, int lhs, int rhs)
         {
-            var actual = sub.Compute(lhs, rhs);
+            var sut =  new Sub();
+
+            var actual = sut.Compute(lhs, rhs);
 
             Assert.Equal(expected, actual);
         }
@@ -25,10 +27,10 @@ namespace Lab1.Model.Tests
         [Fact]
         public void ToStringTest()
         {
-            var sub = new Sub();
+            var sut = new Sub();
             var expected = "Sub";
 
-            var actual = sub.ToString();
+            var actual = sut.ToString();
 
             Assert.Equal(expected, actual);
         }
@@ -44,9 +46,11 @@ namespace Lab1.Model.Tests
 
         [Theory]
         [MemberData(nameof(TestData1))]
-        public void EqualsTest(bool expected, Sub obj1, Operation obj2)
+        public void EqualsTest(bool expected, Operation obj)
         {
-            var actual = obj1.Equals(obj2);
+            var sut = new Sub();
+
+            var actual = sut.Equals(obj);
 
             Assert.Equal(expected, actual);
         }

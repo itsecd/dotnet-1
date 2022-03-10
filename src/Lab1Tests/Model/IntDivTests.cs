@@ -8,16 +8,18 @@ namespace Lab1.Model.Tests
 
         public static IEnumerable<object[]> TestData()
         {
-            yield return new object[] { 2, 5, 2, new IntDiv() };
-            yield return new object[] { 1, 7, 4, new IntDiv() };
-            yield return new object[] { -2, 5, -2, new IntDiv() };
-            yield return new object[] { 4, 20, 5, new IntDiv() };
+            yield return new object[] { 2, 5, 2 };
+            yield return new object[] { 1, 7, 4 };
+            yield return new object[] { -2, 5, -2 };
+            yield return new object[] { 4, 20, 5 };
         }
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public void ComputeTest(int expected, int lhs, int rhs, IntDiv div)
+        public void ComputeTest(int expected, int lhs, int rhs)
         {
+            var sut = new IntDiv();
+
             var actual = div.Compute(lhs, rhs);
 
             Assert.Equal(expected, actual);
@@ -26,28 +28,30 @@ namespace Lab1.Model.Tests
         [Fact]
         public void ToStringTest()
         {
-            var div = new IntDiv();
+            var sut = new IntDiv();
             var expected = "IntDiv";
 
-            var actual = div.ToString();
+            var actual = sut.ToString();
 
             Assert.Equal(expected, actual);
         }
 
         public static IEnumerable<object[]> TestData1()
         {
-            yield return new object[] { true, new IntDiv(), new IntDiv() };
-            yield return new object[] { false, new IntDiv(), new DivRemainder() };
-            yield return new object[] { false, new IntDiv(), new Sum() };
-            yield return new object[] { false, new IntDiv(), new Sub() };
-            yield return new object[] { false, new IntDiv(), new Mul() };
+            yield return new object[] { true, new IntDiv() };
+            yield return new object[] { false, new DivRemainder() };
+            yield return new object[] { false, new Sum() };
+            yield return new object[] { false, new Sub() };
+            yield return new object[] { false, new Mul() };
         }
 
         [Theory]
         [MemberData(nameof(TestData1))]
-        public void EqualsTest(bool expected, IntDiv obj1, Operation obj2)
+        public void EqualsTest(bool expected, Operation obj)
         {
-            var actual = obj1.Equals(obj2);
+            var sut = new IntDiv();
+
+            var actual = sut.Equals(obj);
 
             Assert.Equal(expected, actual);
         }
