@@ -17,7 +17,7 @@ namespace Lab1.Model.Tests
         [Theory]
         [MemberData(nameof(TestData))]
         public void ComputeTest(int expected, int lhs, int rhs)
-        { 
+        {
             var sut = new DivRemainder();
 
             var actual = sut.Compute(lhs, rhs);

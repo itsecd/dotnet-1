@@ -1,7 +1,7 @@
 ﻿
 namespace Lab1.Model
 {
-    public class DivRemainder: Operation
+    public class DivRemainder : Operation
     {
         public override int Compute(int lhs, int rhs) => lhs % rhs;
 

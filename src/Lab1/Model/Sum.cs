@@ -9,7 +9,7 @@ namespace Lab1.Model
         public override bool Equals(object? obj) => obj is Sum;
 
         public override int GetHashCode() => GetType().GetHashCode();
-       
+
         public override string ToString() => nameof(Sum);
 
 

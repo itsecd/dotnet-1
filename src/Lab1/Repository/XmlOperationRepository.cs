@@ -24,7 +24,7 @@ namespace Lab1.Repository
 
             var xmlSerializer = new XmlSerializer(typeof(List<Operation>));
             using var fileStream = new FileStream(StorageFileName, FileMode.Open);
-            _operations =  (List<Operation>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException());;
+            _operations = (List<Operation>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException()); 
         }
 
         private void WriteToFile()
@@ -40,7 +40,7 @@ namespace Lab1.Repository
                 throw new ArgumentNullException(nameof(operation));
 
             ReadFromFile();
-            _operations.Insert(index, operation);
+            _operations!.Insert(index, operation);
             WriteToFile();
 
         }
@@ -48,21 +48,21 @@ namespace Lab1.Repository
         public void RemoveAt(int index)
         {
             ReadFromFile();
-            _operations.RemoveAt(index);
+            _operations!.RemoveAt(index);
             WriteToFile();
         }
 
         public void Clear()
         {
             ReadFromFile();
-            _operations.Clear();
+            _operations!.Clear();
             WriteToFile();
         }
 
         public List<Operation> GetAll()
         {
             ReadFromFile();
-            return _operations;
+            return _operations!;
         }
 
 

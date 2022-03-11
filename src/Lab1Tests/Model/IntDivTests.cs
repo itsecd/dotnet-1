@@ -20,7 +20,7 @@ namespace Lab1.Model.Tests
         {
             var sut = new IntDiv();
 
-            var actual = div.Compute(lhs, rhs);
+            var actual = sut.Compute(lhs, rhs);
 
             Assert.Equal(expected, actual);
         }
