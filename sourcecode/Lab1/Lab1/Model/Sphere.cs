@@ -33,17 +33,26 @@ namespace Lab1.Model
         {
             return "(" + Center.x + "," + Center.y + "," + Center.z + ")" + " " + "Radius: " + radius;
         }
-        public override bool Equals(object obj)
+
+        public override bool Equals(object? obj)
         {
-            if(obj == null || obj.GetType() != GetType())
-            {
-                return false;
-            }
-            else
-            {
-                Sphere sphere = (Sphere)obj;
-                return Center.Equals(sphere.Center) && radius == sphere.radius;
-            }
+            if (obj is not Sphere sphere) return false;
+            return Center.Equals(sphere.Center) && radius == sphere.radius;
+        }
+
+        public Rectangular MinRectangular()
+        {
+            var rectangular = new Rectangular();
+            var vertex1 = rectangular.Vertex1;
+            var vertex2 = rectangular.Vertex2;
+            vertex1.x = Center.x - radius;
+            vertex1.y = Center.y - radius;
+            vertex1.z = Center.z - radius;
+            vertex2.x = Center.x + radius;
+            vertex2.y = Center.y + radius;
+            vertex2.z = Center.z - radius;
+            rectangular.Height = 2 * radius;
+            return rectangular;
         }
     }
 }
