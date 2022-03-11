@@ -43,10 +43,17 @@ namespace Lab1.Model
                    + "height: " + Height;
 
         }
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
-            if(obj is not Rectangular rectangular) return false;
-            return Vertex1.Equals(rectangular.Vertex1) && Vertex2.Equals(rectangular.Vertex2) && height == rectangular.height;
+            if(obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            else
+            {
+                Rectangular rec = (Rectangular)obj;
+                return Vertex1.Equals(rec.Vertex1) && Vertex2.Equals(rec.Vertex2) && Height == rec.Height;
+            }
         }
     }
 }

@@ -35,11 +35,5 @@ namespace Lab1.Model
             return Math.Sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
 
         }
-
-        public override bool Equals(object? obj)
-        {
-            if (obj is not Point vertex) return false;
-            return X == vertex.X && Y == vertex.Y && Z == vertex.Z;
-        }
     }
 }

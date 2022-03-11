@@ -41,26 +41,17 @@ namespace Lab1.Model
         {
             return "(" + point.x + "," + point.y + "," + point.z + ")" + " " + "Radius: " + radius + " " + "Height: " + height;
         }
-
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
-            if(obj is not Cylinder cylinder) return false;
-            return center.Equals(cylinder.center) && radius == cylinder.radius && height == cylinder.height;
-        }
-
-        public Rectangular MinRectangular()
-        {
-            var rectangular = new Rectangular();
-            var vertex1 = rectangular.Vertex1;
-            var vertex2 = rectangular.Vertex2;
-            vertex1.x = center.x - radius;
-            vertex1.y = center.y - radius;
-            vertex1.z = center.z;
-            vertex2.x = center.x + radius;
-            vertex2.y = center.y + radius;
-            vertex2.z = center.z;
-            rectangular.Height = height;
-            return rectangular;
+            if(obj == null|| GetType() != obj.GetType())
+            {
+                return false;
+            }
+            else
+            {
+                Cylinder c = (Cylinder)obj;
+                return center.Equals(c.center) && radius == c.radius && height == c.height;
+            }
         }
     }
 }
