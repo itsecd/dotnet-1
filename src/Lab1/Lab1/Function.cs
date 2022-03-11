@@ -10,11 +10,11 @@ namespace Functions
     [XmlInclude(typeof(ConstFunc)), XmlInclude(typeof(PowerFunc)), XmlInclude(typeof(ExpoFunc)), XmlInclude(typeof(LogFunc))]
     public abstract class Function
     {
-        public string Name{ get; set; }
+        public string Name{ get; init; }
 
-        public double A { get; set; }
+        public double A { get; init; }
 
-        public double Coef { get; set; }
+        public double Coef { get; init; }
 
         public abstract double getValue(double x);
 
