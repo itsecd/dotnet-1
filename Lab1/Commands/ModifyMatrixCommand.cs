@@ -11,20 +11,20 @@ namespace Lab1.Commands
         public class ModifyMatrixSettings : CommandSettings
         {
             [CommandArgument(0,"<matrix index>")]
-            public int matIndex {get; set;}
+            public int MatIndex {get; set;}
 
             [CommandArgument(1, "<i>")]
-            public int i {get; set;}
+            public int I {get; set;}
 
             [CommandArgument(2, "<j>")]
-            public int j {get; set;}
+            public int J {get; set;}
 
             [CommandArgument(3, "<value>")]
-            public double newValue {get; set;}
+            public double NewValue {get; set;}
 
             public override ValidationResult Validate()
             {
-                if (matIndex < 0 || i < 0 || j < 0)
+                if (MatIndex < 0 || I < 0 || J < 0)
                     return ValidationResult.Error("Значение индекса не может быть меньше нуля!");
                 return ValidationResult.Success();
             }
@@ -45,43 +45,9 @@ namespace Lab1.Commands
                 AnsiConsole.Write(new Panel("[yellow]Список пуст, попробуйте сначала добавить матрицу с помощью команды [bold green]add[/][/]"));
                 return -1;
             }
-            _data[settings.matIndex][settings.i, settings.j] = settings.newValue;
+            _data[settings.MatIndex][settings.I, settings.J] = settings.NewValue;
             AnsiConsole.Clear();
-            AnsiConsole.Write(_data[settings.matIndex].ToTable());
-            // while (true)
-            // {
-            //     AnsiConsole.Clear();
-            //     AnsiConsole.Write(_data.ToTable());
-            //     int indMod = AnsiConsole.Prompt(new TextPrompt<int>("Индекс (-1 для выхода из меню):"));
-            //     if (indMod < -1 || indMod >= _data.Count)
-            //     {
-            //         AnsiConsole.MarkupLine("[yellow]Недопустимое значение индекса![/]");
-            //         continue;
-            //     }
-            //     if (indMod == -1)
-            //         break;
-            //     while (true)
-            //     {
-            //         AnsiConsole.Clear();
-            //         AnsiConsole.Write(_data[indMod].ToTable());
-            //         AnsiConsole.MarkupLine("Режим редактирования. Формат ввода: i_j_value.\nДля выхода введите 'q'.");
-            //         string userinput = AnsiConsole.Prompt(new TextPrompt<string>(">>>"));
-            //         if (userinput.Contains('q'))
-            //             break;
-            //         try
-            //         {
-            //             var inputarr = userinput.Split('_', 3);
-            //             int i = int.Parse(inputarr[0]);
-            //             int j = int.Parse(inputarr[1]);
-            //             double val = double.Parse(inputarr[2]);
-            //             _data[indMod][i, j] = val;
-            //         }
-            //         catch
-            //         {
-            //             AnsiConsole.MarkupLine("[red]Неверный ввод. Формат ввода: i_j_value. Для выхода введите 'q'.[/]");
-            //         }
-            //     }
-            // }
+            AnsiConsole.Write(_data[settings.MatIndex].ToTable());
             _data.Dump();
             return 0;
         }
