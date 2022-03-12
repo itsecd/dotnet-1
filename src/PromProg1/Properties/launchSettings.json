@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PromProg1": {
+      "commandName": "Project",
+      "commandLineArgs": "insert"
+    }
+  }
+}

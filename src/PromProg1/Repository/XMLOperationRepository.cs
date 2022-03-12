@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace PromProg1.Repository
 {
-    public class XMLOperationRepository : IXMLOperationRepository
+    public class XMLOperationRepository : IOperationRepository
     {
         private const string StorageFileName = "operations.xml";
 
@@ -53,7 +53,6 @@ namespace PromProg1.Repository
 
         public void ClearCollection()
         {
-            //ReadFromFile();
             _operations.Clear();
             WriteToFile();
         }

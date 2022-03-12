@@ -3,7 +3,10 @@ using System;
 using PromProg1.Models;
 using PromProg1.Repository;
 using System.Collections.Generic;
-
+using Microsoft.Extensions.DependencyInjection;
+using PromProg1.Infrastructure;
+using Spectre.Console.Cli;
+using PromProg1.Commands;
 
 namespace PromProg1
 {
@@ -11,21 +14,19 @@ namespace PromProg1
     {
         static void Main(string[] args)
         {
-            Summation sum1 = new Summation();
-            Operation rem1 = new Remainder();
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IOperationRepository, XMLOperationRepository>();
 
-            AnsiConsole.WriteLine($"\n{sum1.GetResult(1,4)}");
+            var registrar = new TypeRegistrar(serviceCollection);
+            var app = new CommandApp(registrar);
 
-            XMLOperationRepository repos = new XMLOperationRepository();
+            app.Configure(config =>
+            {
+                config.AddCommand<InsertOperationCommand>("insert");
+                //config.AddCommand<GetAllFeaturesCommand>("print");
+            });
 
-            repos.InsertOperation(0, rem1);
-            repos.InsertOperation(2, rem1);
-            repos.InsertOperation(1, sum1);
-            repos.RemoveOperation(0);
-            List<Operation> T = new List<Operation>();
-            T = repos.GetOperations();
-            Console.WriteLine($"{T[0].ToString()}");
-            repos.ClearCollection();
+            app.Run(args);
         }
     }
 }

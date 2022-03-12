@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PromProg1.Repository
 {
-    public interface IXMLOperationRepository
+    public interface IOperationRepository
     {
         List<Operation> GetOperations();
         void InsertOperation(int index, Operation operation);
