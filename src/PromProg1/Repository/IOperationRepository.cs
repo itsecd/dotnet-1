@@ -8,5 +8,6 @@ namespace PromProg1.Repository
         List<Operation> GetOperations();
         void InsertOperation(int index, Operation operation);
         void RemoveOperation(int index);
+        void ClearCollection();
     }
 }

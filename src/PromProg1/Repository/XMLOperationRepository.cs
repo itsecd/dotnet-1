@@ -53,6 +53,7 @@ namespace PromProg1.Repository
 
         public void ClearCollection()
         {
+            ReadFromFile();
             _operations.Clear();
             WriteToFile();
         }

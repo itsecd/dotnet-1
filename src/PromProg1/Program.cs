@@ -24,6 +24,7 @@ namespace PromProg1
             {
                 config.AddCommand<InsertOperationCommand>("insert");
                 config.AddCommand<RemoveOperationCommand>("remove");
+                config.AddCommand<ClearRepositoryCommand>("clear");
                 //config.AddCommand<GetAllFeaturesCommand>("print");
             });
 
