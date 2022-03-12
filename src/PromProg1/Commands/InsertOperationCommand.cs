@@ -41,11 +41,11 @@ namespace PromProg1.Commands
                 AnsiConsole.MarkupLine($"[red]Неизвестный тип операции: {operationType}[/]");
                 return -1;
             }
-            AnsiConsole.MarkupLine("Введите индекс\n");
             int index;
-            string strIndex = Console.ReadLine();
             while (true)
             {
+                AnsiConsole.MarkupLine("Введите индекс");
+                string strIndex = Console.ReadLine();
                 if (int.TryParse(strIndex, out index))
                 {
                     _operationsRepository.InsertOperation(index, operation);
@@ -53,7 +53,7 @@ namespace PromProg1.Commands
                 }
                 else
                 {
-                    AnsiConsole.MarkupLine("Введенный индекс не является числом\n");
+                    AnsiConsole.MarkupLine("Введенный индекс не является целым числом\n");
                 }
             }
             

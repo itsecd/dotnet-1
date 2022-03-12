@@ -1,8 +1,5 @@
-﻿using System;
-using Spectre.Console;
-using Spectre.Console.Cli;
+﻿using Spectre.Console.Cli;
 using PromProg1.Repository;
-using PromProg1.Models;
 using System.Diagnostics.CodeAnalysis;
 
 namespace PromProg1.Commands
@@ -23,7 +20,6 @@ namespace PromProg1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] ClearRepositorySettings settings)
         {
             _operationsRepository.ClearCollection();
-
             return 0;
         }
     }

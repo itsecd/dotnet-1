@@ -21,12 +21,11 @@ namespace PromProg1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveOperationSettings settings)
         {
-
-            AnsiConsole.MarkupLine("Введите индекс удаляемой операции\n");
             int index;
-            string strIndex = Console.ReadLine();
             while (true)
             {
+                AnsiConsole.MarkupLine("Введите индекс удаляемой операции");
+                string strIndex = Console.ReadLine();
                 if (int.TryParse(strIndex, out index))
                 {
                     _operationsRepository.RemoveOperation(index);
@@ -34,7 +33,7 @@ namespace PromProg1.Commands
                 }
                 else
                 {
-                    AnsiConsole.MarkupLine("Введенный индекс не является числом\n");
+                    AnsiConsole.MarkupLine("Введенный индекс не является целым числом\n");
                 }
             }
 

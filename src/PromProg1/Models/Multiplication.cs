@@ -10,7 +10,7 @@ namespace PromProg1.Models
     {
         public override double GetResult(double operand1, double operand2)
         {
-            return operand1 + operand2;
+            return operand1 * operand2;
         }
         public override string ToString()
         {

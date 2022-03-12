@@ -58,6 +58,17 @@ namespace PromProg1.Repository
             WriteToFile();
         }
 
+        public int CompareTwoOperations(int index1stOperation, int index2ndOperation, double operand1, double operand2)
+        {
+            ReadFromFile();
+            if (_operations[index1stOperation].GetResult(operand1, operand2) < _operations[index2ndOperation].GetResult(operand1, operand2))
+                return -1;
+            else if (_operations[index1stOperation].GetResult(operand1, operand2) == _operations[index2ndOperation].GetResult(operand1, operand2))
+                return 0;
+            else
+                return 1;
+        }
+
         public List<Operation> GetOperations()
         {
             ReadFromFile();

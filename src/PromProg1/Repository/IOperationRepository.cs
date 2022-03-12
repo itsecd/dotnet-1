@@ -9,5 +9,6 @@ namespace PromProg1.Repository
         void InsertOperation(int index, Operation operation);
         void RemoveOperation(int index);
         void ClearCollection();
+        int CompareTwoOperations(int index1stOperation, int index2ndOperation, double operand1, double operand2);
     }
 }
