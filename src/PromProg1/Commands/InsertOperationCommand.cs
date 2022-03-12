@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using PromProg1.Repository;
@@ -27,7 +23,7 @@ namespace PromProg1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] InsertOperationSettings settings)
         {
             var operationType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Выберите тип фигуры: ")
+                .Title("Выберите тип операции: ")
                 .AddChoices("Сложение", "Вычитание", "Умножение", "Целочисленное деление", "Остаток от деления"));
 
             Operation operation = operationType switch

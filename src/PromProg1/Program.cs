@@ -23,6 +23,7 @@ namespace PromProg1
             app.Configure(config =>
             {
                 config.AddCommand<InsertOperationCommand>("insert");
+                config.AddCommand<RemoveOperationCommand>("remove");
                 //config.AddCommand<GetAllFeaturesCommand>("print");
             });
 
