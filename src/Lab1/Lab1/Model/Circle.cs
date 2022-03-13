@@ -2,7 +2,7 @@
 
 namespace Lab1.Model
 {
-    public class Circle: Shape
+    public class Circle : Figure
     {
         public Point Centre { get; set; }
 
@@ -38,7 +38,7 @@ namespace Lab1.Model
 
         public override string ToString()
         {
-            return $"Circle: ({Centre.X}; {Centre.Y}) Radius = {Radius}";
+            return $"({Centre.X};{Centre.Y}) Radius = {Radius}";
         }
 
         public override bool Equals(Object obj)

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Lab1.Model
 {
-    public class Triangle : Shape
+    public class Triangle : Figure
     {
         public Point[] Points { get; set; }
 
@@ -42,7 +42,7 @@ namespace Lab1.Model
 
         public override string ToString()
         {
-            return $"Triangle: ({Points[0].X};{Points[0].Y}), " +
+            return $"({Points[0].X};{Points[0].Y}), " +
                 $"({Points[1].X};{Points[1].Y}), ({Points[2].X};{Points[2].Y})";
         }
 
