@@ -1,11 +1,17 @@
 ﻿using System;
 //using Functions;
 using System.Collections.Generic;
+using Spectre.Console;
+using Lab1.FunctionsRepository;
 
 //using System.Xml;
 // using Math;
 
-using MenuSpace;
+//using Lab1.Menu;
+using Microsoft.Extensions.DependencyInjection;
+using Lab1.Infrastructure;
+using Lab1.Commands;
+using Spectre.Console.Cli;
 
 namespace Lab1
 {
@@ -13,23 +19,26 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            /*Console.WriteLine("Hello World!");
-            Console.WriteLine("Введите имя: ");
-            string name = Console.ReadLine();
-            Console.WriteLine($"Ваше имя: {name}");*/
+            //Menu.MainMenu();
 
-            Menu.MainMenu();
-            File.Wr
-            /*List<Function> lst = new List<Function>();
-            Function cfunc = new ConstFunc(10);
-            Function pfunc = new PowerFunc(10);
-            lst.Add(cfunc);
-            lst.Add(pfunc);
-            
-            foreach(Function a in lst)
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IFunctionsRepository, XMLFunctionsRepository>();
+
+            var registrar = new TypeRegistrar(serviceCollection);
+            var app = new CommandApp(registrar);
+
+            app.Configure(config =>
             {
-                Console.WriteLine(a);
-            }*/
+                config.AddCommand<AddFunctionCommand>("add");
+                config.AddCommand<ClearFunctionCommand>("clear");
+                config.AddCommand<MenuFunctionCommand>("menu");
+                config.AddCommand<CompareFunctionCommand>("compare");
+                config.AddCommand<CountFunctionCommand>("count");
+                config.AddCommand<DeleteFunctionCommand>("delete");
+                config.AddCommand<WriteFunctionCommand>("write");
+            });
+
+            app.Run(args);
 
         }
 

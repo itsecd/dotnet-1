@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 using Functions;
 using System.Xml.Serialization;
 using System.IO;
+using Lab1.FunctionsRepository;
 
-namespace MenuSpace
+namespace Lab1.Menu
 {
     static class Menu
     {
-        public static void MainMenu()
+        //private readonly IFunctionsRepository functionRepository;
+        public static void MainMenu(ref IFunctionsRepository functionRepository)
         {
-            var lst = new List<Function>(10);
+            //var functionRepository = new List<Function>(10);
             bool isProgramCompleted = false;
             do
             {
@@ -27,8 +29,6 @@ namespace MenuSpace
                 Console.WriteLine("4 - Сравнить два объекта по индексам");
                 Console.WriteLine("5 - Вывести список на экран");
                 Console.WriteLine("6 - Функция, принимающая наибольшее значение при заданном x");
-                Console.WriteLine("7 - Сериализовать контейнер в XML-файл");
-                Console.WriteLine("8 - Десериализовать контейнер из XML-файла");
                 Console.WriteLine("Esc - Завершить программу");
 
                 ConsoleKeyInfo k = Console.ReadKey(true);
@@ -36,45 +36,22 @@ namespace MenuSpace
                 switch (k.Key)
                 {
                     case ConsoleKey.D1:
-                        AddMenu(ref lst);
+                        AddMenu(ref functionRepository);
                         break;
                     case ConsoleKey.D2:
-                        DeleteMenu(ref lst);
+                        DeleteMenu(ref functionRepository);
                         break;
                     case ConsoleKey.D3:
-                        ClearMenu(ref lst);
-                        //lst.Clear();
+                        ClearMenu(ref functionRepository);
                         break;
                     case ConsoleKey.D4:
-                        CompareMenu(ref lst);
+                        CompareMenu(ref functionRepository);
                         break;
                     case ConsoleKey.D5:
-                        Console.Clear();
-                        Console.WriteLine("Список функций: \n");
-                        /*foreach (Function a in lst)
-                        {
-                            Console.WriteLine($"- {a}");
-                        }*/
-                        for (var i = 0; i < lst.Count; ++i)
-                        {
-                            if (i >= 10)
-                            {
-                                Console.WriteLine("...");
-                                break;
-                            }
-                            Console.WriteLine($"{i}) {lst[i]}");
-                        }
-                        Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню..");
-                        Console.ReadKey(true);
+                        WriteMenu(ref functionRepository);
                         break;
                     case ConsoleKey.D6:
-                        CountMenu(ref lst);
-                        break;
-                    case ConsoleKey.D7:
-                        SerializeMenu(ref lst);
-                        break;
-                    case ConsoleKey.D8:
-                        DeSerializeMenu(ref lst);
+                        CountMenu(ref functionRepository);
                         break;
                     case ConsoleKey.Escape:
                         isProgramCompleted = true;
@@ -87,7 +64,7 @@ namespace MenuSpace
 
         }
 
-        static void AddMenu(ref List<Function> lst)
+        public static void AddMenu(ref IFunctionsRepository functionRepository)
         {
             do
             {
@@ -111,8 +88,10 @@ namespace MenuSpace
                     case ConsoleKey.D1:
                         Console.WriteLine("\nВведите коэффициент: ");
                         arg = Convert.ToDouble(Console.ReadLine());
-                        lst.Add(new ConstFunc(arg));
-                        Console.WriteLine($"Функция: {lst[lst.Count - 1]}");
+
+                        functionRepository.Add(new ConstFunc(arg));
+
+                        //Console.WriteLine($"Функция: {functionRepository[functionRepository.Count - 1]}");
                         //choice = true;
                         Console.ReadKey(true);
                         break;
@@ -120,24 +99,30 @@ namespace MenuSpace
                     case ConsoleKey.D2:
                         Console.WriteLine("\nВведите степень: ");
                         arg = Convert.ToDouble(Console.ReadLine());
-                        lst.Add(new PowerFunc(arg));
-                        Console.WriteLine($"Функция: {lst[lst.Count - 1]}");
+                        functionRepository.Add(new PowerFunc(arg));
+
+                        //Console.WriteLine($"Функция: {functionRepository[functionRepository.Count - 1]}");
+
                         Console.ReadKey(true);
                         break;
 
                     case ConsoleKey.D3:
                         Console.WriteLine("\nВведите основание: ");
                         arg = Convert.ToDouble(Console.ReadLine());
-                        lst.Add(new ExpoFunc(arg, 2));
-                        Console.WriteLine($"Функция: {lst[lst.Count - 1]}");
+                        functionRepository.Add(new ExpoFunc(arg, 2));
+
+                        //Console.WriteLine($"Функция: {functionRepository[functionRepository.Count - 1]}");
+
                         Console.ReadKey(true);
                         break;
 
                     case ConsoleKey.D4:
                         Console.WriteLine("\nВведите основание: ");
                         arg = Convert.ToDouble(Console.ReadLine());
-                        lst.Add(new LogFunc(arg));
-                        Console.WriteLine($"Функция: {lst[lst.Count - 1]}");
+                        functionRepository.Add(new LogFunc(arg));
+
+                        //Console.WriteLine($"Функция: {functionRepository[functionRepository.Count - 1]}");
+
                         Console.ReadKey(true);
                         break;
 
@@ -150,7 +135,7 @@ namespace MenuSpace
             } while (true);
         }
 
-        static void DeleteMenu(ref List<Function> lst)
+        public static void DeleteMenu(ref IFunctionsRepository functionRepository)
         {
             Console.Clear();
 
@@ -162,10 +147,10 @@ namespace MenuSpace
             try
             {
                 int result = Convert.ToInt32(input);
-                /*if (result < 0 || result >= lst.Count)
+                /*if (result < 0 || result >= functionRepository.Count)
                     return;*/
-                tmp = lst[result];
-                lst.RemoveAt(result);
+                tmp = functionRepository[result];
+                functionRepository.Delete(result);
             }
             catch
             {
@@ -177,7 +162,7 @@ namespace MenuSpace
             Console.ReadKey(true);
         }
 
-        static void ClearMenu(ref List<Function> lst)
+        public static void ClearMenu(ref IFunctionsRepository functionRepository)
         {
             Console.Clear();
 
@@ -190,7 +175,7 @@ namespace MenuSpace
             switch (k.Key)
             {
                 case ConsoleKey.D1:
-                    lst.Clear();
+                    functionRepository.Clear();
                     break;
                 default:
                     return;
@@ -201,7 +186,7 @@ namespace MenuSpace
             Console.ReadKey(true);
         }
 
-        static void CompareMenu(ref List<Function> lst)
+        public static void CompareMenu(ref IFunctionsRepository functionRepository)
         {
             Console.Clear();
 
@@ -216,15 +201,15 @@ namespace MenuSpace
                 input = Console.ReadLine();
                 var second_index = Convert.ToInt32(input);
 
-                if (lst[first_index].Equals(lst[second_index]))
+                if (functionRepository[first_index].Equals(functionRepository[second_index]))
                 {
                     Console.WriteLine($"Функции под индексами {first_index} и {second_index} одинаковы");
-                    Console.WriteLine($"({lst[first_index]}) == ({lst[second_index]})");
+                    Console.WriteLine($"({functionRepository[first_index]}) == ({functionRepository[second_index]})");
                 }
                 else
                 {
                     Console.WriteLine($"Функции под индексами {first_index} и {second_index} разные");
-                    Console.WriteLine($"({lst[first_index]}) != ({lst[second_index]})");
+                    Console.WriteLine($"({functionRepository[first_index]}) != ({functionRepository[second_index]})");
                 }
             }
             catch
@@ -236,36 +221,9 @@ namespace MenuSpace
             Console.ReadKey(true);
         }
 
-        static void SerializeMenu(ref List<Function> lst)
+        public static void CountMenu(ref IFunctionsRepository functionRepository)
         {
-            if (lst.Count == 0)
-            {
-                Console.WriteLine("\nСписок пуст!");
-                return;
-            }
-            XmlSerializer formatter = new XmlSerializer(typeof(List<Function>));
-            using (FileStream fs = new FileStream("Functions.xml", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, lst);
-            }
-            Console.WriteLine("\nСписок функций сериализован в файл!");
-        }
-
-        static void DeSerializeMenu(ref List<Function> lst)
-        {
-            XmlSerializer formatter = new XmlSerializer(typeof(List<Function>));
-            using (var fs = new FileStream("Functions.xml", FileMode.OpenOrCreate))
-            {
-                var tmp = formatter.Deserialize(fs) as List<Function>;
-                if (tmp.Count != 0)
-                    lst = tmp;
-            }
-            Console.WriteLine("\nСписок функций десериализован из файла!");
-        }
-
-        static void CountMenu(ref List<Function> lst)
-        {
-            if (lst.Count == 0)
+            if (functionRepository.Count == 0)
                 return;
             Console.Clear();
             Console.WriteLine("Введите число: ");
@@ -282,20 +240,38 @@ namespace MenuSpace
                 Console.ReadKey(true);
                 return;
             }
-            var max = lst[0].getValue(x);
-            for (int i = 0; i < lst.Count; ++i)
+            var max = functionRepository[0].getValue(x);
+            for (int i = 0; i < functionRepository.Count; ++i)
             {
-                if (lst[i].getValue(x) >= max)
+                if (functionRepository[i].getValue(x) >= max)
                 {
-                    max = lst[i].getValue(x);
+                    max = functionRepository[i].getValue(x);
                     index = i;
                 }
             }
             Console.WriteLine($"При x = {x} наибольшее значение принимает фукнция");
-            Console.WriteLine($"{lst[index]}");
-            Console.WriteLine($"f({x}) = {lst[index].getValue(x)}");
+            Console.WriteLine($"{functionRepository[index]}");
+            Console.WriteLine($"f({x}) = {functionRepository[index].getValue(x)}");
 
             Console.WriteLine("Нажмите любую клавишу, чтобы вернуться");
+            Console.ReadKey(true);
+        }
+
+        public static void WriteMenu(ref IFunctionsRepository functionRepository)
+        {
+            Console.Clear();
+            Console.WriteLine("Список функций: \n");
+            Console.WriteLine(functionRepository);
+            /*for (var i = 0; i < functionRepository.Count; ++i)
+            {
+                if (i >= 10)
+                {
+                    Console.WriteLine("...");
+                    break;
+                }
+                Console.WriteLine($"{i}) {functionRepository[i]}");
+            }*/
+            Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню..");
             Console.ReadKey(true);
         }
     }
