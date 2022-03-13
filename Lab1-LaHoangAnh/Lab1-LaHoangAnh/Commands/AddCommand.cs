@@ -22,7 +22,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] AddSetting settings)
         {
             var FigureType = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("Выберите тип фигуры: ").AddChoices("Прямоугольник", "Треугольник", "Круг"));
-            Figure? Creat = FigureType switch
+            Figure? figure = FigureType switch
             {
                 "Прямоугольник" => new Rectangle(new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Первая точка X = [/]")),
                                                         AnsiConsole.Prompt(new TextPrompt<double>("[red]Первая точка Y = [/]"))),
@@ -44,14 +44,14 @@ namespace Lab1.Commands
                                         AnsiConsole.Prompt(new TextPrompt<double>("[red]Радиус = [/]"))),
                 _ => null
             };
-            if (Creat == null)
+            if (figure == null)
             {
                 AnsiConsole.MarkupLine($"[red]Неизвестный тип фигуры: {FigureType}[/]");
                 return -1;
             }
             else
             {
-                _figureRepository.Add(Creat);
+                _figureRepository.Add(figure);
             }
             return 0;
         }
