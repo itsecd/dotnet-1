@@ -1,42 +1,55 @@
-﻿
-
-namespace Lab1.Model
+﻿namespace Lab1.Model
 {
     public class Rectangle : Figure
     {
-        public Point A { get;  }
-        public Point B { get;  }
-        public Point C { get;  }
-        public Point D { get;  }
-
+        private Point _A;
+        public Point A {
+            get => _A;
+            set { _A = value; }
+        }
+        private Point _B;
+        public Point B {
+            get => _B;
+            set { _B = value; }
+        }
+        private Point _C;
+        public Point C {
+            get => _C;
+            set { _C = value; }
+        }
+        private Point _D;
+        public Point D {
+            get => _D;
+            set { _D = value; }
+        }
 
         public Rectangle()
         {
-            A = new Point(0, 0);
-            B = new Point(0, 1);
-            C = new Point(1, 1);
-            D = new Point(1, 0);
+            _A = new Point(0, 0);
+            _B = new Point(0, 1);
+            _C = new Point(1, 1);
+            _D = new Point(1, 0);
         }
         public Rectangle(Point a, Point b, Point c, Point d)
         {
-            A = a;
-            B = b;
-            C = c;
-            D = d;
+            _A = a;
+            _B = b;
+            _C = c;
+            _D = d;
         }
 
-        public override double Perimeter() => A.Distance(B) + B.Distance(C) + C.Distance(D) + D.Distance(A);
+        public override double Perimeter() => 2 * (_A.Distance(_B) + _B.Distance(_C));
 
-        public override double Square() => A.Distance(B) * B.Distance(C);
+        public override double Square() => _A.Distance(_B) * _B.Distance(_C);
 
-        public override Rectangle MinBoundingFigure() => this;
+        public override Rectangle MinBoundingBox() => this;
 
-        public override string ToString() => $"Rectangle: ({A.ToString()},{B.ToString()},{C.ToString()},{D.ToString()})";
+        public override string ToString() => $"Rectangle: ({_A.ToString()},{_B.ToString()},{_C.ToString()},{_D.ToString()})";
 
         public override bool Equals(object? obj)
         {
-            if (obj is Rectangle rectangle) return rectangle.A.Equals(A) && rectangle.B.Equals(B) && rectangle.C.Equals(C) && rectangle.D.Equals(D);
-            else return false;
+            if (obj is not Rectangle rectangle) return false;
+            else return rectangle._A.Equals(_A) && rectangle._B.Equals(_B) && rectangle._C.Equals(_C) && rectangle._D.Equals(_D);
         }
     }
 }

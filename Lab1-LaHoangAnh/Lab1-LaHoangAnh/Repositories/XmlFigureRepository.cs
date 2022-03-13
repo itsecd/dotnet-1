@@ -1,5 +1,4 @@
 ﻿using Lab1.Model;
-using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +9,7 @@ namespace Lab1.Repositories
     public class XmlFigureRepository : IFigureRepository
     {
         private const string StorageFileName = "figure.xml";
-        private List<Figure> _figures;
+        private List<Figure>? _figures;
         private void ReadFromFile()
         {
             if (_figures != null) return;
@@ -21,7 +20,7 @@ namespace Lab1.Repositories
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Figure>));
             using var fileStream = new FileStream(StorageFileName, FileMode.Open);
-            _figures = (List<Figure>)xmlSerializer.Deserialize(fileStream);
+            _figures = (List<Figure>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException());
         }
 
         private void WriteToFile()
@@ -40,38 +39,33 @@ namespace Lab1.Repositories
             else
             {
                 ReadFromFile();
-                _figures.Add(figure);
+                _figures!.Add(figure);
                 WriteToFile();
             }
-
         }
 
         public void RemoveAt(int index)
         {
             ReadFromFile();
-            if (index < 0 || index > _figures.Count - 1)
+            if (index < 0 || index > _figures!.Count - 1)
             {
                 throw new IndexOutOfRangeException();
             }
-            _figures.RemoveAt(index);
+            _figures!.RemoveAt(index);
             WriteToFile();
         }
 
         public void RemoveAll()
         {
             ReadFromFile();
-
-            for (int i = 0; i < _figures.Count; i++)
-            {
-                _figures.RemoveAt(i);
-            }
+            _figures!.Clear();
             WriteToFile();
         }
 
         public List<Figure> GetList()
         {
             ReadFromFile();
-            return _figures;
+            return _figures!;
         }
     }
 }

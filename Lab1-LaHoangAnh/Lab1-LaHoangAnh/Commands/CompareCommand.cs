@@ -11,17 +11,17 @@ namespace Lab1.Commands
 
         private readonly IFigureRepository _figuresRepository;
 
-        public CompareCommand(IFigureRepository fi)
+        public CompareCommand(IFigureRepository figuresRepository)
         {
-            _figuresRepository = fi;
+            _figuresRepository = figuresRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] CompareSettings settings)
         {
-            int id1 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс первой фигуры :[/]"));
-            int id2 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс второй фигуры (отличный от {id1}):[/]"));
-            var List = _figuresRepository.GetList();
-            AnsiConsole.WriteLine($"Результат сравнения: {List[id1].Equals(List[id2])}");
+            int Index1 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс первого фигура :[/]"));
+            int Index2 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс второго фигура (различен от {Index1}):[/]"));
+            var figures = _figuresRepository.GetList();
+            AnsiConsole.WriteLine($"Результат сравнения: {figures[Index1].Equals(figures[Index2])}");
             return 0;
         }
     }

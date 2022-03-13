@@ -4,34 +4,36 @@ namespace Lab1.Model
 {
     public struct Point
     {
-        private double X;
-
-        public double x
+        private double _x;
+        public double X
         {
-            get => X;
-            set { X = value; }
+            get => _x;
+            set { _x = value; }
         }
-    
-        private double Y;
-
-        public double y
+        private double _y;
+        public double Y
         {
-            get => Y;
-            set { Y = value;}
+            get => _y;
+            set { _y = value; }
         }
-       
 
-        public Point(double x, double y) { X = x; Y = y; }
+        public Point(double x, double y) { _x = x; _y = y; }
 
+        public double Distance(Point point) => Math.Sqrt((point._x - _x) * (point._x - _x) + (point._y - _y) * (point._y - _y));
 
-        public double Distance(Point A) => Math.Sqrt((A.X - X) * (A.X - X) + (A.Y - Y) * (A.Y - Y));
+        public override string ToString()
+        {
+            return $"[{_x},{_y}]";
+        }
 
-        public override string ToString() => $"[{X},{Y}]";
         public override bool Equals(object? obj)
         {
-            if (obj is Point point) return point.X == X && point.Y == Y;
-            else return false;
+            if (obj is not Point point) return false;
+            else return point._x == _x && point._y == _y;
         }
 
     }
+
+
+
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Lab1.Model;
-using Lab1.Repositories;
+﻿using Lab1.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Lab1.Infrastructure;
 using Spectre.Console.Cli;
@@ -20,9 +18,9 @@ namespace Lab1
 
             app.Configure(config =>
             {
-                config.AddCommand<AddFigureCommand>("add");
+                config.AddCommand<AddCommand>("add");
                 config.AddCommand<OutputCommand>("output");
-                config.AddCommand<RemoveFigureCommand>("remove_one");
+                config.AddCommand<RemoveAtCommand>("remove_one");
                 config.AddCommand<RemoveAllCommand>("remove_all");
                 config.AddCommand<CompareCommand>("compare");
             });

@@ -18,7 +18,7 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveAllSettings settings)
         {
-            AnsiConsole.Write("[orange]Все фигуры удалены.");
+            AnsiConsole.Write("[orange]Контейнер удален.");
             _figuresRepository.RemoveAll();
             return 0;
         }

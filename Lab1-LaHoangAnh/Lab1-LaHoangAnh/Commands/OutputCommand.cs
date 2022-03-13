@@ -1,7 +1,6 @@
-﻿using Lab1.Model;
-using Lab1.Repositories;
+﻿using Lab1.Repositories;
+using Spectre.Console;
 using Spectre.Console.Cli;
-using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
@@ -21,9 +20,9 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] OutputSettings settings)
         {
             var figures = _figuresRepository.GetList();
-            foreach (Figure f in figures)
+            foreach (var f in figures)
             {
-                Console.WriteLine(f.ToString());
+                AnsiConsole.WriteLine($"{ f.ToString()}");
             }
             return 0;
         }
