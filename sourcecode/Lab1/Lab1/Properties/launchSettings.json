@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Lab1cs": {
-      "commandName": "Project",
-      "commandLineArgs": "Print"
-    }
-  }
-}
