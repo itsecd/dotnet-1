@@ -13,6 +13,7 @@ namespace Lab1.FunctionsRepository
         void Add(Function func);
         void Clear();
         bool Compare(int i, int j);
+        public Function? GetMaxValueFunction(double x);
         void Delete(int index);
         string ToString();
     }

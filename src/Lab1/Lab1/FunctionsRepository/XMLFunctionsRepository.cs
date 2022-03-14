@@ -97,7 +97,20 @@ namespace Lab1.FunctionsRepository
             return lst[i].Equals(lst[j]);
         }
 
-        public override string ToString()
+        public Function? GetMaxValueFunction(double x)
+        {
+            ReadFile();
+
+            if (lst.Count == 0)
+                return null;
+
+            var maxLst = lst.OrderBy(f => f.getValue(x));
+            //var maxList = from f in maxLst
+              //            select Last f
+            return maxLst.Last();
+        }
+
+        /*public override string ToString()
         {
             ReadFile();
             string result = "";
@@ -115,6 +128,17 @@ namespace Lab1.FunctionsRepository
             for (int i = 0; i < end; ++i)
                 result += $"\n{i + 1}) {lst[i]}";
             result += dotes;
+
+            return result;
+        }*/
+
+        public override string ToString()
+        {
+            ReadFile();
+
+            string result = "";
+            for (int i = 0; i < lst.Count; ++i)
+                result += $"\n{i + 1}) {lst[i]}";
 
             return result;
         }

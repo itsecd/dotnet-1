@@ -257,6 +257,35 @@ namespace Lab1.Menu
             Console.ReadKey(true);
         }
 
+        public static void CountMenuLinq(ref IFunctionsRepository functionRepository)
+        {
+            if (functionRepository.Count == 0)
+                return;
+            Console.Clear();
+            Console.WriteLine("Введите число: ");
+            double x;
+            try
+            {
+                x = Convert.ToDouble(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("Похоже, вы ввели не число");
+                Console.WriteLine("Нажмите любую клавишу, чтобы вернуться");
+                Console.ReadKey(true);
+                return;
+            }
+
+            var maxFunc = functionRepository.GetMaxValueFunction(x);
+
+            Console.WriteLine($"При x = {x} наибольшее значение принимает фукнция");
+            Console.WriteLine($"{maxFunc}");
+            Console.WriteLine($"f({x}) = {maxFunc.getValue(x)}");
+
+            Console.WriteLine("Нажмите любую клавишу, чтобы вернуться");
+            Console.ReadKey(true);
+        }
+
         public static void WriteMenu(ref IFunctionsRepository functionRepository)
         {
             Console.Clear();
