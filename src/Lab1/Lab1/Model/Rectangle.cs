@@ -4,8 +4,8 @@ namespace Lab1.Model
 {
     public class Rectangle: Figure
     {
-        public Point Point1 { get; set; }
-        public Point Point2 { get; set; }
+        public Point Point1 { get; init; }
+        public Point Point2 { get; init; }
 
         public Rectangle()
         {
@@ -61,7 +61,7 @@ namespace Lab1.Model
 
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            return Point1.GetHashCode() ^ Point2.GetHashCode();
         }
     }
 }

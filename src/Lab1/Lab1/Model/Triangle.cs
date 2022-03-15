@@ -4,9 +4,9 @@ namespace Lab1.Model
 {
     public class Triangle: Figure
     {
-        public Point A { get; set; }
-        public Point B { get; set; }
-        public Point C { get; set; }
+        public Point A { get; init; }
+        public Point B { get; init; }
+        public Point C { get; init; }
 
         public Triangle()
         {
@@ -68,6 +68,11 @@ namespace Lab1.Model
                 return true;
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return A.GetHashCode() ^ B.GetHashCode() ^ C.GetHashCode();
         }
     }
 }

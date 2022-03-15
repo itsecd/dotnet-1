@@ -4,8 +4,8 @@ namespace Lab1.Model
 {
     public class Circle : Figure
     {
-        public Point Centre { get; set; }
-        public double Radius { get; set; }
+        public Point Centre { get; init; }
+        public double Radius { get; init; }
         public Circle()
         {
             Centre = new Point();
@@ -50,6 +50,10 @@ namespace Lab1.Model
                 return true;
             }
             return false;
+        }
+        public override int GetHashCode()
+        {
+            return Centre.GetHashCode() ^ Radius.GetHashCode();
         }
     }
 }
