@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Serialization;
 using Lab1.Model;
 
 namespace Lab1.Services
 {
-    class XmlStorageRepository
+    class XmlStorageRepository : IXmlStorageRepository
     {
         private const string StorageFileName = "Repository.xml";
 
-        private List<Function> ?functionsList;
+        private List<Function>? functionsList;
 
         public void Insert(int index, Function newFunc)
         {
@@ -49,7 +46,7 @@ namespace Lab1.Services
             if (!File.Exists(StorageFileName))
             {
                 return functionsList = new List<Function>();
-                
+
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
             using var fileStream = new FileStream(StorageFileName, FileMode.Open);
