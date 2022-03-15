@@ -5,13 +5,13 @@ namespace Lab1.Model
 {
     public class Triangle : Figure
     {
-        public Point[] Points { get; set; }
+        public Point[] Points { get; init; }
 
-        private double _A => Points[0].DistanceTo(Points[1]);
+        private double _a => Points[0].DistanceTo(Points[1]);
 
-        private double _B => Points[1].DistanceTo(Points[2]);
+        private double _b => Points[1].DistanceTo(Points[2]);
 
-        private double _C => Points[2].DistanceTo(Points[0]);
+        private double _c => Points[2].DistanceTo(Points[0]);
 
         public Triangle()
         {
@@ -25,13 +25,13 @@ namespace Lab1.Model
 
         public override double GetPerimeter()
         {
-            return _A + _B + _C;
+            return _a + _b + _c;
         }
 
         public override double GetArea()
         {
             var halfPerimeter = GetPerimeter() / 2;
-            return Math.Sqrt(halfPerimeter * (halfPerimeter - _A) * (halfPerimeter - _B) * (halfPerimeter - _C));
+            return Math.Sqrt(halfPerimeter * (halfPerimeter - _a) * (halfPerimeter - _b) * (halfPerimeter - _c));
         }
 
         public override Rectangle GetMinFramingRectangle()

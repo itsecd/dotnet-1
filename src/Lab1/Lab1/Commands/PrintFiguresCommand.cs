@@ -23,24 +23,31 @@ namespace Lab1.Commands
         {
             var table = new Table();
 
-            table.AddColumn("Type");
-            table.AddColumn("Coords");
-            table.AddColumn("Perimeter");
-            table.AddColumn("Area");
-            table.AddColumn("MinFramingRectangle");
+            table.AddColumn("Тип");
+            table.AddColumn("Координаты");
+            table.AddColumn("Периметр");
+            table.AddColumn("Площадь");
+            table.AddColumn("Обрамляющий прямоугольник");
 
-            int index = 0;
-            foreach (Figure figure in _figuresRepository.GetFigures())
+            if (_figuresRepository.GetFigures().Count == 0)
             {
-                if (index == 10)
+                table.AddRow("Фигуры отсутствуют");
+            }
+            else
+            {
+                int index = 0;
+                foreach (Figure figure in _figuresRepository.GetFigures())
                 {
-                    table.AddRow("...");
-                    break;
-                }
+                    if (index == 10)
+                    {
+                        table.AddRow("...");
+                        break;
+                    }
 
-                table.AddRow(figure.GetType().Name, figure.ToString(), figure.GetPerimeter().ToString(),
-                    figure.GetArea().ToString(), figure.GetMinFramingRectangle().ToString());
-                ++index;
+                    table.AddRow(figure.GetType().Name, figure.ToString(), figure.GetPerimeter().ToString(),
+                        figure.GetArea().ToString(), figure.GetMinFramingRectangle().ToString());
+                    ++index;
+                }
             }
             table.Centered();
             AnsiConsole.Write(table);

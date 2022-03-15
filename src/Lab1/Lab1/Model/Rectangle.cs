@@ -4,48 +4,51 @@ namespace Lab1.Model
 {
     public class Rectangle : Figure
     {
-        public Point[] Points { get; set; }
+        public Point FirstPoint { get; init; }
 
-        private double _A => Math.Abs(Points[0].X - Points[1].X);
+        public Point SecondPoint { get; init; }
 
-        private double _B => Math.Abs(Points[0].Y - Points[1].Y);
+        private double _a => Math.Abs(FirstPoint.X - SecondPoint.X);
+
+        private double _b => Math.Abs(FirstPoint.Y - SecondPoint.Y);
 
         public Rectangle()
         {
-            Points = Array.Empty<Point>();
+            FirstPoint = new Point(0, 0);
+            SecondPoint = new Point(0, 0);
         }
 
         public Rectangle(Point point1, Point point2)
         {
-            Points = new Point[] { point1, point2 };
+            FirstPoint = point1;
+            SecondPoint = point2;
         }
 
         public override double GetPerimeter()
         {
-            return (_A + _B) * 2;
+            return (_a + _b) * 2;
         }
 
         public override double GetArea()
         {
-            return _A * _B;
+            return _a * _b;
         }
 
         public override Rectangle GetMinFramingRectangle()
         {
-            return new Rectangle(Points[0], Points[1]);
+            return new Rectangle(FirstPoint, SecondPoint);
         }
 
         public override string ToString()
         {
-            return $"({Points[0].X};{Points[0].Y}), " +
-                $"({Points[1].X};{Points[1].Y})";
+            return $"({FirstPoint.X};{FirstPoint.Y}), ({SecondPoint.X};{SecondPoint.Y})";
         }
 
         public override bool Equals(Object obj)
         {
             if (obj is Rectangle rectangle)
             {
-                return rectangle.Points[0] == Points[0] && rectangle.Points[1] == Points[1];
+                return rectangle.FirstPoint == FirstPoint && rectangle.SecondPoint == SecondPoint;
             }
             return false;
         }

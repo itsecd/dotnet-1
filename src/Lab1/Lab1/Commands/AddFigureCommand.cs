@@ -22,15 +22,15 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureSettings settings)
         {
             var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Выберите тип фигуры: ")
+                .Title("Выберите тип фигуры, которую хотите добавить: ")
                 .AddChoices("Треугольник", "Прямоугольник", "Круг"));
 
             Figure figure = figureType switch
             {
                 "Треугольник" => new Triangle(
                     new Point(
-                        AnsiConsole.Prompt(new TextPrompt<double>("Точка 1 координата X:")),
-                        AnsiConsole.Prompt(new TextPrompt<double>("Точка 1 координата Y:"))),
+                        AnsiConsole.Prompt(new TextPrompt<double>("Точка 1 координата X: ")),
+                        AnsiConsole.Prompt(new TextPrompt<double>("Точка 1 координата Y: "))),
                     new Point(
                         AnsiConsole.Prompt(new TextPrompt<double>("Точка 2 координата X: ")),
                         AnsiConsole.Prompt(new TextPrompt<double>("Точка 2 координата Y: "))),
@@ -54,7 +54,7 @@ namespace Lab1.Commands
                 ),
                 _ => null
             };
-            var index = AnsiConsole.Prompt<int>(new TextPrompt<int>("Индекс для вставки фигуры:"));
+            var index = AnsiConsole.Prompt<int>(new TextPrompt<int>("Индекс для вставки фигуры: "));
             _figuresRepository.AddFigure(index, figure);
             return 0;
         }

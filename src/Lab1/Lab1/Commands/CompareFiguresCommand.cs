@@ -20,14 +20,14 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] CompareFiguresSettings settings)
         {
-            var leftIndex = AnsiConsole.Prompt(new TextPrompt<int>("Индекс первой фигуры для сравнения:"));
-            var rightIndex = AnsiConsole.Prompt(new TextPrompt<int>("Индекс второй фигуры для сравнения:"));
+            var leftIndex = AnsiConsole.Prompt(new TextPrompt<int>("Индекс первой фигуры для сравнения: "));
+            var rightIndex = AnsiConsole.Prompt(new TextPrompt<int>("Индекс второй фигуры для сравнения: "));
             var firstFigure = _figuresRepository.GetFigures()[leftIndex];
             var secondFigure = _figuresRepository.GetFigures()[rightIndex];
             var table = new Table();
 
-            table.AddColumn("First figure");
-            table.AddColumn("Seconds figure");
+            table.AddColumn("Первая фигура");
+            table.AddColumn("Вторая фигура");
 
             table.AddRow(firstFigure.GetType().Name, secondFigure.GetType().Name);
             table.AddRow(firstFigure.ToString(), secondFigure.ToString());
@@ -37,15 +37,15 @@ namespace Lab1.Commands
 
             if (firstFigure.GetArea() > secondFigure.GetArea())
             {
-                AnsiConsole.Write("First figure is bigger than second");
+                AnsiConsole.Write("Первая фигура больше второй");
             }
             else if (firstFigure.GetArea() < secondFigure.GetArea())
             {
-                AnsiConsole.Write("Second figure is bigger than first");
+                AnsiConsole.Write("Вторая фигура больше первой");
             }
             else
             {
-                AnsiConsole.Write("First and second figures are the same size");
+                AnsiConsole.Write("Первая и вторая фигуры имеют одинаковый размер");
             }
             return 0;
         }

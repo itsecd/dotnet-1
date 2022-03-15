@@ -4,9 +4,9 @@ namespace Lab1.Model
 {
     public class Circle : Figure
     {
-        public Point Centre { get; set; }
+        public Point Centre { get; init; }
 
-        public double Radius { get; set; }
+        public double Radius { get; init; }
 
         public Circle()
         {
