@@ -30,7 +30,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFunctionSettings settings)
         {
             //throw new NotImplementedException();
-            Lab1.Menu.Menu.AddMenu(ref functionRepository);
+            Menu.Menu.AddMenu(ref functionRepository);
 
             return 0;
         }

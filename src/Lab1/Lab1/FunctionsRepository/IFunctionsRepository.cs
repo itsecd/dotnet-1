@@ -16,5 +16,6 @@ namespace Lab1.FunctionsRepository
         public Function? GetMaxValueFunction(double x);
         void Delete(int index);
         string ToString();
+        //public void WriteFunctions();
     }
 }

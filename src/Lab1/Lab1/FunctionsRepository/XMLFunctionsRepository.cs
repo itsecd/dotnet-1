@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Functions;
 using System.Xml.Serialization;
 using System.IO;
+using AnsiConsole;
+using Spectre.Console;
 
 namespace Lab1.FunctionsRepository
 {
@@ -39,11 +41,21 @@ namespace Lab1.FunctionsRepository
             }
 
             XmlSerializer formatter = new XmlSerializer(typeof(List<Function>));
-            using (var fs = new FileStream(filename, FileMode.Open))
+
+            try
             {
-                var tmp = formatter.Deserialize(fs) as List<Function>;
-                if (tmp.Count != 0)
-                    lst = tmp;
+                using (var fs = new FileStream(filename, FileMode.Open))
+                {
+                    var tmp = formatter.Deserialize(fs) as List<Function>;
+                    if (tmp.Count != 0)
+                        lst = tmp;
+                    else lst = new List<Function>();
+                }
+            }
+            catch (Exception)
+            {
+                lst = new List<Function>();
+                return false;
             }
 
             return true;
@@ -51,22 +63,18 @@ namespace Lab1.FunctionsRepository
 
         private bool WriteToFile()
         {
-            if (lst.Count == 0)
-                return false;
+            /*if (lst.Count == 0)
+                return false;*/
 
             XmlSerializer formatter = new XmlSerializer(typeof(List<Function>));
-            using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+            //using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(filename, FileMode.Create))
             {
                 formatter.Serialize(fs, lst);
             }
 
             return true;
         }
-
-        /*public void Add(double arg)
-        {
-            lst.Add(new PowerFunc(arg));
-        }*/
 
         public void Add(Function func)
         {
@@ -85,7 +93,7 @@ namespace Lab1.FunctionsRepository
             WriteToFile();
         }
 
-        public void Delete(int index) // лучше просто перегрузить доступ по индексу
+        public void Delete(int index) 
         {
             lst.RemoveAt(index);
             WriteToFile();
@@ -105,14 +113,16 @@ namespace Lab1.FunctionsRepository
                 return null;
 
             var maxLst = lst.OrderBy(f => f.getValue(x));
-            //var maxList = from f in maxLst
-              //            select Last f
             return maxLst.Last();
         }
 
-        /*public override string ToString()
+        public override string ToString()
         {
             ReadFile();
+
+            if (lst.Count == 0)
+                return "Контейнер пуст";
+
             string result = "";
             string dotes = "\n...";
 
@@ -130,9 +140,9 @@ namespace Lab1.FunctionsRepository
             result += dotes;
 
             return result;
-        }*/
+        }
 
-        public override string ToString()
+        /*public override string ToString()
         {
             ReadFile();
 
@@ -142,5 +152,20 @@ namespace Lab1.FunctionsRepository
 
             return result;
         }
+
+        public void WriteFunctions()
+        {
+            ReadFile();
+
+            var table = new Table();
+            table.AddColumn("№");
+            table.AddColumn("Функция");
+
+            foreach(Function func in lst)
+            {
+                table.AddRow(func.GetType().Name, func.ToString());
+            }
+            Console.WriteLine(table.ToString());
+        }*/
     }
 }

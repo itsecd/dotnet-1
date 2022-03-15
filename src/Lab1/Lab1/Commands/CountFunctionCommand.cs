@@ -20,7 +20,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] CountFunctionSettings settings)
         {
             //Menu.Menu.CountMenu(ref functionRepository);
-            Menu.Menu.CountMenuLinq(ref functionRepository);
+            Menu.Menu.CountMenu(ref functionRepository);
 
             return 0;
         }

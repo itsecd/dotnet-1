@@ -83,47 +83,44 @@ namespace Lab1.Menu
                 double arg;
 
                 bool choice = false;
+                bool no_error = true;
                 switch (k.Key)
                 {
                     case ConsoleKey.D1:
                         Console.WriteLine("\nВведите коэффициент: ");
-                        arg = Convert.ToDouble(Console.ReadLine());
-
-                        functionRepository.Add(new ConstFunc(arg));
-
-                        //Console.WriteLine($"Функция: {functionRepository[functionRepository.Count - 1]}");
-                        //choice = true;
-                        Console.ReadKey(true);
+                        //arg = Convert.ToDouble(Console.ReadLine());
+                        no_error = double.TryParse(Console.ReadLine(), out arg);
+                        if (no_error)
+                            functionRepository.Add(new ConstFunc(arg));
+                        else
+                            Console.WriteLine("Ошибка! Новая функция не была добавлена.");
                         break;
 
                     case ConsoleKey.D2:
                         Console.WriteLine("\nВведите степень: ");
-                        arg = Convert.ToDouble(Console.ReadLine());
-                        functionRepository.Add(new PowerFunc(arg));
-
-                        //Console.WriteLine($"Функция: {functionRepository[functionRepository.Count - 1]}");
-
-                        Console.ReadKey(true);
+                        no_error = double.TryParse(Console.ReadLine(), out arg);
+                        if (no_error)
+                            functionRepository.Add(new PowerFunc(arg));
+                        else
+                            Console.WriteLine("Ошибка! Новая функция не была добавлена.");
                         break;
 
                     case ConsoleKey.D3:
                         Console.WriteLine("\nВведите основание: ");
-                        arg = Convert.ToDouble(Console.ReadLine());
-                        functionRepository.Add(new ExpoFunc(arg, 2));
-
-                        //Console.WriteLine($"Функция: {functionRepository[functionRepository.Count - 1]}");
-
-                        Console.ReadKey(true);
+                        no_error = double.TryParse(Console.ReadLine(), out arg);
+                        if (no_error)
+                            functionRepository.Add(new ExpoFunc(arg, 2));
+                        else
+                            Console.WriteLine("Ошибка! Новая функция не была добавлена.");
                         break;
 
                     case ConsoleKey.D4:
                         Console.WriteLine("\nВведите основание: ");
-                        arg = Convert.ToDouble(Console.ReadLine());
-                        functionRepository.Add(new LogFunc(arg));
-
-                        //Console.WriteLine($"Функция: {functionRepository[functionRepository.Count - 1]}");
-
-                        Console.ReadKey(true);
+                        no_error = double.TryParse(Console.ReadLine(), out arg);
+                        if (no_error)
+                            functionRepository.Add(new LogFunc(arg));
+                        else
+                            Console.WriteLine("Ошибка! Новая функция не была добавлена.");
                         break;
 
                     case ConsoleKey.Escape:
@@ -132,6 +129,10 @@ namespace Lab1.Menu
                 }
                 if (choice)
                     break;
+                if (no_error)
+                    Console.WriteLine($"Функция: {functionRepository[functionRepository.Count - 1]}");
+                Console.WriteLine("\nНажмите любую клавишу, чтобы продолжить..");
+                Console.ReadKey(true);
             } while (true);
         }
 
@@ -151,13 +152,15 @@ namespace Lab1.Menu
                     return;*/
                 tmp = functionRepository[result];
                 functionRepository.Delete(result);
+
+                Console.WriteLine($"Удалён элемент {tmp}");
             }
             catch
             {
+                Console.WriteLine("Ошибка!");
                 return;
             }
 
-            Console.WriteLine($"Удалён элемент {tmp}");
             Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню..");
             Console.ReadKey(true);
         }
@@ -214,17 +217,15 @@ namespace Lab1.Menu
             }
             catch
             {
-                return;
+                Console.WriteLine("\nОшибка!");
             }
 
             Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню..");
             Console.ReadKey(true);
         }
 
-        public static void CountMenu(ref IFunctionsRepository functionRepository)
+        private static void OwnCount(ref IFunctionsRepository functionRepository)
         {
-            if (functionRepository.Count == 0)
-                return;
             Console.Clear();
             Console.WriteLine("Введите число: ");
             double x;
@@ -257,10 +258,8 @@ namespace Lab1.Menu
             Console.ReadKey(true);
         }
 
-        public static void CountMenuLinq(ref IFunctionsRepository functionRepository)
+        private static void LinqCount(ref IFunctionsRepository functionRepository)
         {
-            if (functionRepository.Count == 0)
-                return;
             Console.Clear();
             Console.WriteLine("Введите число: ");
             double x;
@@ -271,7 +270,7 @@ namespace Lab1.Menu
             catch
             {
                 Console.WriteLine("Похоже, вы ввели не число");
-                Console.WriteLine("Нажмите любую клавишу, чтобы вернуться");
+                Console.WriteLine("Нажмите любую клавишу, чтобы вернуться..");
                 Console.ReadKey(true);
                 return;
             }
@@ -282,8 +281,37 @@ namespace Lab1.Menu
             Console.WriteLine($"{maxFunc}");
             Console.WriteLine($"f({x}) = {maxFunc.getValue(x)}");
 
-            Console.WriteLine("Нажмите любую клавишу, чтобы вернуться");
+            Console.WriteLine("Нажмите любую клавишу, чтобы вернуться..");
             Console.ReadKey(true);
+        }
+
+        public static void CountMenu(ref IFunctionsRepository functionRepository)
+        {
+            if (functionRepository.Count == 0)
+            {
+                Console.WriteLine("Контейнер пуст, расчёт невозможен");
+                Console.WriteLine("Нажмите любую клавишу, чтобы вернуться..");
+                Console.ReadKey(true);
+                //  return;
+            }
+
+            Console.WriteLine("Использовать для вычислений:");
+            Console.WriteLine("1 - Свой алгоритм");
+            Console.WriteLine("2 - Linq");
+
+            ConsoleKeyInfo k = Console.ReadKey(true);
+
+            switch (k.Key)
+            {
+                case ConsoleKey.D1:
+                    OwnCount(ref functionRepository);
+                    break;
+                case ConsoleKey.D2:
+                    LinqCount(ref functionRepository);
+                    break;
+                default:
+                    return;
+            }
         }
 
         public static void WriteMenu(ref IFunctionsRepository functionRepository)
@@ -291,15 +319,7 @@ namespace Lab1.Menu
             Console.Clear();
             Console.WriteLine("Список функций: \n");
             Console.WriteLine(functionRepository);
-            /*for (var i = 0; i < functionRepository.Count; ++i)
-            {
-                if (i >= 10)
-                {
-                    Console.WriteLine("...");
-                    break;
-                }
-                Console.WriteLine($"{i}) {functionRepository[i]}");
-            }*/
+            //functionRepository.WriteFunctions();
             Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню..");
             Console.ReadKey(true);
         }

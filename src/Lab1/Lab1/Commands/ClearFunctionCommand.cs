@@ -18,7 +18,7 @@ namespace Lab1.Commands
         {
         }
 
-        private readonly IFunctionsRepository functionRepository;
+        private IFunctionsRepository functionRepository;
 
         public ClearFunctionCommand(IFunctionsRepository repository)
         {
@@ -27,27 +27,7 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] ClearFunctionSettings settings)
         {
-            Console.Clear();
-
-            Console.WriteLine("Вы уверены, что хотите полностью очистить контейнер?");
-            Console.WriteLine("1 - Да");
-            Console.WriteLine("2 - Нет");
-
-            ConsoleKeyInfo k = Console.ReadKey(true);
-
-            switch (k.Key)
-            {
-                case ConsoleKey.D1:
-                    functionRepository.Clear();
-                    break;
-                default:
-                    Console.WriteLine("Список не был очищен");
-                    return 1;
-            }
-
-            Console.WriteLine("Список полностью очищен");
-            Console.WriteLine("\nНажмите любую клавишу, чтобы закончить..");
-            Console.ReadKey(true);
+            Menu.Menu.ClearMenu(ref functionRepository);
 
             return 0;
         }
