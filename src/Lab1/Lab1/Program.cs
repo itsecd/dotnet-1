@@ -1,7 +1,7 @@
-﻿using System;
-using Lab1.Model;
+﻿using Lab1.Commands;
+using Lab1.Infrastructure;
 using Lab1.Repositories;
-using Spectre.Console;
+using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 
 namespace Lab1
@@ -10,53 +10,23 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            var figureRepository = new XmlFiguresRepository();
-            while (true)
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IFiguresRepository, XmlFiguresRepository>();
+
+            var registrar = new TypeRegistrar(serviceCollection);
+            var app = new CommandApp(registrar);
+
+            app.Configure(config =>
             {
-                var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Выберите тип фигуры: ")
-                .AddChoices("Треугольник", "Прямоугольник", "Круг"));
+                config.AddCommand<AddFigureCommand>("add");
+                config.AddCommand<PrintFiguresCommand>("print");
+                config.AddCommand<CompareFiguresCommand>("compare");
+                config.AddCommand<GetTotalAreaCommand>("sum");
+                config.AddCommand<RemoveFigureCommand>("remove");
+                config.AddCommand<DeleteFiguresCommand>("clear");
+            });
 
-                Figure figure = figureType switch
-                {
-                    "Треугольник" => new Triangle(
-                        new Point(
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 1 координата X:")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 1 координата Y:"))),
-                        new Point(
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 2 координата X: ")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 2 координата Y: "))),
-                        new Point(
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 3 координата X: ")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 3 координата Y: ")))
-                    ),
-                    "Прямоугольник" => new Rectangle(
-                        new Point(
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 1 координата X: ")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 1 координата Y: "))),
-                        new Point(
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 2 координата X: ")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("Точка 2 координата Y: ")))
-                    ),
-                    "Круг" => new Circle(
-                        new Point(
-                            AnsiConsole.Prompt(new TextPrompt<double>("Центр координата X: ")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("Центр координата Y: "))),
-                        AnsiConsole.Prompt(new TextPrompt<double>("Радиус: "))
-                    ),
-                    _ => null
-                };
-                figureRepository.AddFigure(figure);
-
-                var userChoice = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Хотите добавить еще одну фигуру? ")
-                .AddChoices("Да", "Нет"));
-
-                if (userChoice == "Нет")
-                    break;
-            }
-
-            figureRepository.PrintFigures();
+            app.Run(args);
         }
     }
 }

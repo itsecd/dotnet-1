@@ -1,13 +1,13 @@
 ﻿using Lab1.Model;
-using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace Lab1.Repositories
 {
-    public class XmlFiguresRepository : IXmlFiguresRepository
+    public class XmlFiguresRepository : IFiguresRepository
     {
         private const string StorageFileName = "figures.xml";
 
@@ -46,13 +46,21 @@ namespace Lab1.Repositories
             return _figures;
         }
 
-        public void AddFigure(Figure figure)
+        public void AddFigure(int index, Figure figure)
         {
             if (figure == null)
                 throw new ArgumentNullException();
 
             ReadFromFile();
-            _figures.Add(figure);
+            if (_figures.Count <= index)
+            {
+                _figures.Add(figure);
+            }
+            else
+            {
+                RemoveFigure(index);
+                _figures.Insert(index, figure);
+            }
             WriteToFile();
         }
 
@@ -71,30 +79,19 @@ namespace Lab1.Repositories
             WriteToFile();
         }
 
-        public void PrintFigures()
+        public double GetTotalAreaManually()
         {
-            var table = new Table();
-
-            table.AddColumn("Type");
-            table.AddColumn("Coords");
-            table.AddColumn("Perimeter");
-            table.AddColumn("Area");
-            table.AddColumn("MinFramingRectangle");
-
-            int count = 0;
-            foreach (Figure figure in _figures)
+            double area = 0;
+            foreach (var figure in _figures)
             {
-                if (count == 10)
-                {
-                    table.AddRow("...");
-                    break;
-                }
-
-                table.AddRow(figure.GetType().Name, figure.ToString(), figure.GetPerimeter().ToString(),
-                    figure.GetArea().ToString(), figure.GetMinFramingRectangle().ToString());
-                ++count;
+                area += figure.GetArea();
             }
-            AnsiConsole.Write(table);
+            return area;
+        }
+
+        public double GetTotalAreaLinq()
+        {
+            return _figures.Sum(figure => figure.GetArea());
         }
     }
 }

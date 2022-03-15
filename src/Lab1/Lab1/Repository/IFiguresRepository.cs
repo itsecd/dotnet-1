@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 namespace Lab1.Repositories
 {
-    public interface IXmlFiguresRepository
+    public interface IFiguresRepository
     {
-        void AddFigure(Figure figure);
+        void AddFigure(int index, Figure figure);
         void DeleteFigures();
         List<Figure> GetFigures();
         void RemoveFigure(int index);
+        double GetTotalAreaManually();
+        double GetTotalAreaLinq();
     }
 }
