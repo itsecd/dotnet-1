@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lab1.Services
 {
-    public interface IXmlStorageRepository
+    public interface IFunctionsRepository
     {
         void Clear();
         List<Function> GetAll();

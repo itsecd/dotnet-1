@@ -18,7 +18,7 @@
 
         public override string ToString() => $"{Linear}x + {Const}";
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is LinearFunction func)
             {

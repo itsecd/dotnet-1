@@ -17,7 +17,7 @@
 
         public override string ToString() => $"{ValueConst}";
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Constant c)
             {

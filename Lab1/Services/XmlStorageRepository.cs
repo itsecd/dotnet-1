@@ -6,7 +6,7 @@ using Lab1.Model;
 
 namespace Lab1.Services
 {
-    class XmlStorageRepository : IXmlStorageRepository
+    class XmlStorageRepository : IFunctionsRepository
     {
         private const string StorageFileName = "Repository.xml";
 

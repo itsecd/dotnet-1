@@ -23,7 +23,7 @@ namespace Lab1.Model
 
         public override string ToString() => $"{A}x^2 + {B}x + {C}";
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is QuadraticFunction func)
             {

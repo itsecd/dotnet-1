@@ -23,12 +23,12 @@ namespace Lab1.Model
 
         public override string ToString() => $"{Amplitude} sin({Omega}x + {Phase}";
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            //if (obj is Sin func)
-            //{
-            //    return Sign == func.Sign;
-            //}
+            if (obj is Sin func)
+            {
+                return Amplitude == func.Amplitude && Omega == func.Omega && Phase == func.Phase;
+            }
             return false;
         }
 

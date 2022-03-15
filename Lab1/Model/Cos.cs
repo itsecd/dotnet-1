@@ -23,10 +23,18 @@ namespace Lab1.Model
 
         public override string ToString() => $"{Amplitude} cos({Omega}x + {Phase}";
             
-        public override bool Equals(object obj)
+        /*
+        var s = объект?.поле
+        если объект равен null, то переменная s будет содержать null вместо генерации исключения.
+        var s = объект.поле ?? стандартное_значение
+        если объект равен null, то вернется стандартное_значение.
+        */
+        public override bool Equals(object? obj)
         {
             if (obj is Cos func)
-                return true;
+            {
+                return Amplitude == func.Amplitude && Omega == func.Omega && Phase == func.Phase;
+            }
             return false;
         }
 
