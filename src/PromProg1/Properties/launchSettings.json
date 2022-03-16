@@ -2,7 +2,7 @@
   "profiles": {
     "PromProg1": {
       "commandName": "Project",
-      "commandLineArgs": "compare"
+      "commandLineArgs": "min"
     }
   }
 }

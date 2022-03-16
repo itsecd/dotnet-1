@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 
 
@@ -73,6 +74,32 @@ namespace PromProg1.Repository
         {
             ReadFromFile();
             return _operations;
+        }
+
+
+        public string FindMin(double operand1, double operand2)
+        {
+            ReadFromFile();
+            string minOperation = "null";
+            if (_operations.Count == 0)
+            {
+                return null;
+            }
+            double minResult = _operations[0].GetResult(operand1, operand2);
+            foreach (var operation in _operations)
+            {
+                if (minResult > operation.GetResult(operand1, operand2))
+                {
+                    minResult = operation.GetResult(operand1, operand2);
+                    minOperation = operation.ToString();
+                }
+            }
+            return minOperation;
+        }
+
+        public string FindMinLinq(double operand1, double operand2)
+        {
+            return(_operations.First(operation => operation.GetResult(operand1, operand2) == _operations.Min(operation => operation.GetResult(operand1, operand2))).ToString());
         }
     }
 }

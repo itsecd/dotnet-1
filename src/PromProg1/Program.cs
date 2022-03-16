@@ -26,7 +26,8 @@ namespace PromProg1
                 config.AddCommand<RemoveOperationCommand>("remove");
                 config.AddCommand<ClearRepositoryCommand>("clear");
                 config.AddCommand<CompareTwoOperationsCommand>("compare");
-                //config.AddCommand<GetAllFeaturesCommand>("print");
+                config.AddCommand<FindMinCommand>("min");
+                config.AddCommand<GetOperationsCommand>("print");
             });
 
             app.Run(args);
