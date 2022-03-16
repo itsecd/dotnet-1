@@ -1,5 +1,4 @@
-﻿using System;
-using Spectre.Console;
+﻿using Spectre.Console;
 using Spectre.Console.Cli;
 using PromProg1.Repository;
 using PromProg1.Models;
@@ -41,22 +40,8 @@ namespace PromProg1.Commands
                 AnsiConsole.MarkupLine($"[red]Неизвестный тип операции: {operationType}[/]");
                 return -1;
             }
-            int index;
-            while (true)
-            {
-                AnsiConsole.MarkupLine("Введите индекс");
-                string strIndex = Console.ReadLine();
-                if (int.TryParse(strIndex, out index))
-                {
-                    _operationsRepository.InsertOperation(index, operation);
-                    break;
-                }
-                else
-                {
-                    AnsiConsole.MarkupLine("Введенный индекс не является целым числом\n");
-                }
-            }
-            
+            int index = AnsiConsole.Prompt(new TextPrompt<int>("Введите индекс"));
+            _operationsRepository.InsertOperation(index, operation);
             return 0;
         }
     }

@@ -1,11 +1,9 @@
-﻿using PromProg1.Models;
-using PromProg1.Repository;
+﻿using PromProg1.Repository;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+
 namespace PromProg1.Commands
 {
     public class FindMinCommand : Command<FindMinCommand.FindMinSettings>

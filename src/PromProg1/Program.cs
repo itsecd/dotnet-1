@@ -1,9 +1,5 @@
-﻿using Spectre.Console;
-using System;
-using PromProg1.Models;
-using PromProg1.Repository;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
+﻿using PromProg1.Repository;
+using Microsoft.Extensions.DependencyInjection; 
 using PromProg1.Infrastructure;
 using Spectre.Console.Cli;
 using PromProg1.Commands;

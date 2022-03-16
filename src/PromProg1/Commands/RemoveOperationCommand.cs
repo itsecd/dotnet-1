@@ -21,22 +21,8 @@ namespace PromProg1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveOperationSettings settings)
         {
-            int index;
-            while (true)
-            {
-                AnsiConsole.MarkupLine("Введите индекс удаляемой операции");
-                string strIndex = Console.ReadLine();
-                if (int.TryParse(strIndex, out index))
-                {
-                    _operationsRepository.RemoveOperation(index);
-                    break;
-                }
-                else
-                {
-                    AnsiConsole.MarkupLine("Введенный индекс не является целым числом\n");
-                }
-            }
-
+            int index = AnsiConsole.Prompt(new TextPrompt<int>("Введите индекс"));
+            _operationsRepository.RemoveOperation(index);
             return 0;
         }
     }

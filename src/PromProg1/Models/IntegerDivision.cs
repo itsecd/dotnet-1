@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PromProg1.Models
+﻿namespace PromProg1.Models
 {
     public class IntegerDivision : Operation
     {
@@ -20,11 +14,7 @@ namespace PromProg1.Models
         {
             if (obj == null)
                 return false;
-            if (obj.GetType().Name == GetType().Name)
-            {
-                return true;
-            }
-            return false;
+            return (obj.GetType().Name == GetType().Name);
         }
     }
 }

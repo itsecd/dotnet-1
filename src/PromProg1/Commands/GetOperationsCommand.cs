@@ -1,8 +1,6 @@
-﻿using System;
-using Spectre.Console;
+﻿using Spectre.Console;
 using Spectre.Console.Cli;
 using PromProg1.Repository;
-using PromProg1.Models;
 using System.Diagnostics.CodeAnalysis;
 
 namespace PromProg1.Commands
