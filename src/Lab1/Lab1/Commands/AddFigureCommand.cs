@@ -25,7 +25,7 @@ namespace Lab1.Commands
                 .AddChoices("Rectangle", "Triangle", "Circle"));
             Figure figure = figureType switch
             {
-                "Rectangular parallelepiped" => new Rectangle(
+                "Rectangle" => new Rectangle(
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]X coordinate for point 1:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]Y coordinate for point 1:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]X coordinate for point 2:[/]")),
@@ -39,7 +39,7 @@ namespace Lab1.Commands
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]X coordinate for vertex 3:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]Y coordinate for vertex 3:[/]"))
                     ),
-                "Sphere" => new Circle(
+                "Circle" => new Circle(
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]X coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]Y coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]Radius:[/]")
