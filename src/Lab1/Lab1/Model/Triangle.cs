@@ -25,13 +25,13 @@ namespace Lab1.Model
 
         public override double GetPerimeter()
         {
-            return _a + _b + _c;
+            return A + B + C;
         }
 
         public override double GetArea()
         {
             var halfPerimeter = GetPerimeter() / 2;
-            return Math.Sqrt(halfPerimeter * (halfPerimeter - _a) * (halfPerimeter - _b) * (halfPerimeter - _c));
+            return Math.Sqrt(halfPerimeter * (halfPerimeter - A) * (halfPerimeter - B) * (halfPerimeter - C));
         }
 
         public override Rectangle GetMinFramingRectangle()

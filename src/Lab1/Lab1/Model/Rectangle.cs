@@ -26,12 +26,12 @@ namespace Lab1.Model
 
         public override double GetPerimeter()
         {
-            return (_a + _b) * 2;
+            return (A + B) * 2;
         }
 
         public override double GetArea()
         {
-            return _a * _b;
+            return A * B;
         }
 
         public override Rectangle GetMinFramingRectangle()
