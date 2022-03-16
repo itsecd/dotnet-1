@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lab1.Repositories
 {
-    internal interface IFiguresRepository
+    public interface IFiguresRepository
     {
         void AddFigure(Figure figure, int index);
         void RemoveFigure(int index);

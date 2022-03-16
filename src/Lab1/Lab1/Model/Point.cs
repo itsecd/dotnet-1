@@ -15,10 +15,7 @@ namespace Lab1.Model
             X = x;
             Y = y;
         }
-        public override string ToString()
-        {
-            return $"({X},{Y})";
-        }
+        public override string ToString() => $"({X},{Y})";
         public override bool Equals(object obj)
         {
             if (obj == null || this.GetType() != obj.GetType())
@@ -33,9 +30,6 @@ namespace Lab1.Model
             return false;
         }
 
-        public override int GetHashCode()
-        {
-            return X.GetHashCode() ^ Y.GetHashCode();
-        }
+        public override int GetHashCode() => X.GetHashCode() ^ Y.GetHashCode();
     }
 }

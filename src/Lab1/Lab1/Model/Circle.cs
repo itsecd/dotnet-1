@@ -16,28 +16,22 @@ namespace Lab1.Model
             Centre = point;
             Radius = radius;
         }
-       
-        public override double GetArea()
+
+        public Circle(double x, double y, double radius)
         {
-            return Math.PI * Math.Pow(Radius, 2);
+            Centre = new Point(x,y);
+            Radius = radius;
         }
 
-        public override Rectangle GetMinRectangle()
-        {
-            return new Rectangle
-                (new Point(Centre.X-Radius,Centre.Y+Radius), 
+        public override double GetArea() => Math.PI * Math.Pow(Radius, 2);
+
+        public override Rectangle GetMinRectangle() => new Rectangle
+                (new Point(Centre.X - Radius, Centre.Y + Radius),
                 new Point(Centre.X + Radius, Centre.Y - Radius));
-        }
 
-        public override double GetPerimeter()
-        {
-            return 2 * Math.PI * Radius;
-        }
+        public override double GetPerimeter() => 2 * Math.PI * Radius;
 
-        public override string ToString()
-        {
-            return $"Centre: {Centre}\nRadius: {Radius}\n";
-        }
+        public override string ToString() => $"Centre: {Centre}\nRadius: {Radius}\n";
         public override bool Equals(object obj)
         {
             if (obj == null || this.GetType() != obj.GetType())
@@ -51,9 +45,6 @@ namespace Lab1.Model
             }
             return false;
         }
-        public override int GetHashCode()
-        {
-            return Centre.GetHashCode() ^ Radius.GetHashCode();
-        }
+        public override int GetHashCode() => Centre.GetHashCode() ^ Radius.GetHashCode();
     }
 }

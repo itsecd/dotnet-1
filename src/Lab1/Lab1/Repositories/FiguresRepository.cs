@@ -7,7 +7,7 @@ using Lab1.Model;
 
 namespace Lab1.Repositories
 {
-    internal class FiguresRepository: IFiguresRepository
+    public class FiguresRepository: IFiguresRepository
     {
 
         private const string StorageFileName = "figures.xml";
