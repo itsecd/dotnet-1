@@ -80,7 +80,7 @@ namespace PromProg1.Repository
         public string FindMin(double operand1, double operand2)
         {
             ReadFromFile();
-            string minOperation;
+            string minOperation = "";
             if (_operations.Count == 0)
             {
                 return null;
