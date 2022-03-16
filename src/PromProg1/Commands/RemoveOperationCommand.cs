@@ -1,5 +1,4 @@
-﻿using System;
-using Spectre.Console;
+﻿using Spectre.Console;
 using Spectre.Console.Cli;
 using PromProg1.Repository;
 using System.Diagnostics.CodeAnalysis;
