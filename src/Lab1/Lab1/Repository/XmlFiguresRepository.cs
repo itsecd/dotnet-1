@@ -49,7 +49,7 @@ namespace Lab1.Repository
         public void AddFigure(int index, Figure figure)
         {
             if (figure == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(figure.GetType().Name);
 
             ReadFromFile();
             if (_figures.Count <= index)
