@@ -7,11 +7,11 @@ namespace Lab1.Model
     {
         public Point[] Points { get; init; }
 
-        private double _a => Points[0].DistanceTo(Points[1]);
+        private double A => Points[0].DistanceTo(Points[1]);
 
-        private double _b => Points[1].DistanceTo(Points[2]);
+        private double B => Points[1].DistanceTo(Points[2]);
 
-        private double _c => Points[2].DistanceTo(Points[0]);
+        private double C => Points[2].DistanceTo(Points[0]);
 
         public Triangle()
         {

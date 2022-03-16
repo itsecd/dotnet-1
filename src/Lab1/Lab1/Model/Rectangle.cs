@@ -8,9 +8,9 @@ namespace Lab1.Model
 
         public Point SecondPoint { get; init; }
 
-        private double _a => Math.Abs(FirstPoint.X - SecondPoint.X);
+        private double A => Math.Abs(FirstPoint.X - SecondPoint.X);
 
-        private double _b => Math.Abs(FirstPoint.Y - SecondPoint.Y);
+        private double B => Math.Abs(FirstPoint.Y - SecondPoint.Y);
 
         public Rectangle()
         {

@@ -1,6 +1,6 @@
 ﻿using Lab1.Commands;
 using Lab1.Infrastructure;
-using Lab1.Repositories;
+using Lab1.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 

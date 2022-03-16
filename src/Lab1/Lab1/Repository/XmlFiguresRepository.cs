@@ -5,7 +5,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Linq;
 
-namespace Lab1.Repositories
+namespace Lab1.Repository
 {
     public class XmlFiguresRepository : IFiguresRepository
     {

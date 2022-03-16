@@ -1,7 +1,7 @@
 ﻿using Lab1.Model;
 using System.Collections.Generic;
 
-namespace Lab1.Repositories
+namespace Lab1.Repository
 {
     public interface IFiguresRepository
     {
