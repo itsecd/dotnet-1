@@ -34,16 +34,13 @@ namespace Lab1.Model
         public override string ToString() => $"Centre: {Centre}\nRadius: {Radius}\n";
         public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
             var circle = (Circle)obj;
-            if (Centre.Equals(circle.Centre) && Radius == circle.Radius)
-            {
-                return true;
-            }
-            return false;
+            return Centre.Equals(circle.Centre) && Radius == circle.Radius;
+           
         }
         public override int GetHashCode() => Centre.GetHashCode() ^ Radius.GetHashCode();
     }

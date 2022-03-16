@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Lab1.Model
+﻿namespace Lab1.Model
 {
     public struct Point
     {
@@ -18,16 +12,12 @@ namespace Lab1.Model
         public override string ToString() => $"({X},{Y})";
         public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
             var point = (Point)obj;
-            if (X == point.X && Y == point.Y)
-            {
-                return true;
-            }
-            return false;
+            return point.X == X && point.Y == Y;
         }
 
         public override int GetHashCode() => X.GetHashCode() ^ Y.GetHashCode();

@@ -34,16 +34,12 @@ namespace Lab1.Model
 
         public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
             var rectangle = (Rectangle)obj;
-            if (Point1.Equals(rectangle.Point1) && Point2.Equals(rectangle.Point2))
-            {
-                return true;
-            }
-            return false;
+            return Point1.Equals(rectangle.Point1) && Point2.Equals(rectangle.Point2);
         }
 
         public override int GetHashCode() => Point1.GetHashCode() ^ Point2.GetHashCode();

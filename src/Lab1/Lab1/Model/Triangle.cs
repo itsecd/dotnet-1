@@ -45,16 +45,12 @@ namespace Lab1.Model
 
         public override bool Equals(object obj)
         {
-            if (obj == null || this.GetType() != obj.GetType())
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
             var triangle = (Triangle)obj;
-            if (A.Equals(triangle.A) && B.Equals(triangle.B) && C.Equals(triangle.C))
-            {
-                return true;
-            }
-            return false;
+            return A.Equals(triangle.A) && B.Equals(triangle.B) && C.Equals(triangle.C);
         }
 
         public override int GetHashCode() => A.GetHashCode() ^ B.GetHashCode() ^ C.GetHashCode();
