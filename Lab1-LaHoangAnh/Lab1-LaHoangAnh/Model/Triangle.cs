@@ -5,7 +5,9 @@ namespace Lab1.Model
     public class Triangle : Figure
     {
         public Point Vertex1 { get; init; }
+
         public Point Vertex2 { get; init; }
+
         public Point Vertex3 { get; init; }
 
         public Triangle()

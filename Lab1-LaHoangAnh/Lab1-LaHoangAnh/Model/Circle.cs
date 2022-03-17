@@ -6,6 +6,7 @@ namespace Lab1.Model
     public class Circle : Figure
     {
         public Point Center { get; init; }
+
         public double Radius { get; init; } = 1;
 
         public Circle() { }

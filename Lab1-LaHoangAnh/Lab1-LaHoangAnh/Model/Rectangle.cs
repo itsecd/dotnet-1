@@ -5,6 +5,7 @@ namespace Lab1.Model
     public class Rectangle : Figure
     {
         public Point TopLeft { get; init; }
+
         public Point BottomRight { get; init; }
 
         public Rectangle()
