@@ -10,6 +10,7 @@ namespace Lab1.Repositories
     {
         private const string StorageFileName = "figure.xml";
         private List<Figure>? _figures;
+
         private void ReadFromFile()
         {
             if (_figures != null) return;

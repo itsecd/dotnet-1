@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Lab1.Model
 {
@@ -12,8 +7,10 @@ namespace Lab1.Model
     [XmlInclude(typeof(Circle))]
     public abstract class Figure
     {
-        public abstract double Perimeter();
-        public abstract double Square();
+        public abstract double GetPerimeter();
+
+        public abstract double GetArea();
+
         public abstract Rectangle MinBoundingBox();
     }
 }

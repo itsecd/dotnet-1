@@ -1,55 +1,36 @@
-﻿namespace Lab1.Model
+﻿using System;
+
+namespace Lab1.Model
 {
     public class Rectangle : Figure
     {
-        private Point _A;
-        public Point A {
-            get => _A;
-            set { _A = value; }
-        }
-        private Point _B;
-        public Point B {
-            get => _B;
-            set { _B = value; }
-        }
-        private Point _C;
-        public Point C {
-            get => _C;
-            set { _C = value; }
-        }
-        private Point _D;
-        public Point D {
-            get => _D;
-            set { _D = value; }
-        }
+        public Point TopLeft { get; init; }
+        public Point BottomRight { get; init; }
 
         public Rectangle()
         {
-            _A = new Point(0, 0);
-            _B = new Point(0, 1);
-            _C = new Point(1, 1);
-            _D = new Point(1, 0);
+            TopLeft = new Point();
+            BottomRight = new Point();
         }
-        public Rectangle(Point a, Point b, Point c, Point d)
+
+        public Rectangle(Point topLeft, Point bottomRight)
         {
-            _A = a;
-            _B = b;
-            _C = c;
-            _D = d;
+            TopLeft = topLeft;
+            BottomRight = bottomRight;
         }
 
-        public override double Perimeter() => 2 * (_A.Distance(_B) + _B.Distance(_C));
+        public override double GetPerimeter() => 2 * (Math.Abs(TopLeft.X - BottomRight.X) + Math.Abs(TopLeft.Y - BottomRight.Y));
 
-        public override double Square() => _A.Distance(_B) * _B.Distance(_C);
+        public override double GetArea() => Math.Abs(TopLeft.X - BottomRight.X) * Math.Abs(TopLeft.Y - BottomRight.Y);
 
         public override Rectangle MinBoundingBox() => this;
 
-        public override string ToString() => $"Rectangle: ({_A.ToString()},{_B.ToString()},{_C.ToString()},{_D.ToString()})";
+        public override string ToString() => $"Rectangle: ({TopLeft.ToString()},{BottomRight.ToString()})";
 
         public override bool Equals(object? obj)
         {
             if (obj is not Rectangle rectangle) return false;
-            else return rectangle._A.Equals(_A) && rectangle._B.Equals(_B) && rectangle._C.Equals(_C) && rectangle._D.Equals(_D);
+            else return rectangle.BottomRight.Equals(BottomRight) && rectangle.TopLeft.Equals(TopLeft);
         }
     }
 }

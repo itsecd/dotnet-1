@@ -20,9 +20,9 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] OutputSettings settings)
         {
             var figures = _figuresRepository.GetList();
-            foreach (var f in figures)
+            foreach (var figure in figures)
             {
-                AnsiConsole.WriteLine($"{ f.ToString()}");
+                AnsiConsole.WriteLine($"{ figure.ToString()}");
             }
             return 0;
         }

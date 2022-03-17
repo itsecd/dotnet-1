@@ -1,8 +1,8 @@
-﻿using Lab1.Repositories;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Lab1.Commands;
 using Lab1.Infrastructure;
+using Lab1.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
-using Lab1.Commands;
 
 namespace Lab1
 {

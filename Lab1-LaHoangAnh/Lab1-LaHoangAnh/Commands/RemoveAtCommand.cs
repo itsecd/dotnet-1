@@ -21,8 +21,8 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveAtSettings settings)
         {
-            int Index = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Вводите индекс фигура для удаления: [/]"));
-            _figureRepository.RemoveAt(Index);
+            int index = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Вводите индекс фигура для удаления: [/]"));
+            _figureRepository.RemoveAt(index);
             return 0;
         }
     }

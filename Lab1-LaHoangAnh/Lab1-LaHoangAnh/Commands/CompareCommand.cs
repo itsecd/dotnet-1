@@ -18,10 +18,10 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] CompareSettings settings)
         {
-            int Index1 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс первого фигура :[/]"));
-            int Index2 = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс второго фигура (различен от {Index1}):[/]"));
+            int firstIndex = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс первого фигура :[/]"));
+            int secondIndex = AnsiConsole.Prompt(new TextPrompt<int>($"[blue]Выбирайте индекс второго фигура (различен от {firstIndex}):[/]"));
             var figures = _figuresRepository.GetList();
-            AnsiConsole.WriteLine($"Результат сравнения: {figures[Index1].Equals(figures[Index2])}");
+            AnsiConsole.WriteLine($"Результат сравнения: {figures[firstIndex].Equals(figures[secondIndex])}");
             return 0;
         }
     }
