@@ -20,7 +20,7 @@ namespace Lab1
             {
                 config.AddCommand<AddCommand>("add");
                 config.AddCommand<OutputCommand>("output");
-                config.AddCommand<RemoveAtCommand>("remove_one");
+                config.AddCommand<RemoveAtCommand>("remove_at");
                 config.AddCommand<RemoveAllCommand>("remove_all");
                 config.AddCommand<CompareCommand>("compare");
             });

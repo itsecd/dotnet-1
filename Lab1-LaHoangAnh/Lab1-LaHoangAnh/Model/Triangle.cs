@@ -28,7 +28,7 @@ namespace Lab1.Model
 
         public override double GetArea() => Math.Sqrt(GetPerimeter() / 2 * (GetPerimeter() / 2 - Vertex1.Distance(Vertex2)) * (GetPerimeter() / 2 - Vertex2.Distance(Vertex3)) * (GetPerimeter() / 2 - Vertex3.Distance(Vertex1)));
 
-        public override Rectangle MinBoundingBox() => new Rectangle(new Point(Math.Min(Vertex1.X, Math.Min(Vertex2.X, Vertex3.X)), Math.Min(Vertex1.Y, Math.Min(Vertex2.Y, Vertex3.Y))), new Point(Math.Max(Vertex1.X, Math.Max(Vertex2.X, Vertex3.X)), Math.Max(Vertex1.Y, Math.Max(Vertex2.Y, Vertex3.Y))));
+        public override Rectangle GetBounds() => new Rectangle(new Point(Math.Min(Vertex1.X, Math.Min(Vertex2.X, Vertex3.X)), Math.Min(Vertex1.Y, Math.Min(Vertex2.Y, Vertex3.Y))), new Point(Math.Max(Vertex1.X, Math.Max(Vertex2.X, Vertex3.X)), Math.Max(Vertex1.Y, Math.Max(Vertex2.Y, Vertex3.Y))));
 
         public override string ToString() => $"Tritangle: ({Vertex1.ToString()}, {Vertex2.ToString()}, {Vertex3.ToString()})";
 

@@ -11,6 +11,6 @@ namespace Lab1.Model
 
         public abstract double GetArea();
 
-        public abstract Rectangle MinBoundingBox();
+        public abstract Rectangle GetBounds();
     }
 }

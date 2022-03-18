@@ -21,7 +21,7 @@ namespace Lab1.Model
 
         public override double GetArea() => Math.PI * Radius * Radius;
 
-        public override Rectangle MinBoundingBox()
+        public override Rectangle GetBounds()
         {
             var minBoundingBox = new Rectangle(new Point(Center.X + Radius, Center.Y + Radius), new Point(Center.X - Radius, Center.Y - Radius));
             return minBoundingBox;

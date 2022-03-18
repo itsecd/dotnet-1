@@ -24,7 +24,7 @@ namespace Lab1.Model
 
         public override double GetArea() => Math.Abs(TopLeft.X - BottomRight.X) * Math.Abs(TopLeft.Y - BottomRight.Y);
 
-        public override Rectangle MinBoundingBox() => this;
+        public override Rectangle GetBounds() => this;
 
         public override string ToString() => $"Rectangle: ({TopLeft.ToString()},{BottomRight.ToString()})";
 

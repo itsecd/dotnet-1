@@ -26,20 +26,19 @@ namespace Lab1.Commands
             var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("Выберите тип фигуры: ").AddChoices("Прямоугольник", "Треугольник", "Круг"));
             Figure? figure = figureType switch
             {
-                "Прямоугольник" => new Rectangle(new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Лево-верхняя вершина X = [/]")),
-                                                        AnsiConsole.Prompt(new TextPrompt<double>("[red]Лево-верхняя вершина Y = [/]"))),
-                                                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Право-нижняя вершина X = [/]")),
-                                                        AnsiConsole.Prompt(new TextPrompt<double>("[red]Право-нижняя вершина Y = [/]")))),
+                "Прямоугольник" => new Rectangle(
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Лево-верхняя вершина X = [/]")), AnsiConsole.Prompt(new TextPrompt<double>("[red]Лево-верхняя вершина Y = [/]"))),
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Право-нижняя вершина X = [/]")), AnsiConsole.Prompt(new TextPrompt<double>("[red]Право-нижняя вершина Y = [/]")))
+                    ),
                 "Треугольник" => new Triangle(
-                                                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Первая вершина X = [/]")),
-                                                        AnsiConsole.Prompt(new TextPrompt<double>("[red]Первая вершина Y = [/]"))),
-                                                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Вторая вершина X = [/]")),
-                                                        AnsiConsole.Prompt(new TextPrompt<double>("[red]Вторая вершина Y = [/]"))),
-                                                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Третья вершина X = [/]")),
-                                                        AnsiConsole.Prompt(new TextPrompt<double>("[red]Третья вершина Y = [/]")))),
-                "Круг" => new Circle(new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Центр X = [/]")),
-                                                AnsiConsole.Prompt(new TextPrompt<double>("[red]Центр Y = [/]"))),
-                                        AnsiConsole.Prompt(new TextPrompt<double>("[red]Радиус = [/]"))),
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Первая вершина X = [/]")), AnsiConsole.Prompt(new TextPrompt<double>("[red]Первая вершина Y = [/]"))),
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Вторая вершина X = [/]")), AnsiConsole.Prompt(new TextPrompt<double>("[red]Вторая вершина Y = [/]"))),
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Третья вершина X = [/]")), AnsiConsole.Prompt(new TextPrompt<double>("[red]Третья вершина Y = [/]")))
+                    ),
+                "Круг" => new Circle(
+                    new Point(AnsiConsole.Prompt(new TextPrompt<double>("[red]Центр X = [/]")), AnsiConsole.Prompt(new TextPrompt<double>("[red]Центр Y = [/]"))),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Радиус = [/]"))
+                    ),
                 _ => null
             };
             if (figure == null)
