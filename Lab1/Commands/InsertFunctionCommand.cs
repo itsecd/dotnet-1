@@ -25,39 +25,40 @@ namespace Lab1.Commands
                 .Title("Выберите тип функции: ")
                 .AddChoices("Константа", "Линейная функция", "Квадратичная функция", "Синус", "Косинус"));
 
-            Function addFuncion = figureType switch
+            Function? addFuncion = figureType switch
             {
                 "Константа" => new Constant(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter value 'c' :[/]"))
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'constValue' :[/]"))
                 ),
                 "Линейная функция" => new LinearFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'k' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]"))
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Linear' coefficient :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'constValue' :[/]"))
                 ),
                 "Квадратичная функция" => new QuadraticFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'a' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'c' :[/]"))
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Quadratic' coefficient :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Linear' coefficient :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'constValue' :[/]"))
                 ),
                 "Синус" => new Sin(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'a' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'c' :[/]"))
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Amplitude' :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Omega' :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Phase' :[/]"))
                 ),
                 "Косинус" => new Cos(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'a' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'c' :[/]"))
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Amplitude' :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Omega' :[/]")),
+                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Phase' :[/]"))
                 ),
                 _ => null
             };
             if (addFuncion == null)
             {
-                AnsiConsole.MarkupLine($"[green]Неизвестный тип функции[/]");
+                AnsiConsole.MarkupLine($"[green]Unknown function type[/]");
                 return -1;
             }
-            _functionsRepository.Insert(0, addFuncion);
 
+            int index = AnsiConsole.Prompt(new TextPrompt<int>("[green]Enter index :[/]"));
+            _functionsRepository.Insert(index, addFuncion);
             return 0;
         }
     } 

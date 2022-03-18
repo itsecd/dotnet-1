@@ -4,35 +4,35 @@ namespace Lab1.Model
 {
     public class QuadraticFunction : Function//ax^2 + bx + c
     {
-        public double A { get; } = 1;
-        public double B { get; } = 1;
-        public double C { get; } = 1;
+        public double Quadratic { get; set;} = 1;
+        public double Linear { get; set; } = 1;
+        public double Const { get; set; } = 1;
 
         public QuadraticFunction() { }
         public QuadraticFunction(double a, double b, double c)
         {
-            A = a;
-            B = b;
-            C = c;
+            Quadratic = a;
+            Linear = b;
+            Const = c;
         }
 
         //2ax + b производная - линейная функция
-        public override Function GetDerivative() => new LinearFunction(2 * A, B);
+        public override Function GetDerivative() => new LinearFunction(2 * Quadratic, Linear);
 
-        public override double Compute(double arg) => A * Math.Pow(arg, 2) + B * arg + C;
+        public override double Compute(double arg) => Quadratic * Math.Pow(arg, 2) + Linear * arg + Const;
 
-        public override string ToString() => $"{A}x^2 + {B}x + {C}";
+        public override string ToString() => $"{Quadratic}x^2 + {Linear}x + {Const}";
 
         public override bool Equals(object? obj)
         {
             if (obj is QuadraticFunction func)
             {
-                return A == func.A && B == func.B && C == func.C;
+                return Quadratic == func.Quadratic && Linear == func.Linear && Const == func.Const;
             }
             return false;
         }
 
-        public override int GetHashCode() => (A, B, C).GetHashCode();
+        public override int GetHashCode() => (Quadratic, Linear, Const).GetHashCode();
 
     }
 }

@@ -7,6 +7,7 @@ namespace Lab1.Infrastructure
     {
         private readonly IServiceProvider _provider;
 
+        //≈сли провайдер равен нулю сделать исключение, если нет вернуть это значение
         public TypeResolver(IServiceProvider provider)
         {
             _provider = provider ?? throw new ArgumentNullException(nameof(provider));
@@ -18,7 +19,6 @@ namespace Lab1.Infrastructure
             {
                 return null;
             }
-
             return _provider.GetService(type);
         }
 

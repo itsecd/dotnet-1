@@ -2,8 +2,8 @@
 {
     public class LinearFunction : Function // y = kx + b
     {
-        public double Linear { get; } = 1;
-        public double Const { get; } = 0;
+        public double Linear { get; set; } = 1;
+        public double Const { get; set; } = 0;
         
         public LinearFunction() { }
         public LinearFunction(double linear, double constValue)

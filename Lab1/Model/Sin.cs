@@ -4,9 +4,9 @@ namespace Lab1.Model
 {
     public class Sin : Function
     {
-        public double Amplitude { get; } = 1;
-        public double Omega { get; } = 1;
-        public double Phase { get; } = 1;
+        public double Amplitude { get; set; } = 1;
+        public double Omega { get; set; } = 1;
+        public double Phase { get; set; } = 1;
 
         public Sin() { }
 
@@ -21,7 +21,7 @@ namespace Lab1.Model
 
         public override double Compute(double arg) => Amplitude * Math.Sin(Omega*arg + Phase);
 
-        public override string ToString() => $"{Amplitude} sin({Omega}x + {Phase}";
+        public override string ToString() => $"{Amplitude} sin({Omega}x + {Phase})";
 
         public override bool Equals(object? obj)
         {

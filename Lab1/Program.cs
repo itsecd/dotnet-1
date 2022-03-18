@@ -1,9 +1,11 @@
 ﻿using Lab1.Model;
 using System;
-using Spectre.Console;
-using System.Linq;
 using System.Collections.Generic;
 using Lab1.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Lab1.Infrastructure;
+using Spectre.Console.Cli;
+using Lab1.Commands;
 
 namespace Lab1
 {
@@ -12,6 +14,20 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IFunctionsRepository, XmlStorageRepository>();
+
+            var registrar = new TypeRegistrar(serviceCollection);
+            var app = new CommandApp(registrar);
+
+            app.Configure(config =>
+            {
+                config.AddCommand<InsertFunctionCommand>("Insert");
+                config.AddCommand<GetAllFunctionsCommand>("GetAllFunctions");
+            });
+
+            app.Run(args);
+            /*
             var repos = new XmlStorageRepository();
             //foreach (var function in repos.GetAll())
             //{
@@ -22,52 +38,11 @@ namespace Lab1
             {
                 Console.WriteLine(function);
             }
-            /*
-            Console.WriteLine("Hello World!");
-            Function gg = new Constant(2);
-            Function gg1 = new Constant(3);
-            Function gg2 = new Constant(4);
-            Function gg3 = new Constant(5);
-
-            Function lin = new LinearFunction(2, 8);
-            Function qf = new QuadraticFunction(2, 3, 3);
-
-
-            List<Function> func = new List<Function> { gg, lin, qf, gg3 };
-
-            func.Insert(4, gg2);
-
-            var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Выберите тип функции: ")
-                .AddChoices("Константа", "Линейная функция", "Квадратичная функция", "Синус", "Косинус"));
-
-            Function addFunc = figureType switch
-            {
-                "Константа" => new Constant(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter value 'c' :[/]"))
-                ),
-                "Линейная функция" => new LinearFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'k' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]"))
-                ),
-                "Квадратичная функция" => new QuadraticFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'a' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'b' :[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'c' :[/]"))
-                ),
-                //"Синус" => new Sin(),
-                //"Косинус" => new Cos(),
-                _ => null
-            };
-            if (addFunc == null)
-            {
-                AnsiConsole.MarkupLine($"[green]Неизвестный тип функции[/]");
-            }
-            func.Add(addFunc);
+            
 
             //var textPrompt = new TextPrompt<double>("[red]Enter a real number:[/]");
             //double val = AnsiConsole.Prompt(textPrompt);
-
+            /*
             var table = new Table();
             table.AddColumns("Function", "Data", "Derivative");
             foreach (Function f in func)
@@ -76,7 +51,7 @@ namespace Lab1
                 //AnsiConsole.Write(new Markup($"[mediumorchid]Function ::: [/][lime]{f}[/]\n"));
             }
             AnsiConsole.Write(table);*/
-
+            
             /*
             var minValue = func.Min(x => x.GetDerivative().GetValueFunc(2));
             var funcMinValue = func.First(x => x.GetDerivative().GetValueFunc(2) == minValue);
