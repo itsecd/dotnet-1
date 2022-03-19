@@ -28,9 +28,7 @@ namespace Lab1.Commands
             foreach (Function f in functions)
             {
                 if (count < 10)
-                {
                     table.AddRow(f.GetType().Name, f.ToString(), f.GetDerivative().ToString());
-                }
                 else
                 {
                     table.AddRow("...", "...", "...");
