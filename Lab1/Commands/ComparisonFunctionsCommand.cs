@@ -26,7 +26,19 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] ComparisonFunctionsSettings settings)
         {
-            
+            var functions = _functionsRepository.GetAll();
+            int indexFirst = AnsiConsole.Prompt(new TextPrompt<int>(
+               "[green]Enter the index of the first function :[/]"));
+            int indexSecond = AnsiConsole.Prompt(new TextPrompt<int>(
+               "[green]Enter the index of the second function :[/]"));
+
+            AnsiConsole.Write("Functions\n" + functions[indexFirst] + "\n" + functions[indexSecond]);
+
+            if (functions[indexFirst].Equals(functions[indexSecond]))
+                AnsiConsole.Write("\nAre equal");
+            else
+                AnsiConsole.Write("\nAre Not equal");
+            return 0;
         }
     }
 }
