@@ -24,11 +24,22 @@ namespace Lab1.Commands
             var functions = _functionsRepository.GetAll();
             var table = new Table();
             table.AddColumns("Function", "Data", "Derivative");
+            int count = 0;
             foreach (Function f in functions)
             {
-                table.AddRow(f.GetType().Name, f.ToString(), f.GetDerivative().ToString());
+                if (count < 10)
+                {
+                    table.AddRow(f.GetType().Name, f.ToString(), f.GetDerivative().ToString());
+                }
+                else
+                {
+                    table.AddRow("...", "...", "...");
+                    break;
+                }
+                count++;
             }
             AnsiConsole.Write(table);
+
             return 0;
         }
     } 
