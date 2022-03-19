@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
-namespace Functions
+namespace Lab1.Model
 {
     [XmlInclude(typeof(ConstFunc)), XmlInclude(typeof(PowerFunc)), XmlInclude(typeof(ExpoFunc)), XmlInclude(typeof(LogFunc))]
     public abstract class Function
@@ -16,13 +11,13 @@ namespace Functions
 
         public double Coef { get; init; }
 
-        public abstract double getValue(double x);
+        public abstract double GetValue(double x);
 
-        public abstract Function getDerivative();
+        public abstract Function GetDerivative();
 
         public override bool Equals(object? obj)
         {
-            // если параметр метода представляет тип Person
+            // если параметр метода представляет тип Function
             // то возвращаем true, если имена совпадают
             if (obj is Function func)
             {

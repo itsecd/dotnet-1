@@ -10,6 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\OrganizedMenu\**" />
+    <EmbeddedResource Remove="Commands\OrganizedMenu\**" />
+    <None Remove="Commands\OrganizedMenu\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Commands\MenuFunctionCommand.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AnsiConsole" Version="0.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Spectre.Console" Version="0.43.0" />

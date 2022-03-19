@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Functions
+namespace Lab1.Model
 {
     public class PowerFunc : Function // x^a
     {
-        public override double getValue(double x = 0)
+        public override double GetValue(double x = 0)
         {
             if (x == 0 && A < 0)
-                return 0; // надо изменить на что-нибудь более говорящее
+                return 0; 
 
-            return Coef * Math.Pow(x, A); // 0 нельзя возводить в отрицательные степени!
+            return Coef * Math.Pow(x, A); 
         }
 
-        public override Function getDerivative()
+        public override Function GetDerivative()
         {
             return new PowerFunc(A - 1, A * Coef);
         }

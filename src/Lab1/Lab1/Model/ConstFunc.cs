@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Functions
+﻿namespace Lab1.Model
 {
     public class ConstFunc : Function
     {
-        public override double getValue(double x = 0)
+        public override double GetValue(double x = 0)
         {
             return Coef;
         }
 
-        public override Function getDerivative()
+        public override Function GetDerivative()
         {
             return new ConstFunc(0);
         }
