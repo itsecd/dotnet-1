@@ -27,7 +27,6 @@ namespace Lab1.Commands
             foreach (Function f in functions)
             {
                 table.AddRow(f.GetType().Name, f.ToString(), f.GetDerivative().ToString());
-                //AnsiConsole.Write(new Markup($"[mediumorchid]Function ::: [/][lime]{f}[/]\n"));
             }
             AnsiConsole.Write(table);
             return 0;

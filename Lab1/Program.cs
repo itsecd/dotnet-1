@@ -24,6 +24,10 @@ namespace Lab1
             {
                 config.AddCommand<InsertFunctionCommand>("Insert");
                 config.AddCommand<GetAllFunctionsCommand>("GetAllFunctions");
+                config.AddCommand<RemoveAtFunctionCommand>("RemoveAt");
+                config.AddCommand<ClearFunctionsCommand>("Clear");
+                config.AddCommand<GetDerivativeFunctionCommand>("GetDerivative");
+                config.AddCommand<ComputeFunctionCommand>("Compute");
             });
 
             app.Run(args);
