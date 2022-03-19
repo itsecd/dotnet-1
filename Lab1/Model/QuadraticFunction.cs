@@ -4,7 +4,7 @@ namespace Lab1.Model
 {
     public class QuadraticFunction : Function//ax^2 + bx + c
     {
-        public double Quadratic { get; set;} = 1;
+        public double Quadratic { get; set; } = 1;
         public double Linear { get; set; } = 1;
         public double Const { get; set; } = 1;
 

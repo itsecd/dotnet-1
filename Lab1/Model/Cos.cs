@@ -17,12 +17,12 @@ namespace Lab1.Model
             Phase = phase;
         }
 
-        public override Function GetDerivative() => new Sin(-Amplitude*Omega, Omega, Phase);
+        public override Function GetDerivative() => new Sin(-Amplitude * Omega, Omega, Phase);
 
         public override double Compute(double arg) => Amplitude * Math.Cos(Omega * arg + Phase);
 
         public override string ToString() => $"{Amplitude} cos({Omega}x + {Phase})";
-            
+
         /*
         var s = объект?.поле
         если объект равен null, то переменная s будет содержать null вместо генерации исключения.

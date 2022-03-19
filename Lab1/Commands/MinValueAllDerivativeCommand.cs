@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spectre.Console.Cli;
+﻿using Lab1.Model;
 using Lab1.Services;
-using System.Diagnostics.CodeAnalysis;
 using Spectre.Console;
-using Lab1.Model;
+using Spectre.Console.Cli;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Lab1.Commands
 {
@@ -48,7 +44,7 @@ namespace Lab1.Commands
             AnsiConsole.Write("Method with System.Linq return Function " + funcMinValue
                 + "\nCustom Code return Function " + function);
             return 0;
-            
+
         }
     }
 }

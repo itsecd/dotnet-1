@@ -1,7 +1,6 @@
-using System;
-using Xunit;
 using Lab1.Model;
 using System.Collections.Generic;
+using Xunit;
 
 namespace LabTest1
 {

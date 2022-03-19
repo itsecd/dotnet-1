@@ -4,7 +4,7 @@
     {
         public double Linear { get; set; } = 1;
         public double Const { get; set; } = 0;
-        
+
         public LinearFunction() { }
         public LinearFunction(double linear, double constValue)
         {

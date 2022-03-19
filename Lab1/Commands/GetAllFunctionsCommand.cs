@@ -1,8 +1,8 @@
-﻿using Spectre.Console.Cli;
+﻿using Lab1.Model;
 using Lab1.Services;
-using System.Diagnostics.CodeAnalysis;
 using Spectre.Console;
-using Lab1.Model;
+using Spectre.Console.Cli;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
 {
@@ -40,5 +40,5 @@ namespace Lab1.Commands
 
             return 0;
         }
-    } 
+    }
 }

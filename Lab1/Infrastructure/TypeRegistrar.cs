@@ -1,6 +1,5 @@
-using Spectre.Console.Cli;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Spectre.Console.Cli;
 using System;
 
 namespace Lab1.Infrastructure

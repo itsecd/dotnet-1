@@ -1,11 +1,8 @@
-﻿using Lab1.Model;
-using System;
-using System.Collections.Generic;
+﻿using Lab1.Commands;
+using Lab1.Infrastructure;
 using Lab1.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Lab1.Infrastructure;
 using Spectre.Console.Cli;
-using Lab1.Commands;
 
 namespace Lab1
 {

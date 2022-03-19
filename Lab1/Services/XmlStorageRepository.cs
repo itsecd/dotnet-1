@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Lab1.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
-using Lab1.Model;
 
 namespace Lab1.Services
 {
