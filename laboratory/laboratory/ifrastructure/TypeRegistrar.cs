@@ -2,7 +2,7 @@
 using Spectre.Console.Cli;
 using System;
 
-namespace laboratory.Infrastructure
+namespace Lab1.Infrastructure
 {
     public sealed class TypeRegistrar : ITypeRegistrar
     {

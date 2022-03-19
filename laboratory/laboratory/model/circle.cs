@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace laboratory.model
+namespace Lab1.Model
 {
     public class Circle : Figure
     {
@@ -12,10 +12,10 @@ namespace laboratory.model
 
         }
 
-        public Circle(Point a, double r)
+        public Circle(Point center, double radius)
         {
-            Center = a;
-            Radius = r;
+            Center = center;
+            Radius = radius;
         }
 
         public override double Perimeter() => 2 * Math.PI * Radius;
@@ -23,23 +23,19 @@ namespace laboratory.model
         public override Rectangle FramingRectangle() => new(new Point(Center.X - Radius, Center.Y - Radius),
                                                             new Point(Center.X + Radius, Center.Y + Radius));
 
-        public override double Square() => Math.PI * Math.Pow(Radius, 2);
+        public override double Area() => Math.PI * Math.Pow(Radius, 2);
 
         public override string ToString() => $"{Center}, {Radius}";
 
-        public bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj == null)
-                return false;
-
-            Rectangle personObj = obj as Rectangle;
-            if (personObj == null)
-                return false;
+            if (obj is Rectangle rectangleObj)
+                return Equals(rectangleObj);
             else
-                return Equals(personObj);
+                return false;
         }
 
-        public override bool Equals(Figure obj)
+        public override bool Equals(Figure? obj)
         {
             if (obj is not Circle other)
                 return false;

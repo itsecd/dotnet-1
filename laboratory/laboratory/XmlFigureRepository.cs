@@ -1,68 +1,66 @@
-﻿using Spectre.Console;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Xml.Serialization;
-using laboratory.model;
 
-namespace laboratory
+namespace Lab1
 {
     public class XmlFigureRepository : IRepository
     {
-        private List<Figure> Figures = new();
+        private List<Figure>? _figures;
 
-        private string FileName = "figure.xml";
-
-        public XmlFigureRepository()
-        {
-            Deserialize();
-        }
-
-        public int Count() => Figures.Count();
+        private const string _fileName = "figure.xml";
 
         public void Insert(int index, Figure obj)
         {
-            if (index >= Figures.Count)
+            Deserialize();
+            if (index >= _figures!.Count)
             {
-                Figures.Add(obj);
+                _figures!.Add(obj);
             }
             else
-                Figures.Insert(index, obj);
+                _figures!.Insert(index, obj);
             Serialize();
         }
 
         public void RemoveAt(int index)
         {
-            Figures.RemoveAt(index);
+            Deserialize();
+            _figures!.RemoveAt(index);
             Serialize();
         }
 
         public void Clear()
         {
-            Figures.Clear();
+            Deserialize();
+            _figures!.Clear();
             Serialize();
         }
 
         private void Serialize()
         {
             var xml = new XmlSerializer(typeof(List<Figure>));
-            using (var filestream = new FileStream(FileName, FileMode.Create))
-            {
-                xml.Serialize(filestream, Figures);
-            }
+            using var fileStream = new FileStream(_fileName, FileMode.Create);
+            xml.Serialize(fileStream, _figures);
         }
 
         private void Deserialize()
         {
-            if (!File.Exists(FileName)) return;
+            if (_figures != null) return;
+
+            if (!File.Exists(_fileName))
+            {
+                _figures = new List<Figure>();
+                return;
+            }
             var xml = new XmlSerializer(typeof(List<Figure>));
-            using var filestream = File.OpenRead(FileName);
-            Figures = (List<Figure>)xml.Deserialize(filestream);
+            using var fileStream = File.OpenRead(_fileName);
+            _figures = (List<Figure>?)xml.Deserialize(fileStream);
         }
 
         public List<Figure> GetAll()
         {
-            return this.Figures;
+            Deserialize();
+            return _figures!;
         }
     }
 }

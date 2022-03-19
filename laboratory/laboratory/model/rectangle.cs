@@ -1,55 +1,54 @@
 ﻿using System;
 
-namespace laboratory.model
+namespace Lab1.Model
 {
     public class Rectangle : Figure
     {
 
-        public Point A { get; init; }
+        public Point VertexA { get; init; }
 
-        public Point B { get; init; }
+        public Point VertexB { get; init; }
 
         public Rectangle()
         { }
 
-        public Rectangle(Point point1, Point point2)
+        public Rectangle(Point vertexA, Point vertexB)
         {
-            A = point1;
-            B = point2;
+            VertexA = vertexA;
+            VertexB = vertexB;
         }
 
-        private double Long => Math.Abs(A.X - B.X);
-        private double Width => Math.Abs(A.Y - B.Y);
+        private double Width => Math.Abs(VertexA.X - VertexB.X);
 
-        public override Rectangle FramingRectangle() => new Rectangle(A, B);
+        private double Height => Math.Abs(VertexA.Y - VertexB.Y);
 
-        public override double Perimeter() => 2 * (Long + Width);
+        public override Rectangle FramingRectangle() => new Rectangle(VertexA, VertexB);
 
-        public override double Square() => Long * Width;
+        public override double Perimeter() => 2 * (Width + Height);
 
-        public override string ToString() => $"{A}&{B};{Long}, {Width}";
+        public override double Area() => Width * Height;
 
-        public bool Equals(object obj)
+        public override string ToString() => $"{VertexA}&{VertexB};{Width}, {Height}";
+
+        public override bool Equals(object? obj)
         {
-            if (obj == null)
-                return false;
-
-            Rectangle personObj = obj as Rectangle;
-            if (personObj == null)
-                return false;
+            if (obj is Rectangle rectangleObj)
+                return Equals(rectangleObj);
             else
-                return Equals(personObj);
+                return false;
         }
-        public override bool Equals(Figure obj)
+
+        public override bool Equals(Figure? obj)
         {
             if (obj is not Rectangle other)
                 return false;
-            return Long == other.Long &&
-                    Width == other.Width;
+            return Width == other.Width &&
+                    Height == other.Height;
         }
+
         public override int GetHashCode()
         {
-            return HashCode.Combine<Point, Point>(A, B);
-        }        
+            return HashCode.Combine<Point, Point>(VertexA, VertexB);
+        }
     }
 }

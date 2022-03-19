@@ -2,36 +2,61 @@
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 
-namespace laboratory.Command
+namespace Lab1.Commands
 {
     public class ComparisonFigureCommand : Command<ComparisonFigureCommand.ComparisonFigureSettings>
     {
-        private readonly IRepository FigureRepository;
+        private readonly IRepository _figureRepository;
 
-        public ComparisonFigureCommand(IRepository figure)
+        public ComparisonFigureCommand(IRepository figureRepository)
         {
-            FigureRepository = figure;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] ComparisonFigureSettings settings)
         {
-            if (FigureRepository.Count() < 2)
+            if (_figureRepository.GetAll() == null)
             {
                 AnsiConsole.Clear();
                 AnsiConsole.WriteLine("Comparison is not possible!");
                 return 1;
             }
-            var elements = FigureRepository.GetAll();
-            int index_first, index_second;
-            do
-                index_first = AnsiConsole.Prompt(new TextPrompt<int>($"[Green]Enter the first comparison element [{1}, {FigureRepository.Count()}]: [/]"));
-            while (index_first < 1 && index_first >= FigureRepository.Count());
-            do
-                index_second = AnsiConsole.Prompt(new TextPrompt<int>($"[Green]Enter the second comparison element [{1}, {FigureRepository.Count()}]: [/]"));
-            while (index_second < 1 && index_second >= FigureRepository.Count());
-            index_first--;
-            index_second--;
-            AnsiConsole.WriteLine($"{elements[index_first]} == {elements[index_second]}? {elements[index_first].Equals(elements[index_second])}");
+            var elements = _figureRepository.GetAll();
+            var table = new Table();
+            table.AddColumn("Index");
+            table.AddColumn("Type");
+            table.AddColumn("Element");
+            table.AddColumn("Square");
+            table.AddColumn("Perimeter");
+            for(int i = 0; i < elements.Count; i++)
+            {
+                table.AddRow(i.ToString(), elements[i].GetType().Name, elements[i].ToString(), elements[i].Area().ToString(), elements[i].Perimeter().ToString());
+            }
+            AnsiConsole.Write(table);
+            int indexFirst = AnsiConsole.Prompt(
+                new TextPrompt<int>("Enter index element (0<=):")
+                .ValidationErrorMessage("Invalid index entered")
+                    .Validate(index =>
+                    {
+                        return index switch
+                        {
+                            < 0 => ValidationResult.Error("[red]The index must be greater than zero[/]"),
+                            _ => ValidationResult.Success(),
+                        };
+                    }));
+            int indexSecond = AnsiConsole.Prompt(
+              new TextPrompt<int>("Enter index element (0<=):")
+              .ValidationErrorMessage("Invalid index entered")
+                  .Validate(index =>
+                  {
+                      return index switch
+                      {
+                          < 0 => ValidationResult.Error("[red]The index must be greater than zero[/]"),
+                          _ => ValidationResult.Success(),
+                      };
+                  }));
+
+            AnsiConsole.WriteLine($"{elements[indexFirst]} == {elements[indexSecond]}? {elements[indexFirst].Equals(elements[indexSecond])}");
             return 0;
         }
 

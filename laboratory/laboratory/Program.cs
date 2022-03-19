@@ -1,35 +1,31 @@
-﻿using laboratory.Infrastructure;
+﻿using Lab1.Commands;
+using Lab1.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using Spectre.Console;
 using Spectre.Console.Cli;
-using System;
-using laboratory.Command;
 
-namespace laboratory
+namespace Lab1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //// Command
-            var serviseCollection = new ServiceCollection();
+            var serviceCollection = new ServiceCollection();
 
-            serviseCollection.AddSingleton<IRepository, XmlFigureRepository>();
+            serviceCollection.AddSingleton<IRepository, XmlFigureRepository>();
 
-            var registr = new TypeRegistrar(serviseCollection);
-            var app = new CommandApp(registr);
+            var register = new TypeRegistrar(serviceCollection);
+            var app = new CommandApp(register);
 
             app.Configure(config =>
             {
                 config.AddCommand<AddFigureCommand>("add");
                 config.AddCommand<PrintFigureCommand>("print");
-                config.AddCommand<RemoveFigureCommand>("remuve");
-                config.AddCommand<ComparisonFigureCommand>("comparison");
-                config.AddCommand<FramingRectangleFigureCommand>("framingrectang");
+                config.AddCommand<RemoveFigureCommand>("remove");
+                config.AddCommand<ComparisonFigureCommand>("compare");
+                config.AddCommand<FramingRectangleFigureCommand>("frame");
                 config.AddCommand<PerimeterFigureCommand>("perimeter");
-                config.AddCommand<SquareFigureCommand>("squeare");
-                config.AddCommand<TotalAreaFigureCommand>("totalarea");
-
+                config.AddCommand<AreaFigureCommand>("area");
+                config.AddCommand<TotalAreaFigureCommand>("combined");
             });
             app.Run(args);
         }

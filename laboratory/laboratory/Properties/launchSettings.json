@@ -1,7 +1,8 @@
 {
   "profiles": {
     "laboratory": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "remove"
     }
   }
 }

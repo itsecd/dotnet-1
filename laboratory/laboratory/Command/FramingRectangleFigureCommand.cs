@@ -2,41 +2,41 @@
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 
-namespace laboratory.Command
+namespace Lab1.Commands
 {
     // A class that implements getting a minimal framing rectangle
     public class FramingRectangleFigureCommand : Command<FramingRectangleFigureCommand.FramingRectangleFigureSettings>
     {
-        private readonly IRepository FigureRepository;
+        private readonly IRepository _figureRepository;
 
-        public FramingRectangleFigureCommand(IRepository figure)
+        public FramingRectangleFigureCommand(IRepository figureRepository)
         {
-            FigureRepository = figure;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] FramingRectangleFigureSettings settings)
         {
+            int indexSelectionFigure = AnsiConsole.Prompt(
+                new TextPrompt<int>("Enter index element 0<=:")
+                .ValidationErrorMessage("Invalid index entered")
+                    .Validate(index =>
+                    {
+                        return index switch
+                        {
+                            < 0 => ValidationResult.Error("[red]The index must be greater than zero[/]"),
+                            _ => ValidationResult.Success(),
+                        };
+                    }));
 
-            if (FigureRepository.Count() == 0)
-            {
-                AnsiConsole.WriteLine("The collection is empty");
-                return 1;
-            }
-            int index_selection_figure;
-            do
-                index_selection_figure = AnsiConsole.Prompt(new TextPrompt<int>($"[Green]Enter index element [{1}, {FigureRepository.Count()}]: [/]"));
-            while (index_selection_figure < 1 && index_selection_figure >= FigureRepository.Count());
-            index_selection_figure--;
-
-            var framing_rectangle = FigureRepository.GetAll()[index_selection_figure].FramingRectangle();
-            AnsiConsole.WriteLine(framing_rectangle.ToString());
+            var framingRectangle = _figureRepository.GetAll()[indexSelectionFigure].FramingRectangle();
+            AnsiConsole.WriteLine(framingRectangle.ToString());
             var str = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("[green]Add a framing rectangle to the collection: [/]")
                 .AddChoices("yes", "no"));
             switch (str)
             {
                 case "yes":
-                    FigureRepository.Insert(index_selection_figure, framing_rectangle);
+                    _figureRepository.Insert(indexSelectionFigure, framingRectangle);
                     break;
                 case "no":
                     break;

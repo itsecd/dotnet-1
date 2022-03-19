@@ -3,7 +3,7 @@ using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace laboratory.Command
+namespace Lab1.Commands
 {
     public class PrintFigureCommand : Command<PrintFigureCommand.PrintFigureSettings>
     {
@@ -23,7 +23,7 @@ namespace laboratory.Command
             table.AddColumn("Perimeter");
             foreach (var obj in FigureRepository.GetAll())
             {
-                table.AddRow(obj.GetType().Name, obj.ToString(), obj.Square().ToString(), obj.Perimeter().ToString());
+                table.AddRow(obj.GetType().Name, obj.ToString(), obj.Area().ToString(), obj.Perimeter().ToString());
                 if (table.Rows.Count() == 10)
                 {
                     table.AddRow("...", "...", "...", "...");

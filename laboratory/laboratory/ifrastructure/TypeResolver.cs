@@ -1,7 +1,7 @@
 ﻿using Spectre.Console.Cli;
 using System;
 
-namespace laboratory.Infrastructure
+namespace Lab1.Infrastructure
 {
     public sealed class TypeResolver : ITypeResolver, IDisposable
     {
@@ -12,7 +12,7 @@ namespace laboratory.Infrastructure
             _provider = provider ?? throw new ArgumentNullException(nameof(provider));
         }
 
-        public object Resolve(Type type)
+        public object? Resolve(Type? type)
         {
             if (type == null)
             {

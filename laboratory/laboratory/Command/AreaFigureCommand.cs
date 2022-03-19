@@ -4,24 +4,23 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
 {
-    public class PerimeterFigureCommand : Command<PerimeterFigureCommand.PerimeterFigureSettings>
+    public class AreaFigureCommand : Command<AreaFigureCommand.AreaFigureSettings>
     {
-        private readonly IRepository _figureRepository;
+        private readonly IRepository FigureRepository;
 
-        public PerimeterFigureCommand(IRepository figureRepository)
+        public AreaFigureCommand(IRepository figure)
         {
-            _figureRepository = figureRepository;
+            FigureRepository = figure;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] PerimeterFigureSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] AreaFigureSettings settings)
         {
-
-            if (_figureRepository.GetAll() == null)
+            if (FigureRepository.GetAll() == null || FigureRepository.GetAll().Count == 0)
             {
                 AnsiConsole.WriteLine("The collection is empty");
                 return 1;
             }
-            var index = AnsiConsole.Prompt(
+            int index = AnsiConsole.Prompt(
                 new TextPrompt<int>("Enter index element 0<=:")
                 .ValidationErrorMessage("Invalid index entered")
                     .Validate(index =>
@@ -32,11 +31,12 @@ namespace Lab1.Commands
                             _ => ValidationResult.Success(),
                         };
                     }));
-            AnsiConsole.WriteLine($"{_figureRepository.GetAll()[index]} Perimeter = {_figureRepository.GetAll()[index].Perimeter()}");
+            AnsiConsole.WriteLine($"{FigureRepository.GetAll()[index]} squeare = {FigureRepository.GetAll()[index].Area()}");
             return 0;
+
         }
 
-        public class PerimeterFigureSettings : CommandSettings
+        public class AreaFigureSettings : CommandSettings
         {
 
         }

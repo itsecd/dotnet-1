@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-using laboratory.model;
 
-namespace laboratory
+namespace Lab1
 {
     public interface IRepository
     {
         List<Figure> GetAll();
-
-        public int Count();
 
         void Insert(int index, Figure obj);
 
