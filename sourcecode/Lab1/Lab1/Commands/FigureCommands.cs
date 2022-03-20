@@ -2,71 +2,75 @@
 using Lab1.Repository;
 using Spectre.Console;
 using Spectre.Console.Cli;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
-    public class FigureCommands : Command<FigureCommands.AddFigureCommand>
+    public class AddFigureCommand : Command<AddFigureCommand.AddFigureCommandSettings>
     {
-        public class AddFigureCommand : CommandSettings
+        public class AddFigureCommandSettings : CommandSettings
         {
 
         }
+
         private readonly IFigureRepository _figureRepository;
-        public FigureCommands (IFigureRepository figureRepo)
+
+        public AddFigureCommand(IFigureRepository figureRepo)
         {
             _figureRepository = figureRepo;
         }
-        public override int Execute([NotNull] CommandContext context, [NotNull] AddFigureCommand settings)
+
+        public override int Execute([NotNull] CommandContext conteXt, [NotNull] AddFigureCommandSettings settings)
         {
-             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("choice")
+            var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("choice")
                      .AddChoices("Rectangular", "Sphere", "Cylinder"));
-            Figure f = choice switch
+            Figure figure = choice switch
             {
-                "Rectangular" => new Rectangular {
-                    Vertex1 = new Point(
+                "Rectangular" => new Rectangular
+                {
+                    BaseLeftTop = new Point(
                         AnsiConsole.Prompt(new TextPrompt<double>("[green]Точка 1 X [/]")),
                         AnsiConsole.Prompt(new TextPrompt<double>("[green]Точка 1 Y [/]")),
                         AnsiConsole.Prompt(new TextPrompt<double>("[green]Точка 1 Z [/]"))
                     ),
-                    Vertex2 = new Point(
+                    BaseRightBottom = new Point(
                         AnsiConsole.Prompt(new TextPrompt<double>("[green]Точка 2 X [/]")),
                         AnsiConsole.Prompt(new TextPrompt<double>("[green]Точка 2 Y [/]")),
                         AnsiConsole.Prompt(new TextPrompt<double>("[green]Точка 2 Z [/]"))
                     ),
-                    Height = AnsiConsole.Prompt(new TextPrompt<double>("[green]Высота H [/]"))
+                    Depth = AnsiConsole.Prompt(new TextPrompt<double>("[green]Высота H [/]"))
                 },
                 "Sphere" => new Sphere
                 {
                     Center = new Point(
                         AnsiConsole.Prompt(new TextPrompt<double>("[green]Center X [/]")),
-                        AnsiConsole.Prompt(new TextPrompt<double>("[green]Center 1 Y [/]")),
-                        AnsiConsole.Prompt(new TextPrompt<double>("[green]Center 1 Z [/]"))
+                        AnsiConsole.Prompt(new TextPrompt<double>("[green]Center Y [/]")),
+                        AnsiConsole.Prompt(new TextPrompt<double>("[green]Center Z [/]"))
                     ),
                     Radius = AnsiConsole.Prompt(new TextPrompt<double>("[green]Radius [/]"))
                 },
                 "Cylinder" => new Cylinder
                 {
-                    center = new Point(
+                    Center = new Point(
                         AnsiConsole.Prompt(new TextPrompt<double>("[green]Center X [/]")),
-                        AnsiConsole.Prompt(new TextPrompt<double>("[green]Center 1 Y [/]")),
-                        AnsiConsole.Prompt(new TextPrompt<double>("[green]Center 1 Z [/]"))
+                        AnsiConsole.Prompt(new TextPrompt<double>("[green]Center Y [/]")),
+                        AnsiConsole.Prompt(new TextPrompt<double>("[green]Center Z [/]"))
                     ),
-                    RadiusCylinder = AnsiConsole.Prompt(new TextPrompt<double>("[green]Radius [/]")),
-                    HeightCylinder = AnsiConsole.Prompt(new TextPrompt<double>("[green]Height [/]"))
+                    Radius = AnsiConsole.Prompt(new TextPrompt<double>("[green]Radius [/]")),
+                    Height = AnsiConsole.Prompt(new TextPrompt<double>("[green]Height [/]"))
                 },
                 _ => null
             };
-            if (f == null)
+
+            if (figure == null)
             {
-                AnsiConsole.Markup("[red]Invalid type[/]");
+                AnsiConsole.MarkupLine("[red]Invalid type[/]");
             }
-            _figureRepository.AddFigure(f);
+
+            else
+            {
+                _figureRepository.Add(figure);
+            }
             return 0;
         }
     }

@@ -1,31 +1,28 @@
 ﻿using Lab1.Repository;
+using Spectre.Console;
 using Spectre.Console.Cli;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
-    public class RemoveFigure : Command<RemoveFigure.RemoveFigureCommand>
+    public class RemoveFigureCommand : Command<RemoveFigureCommand.RemoveFigureCommandSettings>
     {
-        public class RemoveFigureCommand : CommandSettings
+        public class RemoveFigureCommandSettings : CommandSettings
         {
 
         }
+
         private readonly IFigureRepository _figureRepository;
-        public RemoveFigure(IFigureRepository figureRepo)
+
+        public RemoveFigureCommand(IFigureRepository figureRepo)
         {
             _figureRepository = figureRepo;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] RemoveFigureCommand settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] RemoveFigureCommandSettings settings)
         {
-            Console.Write("Index = ");
             var index = AnsiConsole.Ask<int>("[green]Index = [/]");
-            _figureRepository.RemoveFigure(index);
+            _figureRepository.RemoveAt(index);
             return 0;
         }
     }

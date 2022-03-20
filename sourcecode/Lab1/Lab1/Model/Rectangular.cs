@@ -4,50 +4,49 @@ namespace Lab1.Model
 {
     public class Rectangular : Figure
     {
-        public Point Vertex1 { get; set; }
-        public Point Vertex2 { get; set; }
-        private double height;
-        public double Length => Math.Abs(Vertex1.X - Vertex2.X);
-        public double Width => Math.Abs(Vetrex1.Y - Vertex2.Y);
+        public Point BaseLeftTop { get; set; }
 
-        public double Height
-        {
-            get => height;
-            set { height = value; }
-        }
+        public Point BaseRightBottom { get; set; }
+
+        public double Depth { get; set; }
+
+        public double Width => Math.Abs(BaseLeftTop.X - BaseRightBottom.X);
+
+        public double Height => Math.Abs(BaseLeftTop.Y - BaseRightBottom.Y);
 
         public Rectangular()
         {
-         
+
         }
 
         public Rectangular(Point vertex1, Point vertex2)
         {
-            Vertex1 = vertex1;
-            Vertex2 = vertex2;
+            BaseLeftTop = vertex1;
+            BaseRightBottom = vertex2;
         }
 
-        public override double SurfaceArea()
+        public override double GetSurfaceArea()
         {
-            return 2 * Length * Width + 2 * Length * Height + 2 * Width * Height;
+            return 2 * Width * Height + 2 * Width * Depth + 2 * Height * Depth;
         }
 
-        public override double volume()
+        public override double GetVolume()
         {
-            return Length * Width * Height;
+            return Width * Height * Depth;
         }
+
         public override string ToString()
         {
-            return "(" + Vertex1.x + "," + Vertex1.y + "," + Vertex1.z + ")" + " "
-                   + "(" + Vertex2.x + "," + Vertex2.y + "," + Vertex2.z + ")" + " "
-                   + "height: " + Height;
+            return "(" + BaseLeftTop.X + "," + BaseLeftTop.Y + "," + BaseLeftTop.Z + ")" + " "
+                   + "(" + BaseRightBottom.X + "," + BaseRightBottom.Y + "," + BaseRightBottom.Z + ")" + " "
+                   + "Depth: " + Depth;
 
         }
-        
-         public override bool Equals(object? obj)
+
+        public override bool Equals(object? obj)
         {
             if (obj is not Rectangular rec) return false;
-            return Vertex1.Equals(rec.Vertex2) && Vertex2.Equals(rec.Vertex2) && Height == rec.Height;
+            return BaseLeftTop.Equals(rec.BaseRightBottom) && BaseRightBottom.Equals(rec.BaseRightBottom) && Depth == rec.Depth;
         }
     }
 }

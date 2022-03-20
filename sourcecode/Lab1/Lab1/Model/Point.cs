@@ -1,26 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Model
 {
     public struct Point
     {
-        private double X;
-        private double Y;
-        private double Z;
-        public double x
-        {
-            get => X;
-            set { X = value; }
-        }
-        public double y
-        {
-            get => Y;
-            set { Y = value; }
-        }
+        public double X { get; set; }
+
+        public double Y { get; set; }
+
+        public double Z { get; set; }
+
         public Point(double x, double y, double z)
         {
             X = x;
@@ -33,9 +22,7 @@ namespace Lab1.Model
             var yDiff = point.Y - Y;
             var zDiff = point.Z - Z;
             return Math.Sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
-
         }
-
         public override bool Equals(object? obj)
         {
             if (obj is not Point vertex) return false;

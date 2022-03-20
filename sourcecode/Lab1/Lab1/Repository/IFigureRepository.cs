@@ -5,9 +5,12 @@ namespace Lab1.Repository
 {
     public interface IFigureRepository
     {
-        void AddFigure(Figure _figure);
-        void ClearAllFigure();
-        void RemoveFigure(int index);
-        List<Figure> getFigure();
+        void Add(Figure NewFigure);
+
+        void Clear();
+
+        void RemoveAt(int indeX);
+
+        List<Figure> GetFigures();
     }
 }

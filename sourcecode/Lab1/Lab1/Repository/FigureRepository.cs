@@ -8,50 +8,57 @@ namespace Lab1.Repository
 {
     public class FigureRepository : IFigureRepository
     {
-        private const string FileName = "Data.xml";
-        private List<Figure> figure;
+        private const string FileName = "figure.Xml";
+        private List<Figure> ListFigures;
+
         private void ReadFileXml()
         {
+            if (ListFigures != null) return;
             if (!File.Exists(FileName))
             {
-                figure = new List<Figure>();
+                ListFigures = new List<Figure>();
+                return;
             }
-            var xmlSelializer = new XmlSerializer(typeof(List<Figure>));
+            var XmlSelializer = new XmlSerializer(typeof(List<Figure>));
             using var fileStream = new FileStream(FileName, FileMode.Open);
-            figure = (List<Figure>)xmlSelializer.Deserialize(fileStream);
+            ListFigures = (List<Figure>)XmlSelializer.Deserialize(fileStream);
         }
+
         private void WriteFileXml()
         {
-            var xmlSelializer = new XmlSerializer(typeof(List<Figure>));
+            var XmlSelializer = new XmlSerializer(typeof(List<Figure>));
             using var fileStream = new FileStream(FileName, FileMode.Create);
-            xmlSelializer.Serialize(fileStream, figure);
+            XmlSelializer.Serialize(fileStream, ListFigures);
         }
-        public void AddFigure(Figure _figure)
+
+        public void Add(Figure NewFigure)
         {
-            if (_figure == null)
+            if (NewFigure == null)
             {
-                throw new ArgumentNullException(nameof(_figure));
+                throw new ArgumentNullException(nameof(NewFigure));
             }
             ReadFileXml();
-            figure.Add(_figure);
+            ListFigures.Add(NewFigure);
             WriteFileXml();
         }
 
-        public List<Figure> getFigure()
+        public List<Figure> GetFigures()
         {
             ReadFileXml();
-            return figure;
+            return ListFigures;
         }
-        public void RemoveFigure(int index)
+
+        public void RemoveAt(int indeX)
         {
             ReadFileXml();
-            figure.RemoveAt(index);
+            ListFigures.RemoveAt(indeX);
             WriteFileXml();
         }
-        public void ClearAllFigure()
+
+        public void Clear()
         {
             ReadFileXml();
-            figure.Clear();
+            ListFigures.Clear();
             WriteFileXml();
         }
     }
