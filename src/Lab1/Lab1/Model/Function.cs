@@ -15,7 +15,7 @@ namespace Lab1.Model
 
         public abstract Function GetDerivative();
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             // если параметр метода представляет тип Function
             // то возвращаем true, если имена совпадают

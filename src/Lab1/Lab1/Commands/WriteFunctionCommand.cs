@@ -28,6 +28,5 @@ namespace Lab1.Commands
 
             return 0;
         }
-
     }
 }

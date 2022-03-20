@@ -17,10 +17,10 @@ namespace Lab1.Model
         public DerLog() : this(1)
         { }
 
-        public DerLog(double value, double _coef = 1)
+        public DerLog(double value, double coefficient = 1)
         {
             A = value; // должно быть больше нуля
-            Coef = _coef;
+            Coef = coefficient;
             Name = "DerLog";
         }
     }

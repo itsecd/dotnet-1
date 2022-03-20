@@ -51,8 +51,6 @@ namespace Lab1.FunctionsRepository
             {
                 lst = new List<Function>();
             }
-
-            return;
         }
 
         private void WriteToFile()
@@ -62,8 +60,6 @@ namespace Lab1.FunctionsRepository
             {
                 formatter.Serialize(fs, lst);
             }
-
-            return;
         }
 
         public void Add(Function func)

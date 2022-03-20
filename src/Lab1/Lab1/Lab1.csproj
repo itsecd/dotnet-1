@@ -16,11 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\Menu.cs" />
     <Compile Remove="Commands\MenuFunctionCommand.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AnsiConsole" Version="0.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Spectre.Console" Version="0.43.0" />
   </ItemGroup>

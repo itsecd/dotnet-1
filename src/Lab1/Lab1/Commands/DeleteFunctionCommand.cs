@@ -26,15 +26,15 @@ namespace Lab1.Commands
             Console.WriteLine("Удалить элемент из контейнера по индексу");
             Console.WriteLine("Введите индекс удаляемого элемента (или не число, чтобы вернуться назад): ");
 
-            Function tmp;
+            Function deletedFunction;
             string input = Console.ReadLine();
             try
             {
                 int result = Convert.ToInt32(input);
-                tmp = _functionRepository[result];
+                deletedFunction = _functionRepository[result];
                 _functionRepository.Delete(result);
 
-                Console.WriteLine($"Удалён элемент {tmp}");
+                Console.WriteLine($"Удалён элемент {deletedFunction}");
             }
             catch
             {

@@ -20,10 +20,10 @@ namespace Lab1.Model
         public PowerFunc() : this(0)
         { }
 
-        public PowerFunc(double value, double _coef = 1)
+        public PowerFunc(double value, double coefficient = 1)
         {
             A = value;
-            Coef = _coef;
+            Coef = coefficient;
             Name = "PowerFunc";
         }
 

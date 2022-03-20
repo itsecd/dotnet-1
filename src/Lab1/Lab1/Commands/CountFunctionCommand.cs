@@ -18,7 +18,7 @@ namespace Lab1.Commands
             _functionRepository = repository;
         }
 
-        private void OwnCount(ref IFunctionsRepository _functionRepository)
+        private void OwnCount()
         {
             Console.Clear();
             Console.WriteLine("Введите число: ");
@@ -44,7 +44,7 @@ namespace Lab1.Commands
                     index = i;
                 }
             }
-            Console.WriteLine($"При x = {x} наибольшее значение принимает фукнция");
+            Console.WriteLine($"При x = {x} наибольшее значение принимает функция");
             Console.WriteLine($"{_functionRepository[index]}");
             Console.WriteLine($"f({x}) = {_functionRepository[index].GetValue(x)}");
 
@@ -52,7 +52,7 @@ namespace Lab1.Commands
             Console.ReadKey(true);
         }
 
-        private void LinqCount(ref IFunctionsRepository _functionRepository)
+        private void LinqCount()
         {
             Console.Clear();
             Console.WriteLine("Введите число: ");
@@ -71,7 +71,7 @@ namespace Lab1.Commands
 
             var maxFunc = _functionRepository.GetMaxValueFunction(x);
 
-            Console.WriteLine($"При x = {x} наибольшее значение принимает фукнция");
+            Console.WriteLine($"При x = {x} наибольшее значение принимает функция");
             Console.WriteLine($"{maxFunc}");
             Console.WriteLine($"f({x}) = {maxFunc.GetValue(x)}");
 
@@ -86,7 +86,6 @@ namespace Lab1.Commands
                 Console.WriteLine("Контейнер пуст, расчёт невозможен");
                 Console.WriteLine("Нажмите любую клавишу, чтобы вернуться..");
                 Console.ReadKey(true);
-                //  return;
             }
 
             Console.WriteLine("Использовать для вычислений:");
@@ -98,13 +97,13 @@ namespace Lab1.Commands
             switch (k.Key)
             {
                 case ConsoleKey.D1:
-                    OwnCount(ref _functionRepository);
+                    OwnCount();
                     break;
                 case ConsoleKey.D2:
-                    LinqCount(ref _functionRepository);
+                    LinqCount();
                     break;
                 default:
-                    return 0;
+                    break;
             }
 
             return 0;

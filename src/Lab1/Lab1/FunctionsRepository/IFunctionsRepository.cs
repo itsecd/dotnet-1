@@ -15,6 +15,5 @@ namespace Lab1.FunctionsRepository
         bool Compare(int i, int j);
         public Function GetMaxValueFunction(double x);
         void Delete(int index);
-        string ToString();
     }
 }

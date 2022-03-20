@@ -15,9 +15,9 @@
         public ConstFunc() : this(0)
         { }
 
-        public ConstFunc(double _coef)
+        public ConstFunc(double coefficient)
         {
-            Coef = _coef;
+            Coef = coefficient;
             Name = "ConstFunc";
         }
 

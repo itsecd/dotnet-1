@@ -20,10 +20,10 @@ namespace Lab1.Model
         public ExpoFunc() : this(1)
         { }
 
-        public ExpoFunc(double value, double _coef = 1)
+        public ExpoFunc(double value, double coefficient = 1)
         {
             A = value;
-            Coef = _coef;
+            Coef = coefficient;
             Name = "ExpoFunc";
         }
 
