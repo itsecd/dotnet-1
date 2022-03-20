@@ -4,8 +4,8 @@
     "\\sourcecode",
     "\\sourcecode\\Lab1",
     "\\sourcecode\\Lab1\\Lab1",
-    "\\sourcecode\\Lab1\\Lab1\\bin"
+    "\\sourcecode\\Lab1\\Lab1\\Model"
   ],
-  "SelectedNode": "\\sourcecode\\Lab1\\Lab1\\Commands",
+  "SelectedNode": "\\sourcecode\\Lab1\\Lab1\\Model\\Point.cs",
   "PreviewInSolutionExplorer": false
 }
