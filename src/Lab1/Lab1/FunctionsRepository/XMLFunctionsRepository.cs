@@ -11,11 +11,11 @@ namespace Lab1.FunctionsRepository
     {
         const string name = "Functions.xml";
 
-        List<Function> lst;
+        private List<Function> _functionsList;
         public Function this[int index]
         {
-            get => lst[index];
-            set => lst[index] = value;
+            get => _functionsList[index];
+            set => _functionsList[index] = value;
         }
 
         public int Count
@@ -23,7 +23,7 @@ namespace Lab1.FunctionsRepository
             get
             {
                 ReadFile();
-                return lst.Count;
+                return _functionsList.Count;
             }
         }
 
@@ -31,7 +31,7 @@ namespace Lab1.FunctionsRepository
         {
             if (!File.Exists(name))
             {
-                lst = new List<Function>();
+                _functionsList = new List<Function>();
                 return;
             }
 
@@ -43,13 +43,13 @@ namespace Lab1.FunctionsRepository
                 {
                     var tmp = formatter.Deserialize(fs) as List<Function>;
                     if (tmp.Count != 0)
-                        lst = tmp;
-                    else lst = new List<Function>();
+                        _functionsList = tmp;
+                    else _functionsList = new List<Function>();
                 }
             }
             catch (Exception)
             {
-                lst = new List<Function>();
+                _functionsList = new List<Function>();
             }
         }
 
@@ -58,7 +58,7 @@ namespace Lab1.FunctionsRepository
             XmlSerializer formatter = new XmlSerializer(typeof(List<Function>));
             using (FileStream fs = new FileStream(name, FileMode.Create))
             {
-                formatter.Serialize(fs, lst);
+                formatter.Serialize(fs, _functionsList);
             }
         }
 
@@ -68,37 +68,37 @@ namespace Lab1.FunctionsRepository
                 throw new ArgumentNullException(nameof(func));
 
             ReadFile();
-            lst.Add(func);
+            _functionsList.Add(func);
             WriteToFile();
         }
 
         public void Clear()
         {
             ReadFile();
-            lst.Clear();
+            _functionsList.Clear();
             WriteToFile();
         }
 
         public void Delete(int index) 
         {
-            lst.RemoveAt(index);
+            _functionsList.RemoveAt(index);
             WriteToFile();
         }
 
         public bool Compare(int i, int j)
         {
             ReadFile();
-            return lst[i].Equals(lst[j]);
+            return _functionsList[i].Equals(_functionsList[j]);
         }
 
         public Function GetMaxValueFunction(double x)
         {
             ReadFile();
 
-            if (lst.Count == 0)
+            if (_functionsList.Count == 0)
                 return null;
 
-            var maxLst = lst.OrderBy(f => f.GetValue(x));
+            var maxLst = _functionsList.OrderBy(f => f.GetValue(x));
             return maxLst.Last();
         }
 
@@ -106,23 +106,23 @@ namespace Lab1.FunctionsRepository
         {
             ReadFile();
 
-            if (lst.Count == 0)
+            if (_functionsList.Count == 0)
                 return "Контейнер пуст";
 
             string result = "";
             string dotes = "\n...";
 
             int end;
-            if (lst.Count <= 10)
+            if (_functionsList.Count <= 10)
             {
-                end = lst.Count;
+                end = _functionsList.Count;
                 dotes = "";
             }
             else
                 end = 10;
 
             for (int i = 0; i < end; ++i)
-                result += $"\n{i + 1}) {lst[i]}";
+                result += $"\n{i + 1}) {_functionsList[i]}";
             result += dotes;
 
             return result;
