@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace Lab1.Model
 {
-    [XmlInclude(typeof(BufferedMatrix))]
-    [XmlInclude(typeof(SparseMatrix))]
     public abstract class Matrix
     {
         public abstract int GetMatrixSize();
         public abstract double GetValueByIndex(int i, int j);
         public abstract void SetValueByIndex(int i, int j, double value);
         public abstract void PrintMatrix();
-        public abstract string ToString();
-        public abstract int GetHashCode();
+        public override abstract string ToString();
+        public override abstract int GetHashCode();
         public abstract double GetMaxElm();
         public abstract double GetMaxElmLinq();
+
+        public abstract void ToXml(XmlTextWriter writer);
+        public abstract void LoadXml(XmlTextReader reader);
     }
 }

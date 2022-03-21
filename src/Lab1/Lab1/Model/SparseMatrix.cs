@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Lab1.Model
 {
     public class SparseMatrix : Matrix
     {
-        private int n { get; }
-        private int m { get; }
+        public int n { get; }
+        public int m { get; }
+        public Dictionary<Tuple<int, int>, double> _matrix;
 
-        private Dictionary<Tuple<int, int>, double> _matrix;
+        //public Dictionary<Tuple<int, int>, double> _matrix;
         public SparseMatrix() { }
 
         //public SparseMatrix(double[][] matrix)
@@ -32,9 +34,13 @@ namespace Lab1.Model
         //    }
         //}
 
-        public SparseMatrix(int n, int m)
+        public SparseMatrix(int n, int m, bool fillRandom)
         {
             _matrix = new Dictionary<Tuple<int, int>, double>();
+            this.n = n;
+            this.m = m;
+            if (!fillRandom) return;
+
             var matrix = new int[n][];
 
             for (int i = 0; i < n; i++)
@@ -49,8 +55,6 @@ namespace Lab1.Model
                     matrix[i][j] = rand.Next(0, +20);
             }
 
-            this.n = matrix.Length;
-            this.m = matrix[0].Length;
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < m; j++)
@@ -72,7 +76,7 @@ namespace Lab1.Model
             {
                 for (int j = 0; j < m; j++)
                 {
-                    var ind = Tuple.Create(i, j);
+                    var ind = new Tuple<int, int>(i, j);
                     if (_matrix.ContainsKey(ind))
                         Console.Write(_matrix[ind] + "\t");
                     else
@@ -100,16 +104,25 @@ namespace Lab1.Model
             if (value == 0)
                 _matrix.Remove(new Tuple<int, int>(i, j));
             else
-                _matrix [new Tuple<int, int>(i, j)] = value;
+                _matrix[new Tuple<int, int>(i, j)] = value;
         }
 
         public override string ToString()
         {
             string str = "";
-            foreach(Tuple<int, int> key in _matrix.Keys)
+
+            for (int i = 0; i < n; i++)
             {
-                str += key + "=" + _matrix[key];
+                for (int j = 0; j < m; j++)
+                {
+                    var ind = new Tuple<int, int>(i, j);
+                    if (_matrix.ContainsKey(ind))
+                        str += ind + "=" + _matrix[ind];
+                    else
+                        str += ind + "=0";
+                }
             }
+
             return str;
             //var sb = new StringBuilder();
             //for (int i = 0; i < n; i++)
@@ -159,7 +172,7 @@ namespace Lab1.Model
             {
                 for (int j = 0; j < m; j++)
                 {
-                    if (GetValueByIndex(i,j) != matrix.GetValueByIndex(i, j))
+                    if (GetValueByIndex(i, j) != matrix.GetValueByIndex(i, j))
                     {
                         return false;
                     }
@@ -172,7 +185,7 @@ namespace Lab1.Model
             double maxElm = 0;
             foreach (var elem in _matrix.Values)
             {
-                if(maxElm < Math.Abs(elem))
+                if (maxElm < Math.Abs(elem))
                     maxElm = elem;
             }
             return maxElm;
@@ -182,5 +195,36 @@ namespace Lab1.Model
             return _matrix.Values.Max();
         }
 
+        public override void ToXml(XmlTextWriter writer)
+        {
+            writer.WriteAttributeString("n", n.ToString());
+            writer.WriteAttributeString("m", m.ToString());
+            foreach (var ((i, j), elem) in _matrix)
+            {
+                writer.WriteStartElement("elem");
+                writer.WriteAttributeString("i", i.ToString());
+                writer.WriteAttributeString("j", j.ToString());
+                writer.WriteAttributeString("value", elem.ToString());
+                writer.WriteEndElement();
+            }
+        }
+
+        public override void LoadXml(XmlTextReader reader)
+        {
+            if (reader.IsEmptyElement) return;
+            while (reader.NodeType != XmlNodeType.Element)
+            {
+                reader.Read();
+            }
+            reader.Read();
+            while (reader.NodeType != XmlNodeType.EndElement)
+            {
+                _matrix.Add(new Tuple<int, int>(
+                    int.Parse(reader.GetAttribute("i")),
+                    int.Parse(reader.GetAttribute("j"))),
+                    double.Parse(reader.GetAttribute("value")));
+                reader.Read();
+            }
+        }
     }
 }

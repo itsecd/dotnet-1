@@ -1,9 +1,13 @@
 ﻿using Lab1.Model;
+using System.Collections.Generic;
 
 namespace Lab1.Repository
 {
     public interface IMatricesRepository
     {
-        void AddMatrix(Matrix matrix);
+        void AddMatrix(Matrix matrix, int index);
+        void RemoveMatrix(int index);
+        List<Matrix> GetMatrices();
+        void PrintMatrices();
     }
 }

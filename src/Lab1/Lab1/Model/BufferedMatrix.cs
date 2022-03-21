@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Lab1.Model
 {
     public class BufferedMatrix : Matrix
     {
-        private int n{ get; }
-        private int m{ get; }
-        private double[][] _matrix;
+        public int n { get; init; }
+        public int m { get; init; }
+        public double[][] _matrix { get; init; }
         public BufferedMatrix() { }
 
-        public BufferedMatrix(int n, int m)
+        public BufferedMatrix(int n, int m, bool fillRandom)
         {
             this.n = n;
             this.m = m;
@@ -24,11 +25,13 @@ namespace Lab1.Model
                 _matrix[i] = new double[m];
             }
 
+            if (!fillRandom) return;
+
             Random rand = new Random();
-            for(int i=0; i<n; i++)
+            for (int i = 0; i < n; i++)
             {
-                for(int j=0; j<m; j++)
-                    _matrix[i][j] = rand.Next(0, +20);     
+                for (int j = 0; j < m; j++)
+                    _matrix[i][j] = rand.Next(0, +20);
             }
         }
 
@@ -39,7 +42,7 @@ namespace Lab1.Model
 
         public override double GetValueByIndex(int i, int j)
         {
-            if(m>0 && n>0)
+            if (m > 0 && n > 0)
                 return _matrix[i][j];
             else
                 return 0;
@@ -47,9 +50,9 @@ namespace Lab1.Model
 
         public override void SetValueByIndex(int i, int j, double value)
         {
-            if(i<0 || i>=m)
+            if (i < 0 || i >= m)
                 return;
-            if(j<0 || j>=n)
+            if (j < 0 || j >= n)
                 return;
             _matrix[i][j] = value;
         }
@@ -69,9 +72,9 @@ namespace Lab1.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            for(int i=0; i<n; i++)
+            for (int i = 0; i < n; i++)
             {
-                for(int j=0; j<m; j++)
+                for (int j = 0; j < m; j++)
                 {
                     sb.Append(_matrix[i][j]);
                 }
@@ -118,7 +121,7 @@ namespace Lab1.Model
                     hashCode = hashCode * _matrix.GetLength(0);
                 }
             }
-            
+
             return Math.Abs((int)hashCode);
         }
         public override double GetMaxElm()
@@ -128,7 +131,7 @@ namespace Lab1.Model
             {
                 for (int j = 0; j < _matrix[i].Length; j++)
                 {
-                    if(Math.Abs(_matrix[i][j]) > maxElm)
+                    if (Math.Abs(_matrix[i][j]) > maxElm)
                         maxElm = Math.Abs(_matrix[i][j]);
                 }
             }
@@ -137,6 +140,40 @@ namespace Lab1.Model
         public override double GetMaxElmLinq()
         {
             return _matrix.Max(p => p.Max(Math.Abs));
+        }
+
+        public override void ToXml(XmlTextWriter writer)
+        {
+            writer.WriteAttributeString("n", n.ToString());
+            writer.WriteAttributeString("m", m.ToString());
+            foreach (var i in _matrix)
+            {
+                foreach (var j in i)
+                {
+                    writer.WriteStartElement("elem");
+                    writer.WriteAttributeString("value", j.ToString());
+                    writer.WriteEndElement();
+                }
+            }
+        }
+
+        public override void LoadXml(XmlTextReader reader)
+        {
+            if (reader.IsEmptyElement) return;
+            while (reader.NodeType != XmlNodeType.Element)
+            {
+                reader.Read();
+            }
+            for (int i = 0; i < n; i++)
+            {
+                _matrix[i] = new double[m];
+                for (int j = 0; j < m; j++)
+                {
+                    reader.Read();
+                    _matrix[i][j] = double.Parse(reader.GetAttribute("value"));
+                }
+            }
+            reader.Read();
         }
     }
 }

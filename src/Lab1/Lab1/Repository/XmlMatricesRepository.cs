@@ -6,55 +6,129 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.Xml;
+using Spectre.Console;
 
 namespace Lab1.Repository
 {
     public class XmlMatricesRepository : IMatricesRepository
     {
-        private const string StorageFileName = "matrices.xml";
+        private const string _storageFileName = "matrices.xml";
         private List<Matrix> _matrices;
 
-        public XmlMatricesRepository()
-        {
-            _matrices = new List<Matrix>();
-        }
         private void ReadFromFile()
         {
             if (_matrices != null) return;
 
-            if (!File.Exists(StorageFileName))
+            if (!File.Exists(_storageFileName))
             {
                 _matrices = new List<Matrix>();
                 return;
             }
+            using (var fileStream = new StreamReader(_storageFileName))
+            {
+                using (XmlTextReader reader = new XmlTextReader(fileStream))
+                {
+                    reader.WhitespaceHandling = WhitespaceHandling.None;
+                    if (new FileInfo(_storageFileName).Length == 0)
+                    {
+                        _matrices = new List<Matrix>();
+                        return;
+                    }
 
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Matrix>));
-            using var fileStream = new FileStream(StorageFileName, FileMode.Open);
-            _matrices = (List<Matrix>)xmlSerializer.Deserialize(fileStream);
+                    while (reader.NodeType != XmlNodeType.Element)
+                    {
+                        reader.Read();
+                    }
+                    if (int.Parse(reader.GetAttribute("count")) == 0)
+                    {
+                        _matrices = new List<Matrix>();
+                        return;
+                    }
+                    reader.Read();
+                    while (reader.NodeType != XmlNodeType.EndElement)
+                    {
+                        Matrix tmp = reader.Name.Equals("SparseMatrix") ?
+                            new SparseMatrix(int.Parse(reader.GetAttribute("n")), int.Parse(reader.GetAttribute("m")), false) :
+                            new BufferedMatrix(int.Parse(reader.GetAttribute("n")), int.Parse(reader.GetAttribute("m")), false);
+
+                        tmp.LoadXml(reader);
+                        reader.ReadEndElement();
+
+                        if (_matrices == null)
+                            _matrices = new List<Matrix>();
+                        _matrices.Add(tmp);
+                    }
+                }
+            }
         }
 
         private void WriteToFile()
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Matrix>));
-            using var fileStream = new FileStream(StorageFileName, FileMode.Create);
-            xmlSerializer.Serialize(fileStream, _matrices);
+            using (var fileStream = new StreamWriter(_storageFileName))
+            {
+                using (var writer = new XmlTextWriter(fileStream))
+                {
+                    writer.Formatting = Formatting.Indented;
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("matrices");
+                    writer.WriteAttributeString("count", _matrices.Count.ToString());
+                    foreach (var matrix in _matrices)
+                    {
+                        writer.WriteStartElement(matrix.GetType().Name);
+                        matrix.ToXml(writer);
+                        writer.WriteEndElement();
+                    }
+                    writer.WriteEndElement();
+                }
+            }
         }
 
-        public void AddMatrix(Matrix matrix)
+        public void AddMatrix(Matrix matrix, int index)
         {
             if (matrix == null)
                 throw new ArgumentNullException(nameof(matrix));
 
             ReadFromFile();
-            _matrices.Add(matrix);
+            if (index < 0)
+            {
+                _matrices.Add(matrix);
+                WriteToFile();
+                return;
+            }
+            _matrices.Insert(index, matrix);
             WriteToFile();
         }
 
-        private void RemoveMatrix(int index)
+        public void RemoveMatrix(int index)
         {
             ReadFromFile();
             _matrices.RemoveAt(index);
             WriteToFile();
+        }
+
+        public List<Matrix> GetMatrices()
+        {
+            ReadFromFile();
+            return _matrices;
+        }
+
+        public void PrintMatrices()
+        {
+            ReadFromFile();
+
+            var table = new Table();
+            table.AddColumn("Index");
+            table.AddColumn("Type");
+            table.AddColumn("Size");
+            table.AddColumn("Value");
+
+            for (var i = 0; i < _matrices.Count(); i++)
+            {
+                table.AddRow(i.ToString(), _matrices[i].GetType().Name, _matrices[i].GetMatrixSize().ToString(), _matrices[i].ToString());
+            }
+
+            AnsiConsole.Write(table);
         }
     }
 }

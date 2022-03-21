@@ -30,15 +30,20 @@ namespace Lab1.Commands
                 .Title("Выберите тип матрицы: ")
                 .AddChoices("Sparse matrix", "Buffered matrix"));
 
+
+
+
             Matrix matrix = matrixType switch
             {
                 "Sparse matrix" => new SparseMatrix(
                     AnsiConsole.Prompt(new TextPrompt<int>("Высота")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("Ширина"))
+                    AnsiConsole.Prompt(new TextPrompt<int>("Ширина")),
+                    true
                 ),
-                "Buffered matrix" => new SparseMatrix(
+                "Buffered matrix" => new BufferedMatrix(
                     AnsiConsole.Prompt(new TextPrompt<int>("Высота")),
-                    AnsiConsole.Prompt(new TextPrompt<int>("Ширина"))
+                    AnsiConsole.Prompt(new TextPrompt<int>("Ширина")),
+                    true
                 ),
                 _ => null
             };
@@ -49,7 +54,21 @@ namespace Lab1.Commands
                 return -1;
             }
 
-            _matricesRepository.AddMatrix(matrix);
+            if (_matricesRepository.GetMatrices().Count() == 0)
+            {
+                _matricesRepository.AddMatrix(matrix, -1);
+                return 0;
+            }
+
+            _matricesRepository.PrintMatrices();
+
+            var index = -1;
+            do
+            {
+                index = AnsiConsole.Prompt(new TextPrompt<int>("Введите индекс для вставки матрицы"));
+            } while (index > _matricesRepository.GetMatrices().Count());
+
+            _matricesRepository.AddMatrix(matrix, index);
             return 0;
         }
     }

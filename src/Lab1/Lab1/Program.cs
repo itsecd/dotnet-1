@@ -10,6 +10,9 @@ using System.Xml;
 using System.Xml.Linq;
 using Spectre.Console;
 using Microsoft.Extensions.DependencyInjection;
+using Lab1.Infrastructure;
+using Spectre.Console.Cli;
+using Lab1.Commands;
 
 namespace Lab1
 {
@@ -20,9 +23,17 @@ namespace Lab1
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<IMatricesRepository, XmlMatricesRepository>();
 
-            IMatricesRepository xmlMatricesRepository = new XmlMatricesRepository();            
+            var registrar = new TypeRegistrar(serviceCollection);
+            var app = new CommandApp(registrar);
+
+            app.Configure(config =>
+            {
+                config.AddCommand<AddMatrixCommand>("add");
+            });
+
+            app.Run(args);
         }
     }
 
-    
+
 }
