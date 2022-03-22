@@ -26,7 +26,7 @@ namespace Lab1.Commands
                 _matricesRepository.GetMatrices()[0].GetMaxElm() : null);
             if (min == null)
             {
-                AnsiConsole.MarkupLine("[red]Репозиторий пуст[/]");
+                AnsiConsole.MarkupLine("[red]Repository is empty[/]");
                 return -1;
             }
 
@@ -35,7 +35,7 @@ namespace Lab1.Commands
                 if (matrix.GetMaxElm() < min)
                     min = matrix.GetMaxElm();
             }
-            AnsiConsole.MarkupLine($"[green]Минимальная норма: {min} [/]");
+            AnsiConsole.MarkupLine($"[green]Minimum rate: {min} [/]");
 
             min = _matricesRepository.GetMatrices()[0].GetMaxElmLinq();
             foreach (var matrix in _matricesRepository.GetMatrices())
@@ -43,7 +43,7 @@ namespace Lab1.Commands
                 if (matrix.GetMaxElmLinq() < min)
                     min = matrix.GetMaxElmLinq();
             }
-            AnsiConsole.MarkupLine($"[green]Минимальная норма Linq: {min} [/]");
+            AnsiConsole.MarkupLine($"[green]Minimum rate Linq: {min} [/]");
 
             return 0;
         }
