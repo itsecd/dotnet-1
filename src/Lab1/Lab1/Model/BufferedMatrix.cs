@@ -116,7 +116,7 @@ namespace Lab1.Model
             {
                 for (int j = 0; j < _m; j++)
                 {
-                    hashCode = hashCode * _matrix.GetLength(0);
+                    hashCode *=  _matrix.GetLength(0);
                 }
             }
 
