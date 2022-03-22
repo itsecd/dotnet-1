@@ -74,7 +74,7 @@ namespace Lab1.Model
             {
                 for (int j = 0; j < _m; j++)
                 {
-                    sb.Append(_matrix[i][j]);
+                    sb.Append($"({i}, {j})=" + _matrix[i][j]);
                 }
                 sb.AppendLine();
             }

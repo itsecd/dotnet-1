@@ -23,6 +23,7 @@ namespace Lab1
                 config.AddCommand<CompareMatricesCommand>("compare");
                 config.AddCommand<GetAllMatricesCommand>("print");
                 config.AddCommand<RemoveMatrixCommand>("remove");
+                config.AddCommand<PrintMinMaxAbsMatrixCommand>("lowest");
             });
 
             app.Run(args);
