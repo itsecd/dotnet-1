@@ -160,8 +160,8 @@ namespace Lab1.Model
 
         public override void ToXml(XmlTextWriter writer)
         {
-            writer.WriteAttributeString("_n", _n.ToString());
-            writer.WriteAttributeString("_m", _m.ToString());
+            writer.WriteAttributeString("n", _n.ToString());
+            writer.WriteAttributeString("m", _m.ToString());
             foreach (var ((i, j), elem) in _matrix)
             {
                 writer.WriteStartElement("elem");
