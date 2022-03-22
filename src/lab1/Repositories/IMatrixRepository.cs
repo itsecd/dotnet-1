@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace lab1.Repositories
 {
-    interface IMatrixRepository
+    public interface IMatrixRepository
     {
         public bool Compare(int lhs, int rhs);
         public void Insert(int index, IMatrix? matrix);
@@ -11,5 +11,6 @@ namespace lab1.Repositories
         public void Clear();
         public IMatrix GetMatrix(int index);
         public List<IMatrix> GetAll();
+        public void SetValue(int index, int i, int j, double value);
     }
 }

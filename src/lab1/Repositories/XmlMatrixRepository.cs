@@ -79,7 +79,6 @@ namespace lab1.Repositories
             ReadFromFile();
             _matrices!.Insert(index, matrix);
             WriteToFile();
-
         }
 
         public void RemoveAt(int index)
@@ -106,6 +105,13 @@ namespace lab1.Repositories
         {
             ReadFromFile();
             return _matrices!;
+        }
+
+        public void SetValue(int index, int i, int j, double value)
+        {
+            ReadFromFile();
+            _matrices![index].SetValue(i,j,value);
+            WriteToFile();
         }
     }
 }
