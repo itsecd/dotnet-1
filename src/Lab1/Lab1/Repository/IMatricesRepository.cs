@@ -9,5 +9,7 @@ namespace Lab1.Repository
         void RemoveMatrix(int index);
         List<Matrix> GetMatrices();
         void PrintMatrices();
+        void ClearRepository();
+        bool CompareMatrices(int index1, int index2);
     }
 }

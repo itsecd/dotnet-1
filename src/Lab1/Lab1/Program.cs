@@ -29,6 +29,10 @@ namespace Lab1
             app.Configure(config =>
             {
                 config.AddCommand<AddMatrixCommand>("add");
+                config.AddCommand<GetAllMatricesCommand>("print");
+                config.AddCommand<RemoveMatrixCommand>("remove");
+                config.AddCommand<ClearRepositoryCommand>("clear");
+                config.AddCommand<CompareMatricesCommand>("compare");
             });
 
             app.Run(args);

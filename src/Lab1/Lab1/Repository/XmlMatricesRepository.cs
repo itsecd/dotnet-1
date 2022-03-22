@@ -130,5 +130,19 @@ namespace Lab1.Repository
 
             AnsiConsole.Write(table);
         }
+
+        public void ClearRepository()
+        {
+            ReadFromFile();
+            _matrices.Clear();
+            WriteToFile();
+        }
+
+        public bool CompareMatrices(int index1, int index2)
+        {
+            var matrix1 = _matrices[index1];
+            var matrix2 = _matrices[index2];
+            return matrix1.Equals(matrix2);
+        }
     }
 }

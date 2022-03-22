@@ -146,12 +146,12 @@ namespace Lab1.Model
         {
             writer.WriteAttributeString("n", n.ToString());
             writer.WriteAttributeString("m", m.ToString());
-            foreach (var i in _matrix)
+            foreach (var row in _matrix)
             {
-                foreach (var j in i)
+                foreach (var elem in row)
                 {
                     writer.WriteStartElement("elem");
-                    writer.WriteAttributeString("value", j.ToString());
+                    writer.WriteAttributeString("value", elem.ToString());
                     writer.WriteEndElement();
                 }
             }
