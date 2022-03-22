@@ -1,11 +1,10 @@
 ﻿using lab1.Model;
+using lab1.PrintMatrix;
 using lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
 using System.Diagnostics.CodeAnalysis;
-using lab1.PrintMatrix;
-using System.Text;
 
 namespace Lab1.Commands
 {

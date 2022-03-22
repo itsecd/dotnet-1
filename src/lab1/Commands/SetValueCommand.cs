@@ -1,5 +1,4 @@
-﻿using lab1.Model;
-using lab1.PrintMatrix;
+﻿using lab1.PrintMatrix;
 using lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;

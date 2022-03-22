@@ -1,6 +1,8 @@
-﻿using lab1.Model;
-using lab1.Repositories;
-using Spectre.Console;
+﻿using lab1.Repositories;
+using Lab1.Commands;
+using Lab1.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using Spectre.Console.Cli;
 
 namespace lab1
 {
@@ -8,30 +10,36 @@ namespace lab1
     {
         static void Main(string[] args)
         {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IMatrixRepository, XmlMatrixRepository>();
 
-            double[,] bma = { { 1, 2, 3, 8, 10 }, { 0, 4, 1, 2, 3 }, { 6, 2, 0, 5, 7 }, { 7, 15, 2, 5, 7 }, { 7, 15, 2, 5, 7 } };
-            BufferedMatrix bm = new BufferedMatrix(bma);
+            var registrar = new TypeRegistrar(serviceCollection);
 
-            double[,] m = { { 1, 2, 3 }, { 0, 4, 1 }, { 6, 2, 0 }, { 7, 15, 2 } };
+            var app = new CommandApp(registrar);
 
-            SparseMatrix sm = new SparseMatrix(m);
+            app.Configure(config =>
+            {
+                config.AddCommand<InsertCommand>("insert")
+                .WithDescription("Insert new matrix by index");
+                config.AddCommand<PrintAllCommand>("print_all")
+                .WithDescription("Print all matrices (if the count of matrices is greater than 10, then it print only the first 10)");
+                config.AddCommand<PrintMatrixCommand>("print_matrix")
+                .WithDescription("Print matrix by index");
+                config.AddCommand<CompareCommand>("compare")
+                .WithDescription("Compares 2 matrices");
+                config.AddCommand<RemoveAtCommand>("remove")
+                .WithDescription("Remove matrix by index");
+                config.AddCommand<ClearCommand>("clear")
+                .WithDescription("Delete all matrices");
+                config.AddCommand<GetAbsMaxCommand>("abs_max")
+                .WithDescription("Finds the matrix with the smallest norm of maximum modulus");
+                config.AddCommand<GetAbsMaxLinqCommand>("abs_max_linq")
+                .WithDescription("Finds the matrix with the smallest norm of maximum modulus (use linq)");
+                config.AddCommand<SetValueCommand>("set")
+                .WithDescription("Set value in the matrix by index");
+            });
 
-            sm.SetValue(0, 1, 0);
-            sm.SetValue(1, 0, 0);
-            sm.SetValue(2, 2, 5);
-            sm.SetValue(3, 1, 6);
-
-            var matrixRepository = new XmlMatrixRepository();
-            matrixRepository.Insert(0, bm);
-            matrixRepository.Insert(0, sm);
-
-            var tmp = matrixRepository.GetAll();
-            foreach (var matrix in tmp)
-                AnsiConsole.WriteLine(matrix.ToString()!);
-
-            AnsiConsole.WriteLine(matrixRepository.Compare(0, 1));
-            AnsiConsole.WriteLine(matrixRepository.Compare(1, 1));
-            AnsiConsole.WriteLine(matrixRepository.Compare(0, 2));
+            app.Run(args);
         }
     }
 }
