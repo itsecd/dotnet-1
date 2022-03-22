@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Lab1.Model
@@ -13,26 +11,7 @@ namespace Lab1.Model
         public int m { get; }
         public Dictionary<Tuple<int, int>, double> _matrix;
 
-        //public Dictionary<Tuple<int, int>, double> _matrix;
         public SparseMatrix() { }
-
-        //public SparseMatrix(double[][] matrix)
-        //{
-        //    _matrix = new Dictionary<Tuple<int, int>, double>();
-        //    if (matrix == null)
-        //        return;
-
-        //    n = matrix.Length;
-        //    m = matrix[0].Length;
-        //    for (int i = 0; i < n; i++)
-        //    {
-        //        for (int j = 0; j < m; j++)
-        //        {
-        //            if (matrix[i][j] != 0)
-        //                _matrix.Add(new Tuple<int, int>(i, j), matrix[i][j]);
-        //        }
-        //    }
-        //}
 
         public SparseMatrix(int n, int m, bool fillRandom)
         {
@@ -124,23 +103,7 @@ namespace Lab1.Model
             }
 
             return str;
-            //var sb = new StringBuilder();
-            //for (int i = 0; i < n; i++)
-            //{
-            //    for (int j = 0; j < m; j++)
-            //    {
-            //        var tuple = new Tuple<int, int>(i, j);
-            //        if (_matrix.ContainsKey(tuple))
-            //        {
-            //            sb.Append($"{_matrix[tuple],10}");
-            //        }
-            //        else
-            //            sb.Append($"{0,10}");
-            //        sb.Append(' ');
-            //    }
-            //    sb.AppendLine();
-            //}
-            //return sb.ToString();
+            
         }
 
         public override int GetHashCode()
