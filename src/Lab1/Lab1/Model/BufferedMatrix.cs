@@ -7,15 +7,15 @@ namespace Lab1.Model
 {
     public class BufferedMatrix : Matrix
     {
-        public int n { get; init; }
-        public int m { get; init; }
-        public double[][] _matrix { get; init; }
+        private readonly int _n;
+        private readonly int _m;
+        private readonly double[][] _matrix;
         public BufferedMatrix() { }
 
         public BufferedMatrix(int n, int m, bool fillRandom)
         {
-            this.n = n;
-            this.m = m;
+            this._n = n;
+            this._m = m;
             _matrix = new double[n][];
 
             for (int i = 0; i < n; i++)
@@ -35,12 +35,12 @@ namespace Lab1.Model
 
         public override int GetMatrixSize()
         {
-            return n * m;
+            return _n * _m;
         }
 
         public override double GetValueByIndex(int i, int j)
         {
-            if (m > 0 && n > 0)
+            if (_m > 0 && _n > 0)
                 return _matrix[i][j];
             else
                 return 0;
@@ -48,18 +48,18 @@ namespace Lab1.Model
 
         public override void SetValueByIndex(int i, int j, double value)
         {
-            if (i < 0 || i >= m)
+            if (i < 0 || i >= _m)
                 return;
-            if (j < 0 || j >= n)
+            if (j < 0 || j >= _n)
                 return;
             _matrix[i][j] = value;
         }
 
         public override void PrintMatrix()
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < _n; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < _m; j++)
                 {
                     Console.Write(_matrix[i][j] + "\t");
                 }
@@ -70,9 +70,9 @@ namespace Lab1.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < _n; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < _m; j++)
                 {
                     sb.Append(_matrix[i][j]);
                 }
@@ -96,9 +96,9 @@ namespace Lab1.Model
             {
                 return false;
             }
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < _n; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < _m; j++)
                 {
                     if (_matrix[i][j] != matrix.GetValueByIndex(i, j))
                     {
@@ -112,9 +112,9 @@ namespace Lab1.Model
         public override int GetHashCode()
         {
             double hashCode = 0;
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < _n; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < _m; j++)
                 {
                     hashCode = hashCode * _matrix.GetLength(0);
                 }
@@ -142,8 +142,8 @@ namespace Lab1.Model
 
         public override void ToXml(XmlTextWriter writer)
         {
-            writer.WriteAttributeString("n", n.ToString());
-            writer.WriteAttributeString("m", m.ToString());
+            writer.WriteAttributeString("_n", _n.ToString());
+            writer.WriteAttributeString("_m", _m.ToString());
             foreach (var row in _matrix)
             {
                 foreach (var elem in row)
@@ -162,10 +162,10 @@ namespace Lab1.Model
             {
                 reader.Read();
             }
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < _n; i++)
             {
-                _matrix[i] = new double[m];
-                for (int j = 0; j < m; j++)
+                _matrix[i] = new double[_m];
+                for (int j = 0; j < _m; j++)
                 {
                     reader.Read();
                     _matrix[i][j] = double.Parse(reader.GetAttribute("value"));

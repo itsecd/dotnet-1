@@ -52,8 +52,7 @@ namespace Lab1.Repository
                         tmp.LoadXml(reader);
                         reader.ReadEndElement();
 
-                        if (_matrices == null)
-                            _matrices = new List<Matrix>();
+                        _matrices ??= new List<Matrix>();
                         _matrices.Add(tmp);
                     }
                 }
@@ -120,7 +119,7 @@ namespace Lab1.Repository
             table.AddColumn("Size");
             table.AddColumn("Value");
 
-            for (var i = 0; i < _matrices.Count(); i++)
+            for (var i = 0; i < _matrices.Count; i++)
             {
                 table.AddRow(i.ToString(), _matrices[i].GetType().Name, _matrices[i].GetMatrixSize().ToString(), _matrices[i].ToString());
             }

@@ -21,7 +21,7 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] CompareMatricesSettings settings)
         {
-            if (_matricesRepository.GetMatrices().Count() < 2)
+            if (_matricesRepository.GetMatrices().Count < 2)
             {
                 AnsiConsole.MarkupLine($"[red]У вас меньше 2 матриц, чтобы их сравнить[/]");
                 return 0;
@@ -29,21 +29,18 @@ namespace Lab1.Commands
 
             _matricesRepository.PrintMatrices();
 
-            var index1 = -1;
-            var index2 = -1;
+            int index1;
+            int index2;
             do
             {
                 index1 = AnsiConsole.Prompt(new TextPrompt<int>("Введите индекс 1 "));
-            } while (index1 >= _matricesRepository.GetMatrices().Count());
+            } while (index1 >= _matricesRepository.GetMatrices().Count);
             do
             {
                 index2 = AnsiConsole.Prompt(new TextPrompt<int>("Введите индекс 2 "));
-            } while (index2 >= _matricesRepository.GetMatrices().Count());
+            } while (index2 >= _matricesRepository.GetMatrices().Count);
 
-            if (_matricesRepository.CompareMatrices(index1, index2))
-                AnsiConsole.MarkupLine($"[green]Матрицы равны[/]");
-            else
-                AnsiConsole.MarkupLine($"[red]Матрицы не равны[/]");
+            AnsiConsole.MarkupLine(_matricesRepository.CompareMatrices(index1, index2) ? "[green]Матрицы равны[/]" : "[red]Матрицы не равны[/]");
 
             return 0;
         }

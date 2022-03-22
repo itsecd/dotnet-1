@@ -1,14 +1,4 @@
-﻿using System;
-using System.Linq;
-using Lab1.Model;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-using System.IO;
-using Lab1.Repository;
-using System.Runtime.Serialization;
-using System.Xml;
-using System.Xml.Linq;
-using Spectre.Console;
+﻿using Lab1.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Lab1.Infrastructure;
 using Spectre.Console.Cli;
@@ -29,10 +19,10 @@ namespace Lab1
             app.Configure(config =>
             {
                 config.AddCommand<AddMatrixCommand>("add");
-                config.AddCommand<GetAllMatricesCommand>("print");
-                config.AddCommand<RemoveMatrixCommand>("remove");
                 config.AddCommand<ClearRepositoryCommand>("clear");
                 config.AddCommand<CompareMatricesCommand>("compare");
+                config.AddCommand<GetAllMatricesCommand>("print");
+                config.AddCommand<RemoveMatrixCommand>("remove");
             });
 
             app.Run(args);

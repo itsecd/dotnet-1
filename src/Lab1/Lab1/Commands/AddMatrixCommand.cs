@@ -50,7 +50,7 @@ namespace Lab1.Commands
                 return -1;
             }
 
-            if (_matricesRepository.GetMatrices().Count() == 0)
+            if (!_matricesRepository.GetMatrices().Any())
             {
                 _matricesRepository.AddMatrix(matrix, -1);
                 return 0;
@@ -58,11 +58,11 @@ namespace Lab1.Commands
 
             _matricesRepository.PrintMatrices();
 
-            var index = -1;
+            int index;
             do
             {
                 index = AnsiConsole.Prompt(new TextPrompt<int>("Введите индекс для вставки матрицы"));
-            } while (index > _matricesRepository.GetMatrices().Count());
+            } while (index > _matricesRepository.GetMatrices().Count);
 
             _matricesRepository.AddMatrix(matrix, index);
             return 0;

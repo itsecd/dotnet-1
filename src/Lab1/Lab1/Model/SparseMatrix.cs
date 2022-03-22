@@ -7,17 +7,17 @@ namespace Lab1.Model
 {
     public class SparseMatrix : Matrix
     {
-        public int n { get; }
-        public int m { get; }
-        public Dictionary<Tuple<int, int>, double> _matrix;
+        private readonly int _n;
+        private readonly int _m;
+        private readonly Dictionary<Tuple<int, int>, double> _matrix;
 
         public SparseMatrix() { }
 
         public SparseMatrix(int n, int m, bool fillRandom)
         {
             _matrix = new Dictionary<Tuple<int, int>, double>();
-            this.n = n;
-            this.m = m;
+            this._n = n;
+            this._m = m;
             if (!fillRandom) return;
 
             var matrix = new int[n][];
@@ -46,14 +46,14 @@ namespace Lab1.Model
 
         public override int GetMatrixSize()
         {
-            return n * m;
+            return _n * _m;
         }
 
         public override void PrintMatrix()
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < _n; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < _m; j++)
                 {
                     var ind = new Tuple<int, int>(i, j);
                     if (_matrix.ContainsKey(ind))
@@ -76,9 +76,9 @@ namespace Lab1.Model
 
         public override void SetValueByIndex(int i, int j, double value)
         {
-            if (i < 0 || i >= m)
+            if (i < 0 || i >= _m)
                 return;
-            if (j < 0 || j >= n)
+            if (j < 0 || j >= _n)
                 return;
             if (value == 0)
                 _matrix.Remove(new Tuple<int, int>(i, j));
@@ -90,9 +90,9 @@ namespace Lab1.Model
         {
             string str = "";
 
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < _n; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < _m; j++)
                 {
                     var ind = new Tuple<int, int>(i, j);
                     if (_matrix.ContainsKey(ind))
@@ -103,7 +103,7 @@ namespace Lab1.Model
             }
 
             return str;
-            
+
         }
 
         public override int GetHashCode()
@@ -111,7 +111,7 @@ namespace Lab1.Model
             double hashCode = 0;
             foreach (var ((i, j), elem) in _matrix)
             {
-                hashCode = hashCode * elem.GetHashCode();
+                hashCode *= elem.GetHashCode();
             }
             return Math.Abs((int)hashCode);
         }
@@ -131,9 +131,9 @@ namespace Lab1.Model
             {
                 return false;
             }
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < _n; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < _m; j++)
                 {
                     if (GetValueByIndex(i, j) != matrix.GetValueByIndex(i, j))
                     {
@@ -160,8 +160,8 @@ namespace Lab1.Model
 
         public override void ToXml(XmlTextWriter writer)
         {
-            writer.WriteAttributeString("n", n.ToString());
-            writer.WriteAttributeString("m", m.ToString());
+            writer.WriteAttributeString("_n", _n.ToString());
+            writer.WriteAttributeString("_m", _m.ToString());
             foreach (var ((i, j), elem) in _matrix)
             {
                 writer.WriteStartElement("elem");
