@@ -1,5 +1,5 @@
-﻿using lab1.Model;
-using lab1.Repositories;
+﻿using Lab1.Model;
+using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
@@ -22,10 +22,6 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] InsertSettings settings)
         {
-            var matrixType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("[blue]Select type of matrix: [/]")
-                .AddChoices("buffered", "sparse"));
-
             var height = AnsiConsole.Prompt(new TextPrompt<uint>("[blue]Height: [/]"));
             var width = AnsiConsole.Prompt(new TextPrompt<uint>("[blue]Width: [/]"));
 
@@ -35,6 +31,10 @@ namespace Lab1.Commands
                 {
                     numbers[i, j] = AnsiConsole.Prompt(new TextPrompt<double>($"[blue]{i}, {j}: [/]"));
                 }
+
+            var matrixType = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                .Title("[blue]Select type of matrix: [/]")
+                .AddChoices("buffered", "sparse"));
 
             IMatrix? matrix = matrixType switch
             {

@@ -1,6 +1,5 @@
-﻿using lab1.Model;
-using lab1.PrintMatrix;
-using lab1.Repositories;
+﻿using Lab1.Model;
+using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
@@ -24,13 +23,13 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] GetMinMaxNormSettings settings)
         {
-            var max = Double.PositiveInfinity;
             var matrices = _matricesRepository.GetAll();
             if (matrices.Count == 0)
                 return 0;
 
             IMatrix? resMatrix = null;
 
+            var max = Double.PositiveInfinity;
             foreach (var matrix in matrices)
             {
                 var matrixMax = matrix.GetMaxNorm();
@@ -46,7 +45,7 @@ namespace Lab1.Commands
 
             AnsiConsole.MarkupLine($"[blue]Min max norm: {max} [/]");
             AnsiConsole.MarkupLine($"[blue]Matrix: [/]");
-            PrintMatrix.Print(resMatrix);
+            PrintMatrixCommand.Print(resMatrix);
 
             return 0;
         }

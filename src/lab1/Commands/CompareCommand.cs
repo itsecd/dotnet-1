@@ -1,4 +1,4 @@
-﻿using lab1.Repositories;
+﻿using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
@@ -21,10 +21,12 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] CompareSettings settings)
         {
-            int lhs = (int)AnsiConsole.Prompt(new TextPrompt<uint>("[blue]First matrix index: [/]"));
-            int rhs = (int)AnsiConsole.Prompt(new TextPrompt<uint>("[blue]Second matrix index: [/]"));
+            int lhsIndex = (int)AnsiConsole.Prompt(new TextPrompt<uint>("[blue]First matrix index: [/]"));
+            int rhsIndex = (int)AnsiConsole.Prompt(new TextPrompt<uint>("[blue]Second matrix index: [/]"));
 
-            var res = _matricesRepository.Compare(lhs, rhs);
+            var lhs = _matricesRepository.GetMatrix(lhsIndex);
+            var rhs = _matricesRepository.GetMatrix(rhsIndex);
+            var res = lhs.Equals(rhs);
 
             AnsiConsole.MarkupLine($"[blue]Comparision result: {res}[/]");
             return 0;

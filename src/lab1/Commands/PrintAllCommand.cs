@@ -1,5 +1,4 @@
-using lab1.PrintMatrix;
-using lab1.Repositories;
+using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
@@ -32,7 +31,7 @@ namespace Lab1.Commands
                     break;
                 }
                 AnsiConsole.MarkupLine($"[blue]Matrix {i}[/]");
-                PrintMatrix.Print(matrices[i]);
+                PrintMatrixCommand.Print(matrices[i]);
                 AnsiConsole.WriteLine();
             }
             return 0;

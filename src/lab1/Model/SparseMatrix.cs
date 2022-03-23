@@ -1,16 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Xml;
 
-namespace lab1.Model
+namespace Lab1.Model
 {
-    public class SparseMatrix : IMatrix
+    public class SparseMatrix : Matrix
     {
 
-        private readonly Dictionary<Tuple<int, int>, double> _matrix;
-        public int Width { get; init; }
-        public int Height { get; init; }
+        private readonly Dictionary<(int, int), double> _matrix;
+        public override int Width { get; init; }
+        public override int Height { get; init; }
+
+        public override double this[int i, int j]
+        {
+            get => _matrix.ContainsKey((i, j))? _matrix[(i, j)] : 0;
+
+            set
+            {
+                if (value == 0 && _matrix.ContainsKey((i, j)))
+                    _matrix.Remove((i, j));
+                if (value != 0)
+                    _matrix[(i, j)] = value;
+            }
+        }
 
         /// <summary>
         /// Create 2x2 matrix
@@ -40,14 +53,14 @@ namespace lab1.Model
         /// <param name="matrix">two-dimensional array</param>
         public SparseMatrix(double[,] matrix)
         {
-            Height = matrix.GetUpperBound(0) + 1;
-            Width = matrix.GetUpperBound(1) + 1;
+            Height = matrix.GetLength(0);
+            Width = matrix.GetLength(1);
             _matrix = new();
             for (int i = 0; i < Height; ++i)
                 for (int j = 0; j < Width; ++j)
                 {
                     if (matrix[i, j] != 0)
-                        _matrix.Add(new Tuple<int, int>(i, j), matrix[i, j]);
+                        _matrix.Add((i, j), matrix[i, j]);
                 }
         }
 
@@ -79,7 +92,7 @@ namespace lab1.Model
                     throw new ArgumentException("Failed to parse the attribute 'j'");
                 if (!double.TryParse(reader.GetAttribute("Val"), out double val))
                     throw new ArgumentException("Failed to parse the attribute 'Val'");
-                _matrix.Add(new Tuple<int, int>(i, j), val);
+                _matrix.Add((i, j), val);
                 reader.Read();
             }
         }
@@ -88,56 +101,14 @@ namespace lab1.Model
         /// Find maximum modulus
         /// </summary>
         /// <returns>Maximem modulus</returns>
-        public double GetMaxNorm()
-        {
-            var max = Double.NegativeInfinity;
-            foreach (var num in _matrix)
-            {
-                if (Math.Abs(num.Value) > max)
-                    max = Math.Abs(num.Value);
-            }
-            return max;
-        }
+        public override double GetMaxNorm() =>_matrix.Max(n => Math.Abs(n.Value));
 
-        /// <summary>
-        /// Return a value from the matrix by indexes
-        /// </summary>
-        /// <param name="i">first dimension index</param>
-        /// <param name="j">second dimension index</param>
-        /// <returns>value</returns>
-        public double GetValue(int i, int j)
-        {
-            if (i >= Height)
-                throw new ArgumentOutOfRangeException(nameof(i), $"Height must be not bigger than {Height}");
-            if (j >= Width)
-                throw new ArgumentOutOfRangeException(nameof(j), $"Width must be not bigger than {Width}");
-            return _matrix.ContainsKey(new Tuple<int, int>(i, j)) ? _matrix[new Tuple<int, int>(i, j)] : 0;
-        }
-
-        /// <summary>
-        /// Set a value to the matrix by indexes
-        /// </summary>
-        /// <param name="i">first dimension index</param>
-        /// <param name="j">second dimension index</param>
-        /// <param name="value">value</param>
-        public void SetValue(int i, int j, double value)
-        {
-            if (i >= Height)
-                throw new ArgumentOutOfRangeException(nameof(i), $"Height must be not bigger than {Height}");
-            if (j >= Width)
-                throw new ArgumentOutOfRangeException(nameof(j), $"Width must be not bigger than {Width}");
-            if (value == 0)
-                return;
-            if (value == 0 && _matrix.ContainsKey(new Tuple<int, int>(i, j)))
-                _matrix.Remove(new Tuple<int, int>(i, j));
-            _matrix[new Tuple<int, int>(i, j)] = value;
-        }
 
         /// <summary>
         /// Write matrix to Xml
         /// </summary>
         /// <param name="writer">Xml writer</param>
-        public void GetXml(XmlTextWriter writer)
+        public override void GetXml(XmlTextWriter writer)
         {
             writer.WriteAttributeString("Height", Height.ToString());
             writer.WriteAttributeString("Width", Width.ToString());
@@ -149,61 +120,6 @@ namespace lab1.Model
                 writer.WriteAttributeString("Val", elem.ToString());
                 writer.WriteEndElement();
             }
-        }
-        public override bool Equals(object? obj)
-        {
-
-            if (this == obj)
-            {
-                return true;
-            }
-            if (obj is not SparseMatrix)
-            {
-                return false;
-            }
-            var tmp = (SparseMatrix)obj;
-            if (tmp.Height != Height || tmp.Width != Width)
-            {
-                return false;
-            }
-            foreach (var ((i, j), value) in _matrix)
-            {
-                if (tmp.GetValue(i, j) != value)
-                    return false;
-            }
-            return true;
-        }
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-
-            for (int i = 0; i < Height; i++)
-            {
-                for (int j = 0; j < Width; j++)
-                {
-                    if (_matrix.ContainsKey(new Tuple<int, int>(i, j)))
-                        sb.Append($"{_matrix[new Tuple<int, int>(i, j)]} ");
-                    else
-                        sb.Append("0 ");
-                }
-
-                sb.AppendLine();
-            }
-
-            return sb.ToString();
-        }
-
-        public override int GetHashCode()
-        {
-            int tmp = 1;
-            double hash = Height + Width;
-            foreach (var ((i, j), value) in _matrix)
-            {
-                hash += tmp * i + tmp * j + value;
-                ++tmp;
-            }
-            return (int)Math.Round(hash);
         }
     }
 }

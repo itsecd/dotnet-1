@@ -1,16 +1,23 @@
 ﻿using System;
-using System.Text;
+using System.Linq;
 using System.Xml;
 
-namespace lab1.Model
+namespace Lab1.Model
 {
-    public class BufferedMatrix : IMatrix
+    public class BufferedMatrix : Matrix
     {
         private readonly double[,] _matrix;
 
-        public int Width { get; init; }
+        public override int Width { get; init; }
 
-        public int Height { get; init; }
+        public override int Height { get; init; }
+
+        public override double this[int i, int j]
+        {
+            get => _matrix[i, j];
+
+            set => _matrix[i, j] = value;
+        }
 
         /// <summary>
         /// Create 2x2 matrix
@@ -40,13 +47,17 @@ namespace lab1.Model
         /// <param name="matrix">two-dimensional array</param>
         public BufferedMatrix(double[,] matrix)
         {
-            Height = matrix.GetUpperBound(0) + 1;
-            Width = matrix.GetUpperBound(1) + 1;
+            //Height = matrix.GetUpperBound(0) + 1;
+            Height = matrix.GetLength(0);
+            //Width = matrix.GetUpperBound(1) + 1;
+            Width = matrix.GetLength(1);
             _matrix = new double[Height, Width];
 
-            for (int i = 0; i < Height; ++i)
-                for (int j = 0; j < Width; ++j)
-                    _matrix[i, j] = matrix[i, j];
+            //for (int i = 0; i < Height; ++i)
+            //    for (int j = 0; j < Width; ++j)
+            //        _matrix[i, j] = matrix[i, j];
+
+            _matrix = (double[,])matrix.Clone();
         }
 
         /// <summary>
@@ -83,53 +94,13 @@ namespace lab1.Model
         /// Find maximum modulus
         /// </summary>
         /// <returns>Maximem modulus</returns>
-        public double GetMaxNorm()
-        {
-            var max = Double.NegativeInfinity;
-            foreach (var num in _matrix)
-            {
-                if (Math.Abs(num) > max)
-                    max = Math.Abs(num);
-            }
-            return max;
-        }
-
-        /// <summary>
-        /// Return a value from the matrix by indexes
-        /// </summary>
-        /// <param name="i">first dimension index</param>
-        /// <param name="j">second dimension index</param>
-        /// <returns>value</returns>
-        public double GetValue(int i, int j)
-        {
-            if (i >= Height)
-                throw new ArgumentOutOfRangeException(nameof(i), $"Height must be not bigger than {Height}");
-            if (j >= Width)
-                throw new ArgumentOutOfRangeException(nameof(j), $"Width must be not bigger than {Width}");
-
-            return _matrix[i, j];
-        }
-
-        /// <summary>
-        /// Set a value to the matrix by indexes
-        /// </summary>
-        /// <param name="i">first dimension index</param>
-        /// <param name="j">second dimension index</param>
-        /// <param name="value">value</param>
-        public void SetValue(int i, int j, double value)
-        {
-            if (i >= Height)
-                throw new ArgumentOutOfRangeException(nameof(i), $"Height must be not bigger than {Height}");
-            if (j >= Width)
-                throw new ArgumentOutOfRangeException(nameof(j), $"Width must be not bigger than {Width}");
-            _matrix[i, j] = value;
-        }
+        public override double GetMaxNorm() => _matrix.Cast<double>().Max(Math.Abs);
 
         /// <summary>
         /// Write matrix to Xml
         /// </summary>
         /// <param name="writer">Xml writer</param>
-        public void GetXml(XmlTextWriter writer)
+        public override void GetXml(XmlTextWriter writer)
         {
             writer.WriteAttributeString("Height", Height.ToString());
             writer.WriteAttributeString("Width", Width.ToString());
@@ -139,58 +110,6 @@ namespace lab1.Model
                 writer.WriteAttributeString("Val", elem.ToString());
                 writer.WriteEndElement();
             }
-        }
-
-        public override bool Equals(object? obj)
-        {
-
-            if (this == obj)
-            {
-                return true;
-            }
-            if (obj is not BufferedMatrix)
-            {
-                return false;
-            }
-            var tmp = (BufferedMatrix)obj;
-            if (tmp.Height != Height || tmp.Width != Width)
-            {
-                return false;
-            }
-            for (int i = 0; i < Height; i++)
-                for (int j = 0; j < Width; j++)
-                    if (_matrix[i, j] != tmp.GetValue(i, j))
-                        return false;
-            return true;
-        }
-
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-
-            for (int i = 0; i < Height; i++)
-            {
-                for (int j = 0; j < Width; j++)
-                {
-                    sb.Append($"{_matrix[i, j]} ");
-                }
-
-                sb.AppendLine();
-            }
-
-            return sb.ToString();
-        }
-        public override int GetHashCode()
-        {
-            int tmp = 1;
-            double hash = Height + Width;
-            for (int i = 0; i < Height; ++i)
-                for (int j = 0; j < Width; ++j)
-                {
-                    hash += tmp * i + tmp * j + _matrix[i, j];
-                    ++tmp;
-                }
-            return (int)Math.Round(hash);
         }
     }
 }

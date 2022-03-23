@@ -1,6 +1,4 @@
-﻿using lab1.Model;
-using lab1.PrintMatrix;
-using lab1.Repositories;
+﻿using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
@@ -24,18 +22,17 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] GetMinMaxNormLinqSettings settings)
         {
-            var matrices = _matricesRepository.GetAll();
-            if (matrices.Count == 0)
+            var matrix = _matricesRepository
+                .GetAll()
+                .OrderBy(m => m.GetMaxNorm())
+                .FirstOrDefault();
+
+            if (matrix is null)
                 return 0;
 
-            IMatrix? resMatrix = matrices.OrderBy(Matrix => Matrix.GetMaxNorm()).First();
-
-            if (resMatrix == null)
-                return -1;
-
-            AnsiConsole.MarkupLine($"[blue]Min max norm: {resMatrix.GetMaxNorm()} [/]");
+            AnsiConsole.MarkupLine($"[blue]Min max norm: {matrix.GetMaxNorm()} [/]");
             AnsiConsole.MarkupLine($"[blue]Matrix: [/]");
-            PrintMatrix.Print(resMatrix);
+            PrintMatrixCommand.Print(matrix);
 
             return 0;
         }
