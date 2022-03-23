@@ -1,6 +1,6 @@
 ﻿namespace Lab1.Model
 {
-    public class LinearFunction : Function // y = kx + b
+    public class LinearFunction : Function
     {
         public double Linear { get; set; } = 1;
         public double Const { get; set; } = 0;

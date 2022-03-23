@@ -8,9 +8,9 @@ namespace Lab1.Services
 {
     class XmlStorageRepository : IFunctionsRepository
     {
-        private const string StorageFileName = "Repository.xml";
+        private const string StorageFileName = "functions.xml";
 
-        private List<Function>? functionsList;
+        private List<Function>? _functions;
 
         public void Insert(int index, Function newFunc)
         {
@@ -41,17 +41,17 @@ namespace Lab1.Services
 
         private List<Function> Read()
         {
-            if (functionsList is not null)
-                return functionsList;
+            if (_functions is not null)
+                return _functions;
             if (!File.Exists(StorageFileName))
             {
-                return functionsList = new List<Function>();
+                return _functions = new List<Function>();
 
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
             using var fileStream = new FileStream(StorageFileName, FileMode.Open);
-            functionsList = (List<Function>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException());
-            return functionsList;
+            _functions = (List<Function>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException());
+            return _functions;
         }
 
         private void Write(List<Function> funcList)

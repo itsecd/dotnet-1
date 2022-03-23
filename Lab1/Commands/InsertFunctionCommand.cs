@@ -2,6 +2,8 @@
 using Lab1.Services;
 using Spectre.Console;
 using Spectre.Console.Cli;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
@@ -18,47 +20,44 @@ namespace Lab1.Commands
         {
             _functionsRepository = functionRepository;
         }
-
         public override int Execute([NotNull] CommandContext context, [NotNull] InsertFunctionSettings settings)
         {
-            var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Выберите тип функции: ")
-                .AddChoices("Константа", "Линейная функция", "Квадратичная функция", "Синус", "Косинус"));
-
-            Function? addFuncion = figureType switch
+            var functionFactory = new Dictionary<string, Func<Function>>
             {
-                "Константа" => new Constant(
+                { "Константа",() => new Constant(
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'constValue' :[/]"))
-                ),
-                "Линейная функция" => new LinearFunction(
+                )},
+                {
+                "Линейная функция",() => new LinearFunction(
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Linear' coefficient :[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'constValue' :[/]"))
-                ),
-                "Квадратичная функция" => new QuadraticFunction(
+                )},
+                {"Квадратичная функция",() => new QuadraticFunction(
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Quadratic' coefficient :[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Linear' coefficient :[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'constValue' :[/]"))
-                ),
-                "Синус" => new Sin(
+                )},
+                {"Синус",() => new Sin(
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Amplitude' :[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Omega' :[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Phase' :[/]"))
-                ),
-                "Косинус" => new Cos(
+                )},
+                {"Косинус",() => new Cos(
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Amplitude' :[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Omega' :[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'Phase' :[/]"))
-                ),
-                _ => null
+                )},
             };
-            if (addFuncion == null)
-            {
-                AnsiConsole.MarkupLine($"[green]Unknown function type[/]");
-                return -1;
-            }
 
+            var functionType = AnsiConsole.Prompt(new SelectionPrompt<string>()
+                .Title("Выберите тип функции: ")
+                .AddChoices(functionFactory.Keys));
+
+            var newFunction = functionFactory[functionType];
+            var addFunction = newFunction.Invoke();
+            
             int index = AnsiConsole.Prompt(new TextPrompt<int>("[green]Enter index :[/]"));
-            _functionsRepository.Insert(index, addFuncion);
+            _functionsRepository.Insert(index, addFunction);
             return 0;
         }
     }

@@ -2,7 +2,7 @@
 
 namespace Lab1.Model
 {
-    public class QuadraticFunction : Function//ax^2 + bx + c
+    public class QuadraticFunction : Function
     {
         public double Quadratic { get; set; } = 1;
         public double Linear { get; set; } = 1;
@@ -16,7 +16,6 @@ namespace Lab1.Model
             Const = c;
         }
 
-        //2ax + b производная - линейная функция
         public override Function GetDerivative() => new LinearFunction(2 * Quadratic, Linear);
 
         public override double Compute(double arg) => Quadratic * Math.Pow(arg, 2) + Linear * arg + Const;
