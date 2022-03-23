@@ -106,6 +106,7 @@ namespace lab1.Model
                 throw new ArgumentOutOfRangeException(nameof(i), $"Height must be not bigger than {Height}");
             if (j >= Width)
                 throw new ArgumentOutOfRangeException(nameof(j), $"Width must be not bigger than {Width}");
+
             return _matrix[i, j];
         }
 
