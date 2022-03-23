@@ -31,7 +31,7 @@ namespace Lab1.Commands
 
             IMatrix? resMatrix = null;
 
-            foreach(var matrix in matrices)
+            foreach (var matrix in matrices)
             {
                 var matrixMax = matrix.GetAbsMax();
                 if (matrixMax < max)

@@ -25,7 +25,7 @@ namespace Lab1.Commands
                 .Title("[blue]You want to delete all matrices?: [/]")
                 .AddChoices("Yes", "No"));
 
-            switch(check)
+            switch (check)
             {
                 case "Yes":
                     _matricesRepository.Clear();

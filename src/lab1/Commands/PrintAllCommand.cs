@@ -24,9 +24,9 @@ namespace Lab1.Commands
         {
             var matrices = _matricesRepository.GetAll();
 
-            for(var i = 0; i < matrices.Count; ++i)
+            for (var i = 0; i < matrices.Count; ++i)
             {
-                if(i==10)
+                if (i == 10)
                 {
                     AnsiConsole.MarkupLine("[blue]...[/]");
                     break;

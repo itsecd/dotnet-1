@@ -28,7 +28,7 @@ namespace Lab1.Commands
             if (matrices.Count == 0)
                 return 0;
 
-            IMatrix? resMatrix = matrices.OrderBy( Matrix => Matrix.GetAbsMax()).First();
+            IMatrix? resMatrix = matrices.OrderBy(Matrix => Matrix.GetAbsMax()).First();
 
             if (resMatrix == null)
                 return -1;

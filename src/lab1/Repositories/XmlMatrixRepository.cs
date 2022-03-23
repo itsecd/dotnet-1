@@ -110,7 +110,7 @@ namespace lab1.Repositories
         public void SetValue(int index, int i, int j, double value)
         {
             ReadFromFile();
-            _matrices![index].SetValue(i,j,value);
+            _matrices![index].SetValue(i, j, value);
             WriteToFile();
         }
     }
