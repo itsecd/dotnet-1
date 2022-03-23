@@ -31,9 +31,9 @@ namespace lab1
                 .WithDescription("Remove matrix by index");
                 config.AddCommand<ClearCommand>("clear")
                 .WithDescription("Delete all matrices");
-                config.AddCommand<GetAbsMaxCommand>("abs_max")
+                config.AddCommand<GetMinMaxNormCommand>("norm")
                 .WithDescription("Finds the matrix with the smallest norm of maximum modulus");
-                config.AddCommand<GetAbsMaxLinqCommand>("abs_max_linq")
+                config.AddCommand<GetMinMaxNormLinqCommand>("norm_linq")
                 .WithDescription("Finds the matrix with the smallest norm of maximum modulus (use linq)");
                 config.AddCommand<SetValueCommand>("set")
                 .WithDescription("Set value in the matrix by index");

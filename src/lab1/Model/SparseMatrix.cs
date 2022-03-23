@@ -88,7 +88,7 @@ namespace lab1.Model
         /// Find maximum modulus
         /// </summary>
         /// <returns>Maximem modulus</returns>
-        public double GetAbsMax()
+        public double GetMaxNorm()
         {
             var max = Double.NegativeInfinity;
             foreach (var num in _matrix)

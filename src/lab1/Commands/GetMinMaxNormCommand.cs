@@ -8,21 +8,21 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
 {
-    public class GetAbsMaxCommand : Command<GetAbsMaxCommand.GetAbsMaxSettings>
+    public class GetMinMaxNormCommand : Command<GetMinMaxNormCommand.GetMinMaxNormSettings>
     {
 
-        public class GetAbsMaxSettings : CommandSettings
+        public class GetMinMaxNormSettings : CommandSettings
         {
         }
 
         private readonly IMatrixRepository _matricesRepository;
 
-        public GetAbsMaxCommand(IMatrixRepository matricesRepository)
+        public GetMinMaxNormCommand(IMatrixRepository matricesRepository)
         {
             _matricesRepository = matricesRepository;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] GetAbsMaxSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] GetMinMaxNormSettings settings)
         {
             var max = Double.PositiveInfinity;
             var matrices = _matricesRepository.GetAll();
@@ -33,7 +33,7 @@ namespace Lab1.Commands
 
             foreach (var matrix in matrices)
             {
-                var matrixMax = matrix.GetAbsMax();
+                var matrixMax = matrix.GetMaxNorm();
                 if (matrixMax < max)
                 {
                     max = matrixMax;
@@ -44,7 +44,7 @@ namespace Lab1.Commands
             if (resMatrix == null)
                 return -1;
 
-            AnsiConsole.MarkupLine($"[blue]Min max abs: {max} [/]");
+            AnsiConsole.MarkupLine($"[blue]Min max norm: {max} [/]");
             AnsiConsole.MarkupLine($"[blue]Matrix: [/]");
             PrintMatrix.Print(resMatrix);
 

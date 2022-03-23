@@ -8,32 +8,32 @@ using System.Linq;
 
 namespace Lab1.Commands
 {
-    public class GetAbsMaxLinqCommand : Command<GetAbsMaxLinqCommand.GetAbsMaxLinqSettings>
+    public class GetMinMaxNormLinqCommand : Command<GetMinMaxNormLinqCommand.GetMinMaxNormLinqSettings>
     {
 
-        public class GetAbsMaxLinqSettings : CommandSettings
+        public class GetMinMaxNormLinqSettings : CommandSettings
         {
         }
 
         private readonly IMatrixRepository _matricesRepository;
 
-        public GetAbsMaxLinqCommand(IMatrixRepository matricesRepository)
+        public GetMinMaxNormLinqCommand(IMatrixRepository matricesRepository)
         {
             _matricesRepository = matricesRepository;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] GetAbsMaxLinqSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] GetMinMaxNormLinqSettings settings)
         {
             var matrices = _matricesRepository.GetAll();
             if (matrices.Count == 0)
                 return 0;
 
-            IMatrix? resMatrix = matrices.OrderBy(Matrix => Matrix.GetAbsMax()).First();
+            IMatrix? resMatrix = matrices.OrderBy(Matrix => Matrix.GetMaxNorm()).First();
 
             if (resMatrix == null)
                 return -1;
 
-            AnsiConsole.MarkupLine($"[blue]Min max abs: {resMatrix.GetAbsMax()} [/]");
+            AnsiConsole.MarkupLine($"[blue]Min max norm: {resMatrix.GetMaxNorm()} [/]");
             AnsiConsole.MarkupLine($"[blue]Matrix: [/]");
             PrintMatrix.Print(resMatrix);
 
