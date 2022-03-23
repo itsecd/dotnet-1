@@ -1,5 +1,6 @@
 ﻿using Spectre.Console;
 using Spectre.Console.Cli;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
@@ -15,22 +16,22 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] ComparisonFigureSettings settings)
         {
-            if (_figureRepository.GetAll() == null)
+            List<Figure>? listElements = _figureRepository.GetAll();
+            if (listElements!.Count == 0)
             {
                 AnsiConsole.Clear();
                 AnsiConsole.WriteLine("Comparison is not possible!");
                 return 1;
             }
-            var elements = _figureRepository.GetAll();
             var table = new Table();
             table.AddColumn("Index");
             table.AddColumn("Type");
             table.AddColumn("Element");
             table.AddColumn("Square");
             table.AddColumn("Perimeter");
-            for(int i = 0; i < elements.Count; i++)
+            for (int i = 0; i < listElements.Count; i++)
             {
-                table.AddRow(i.ToString(), elements[i].GetType().Name, elements[i].ToString(), elements[i].Area().ToString(), elements[i].Perimeter().ToString());
+                table.AddRow(i.ToString(), listElements[i].GetType().Name, listElements[i].ToString(), listElements[i].Area().ToString(), listElements[i].Perimeter().ToString());
             }
             AnsiConsole.Write(table);
             int indexFirst = AnsiConsole.Prompt(
@@ -56,7 +57,7 @@ namespace Lab1.Commands
                       };
                   }));
 
-            AnsiConsole.WriteLine($"{elements[indexFirst]} == {elements[indexSecond]}? {elements[indexFirst].Equals(elements[indexSecond])}");
+            AnsiConsole.WriteLine($"{listElements[indexFirst]} == {listElements[indexSecond]}? {listElements[indexFirst].Equals(listElements[indexSecond])}");
             return 0;
         }
 

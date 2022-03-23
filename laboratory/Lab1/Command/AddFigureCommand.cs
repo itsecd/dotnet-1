@@ -14,8 +14,9 @@ namespace Lab1.Commands
             _figureRepository = figureRepository;
         }
 
-        private static Point Create()
+        private static Point ReadPoint(string name)
         {
+            AnsiConsole.WriteLine("Coordinate " + name);
             var x = AnsiConsole.Prompt(new TextPrompt<double>("[Green]Введите вещественную координату X:[/]"));
             var y = AnsiConsole.Prompt(new TextPrompt<double>("[Green]Введите вещественную координату Y:[/]"));
             return new Point(x, y);
@@ -41,42 +42,41 @@ namespace Lab1.Commands
             switch (сhoice)
             {
                 case "Rectangle":
-                    AnsiConsole.WriteLine("Coordinate A");
-                    var a = Create();
-                    AnsiConsole.WriteLine("Coordinate B");
-                    var b = Create();
-                    Figure obj = new Rectangle(a, b);
-                    _figureRepository.Insert(index, obj);
-                    break;
-                case "Triangle":
-                    AnsiConsole.WriteLine("Coordinate A");
-                    AnsiConsole.WriteLine("Coordinate A");
-                    a = Create();
-                    AnsiConsole.WriteLine("Coordinate B");
-                    b = Create();
-                    AnsiConsole.WriteLine("Coordinate C");
-                    var c = Create();
-                    obj = new Triangle(a, b, c);
-                    _figureRepository.Insert(index, obj);
-                    break;
-                case "Circle":
-                    AnsiConsole.WriteLine("Coordinate Center's");
-                    a = Create();
-                    AnsiConsole.WriteLine("Radius Circle");
-                    double radius = AnsiConsole.Prompt(
-                new TextPrompt<int>("Radius Circle(0, +Б):")
-                    .ValidationErrorMessage("Invalid radius")
-                    .Validate(index =>
                     {
-                        return index switch
-                        {
-                            <= 0 => ValidationResult.Error("[red]The Radius must be greater than zero[/]"),
-                            _ => ValidationResult.Success(),
-                        };
-                    }));
-                    obj = new Circle(a, radius);
-                    _figureRepository.Insert(index, obj);
-                    break;
+                        var a = ReadPoint("A");
+                        var b = ReadPoint("B");
+                        Figure obj = new Rectangle(a, b);
+                        _figureRepository.Insert(index, obj);
+                        break;
+                    }
+                case "Triangle":
+                    {
+                        var a = ReadPoint("A");
+                        var b = ReadPoint("B");
+                        var c = ReadPoint("C");
+                        var obj = new Triangle(a, b, c);
+                        _figureRepository.Insert(index, obj);
+                        break;
+                    }
+                case "Circle":
+                    {
+                        var a = ReadPoint("Center's");
+                        AnsiConsole.WriteLine("Radius Circle");
+                        double radius = AnsiConsole.Prompt(
+                        new TextPrompt<int>("Radius Circle(0, +Б):")
+                            .ValidationErrorMessage("Invalid radius")
+                            .Validate(index =>
+                            {
+                                return index switch
+                                {
+                                    <= 0 => ValidationResult.Error("[red]The Radius must be greater than zero[/]"),
+                                    _ => ValidationResult.Success(),
+                                };
+                            }));
+                        var obj = new Circle(a, radius);
+                        _figureRepository.Insert(index, obj);
+                        break;
+                    }
             }
             return 0;
 

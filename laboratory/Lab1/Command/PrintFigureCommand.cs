@@ -7,11 +7,11 @@ namespace Lab1.Commands
 {
     public class PrintFigureCommand : Command<PrintFigureCommand.PrintFigureSettings>
     {
-        private readonly IRepository FigureRepository;
+        private readonly IRepository _figureRepository;
 
-        public PrintFigureCommand(IRepository figure)
+        public PrintFigureCommand(IRepository figureRepository)
         {
-            FigureRepository = figure;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] PrintFigureSettings settings)
@@ -21,9 +21,9 @@ namespace Lab1.Commands
             table.AddColumn("Element");
             table.AddColumn("Square");
             table.AddColumn("Perimeter");
-            foreach (var obj in FigureRepository.GetAll())
+            foreach (Figure? obj in _figureRepository.GetAll()!)
             {
-                table.AddRow(obj.GetType().Name, obj.ToString(), obj.Area().ToString(), obj.Perimeter().ToString());
+                table.AddRow(obj!.GetType().Name, obj!.ToString(), obj!.Area().ToString(), obj!.Perimeter().ToString());
                 if (table.Rows.Count() == 10)
                 {
                     table.AddRow("...", "...", "...", "...");

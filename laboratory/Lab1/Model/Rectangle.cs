@@ -40,10 +40,10 @@ namespace Lab1.Model
 
         public override bool Equals(Figure? obj)
         {
-            if (obj is not Rectangle other)
+            if (obj is not Rectangle rectangleObj)
                 return false;
-            return Width == other.Width &&
-                    Height == other.Height;
+            return (VertexA == rectangleObj.VertexA && VertexB == rectangleObj.VertexB)||
+                (VertexA == rectangleObj.VertexB && VertexB == rectangleObj.VertexA);
         }
 
         public override int GetHashCode()

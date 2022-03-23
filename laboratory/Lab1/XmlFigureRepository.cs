@@ -45,8 +45,6 @@ namespace Lab1
 
         private void Deserialize()
         {
-            if (_figures != null) return;
-
             if (!File.Exists(_fileName))
             {
                 _figures = new List<Figure>();
@@ -57,7 +55,7 @@ namespace Lab1
             _figures = (List<Figure>?)xml.Deserialize(fileStream);
         }
 
-        public List<Figure> GetAll()
+        public List<Figure>? GetAll()
         {
             Deserialize();
             return _figures!;

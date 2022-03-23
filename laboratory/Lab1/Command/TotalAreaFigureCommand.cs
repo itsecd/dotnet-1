@@ -1,5 +1,6 @@
 ﻿using Spectre.Console;
 using Spectre.Console.Cli;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -8,27 +9,28 @@ namespace Lab1.Commands
 
     public class TotalAreaFigureCommand : Command<TotalAreaFigureCommand.TotalAreaFigureSettings>
     {
-        private readonly IRepository FigureRepository;
+        private readonly IRepository _figureRepository;
 
-        public TotalAreaFigureCommand(IRepository figure)
+        public TotalAreaFigureCommand(IRepository figureRepository)
         {
-            FigureRepository = figure;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] TotalAreaFigureSettings settings)
         {
-            if (FigureRepository.GetAll() == null)
+            List<Figure>? listElements = _figureRepository.GetAll();
+            if (listElements!.Count == 0)
             {
                 AnsiConsole.WriteLine("The collection is empty");
                 return 1;
             }
             double totalArea = 0;
-            foreach (var obj in FigureRepository.GetAll())
+            foreach (Figure? obj in listElements!)
             {
-                totalArea += obj.Area();
+                totalArea += obj!.Area();
             }
             AnsiConsole.WriteLine($"Square = {totalArea}");
-            AnsiConsole.WriteLine($"Square(Linq) = {FigureRepository.GetAll().Sum(x => x.Area())}");
+            AnsiConsole.WriteLine($"Square(Linq) = {listElements!.Sum(x => x.Area())}");
             return 0;
         }
 

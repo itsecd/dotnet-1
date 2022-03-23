@@ -1,26 +1,28 @@
 ﻿using Spectre.Console;
 using Spectre.Console.Cli;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
 {
-    public class AreaFigureCommand : Command<AreaFigureCommand.AreaFigureSettings>
+    public class PerimeterFigureCommand : Command<PerimeterFigureCommand.PerimeterFigureSettings>
     {
-        private readonly IRepository FigureRepository;
+        private readonly IRepository _figureRepository;
 
-        public AreaFigureCommand(IRepository figure)
+        public PerimeterFigureCommand(IRepository figureRepository)
         {
-            FigureRepository = figure;
+            _figureRepository = figureRepository;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] AreaFigureSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] PerimeterFigureSettings settings)
         {
-            if (FigureRepository.GetAll() == null || FigureRepository.GetAll().Count == 0)
+            List<Figure>? listElements = _figureRepository.GetAll();
+            if (listElements!.Count == 0)
             {
                 AnsiConsole.WriteLine("The collection is empty");
                 return 1;
             }
-            int index = AnsiConsole.Prompt(
+            var index = AnsiConsole.Prompt(
                 new TextPrompt<int>("Enter index element 0<=:")
                 .ValidationErrorMessage("Invalid index entered")
                     .Validate(index =>
@@ -31,12 +33,11 @@ namespace Lab1.Commands
                             _ => ValidationResult.Success(),
                         };
                     }));
-            AnsiConsole.WriteLine($"{FigureRepository.GetAll()[index]} squeare = {FigureRepository.GetAll()[index].Area()}");
+            AnsiConsole.WriteLine($"{listElements![index]} Perimeter = {listElements![index].Perimeter()}");
             return 0;
-
         }
 
-        public class AreaFigureSettings : CommandSettings
+        public class PerimeterFigureSettings : CommandSettings
         {
 
         }

@@ -29,8 +29,8 @@ namespace Lab1.Model
 
         public override bool Equals(object? obj)
         {
-            if (obj is Rectangle rectangleObj)
-                return Equals(rectangleObj);
+            if (obj is Circle circleObj)
+                return Equals(circleObj);
             else
                 return false;
         }

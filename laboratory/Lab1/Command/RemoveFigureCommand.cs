@@ -6,11 +6,11 @@ namespace Lab1.Commands
 {
     public class RemoveFigureCommand : Command<RemoveFigureCommand.RemoveFigureSettings>
     {
-        private readonly IRepository FigureRepository;
+        private readonly IRepository _figureRepository;
 
-        public RemoveFigureCommand(IRepository figure)
+        public RemoveFigureCommand(IRepository figureRepository)
         {
-            FigureRepository = figure;
+            _figureRepository = figureRepository;
         }
 
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveFigureSettings settings)
@@ -22,7 +22,7 @@ namespace Lab1.Commands
             table.AddColumn("Element");
             table.AddColumn("Square");
             table.AddColumn("Perimeter");
-            for (int i = 0; i < elements.Count; i++)
+            for (int i = 0; i < elements!.Count; i++)
             {
                 table.AddRow(i.ToString(), elements[i].GetType().Name, elements[i].ToString(), elements[i].Area().ToString(), elements[i].Perimeter().ToString());
             }
@@ -44,10 +44,10 @@ namespace Lab1.Commands
                                 _ => ValidationResult.Success(),
                             };
                         }));
-                    FigureRepository.RemoveAt(index);
+                    _figureRepository.RemoveAt(index);
                     break;
                 case "All elements":
-                    FigureRepository.Clear();
+                    _figureRepository.Clear();
                     break;
             }
             return 0;
