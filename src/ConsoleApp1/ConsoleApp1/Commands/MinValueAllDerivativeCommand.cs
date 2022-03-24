@@ -23,27 +23,10 @@ namespace ConsoleApp1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] MinValueAllDerivativeSettings settings)
         {
             double arg = AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter an argument :[/]"));
-            var functions = _functionsRepository.GetAll();
-
-            var minValue = functions.Min(x => x.GetDerivative().Compute(arg));
-            var funcMinValue = functions.First(x => x.GetDerivative().Compute(arg) == minValue);
-
-            double min = double.MaxValue;
-            Func? function = null;
-            foreach (Func elem in functions)
-            {
-                if (elem.GetDerivative().Compute(arg) < min)
-                    min = elem.GetDerivative().Compute(arg);
-            }
-            foreach (Func elem in functions)
-            {
-                if (elem.GetDerivative().Compute(arg) == min)
-                    function = elem;
-            }
-
-            AnsiConsole.Write("Method with System.Linq return Function " + funcMinValue
-                + "\nCustom Code return Function " + function);
+            AnsiConsole.Write("Method with System.Linq return Function " + _functionsRepository.MinFunctionWithLINQ(arg)
+               + "\nCustom Code return Function " + _functionsRepository.MinFunction(arg));
             return 0;
+
 
         }
     }

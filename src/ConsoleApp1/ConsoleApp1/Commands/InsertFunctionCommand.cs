@@ -21,11 +21,11 @@ namespace ConsoleApp1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] InsertFunctionSettings settings)
         {
-            var figureType = AnsiConsole.Prompt(new SelectionPrompt<string>()
+            var functionType = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("Выберите тип функции: ")
                 .AddChoices("Константа", "Линейная функция", "Квадратичная функция", "Синус", "Косинус"));
 
-            Func? addFuncion = figureType switch
+            Func addFunction = functionType switch
             {
                 "Константа" => new Constanta(
                     AnsiConsole.Prompt(new TextPrompt<double>("[red]Enter 'constValue' :[/]"))
@@ -51,14 +51,14 @@ namespace ConsoleApp1.Commands
                 ),
                 _ => null
             };
-            if (addFuncion == null)
+            if (addFunction == null)
             {
-                AnsiConsole.MarkupLine($"[yellow]Unknown function type[/]");
+                AnsiConsole.MarkupLine("[yellow]Unknown function type[/]");
                 return -1;
             }
 
             int index = AnsiConsole.Prompt(new TextPrompt<int>("[yellow]Enter index :[/]"));
-            _functionsRepository.Insert(index, addFuncion);
+            _functionsRepository.Insert(index, addFunction);
             return 0;
         }
     }

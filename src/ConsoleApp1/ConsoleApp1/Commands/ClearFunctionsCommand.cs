@@ -21,7 +21,7 @@ namespace ConsoleApp1.Commands
         public override int Execute ([NotNull] CommandContext context, [NotNull] ClearFunctionsSettings settings)
         {
             _functionsRepository.Clear();
-            AnsiConsole.MarkupLine($"[yellow]The list of functions has been cleared[/]");
+            AnsiConsole.MarkupLine("[yellow]The list of functions has been cleared[/]");
             return 0;
         }
     }

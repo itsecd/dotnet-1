@@ -3,6 +3,7 @@ using ConsoleApp1.Model;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using System.Linq;
 
 namespace ConsoleApp1.Repositories
 {
@@ -10,7 +11,7 @@ namespace ConsoleApp1.Repositories
     {
         private const string StorageFileName = "Repository.xml";
 
-        private List<Func>? functionsList;
+        private List<Func> _functionsList;
 
         public void Insert(int index, Func newFunc)
         {
@@ -38,20 +39,44 @@ namespace ConsoleApp1.Repositories
             Write(list);
         }
 
+        public string MinFunction(double arg){
+            var functions = GetAll();
+            var min = double.MaxValue;
+            var function = "";
+            foreach (Func elem in functions)
+            {
+                if (elem.GetDerivative().Compute(arg) < min)
+                {
+                    min = elem.GetDerivative().Compute(arg);
+                    function = elem.ToString();
+
+                }
+            }
+            return function;
+        }
+
+        
+        public string MinFunctionWithLINQ(double arg){
+            var functions = GetAll();
+            var minValue = functions.Min(x => x.GetDerivative().Compute(arg));
+            var funcMinValue = functions.First(x => x.GetDerivative().Compute(arg) == minValue);
+            
+            return funcMinValue.ToString();
+        }
 
         private List<Func> Read()
         {
-            if (functionsList is not null)
-                return functionsList;
+            if (_functionsList is not null)
+                return _functionsList;
             if (!File.Exists(StorageFileName))
             {
-                return functionsList = new List<Func>();
+                return _functionsList = new List<Func>();
 
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Func>));
             using var fileStream = new FileStream(StorageFileName, FileMode.Open);
-            functionsList = (List<Func>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException());
-            return functionsList;
+            _functionsList = (List<Func>)(xmlSerializer.Deserialize(fileStream)  ??throw new InvalidOperationException());
+            return _functionsList;
         }
 
         private void Write(List<Func> funcList)

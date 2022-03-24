@@ -29,6 +29,6 @@ namespace ConsoleApp1.Model
             return false;
         }
 
-        public override int GetHashCode() => (Linear, Const).GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 }

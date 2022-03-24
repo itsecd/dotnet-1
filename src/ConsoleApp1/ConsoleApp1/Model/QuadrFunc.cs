@@ -32,7 +32,7 @@ namespace ConsoleApp1.Model
             return false;
         }
 
-        public override int GetHashCode() => (Quadratic, Linear, Const).GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
 
     }
 }
