@@ -12,6 +12,7 @@ namespace Lab1.Model
 
         public Cylinder()
         {
+
         }
 
         public Cylinder(Point center, double radius, double height)

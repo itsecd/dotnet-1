@@ -28,6 +28,7 @@ namespace Lab1.Model
         {
             return ((4 * Math.PI * Radius * Radius * Radius) / 3);
         }
+
         public override string ToString()
         {
             return "(" + Center.X + "," + Center.Y + "," + Center.Z + ")" + " " + "Radius: " + Radius;

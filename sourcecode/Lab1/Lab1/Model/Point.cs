@@ -16,6 +16,7 @@ namespace Lab1.Model
             Y = y;
             Z = z;
         }
+
         public double Distance(Point point)
         {
             var xDiff = point.X - X;
@@ -23,6 +24,7 @@ namespace Lab1.Model
             var zDiff = point.Z - Z;
             return Math.Sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff);
         }
+
         public override bool Equals(object? obj)
         {
             if (obj is not Point vertex) return false;
