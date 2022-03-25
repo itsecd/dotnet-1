@@ -4,11 +4,11 @@ namespace Lab1.Model
 {
     public class Rectangular : Figure
     {
-        public Point BaseLeftTop { get; set; }
+        public Point BaseLeftTop { get; init; }
 
-        public Point BaseRightBottom { get; set; }
+        public Point BaseRightBottom { get; init; }
 
-        public double Depth { get; set; }
+        public double Depth { get; init; } = 1;
 
         public double Width => Math.Abs(BaseLeftTop.X - BaseRightBottom.X);
 
@@ -19,10 +19,11 @@ namespace Lab1.Model
 
         }
 
-        public Rectangular(Point vertex1, Point vertex2)
+        public Rectangular(Point baseLeftTop, Point baseRightBottom, double depth)
         {
-            BaseLeftTop = vertex1;
-            BaseRightBottom = vertex2;
+            BaseLeftTop = baseLeftTop;
+            BaseRightBottom = baseRightBottom;
+            Depth = depth;
         }
 
         public override double GetSurfaceArea()
@@ -48,5 +49,7 @@ namespace Lab1.Model
             if (obj is not Rectangular rec) return false;
             return BaseLeftTop.Equals(rec.BaseRightBottom) && BaseRightBottom.Equals(rec.BaseRightBottom) && Depth == rec.Depth;
         }
+
+        public override Rectangular GetBoundingBox() => this;
     }
 }

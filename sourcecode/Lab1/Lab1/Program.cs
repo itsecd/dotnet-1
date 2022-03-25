@@ -6,7 +6,7 @@ using Spectre.Console.Cli;
 
 namespace Lab1
 {
-    public class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -14,15 +14,16 @@ namespace Lab1
             serviceCollection.AddSingleton<IFigureRepository, FigureRepository>();
             var registrar = new TypeRegistrar(serviceCollection);
             var app = new CommandApp(registrar);
-            app.Configure(config => 
+            app.Configure(config =>
             {
-                config.AddCommand<FigureCommands>("Add");
-                config.AddCommand<ClearAllFigure>("Clear");
-                config.AddCommand<CompareTwoFigure>("Compare");
-                config.AddCommand<RemoveFigure>("Remove");
-                config.AddCommand<PrintListFigure>("Print");
+                config.AddCommand<AddFigureCommand>("Add");
+                config.AddCommand<ClearFiguresCommand>("Clear");
+                config.AddCommand<CompareFiguresCommand>("Compare");
+                config.AddCommand<RemoveFigureCommand>("Remove");
+                config.AddCommand<PrintFiguresCommand>("Print");
+                config.AddCommand<GetSumAreaCommand>("Sum");
             });
             app.Run(args);
-        }      
+        }
     }
 }

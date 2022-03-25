@@ -4,7 +4,7 @@ namespace Lab1.Model
 {
     public class Cylinder : Figure
     {
-        public Point Center { get; set; }
+        public Point Center { get; init; }
 
         public double Radius { get; init; } = 1;
 
@@ -12,7 +12,6 @@ namespace Lab1.Model
 
         public Cylinder()
         {
-
         }
 
         public Cylinder(Point center, double radius, double height)
@@ -43,19 +42,11 @@ namespace Lab1.Model
             return Center.Equals(cylinder.Center) && Radius == cylinder.Radius && Height == cylinder.Height;
         }
 
-        public Rectangular MinRectangular()
+        public override Rectangular GetBoundingBox()
         {
-            var rectangular = new Rectangular();
-            var vertex1 = rectangular.BaseLeftTop;
-            var vertex2 = rectangular.BaseRightBottom;
-            vertex1.X = Center.X - Radius;
-            vertex1.Y = Center.Y - Radius;
-            vertex1.Z = Center.Z;
-            vertex2.X = Center.X + Radius;
-            vertex2.Y = Center.Y + Radius;
-            vertex2.Z = Center.Z;
-            rectangular.Depth = Height;
-            return rectangular;
+            var minBoundingBox = new Rectangular(new Point(Center.X - Radius, Center.Y - Radius, Center.Z),
+            new Point(Center.X + Radius, Center.Y + Radius, Center.Z), Height);
+            return minBoundingBox;
         }
     }
 }

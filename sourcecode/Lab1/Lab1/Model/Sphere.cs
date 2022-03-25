@@ -4,7 +4,7 @@ namespace Lab1.Model
 {
     public class Sphere : Figure
     {
-        public Point Center { get; set; }
+        public Point Center { get; init; }
 
         public double Radius { get; init; } = 1;
 
@@ -26,9 +26,8 @@ namespace Lab1.Model
 
         public override double GetVolume()
         {
-            return 4 / 3 * Math.PI * Radius * Radius * Radius;
+            return ((4 * Math.PI * Radius * Radius * Radius) / 3);
         }
-
         public override string ToString()
         {
             return "(" + Center.X + "," + Center.Y + "," + Center.Z + ")" + " " + "Radius: " + Radius;
@@ -40,19 +39,11 @@ namespace Lab1.Model
             return Center.Equals(sphere.Center) && Radius == sphere.Radius;
         }
 
-        public Rectangular MinRectangular()
+        public override Rectangular GetBoundingBox()
         {
-            var rectangular = new Rectangular();
-            var vertex1 = rectangular.BaseLeftTop;
-            var vertex2 = rectangular.BaseRightBottom;
-            vertex1.X = Center.X - Radius;
-            vertex1.Y = Center.Y - Radius;
-            vertex1.Z = Center.Z - Radius;
-            vertex2.X = Center.X + Radius;
-            vertex2.Y = Center.Y + Radius;
-            vertex2.Z = Center.Z - Radius;
-            rectangular.Depth = 2 * Radius;
-            return rectangular;
+            var minBoundingBox = new Rectangular(new Point(Center.X - Radius, Center.Y - Radius, Center.Z),
+            new Point(Center.X + Radius, Center.Y + Radius, Center.Z), 2 * Radius);
+            return minBoundingBox;
         }
     }
 }

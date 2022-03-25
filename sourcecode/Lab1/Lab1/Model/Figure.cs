@@ -7,11 +7,12 @@ namespace Lab1.Model
     [XmlInclude(typeof(Sphere))]
     [XmlInclude(typeof(Cylinder))]
     [Serializable]
-
     public abstract class Figure
     {
         public abstract double GetSurfaceArea();
 
         public abstract double GetVolume();
+
+        public abstract Rectangular GetBoundingBox();
     }
 }
