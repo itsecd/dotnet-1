@@ -4,8 +4,8 @@ namespace ConsoleApp1.Model
 {
     public class LinearFunc : Func 
     {
-        public double Linear { get; set; } = 1;
-        public double Const { get; set; } = 0;
+        public double Linear { get; init; } = 1;
+        public double Const { get; init; } = 0;
 
         public LinearFunc() { }
         public LinearFunc(double linear, double constValue)
@@ -20,7 +20,7 @@ namespace ConsoleApp1.Model
 
         public override string ToString() => $"{Linear}x + {Const}";
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (obj is LinearFunc func)
             {
@@ -29,6 +29,6 @@ namespace ConsoleApp1.Model
             return false;
         }
 
-        public override int GetHashCode() => GetType().GetHashCode();
+        public override int GetHashCode() => (Linear, Const).GetHashCode();
     }
 }

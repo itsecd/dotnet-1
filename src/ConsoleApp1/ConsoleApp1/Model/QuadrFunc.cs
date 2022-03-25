@@ -4,9 +4,9 @@ namespace ConsoleApp1.Model
 {
     public class QuadrFunc : Func
     {
-        public double Quadratic { get; set; } = 1;
-        public double Linear { get; set; } = 1;
-        public double Const { get; set; } = 1;
+        public double Quadratic { get; init; } = 1;
+        public double Linear { get; init; } = 1;
+        public double Const { get; init; } = 1;
 
         public QuadrFunc() { }
         public QuadrFunc(double a, double b, double c)
@@ -23,7 +23,7 @@ namespace ConsoleApp1.Model
 
         public override string ToString() => $"{Quadratic}x^2 + {Linear}x + {Const}";
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (obj is QuadrFunc func)
             {
@@ -32,7 +32,7 @@ namespace ConsoleApp1.Model
             return false;
         }
 
-        public override int GetHashCode() => GetType().GetHashCode();
+        public override int GetHashCode() => (Quadratic, Linear, Const).GetHashCode();
 
     }
 }

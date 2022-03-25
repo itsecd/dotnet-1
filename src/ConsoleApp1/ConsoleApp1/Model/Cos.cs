@@ -5,9 +5,9 @@ namespace ConsoleApp1.Model
 {
     public class Cos : Func
     {
-        public double Amplitude { get; set; } = 1;
-        public double Omega { get; set; } = 1;
-        public double Phase { get; set; } = 1;
+        public double Amplitude { get; init; } = 1;
+        public double Omega { get; init; } = 1;
+        public double Phase { get; init; } = 1;
 
         public Cos() { }
 
@@ -24,7 +24,7 @@ namespace ConsoleApp1.Model
 
         public override string ToString() => $"{Amplitude} cos({Omega}x + {Phase})";
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (obj is Cos func)
             {
@@ -33,6 +33,6 @@ namespace ConsoleApp1.Model
             return false;
         }
 
-        public override int GetHashCode() => GetType().GetHashCode();
+        public override int GetHashCode() => (Amplitude, Omega, Phase).GetHashCode();
     }
 }

@@ -5,7 +5,7 @@ namespace ConsoleApp1.Model
 {
     public class Constanta : Func
     {
-        public double GetValue { get; set; } = 1;
+        public double GetValue { get; init; } = 1;
 
         public Constanta() { }
 
@@ -20,7 +20,7 @@ namespace ConsoleApp1.Model
 
         public override string ToString() => $"{GetValue}";
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
             if (obj is Constanta c)
             {
