@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
 {
-    // A class that implements getting a minimal framing rectangle
     public class FramingRectangleFigureCommand : Command<FramingRectangleFigureCommand.FramingRectangleFigureSettings>
     {
         private readonly IRepository _figureRepository;

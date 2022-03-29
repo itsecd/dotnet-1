@@ -63,16 +63,16 @@ namespace Lab1.Commands
                         var a = ReadPoint("Center's");
                         AnsiConsole.WriteLine("Radius Circle");
                         double radius = AnsiConsole.Prompt(
-                        new TextPrompt<int>("Radius Circle(0, +Б):")
-                            .ValidationErrorMessage("Invalid radius")
-                            .Validate(index =>
-                            {
-                                return index switch
+                            new TextPrompt<int>("Radius Circle(0, +Б):")
+                                .ValidationErrorMessage("Invalid radius")
+                                .Validate(index =>
                                 {
-                                    <= 0 => ValidationResult.Error("[red]The Radius must be greater than zero[/]"),
-                                    _ => ValidationResult.Success(),
-                                };
-                            }));
+                                    return index switch
+                                    {
+                                        <= 0 => ValidationResult.Error("[red]The Radius must be greater than zero[/]"),
+                                        _ => ValidationResult.Success(),
+                                    };
+                                }));
                         var obj = new Circle(a, radius);
                         _figureRepository.Insert(index, obj);
                         break;

@@ -31,7 +31,8 @@ namespace Lab1.Commands
             table.AddColumn("Perimeter");
             for (int i = 0; i < listElements.Count; i++)
             {
-                table.AddRow(i.ToString(), listElements[i].GetType().Name, listElements[i].ToString(), listElements[i].Area().ToString(), listElements[i].Perimeter().ToString());
+                table.AddRow(i.ToString(), listElements[i].GetType().Name, listElements[i].ToString(), 
+                    listElements[i].Area().ToString(), listElements[i].Perimeter().ToString());
             }
             AnsiConsole.Write(table);
             int indexFirst = AnsiConsole.Prompt(
