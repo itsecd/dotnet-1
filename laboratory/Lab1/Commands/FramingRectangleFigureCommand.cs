@@ -27,15 +27,15 @@ namespace Lab1.Commands
                         };
                     }));
 
-            Figure? framingRectangle = _figureRepository?.GetAll()?[indexSelectionFigure].FramingRectangle();
-            AnsiConsole.WriteLine(framingRectangle!.ToString());
+            var framingRectangle = _figureRepository.GetAll()[indexSelectionFigure].FramingRectangle();
+            AnsiConsole.WriteLine(framingRectangle.ToString());
             var str = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("[green]Add a framing rectangle to the collection: [/]")
                 .AddChoices("yes", "no"));
             switch (str)
             {
                 case "yes":
-                    _figureRepository!.Insert(indexSelectionFigure, framingRectangle);
+                    _figureRepository.Insert(indexSelectionFigure, framingRectangle);
                     break;
                 case "no":
                     break;

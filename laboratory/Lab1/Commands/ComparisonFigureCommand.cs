@@ -1,6 +1,5 @@
 ﻿using Spectre.Console;
 using Spectre.Console.Cli;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
@@ -16,8 +15,8 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] ComparisonFigureSettings settings)
         {
-            List<Figure>? listElements = _figureRepository.GetAll();
-            if (listElements!.Count == 0)
+            var listElements = _figureRepository.GetAll();
+            if (listElements.Count == 0)
             {
                 AnsiConsole.Clear();
                 AnsiConsole.WriteLine("Comparison is not possible!");
@@ -31,7 +30,7 @@ namespace Lab1.Commands
             table.AddColumn("Perimeter");
             for (int i = 0; i < listElements.Count; i++)
             {
-                table.AddRow(i.ToString(), listElements[i].GetType().Name, listElements[i].ToString(), 
+                table.AddRow(i.ToString(), listElements[i].GetType().Name, listElements[i].ToString(),
                     listElements[i].Area().ToString(), listElements[i].Perimeter().ToString());
             }
             AnsiConsole.Write(table);

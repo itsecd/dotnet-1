@@ -22,9 +22,10 @@ namespace Lab1.Commands
             table.AddColumn("Element");
             table.AddColumn("Square");
             table.AddColumn("Perimeter");
-            for (int i = 0; i < elements!.Count; i++)
+            for (int i = 0; i < elements.Count; i++)
             {
-                table.AddRow(i.ToString(), elements[i].GetType().Name, elements[i].ToString(), elements[i].Area().ToString(), elements[i].Perimeter().ToString());
+                table.AddRow(i.ToString(), elements[i].GetType().Name, elements[i].ToString(),
+                    elements[i].Area().ToString(), elements[i].Perimeter().ToString());
             }
             AnsiConsole.Write(table);
             var сhoice = AnsiConsole.Prompt(new SelectionPrompt<string>()

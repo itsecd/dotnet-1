@@ -13,52 +13,53 @@ namespace Lab1
         public void Insert(int index, Figure obj)
         {
             Deserialize();
-            if (index >= _figures!.Count)
+            if (index >= _figures?.Count)
             {
-                _figures!.Add(obj);
+                _figures.Add(obj);
             }
             else
-                _figures!.Insert(index, obj);
-            Serialize();
+                _figures?.Insert(index, obj);
+            Serialize(_figures!);
         }
 
         public void RemoveAt(int index)
         {
             Deserialize();
-            _figures!.RemoveAt(index);
-            Serialize();
+            _figures?.RemoveAt(index);
+            Serialize(_figures!);
         }
 
         public void Clear()
         {
-            Deserialize();
-            _figures!.Clear();
-            Serialize();
+            _figures = Deserialize();
+            _figures?.Clear();
+            Serialize(_figures!);
         }
 
-        private void Serialize()
+        private void Serialize(List<Figure> figuresList)
         {
             var xml = new XmlSerializer(typeof(List<Figure>));
             using var fileStream = new FileStream(_fileName, FileMode.Create);
-            xml.Serialize(fileStream, _figures);
+            xml.Serialize(fileStream, figuresList);
         }
 
-        private void Deserialize()
+        private List<Figure> Deserialize()
         {
             if (!File.Exists(_fileName))
             {
                 _figures = new List<Figure>();
-                return;
+                return _figures;
             }
             var xml = new XmlSerializer(typeof(List<Figure>));
             using var fileStream = File.OpenRead(_fileName);
             _figures = (List<Figure>?)xml.Deserialize(fileStream);
+            return _figures!;
         }
 
-        public List<Figure>? GetAll()
+        public List<Figure> GetAll()
         {
-            Deserialize();
-            return _figures!;
+            _figures = Deserialize();
+            return _figures;
         }
     }
 }

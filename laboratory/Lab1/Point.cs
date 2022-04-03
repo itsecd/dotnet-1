@@ -28,12 +28,9 @@ namespace Lab1
                     left.Y == right.Y;
         }
 
-
         public override bool Equals(object? obj)
         {
-            return obj is Point point &&
-                   X == point.X &&
-                   Y == point.Y;
+            return obj is Point point && point == this;
         }
 
         public override int GetHashCode()

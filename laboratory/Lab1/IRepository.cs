@@ -4,7 +4,7 @@ namespace Lab1
 {
     public interface IRepository
     {
-        List<Figure>? GetAll();
+        List<Figure> GetAll();
 
         void Insert(int index, Figure obj);
 

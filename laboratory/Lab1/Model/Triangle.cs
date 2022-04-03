@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lab1.Model
 {
@@ -64,10 +65,19 @@ namespace Lab1.Model
         {
             if (obj is not Triangle triangleObj)
                 return false;
-            return (VertexA == triangleObj.VertexA && (VertexB == triangleObj.VertexB && VertexC == triangleObj.VertexC || 
-                                                        VertexB == triangleObj.VertexC && VertexC == triangleObj.VertexB)) ||
-                (VertexA == triangleObj.VertexB && VertexB == triangleObj.VertexC && VertexC == triangleObj.VertexA) ||
-                (VertexA == triangleObj.VertexC && VertexB == triangleObj.VertexA && VertexC == triangleObj.VertexB);
+            HashSet<Point> my = new()
+            {
+                VertexA,
+                VertexB,
+                VertexC
+            };
+            HashSet<Point> externalObject = new()
+            {
+                triangleObj.VertexA,
+                triangleObj.VertexB,
+                triangleObj.VertexC
+            };
+            return my.Equals(externalObject);
         }
 
         public override int GetHashCode()

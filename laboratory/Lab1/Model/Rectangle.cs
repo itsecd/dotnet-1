@@ -42,7 +42,7 @@ namespace Lab1.Model
         {
             if (obj is not Rectangle rectangleObj)
                 return false;
-            return (VertexA == rectangleObj.VertexA && VertexB == rectangleObj.VertexB)||
+            return (VertexA == rectangleObj.VertexA && VertexB == rectangleObj.VertexB) ||
                 (VertexA == rectangleObj.VertexB && VertexB == rectangleObj.VertexA);
         }
 
