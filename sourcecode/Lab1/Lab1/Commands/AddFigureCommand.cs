@@ -23,7 +23,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext conteXt, [NotNull] AddFigureCommandSettings settings)
         {
             var choice = AnsiConsole.Prompt(new SelectionPrompt<string>().Title("choice")
-                     .AddChoices("Rectangular", "Sphere", "Cylinder"));
+                .AddChoices("Rectangular", "Sphere", "Cylinder"));
             Figure figure = choice switch
             {
                 "Rectangular" => new Rectangular
@@ -59,18 +59,9 @@ namespace Lab1.Commands
                     Radius = AnsiConsole.Prompt(new TextPrompt<double>("[green]Radius [/]")),
                     Height = AnsiConsole.Prompt(new TextPrompt<double>("[green]Height [/]"))
                 },
-                _ => null
+                _ => AnsiConsole.MarkupLine("[red]Invalid type[/]");
             };
-
-            if (figure == null)
-            {
-                AnsiConsole.MarkupLine("[red]Invalid type[/]");
-            }
-
-            else
-            {
-                _figureRepository.Add(figure);
-            }
+            _figureRepository.Add(figure);
             return 0;
         }
     }

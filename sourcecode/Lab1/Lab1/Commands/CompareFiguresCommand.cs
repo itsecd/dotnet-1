@@ -21,8 +21,8 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext conteXt, [NotNull] CompareFiguresCommandSettings settings)
         {
-            var x = AnsiConsole.Ask<int>("[green]fistIndex = [/]");
-            var y = AnsiConsole.Ask<int>("[green]secondIndex = [/]");
+            var firstIndex = AnsiConsole.Ask<int>("[green]firstIndex = [/]");
+            var secondIndex = AnsiConsole.Ask<int>("[green]secondIndex = [/]");
             var figures = _figureRepository.GetFigures();
             if (figures[x].Equals(figures[y])) AnsiConsole.MarkupLine("[green]Figure in first index = Figure in second index [/]");
             else AnsiConsole.MarkupLine("[red]Figure in first index != Figure in second index [/]");

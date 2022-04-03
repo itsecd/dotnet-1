@@ -21,13 +21,13 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] PrintFiguresCommandSettings settings)
         {
-            var _listFigures = _figureRepository.GetFigures();
+            var figures = _figureRepository.GetFigures();
             var table = new Table();
             table.AddColumn("Type Figure");
             table.AddColumn("Coords");
             table.AddColumn("GetSurfaceArea");
             table.AddColumn("GetVolume");
-            foreach (var elem in _listFigures)
+            foreach (var elem in figures)
             {
                 table.AddRow(elem.GetType().Name, elem.ToString(), elem.GetSurfaceArea().ToString(), elem.GetVolume().ToString());
             }

@@ -5,7 +5,7 @@ namespace Lab1.Repository
 {
     public interface IFigureRepository
     {
-        void Add(Figure NewFigure);
+        void Add(Figure figure);
 
         void Clear();
 

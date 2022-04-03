@@ -9,56 +9,56 @@ namespace Lab1.Repository
     public class FigureRepository : IFigureRepository
     {
         private const string FileName = "figure.Xml";
-        private List<Figure> _listFigures;
+        private List<Figure> _figures;
 
         private void ReadFileXml()
         {
-            if (_listFigures != null) return;
+            if (_figures != null) return;
             if (!File.Exists(FileName))
             {
-                _listFigures = new List<Figure>();
+                _figures = new List<Figure>();
                 return;
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Figure>));
             using var fileStream = new FileStream(FileName, FileMode.Open);
-            _listFigures = (List<Figure>)xmlSerializer.Deserialize(fileStream);
+            _figures = (List<Figure>)xmlSerializer.Deserialize(fileStream);
         }
 
         private void WriteFileXml()
         {
             var xmlSerializer = new XmlSerializer(typeof(List<Figure>));
             using var fileStream = new FileStream(FileName, FileMode.Create);
-            xmlSerializer.Serialize(fileStream, _listFigures);
+            xmlSerializer.Serialize(fileStream, _figures);
         }
 
-        public void Add(Figure NewFigure)
+        public void Add(Figure figure)
         {
             if (NewFigure == null)
             {
                 throw new ArgumentNullException(nameof(NewFigure));
             }
             ReadFileXml();
-            _listFigures.Add(NewFigure);
+            _figures.Add(NewFigure);
             WriteFileXml();
         }
 
         public List<Figure> GetFigures()
         {
             ReadFileXml();
-            return _listFigures;
+            return _figures;
         }
 
         public void RemoveAt(int index)
         {
             ReadFileXml();
-            _listFigures.RemoveAt(index);
+            _figures.RemoveAt(index);
             WriteFileXml();
         }
 
         public void Clear()
         {
             ReadFileXml();
-            _listFigures.Clear();
+            _figures.Clear();
             WriteFileXml();
         }
     }

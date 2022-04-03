@@ -22,8 +22,8 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] GetSumAreaCommandSettings settings)
         {
-            var _listFigures = _figureRepository.GetFigures();
-            var sumArea = _listFigures.Sum(figure => figure.GetSurfaceArea());
+            var figures = _figureRepository.GetFigures();
+            var sumArea = figures.Sum(figure => figure.GetSurfaceArea());
             AnsiConsole.MarkupLine($"[green]Sum Area: {sumArea}[/]");
             return 0;
         }
