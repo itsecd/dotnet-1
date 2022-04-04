@@ -4,35 +4,35 @@ namespace ConsoleApp1.Model
 {
     public class QuadrFunc : Func
     {
-        public double Quadratic { get; init; } = 1;
-        public double Linear { get; init; } = 1;
-        public double Const { get; init; } = 1;
+        public double _quadratic { get; init; } = 1;
+        public double _linear { get; init; } = 1;
+        public double _const { get; init; } = 1;
 
         public QuadrFunc() { }
         public QuadrFunc(double a, double b, double c)
         {
-            Quadratic = a;
-            Linear = b;
-            Const = c;
+            _quadratic = a;
+            _linear = b;
+            _const = c;
         }
 
         
-        public override Func GetDerivative() => new LinearFunc(2 * Quadratic, Linear);
+        public override Func GetDerivative() => new LinearFunc(2 * _quadratic, _linear);
 
-        public override double Compute(double arg) => Quadratic * Math.Pow(arg, 2) + Linear * arg + Const;
+        public override double Compute(double arg) => _quadratic * Math.Pow(arg, 2) + _linear * arg + _const;
 
-        public override string ToString() => $"{Quadratic}x^2 + {Linear}x + {Const}";
+        public override string ToString() => $"{_quadratic}x^2 + {_linear}x + {_const}";
 
         public override bool Equals(object obj)
         {
             if (obj is QuadrFunc func)
             {
-                return Quadratic == func.Quadratic && Linear == func.Linear && Const == func.Const;
+                return _quadratic == func._quadratic && _linear == func._linear && _const == func._const;
             }
             return false;
         }
 
-        public override int GetHashCode() => (Quadratic, Linear, Const).GetHashCode();
+        public override int GetHashCode() => (_quadratic, _linear, _const).GetHashCode();
 
     }
 }

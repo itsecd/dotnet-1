@@ -5,30 +5,30 @@ namespace ConsoleApp1.Model
 {
     public class Constanta : Func
     {
-        public double GetValue { get; init; } = 1;
+        public double _value { get; init; } = 1;
 
         public Constanta() { }
 
         public Constanta(double value)
         {
-            GetValue = value;
+            _value = value;
         }
 
         public override Func GetDerivative() => new Constanta(0);
 
-        public override double Compute(double arg) => GetValue;
+        public override double Compute(double arg) => _value;
 
-        public override string ToString() => $"{GetValue}";
+        public override string ToString() => $"{_value}";
 
         public override bool Equals(object obj)
         {
             if (obj is Constanta c)
             {
-                return GetValue == c.GetValue;
+                return _value == c._value;
             }
             return false;
         }
 
-        public override int GetHashCode() => GetType().GetHashCode();
+        public override int GetHashCode() => (_value).GetHashCode();
     }
 }
