@@ -18,7 +18,7 @@ namespace ConsoleApp1.Commands
             _functionsRepository = functionRepository;
         }
 
-        public override int Execute ([NotNull] CommandContext context, [NotNull] ClearFunctionsSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] ClearFunctionsSettings settings)
         {
             _functionsRepository.Clear();
             AnsiConsole.MarkupLine("[yellow]The list of functions has been cleared[/]");

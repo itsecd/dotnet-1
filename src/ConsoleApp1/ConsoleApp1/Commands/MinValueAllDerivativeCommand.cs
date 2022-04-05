@@ -1,9 +1,7 @@
-﻿using ConsoleApp1.Model;
-using ConsoleApp1.Repositories;
+﻿using ConsoleApp1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace ConsoleApp1.Commands
 {

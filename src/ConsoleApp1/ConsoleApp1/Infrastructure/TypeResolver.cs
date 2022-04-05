@@ -9,7 +9,7 @@ namespace ConsoleApp1.Infrastructure
 
         public TypeResolver(IServiceProvider provider)
         {
-            _provider = provider  ??throw new ArgumentNullException(nameof(provider));
+            _provider = provider ?? throw new ArgumentNullException(nameof(provider));
         }
 
         public object Resolve(Type type)

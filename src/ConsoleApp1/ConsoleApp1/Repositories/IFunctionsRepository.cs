@@ -10,7 +10,7 @@ namespace ConsoleApp1.Repositories
         void Insert(int index, Func newFunc);
         void RemoveAt(int index);
         string MinFunctionWithLINQ(double arg);
-        string MinFunction (double arg);
-        
+        string MinFunction(double arg);
+
     }
 }

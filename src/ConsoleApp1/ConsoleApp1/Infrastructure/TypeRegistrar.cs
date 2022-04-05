@@ -7,7 +7,7 @@ namespace ConsoleApp1.Infrastructure
     public sealed class TypeRegistrar : ITypeRegistrar
     {
         private readonly IServiceCollection _builder;
-       
+
 
         public TypeRegistrar(IServiceCollection builder)
         {

@@ -1,8 +1,8 @@
-﻿using ConsoleApp1.Repositories;
+﻿using ConsoleApp1.Commands;
+using ConsoleApp1.Infrastructure;
+using ConsoleApp1.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
-using ConsoleApp1.Commands;
-using ConsoleApp1.Infrastructure;
 
 namespace ConsoleApp1
 {

@@ -23,7 +23,7 @@ namespace ConsoleApp1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveAtFunctionSettings settings)
         {
             int index = AnsiConsole.Prompt(new TextPrompt<int>("[yellow]Enter the index of the function to be removed :[/]"));
-             _functionsRepository.RemoveAt(index);
+            _functionsRepository.RemoveAt(index);
             return 0;
         }
     }
