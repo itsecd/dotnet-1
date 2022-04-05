@@ -16,7 +16,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] ComparisonFigureSettings settings)
         {
             var listElements = _figureRepository.GetAll();
-            if (listElements.Count == 0)
+            if (listElements.Count < 2)
             {
                 AnsiConsole.Clear();
                 AnsiConsole.WriteLine("Comparison is not possible!");

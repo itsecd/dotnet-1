@@ -51,7 +51,7 @@ namespace Lab1.Model
             return Math.Sqrt(per * (per - SideAB) * (per - SideAC) * (per - SideCB));
         }
 
-        public override string ToString() => $"{SideAB}, {SideAC}, {SideCB}";
+        public override string ToString() => $" A:{VertexA}, B:{VertexB}, C:{VertexC},: {SideAB}, {SideAC}, {SideCB}";
 
         public override bool Equals(object? obj)
         {
