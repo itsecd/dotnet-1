@@ -17,8 +17,8 @@ namespace Lab1.Commands
         private static Point ReadPoint(string name)
         {
             AnsiConsole.WriteLine("Coordinate " + name);
-            var x = AnsiConsole.Prompt(new TextPrompt<double>("[Green]Введите вещественную координату X:[/]"));
-            var y = AnsiConsole.Prompt(new TextPrompt<double>("[Green]Введите вещественную координату Y:[/]"));
+            var x = AnsiConsole.Prompt(new TextPrompt<double>("[Green]Enter a real coordinate X:[/]"));
+            var y = AnsiConsole.Prompt(new TextPrompt<double>("[Green]Enter a real coordinate Y:[/]"));
             return new Point(x, y);
         }
 
@@ -31,7 +31,7 @@ namespace Lab1.Commands
                     {
                         return index switch
                         {
-                            < 0 => ValidationResult.Error("[red]The index must be greater than zero[/]"),
+                            < 0 => ValidationResult.Error("[red]The index must be greater than or equal to zero[/]"),
                             _ => ValidationResult.Success(),
                         };
                     }));

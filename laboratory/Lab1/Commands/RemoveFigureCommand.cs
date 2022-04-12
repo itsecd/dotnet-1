@@ -41,7 +41,7 @@ namespace Lab1.Commands
                         {
                             return index switch
                             {
-                                < 0 => ValidationResult.Error("[red]The index must be greater than zero[/]"),
+                                < 0 => ValidationResult.Error("[red]The index must be greater than or equal to zero[/]"),
                                 _ => ValidationResult.Success(),
                             };
                         }));
