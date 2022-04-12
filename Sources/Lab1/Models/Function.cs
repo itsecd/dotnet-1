@@ -6,6 +6,7 @@ namespace Lab1.Models
 {
     [XmlInclude(typeof(ConstantFunction))]
     [XmlInclude(typeof(LinearFunction))]
+    [XmlInclude(typeof(QuadraticFunction))]
     [XmlInclude(typeof(SinusFunction))]
     [XmlInclude(typeof(CosinusFunction))]
     public abstract class Function :
