@@ -43,7 +43,7 @@ namespace Lab1.Model
         public override Rectangular GetBoundingBox()
         {
             var minBoundingBox = new Rectangular(new Point(Center.X - Radius, Center.Y + Radius, Center.Z - Radius),
-            new Point(Center.X + Radius, Center.Y - Radius, Center.Z - Radius), 2 * Radius);
+                new Point(Center.X + Radius, Center.Y - Radius, Center.Z - Radius), 2 * Radius);
             return minBoundingBox;
         }
     }

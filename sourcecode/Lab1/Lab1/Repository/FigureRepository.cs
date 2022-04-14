@@ -33,12 +33,12 @@ namespace Lab1.Repository
 
         public void Add(Figure figure)
         {
-            if (NewFigure == null)
+            if (figure == null)
             {
-                throw new ArgumentNullException(nameof(NewFigure));
+                throw new ArgumentNullException(nameof(figure));
             }
             ReadFileXml();
-            _figures.Add(NewFigure);
+            _figures.Add(figure);
             WriteFileXml();
         }
 

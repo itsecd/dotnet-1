@@ -46,8 +46,8 @@ namespace Lab1.Model
 
         public override bool Equals(object? obj)
         {
-            if (obj is not Rectangular rec) return false;
-            return BaseLeftTop.Equals(rec.BaseRightBottom) && BaseRightBottom.Equals(rec.BaseRightBottom) && Depth == rec.Depth;
+            if (obj is not Rectangular rectangular) return false;
+            return BaseLeftTop.Equals(rectangular.BaseRightBottom) && BaseRightBottom.Equals(rectangular.BaseRightBottom) && Depth == rectangular.Depth;
         }
 
         public override Rectangular GetBoundingBox() => this;

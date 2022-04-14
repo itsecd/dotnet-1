@@ -59,7 +59,7 @@ namespace Lab1.Commands
                     Radius = AnsiConsole.Prompt(new TextPrompt<double>("[green]Radius [/]")),
                     Height = AnsiConsole.Prompt(new TextPrompt<double>("[green]Height [/]"))
                 },
-                _ => AnsiConsole.MarkupLine("[red]Invalid type[/]");
+                _ => throw new System.Exception("Invalid Type")
             };
             _figureRepository.Add(figure);
             return 0;
