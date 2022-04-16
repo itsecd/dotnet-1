@@ -1,24 +1,24 @@
 using System;
 
-namespace PPLab1.Model
+namespace Lab1.Model
 {
-    public class ExpFunct : Function
+    public class Exponential : Function
     {
         public Data Elems { get; init; }
 
-        public ExpFunct() { Elems = new Data(); }
+        public Exponential() { Elems = new Data(); }
 
-        public ExpFunct(Data elems)
+        public Exponential(Data elems)
         {
             Elems = new Data(elems.A, elems.Coeff);
         }
 
-        public ExpFunct(int exponent, int coefficient)
+        public Exponential(int exponent, int coefficient)
         {
             Elems = new Data(exponent, coefficient);
         }
 
-        public override double? CalculationFunction(double value)
+        public override double? Calculation(double value)
         {
             if (value < 0)
                 return null;
@@ -53,7 +53,7 @@ namespace PPLab1.Model
         }
         public override bool Equals(Object obj)
         {
-            if (obj is not ExpFunct other)
+            if (obj is not Exponential other)
                 return false;
             return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }

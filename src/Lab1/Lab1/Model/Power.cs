@@ -2,23 +2,23 @@ using System;
 
 namespace Lab1.Model
 {
-    public class PowerFunct : Function
+    public class Power : Function
     {
         public Data Elems { get; init; }
 
-        public PowerFunct() { Elems = new Data(); }
+        public Power() { Elems = new Data(); }
 
-        public PowerFunct(Data elems)
+        public Power(Data elems)
         {
             Elems = new Data(elems.A, elems.Coeff);
         }
 
-        public PowerFunct(int power, int coefficient)
+        public Power(int power, int coefficient)
         {
             Elems = new Data(power, coefficient);
         }
 
-        public override double? CalculationFunction(double value)
+        public override double? Calculation(double value)
         {
             return Elems.Coeff * Math.Pow(value, Elems.A);
         }
@@ -57,7 +57,7 @@ namespace Lab1.Model
 
         public override bool Equals(Object obj)
         {
-            if (obj is not PowerFunct other)
+            if (obj is not Power other)
                 return false;
             return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }

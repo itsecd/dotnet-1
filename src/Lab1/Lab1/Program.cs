@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spectre.Console;
+using System;
 
 namespace Lab1
 {
@@ -6,7 +7,11 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var a = AnsiConsole.Prompt(prompt: new SelectionPrompt<string>()
+                .Title("11")
+                .AddChoices<string>("константа", "показательная"));
+                
+            AnsiConsole.MarkupLine("[blue]Hello World![/]");
         }
     }
 }

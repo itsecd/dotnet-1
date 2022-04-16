@@ -2,22 +2,22 @@ using System;
 
 namespace Lab1.Model
 {
-    public class LogFunct : Function
+    public class Logarithm : Function
     {
         public Data Elems { get; init; }
 
-        public LogFunct() { Elems = new Data(); }
+        public Logarithm() { Elems = new Data(); }
 
-        public LogFunct(Data elems)
+        public Logarithm(Data elems)
         {
             Elems = new Data(elems.A, elems.Coeff);
         }
-        public LogFunct(int basis, int coefficient)
+        public Logarithm(int basis, int coefficient)
         {
             Elems = new Data(basis, coefficient);
         }
 
-        public override double? CalculationFunction(double value)
+        public override double? Calculation(double value)
         {
             if (value < 0)
                 return null;
@@ -54,7 +54,7 @@ namespace Lab1.Model
 
         public override bool Equals(Object obj)
         {
-            if (obj is not LogFunct other)
+            if (obj is not Logarithm other)
                 return false;
             return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }

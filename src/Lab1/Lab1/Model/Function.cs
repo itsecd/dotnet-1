@@ -3,17 +3,22 @@ using System.Xml.Serialization;
 
 namespace Lab1.Model
 {
-    [XmlInclude(typeof(Const))]
-    [XmlInclude(typeof(ExpFunct))]
-    [XmlInclude(typeof(LogFunct))]
-    [XmlInclude(typeof(PowerFunct))]
+    [XmlInclude(typeof(Constant))]
+    [XmlInclude(typeof(Exponential))]
+    [XmlInclude(typeof(Logarithm))]
+    [XmlInclude(typeof(Power))]
 
     public abstract class Function
     {
-        public abstract double? CalculationFunction(double value);
+        public abstract double? Calculation(double value);
         public abstract string Derivative();
         public abstract override string ToString();
         public abstract override bool Equals(Object obj);
         public abstract override int GetHashCode();
+
+        internal object Calculation()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

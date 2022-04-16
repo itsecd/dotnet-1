@@ -2,23 +2,23 @@ using System;
 
 namespace Lab1.Model
 {
-    public class Const : Function
+    public class Constant : Function
     {
         public Data Elems { get; init; }
 
-        public Const() { Elems = new Data(); }
+        public Constant() { Elems = new Data(); }
 
-        public Const(Data elems)
+        public Constant(Data elems)
         {
             Elems = new Data(elems.A, elems.Coeff);
         }
 
-        public Const(int coefficient)
+        public Constant(int coefficient)
         {
             Elems = new Data(1, coefficient);
         }
 
-        public override double? CalculationFunction(double value) { return Elems.Coeff; }
+        public override double? Calculation(double value) { return Elems.Coeff; }
 
         public override string Derivative() { return "y' = 0"; }
 
@@ -29,7 +29,7 @@ namespace Lab1.Model
 
         public override bool Equals(Object obj)
         {
-            if (obj is not Const other)
+            if (obj is not Constant other)
                 return false;
             return Elems.Coeff == other.Elems.Coeff;
         }
