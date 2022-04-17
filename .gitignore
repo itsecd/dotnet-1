@@ -399,3 +399,5 @@ VSWorkspaceState.json
 
 # JetBrains Rider
 *.sln.iml
+/src/LabBabushkin/LabBabushkin
+*.sln
