@@ -1,38 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
-namespace PromLab01
+namespace Lab01
 {
-    internal struct Point
+
+    [Serializable]
+    [XmlRoot("Point")]
+    public struct Point
     {
-        double x;
+        [XmlElement("X")]
         public double X
         {
-            get { return x; }
-            set { x = value; }
+            get;
         }
-
-        double y;
+        [XmlElement("Y")]
         public double Y
         {
-            get { return y; }
-            set { y = value; }
-        }
-        
-        public Point(double x, double y)
-        {
-            this.x = x;
-            this.y = y;
+            get;
         }
 
-        public Point(double x)
+        public Point(double x, double y)
         {
-            this.x = x;
-            y = 0;
+            X = x;
+            Y = y;
         }
+
         new public string ToString()
         {
             return "(" + X + ";" + Y + ")";
@@ -40,17 +32,7 @@ namespace PromLab01
 
         static public double GetLength(Point a, Point b)
         {
-            var c = new Point();
-            c.X = b.X - a.X;
-            c.Y = b.Y - a.Y;
-            return Math.Sqrt(Math.Pow(c.X,2) + Math.Pow(c.Y,2));
-        }
-        static public Point GetMiddle(Point a, Point b)
-        {
-            var c = new Point();
-            c.X = (a.X + b.X) / 2;
-            c.Y = (a.Y + b.Y) / 2;
-            return c;
+            return Math.Sqrt(Math.Pow(b.X - a.X, 2) + Math.Pow(b.Y - a.Y, 2));
         }
 
     }

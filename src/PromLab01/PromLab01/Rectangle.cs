@@ -1,61 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
-namespace PromLab01
+namespace Lab01
 {
-    internal class Rectangle : ICalculations
+
+    [Serializable]
+    [XmlRoot("Rectangle")]
+    public class Rectangle : Shape
     {
-        Point a;
+        [XmlElement("First_point")]
         public Point A
         {
-            get { return a; }
-            set { a = value; }
+            get;
         }
-        Point b;
+        [XmlElement("Second_point")]
         public Point B
         {
-            get { return b; }
-            set { b = value; }  
+            get;
         }
         public Rectangle(Point a, Point b)
         {
-            this.a = a;
-            this.b = b;
+            A = a;
+            B = b;
         }
 
         public Rectangle(Point a, double width)
         {
-            this.a = a;
-            b = new Point (a.X + width, a.Y - width);
+            A = a;
+            B = new Point(a.X + width, a.Y - width);
 
         }
         public Rectangle()
         {
-            this.a = new Point(0);
-            this.b = new Point(0);
+            A = new Point(0,0);
+            B = new Point(1,1);
         }
 
-        public double GetArea()
+        override public double GetArea()
         {
-            return Math.Abs(b.X-a.X)*Math.Abs(b.Y-a.Y);
+            return Math.Abs(B.X - A.X) * Math.Abs(B.Y - A.Y);
         }
 
-        public double GetPerimeter()
+        override public double GetPerimeter()
         {
-            return 2*Math.Abs(b.X - a.X) + 2* Math.Abs(b.Y - a.Y);
+            return 2 * Math.Abs(B.X - A.X) + 2 * Math.Abs(B.Y - A.Y);
         }
 
-        public Rectangle GetBorders()
+        override public Rectangle GetBorders()
         {
-            return new Rectangle(a, b);
+            return new Rectangle(A, B);
         }
 
-        new public string ToString()
+        override public string ToString()
         {
-            return "{" + a.ToString() + ";" + b.ToString() + "}";
+            return "{" + A.ToString() + ";" + B.ToString() + "}";
         }
     }
 }

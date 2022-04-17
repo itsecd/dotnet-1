@@ -1,54 +1,86 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
-namespace PromLab01
+namespace Lab01
 {
-    internal class Triangle : ICalculations
+
+    [Serializable]
+    [XmlRoot("Triangle")]
+    public class Triangle : Shape
     {
-        Point[] array;
-        public Point[] Array
+        [XmlElement("Points")]
+        public Point A
         {
             get;
-            set;
+        }
+        public Point B
+        {
+            get;
+        }
+        public Point C
+        {
+            get;
         }
 
         public Triangle(Point a, Point b, Point c)
         {
-            Array = new Point[3] {a, b, c};
+            A = a;
+            B = b;
+            C = c;
         }
         public Triangle()
         {
-            Array = new Point[3] { new Point(0), new Point(0), new Point(0) };
+            A=  new Point(0, 0);
+            B = new Point(1, 1);
+            C = new Point(-1, 1);
         }
 
-        public double GetArea()
+        private double MinX()
         {
-            return Math.Sqrt(GetPerimeter() 
-                * (GetPerimeter() - Point.GetLength(Array[0], Array[1]))
-                * (GetPerimeter() - Point.GetLength(Array[1], Array[2])) 
-                * (GetPerimeter() - Point.GetLength(Array[2], Array[0])));
+            return Math.Min(Math.Min(A.X, B.X), C.X);
         }
 
-        public double GetPerimeter()
+        private double MinY()
         {
-            return Point.GetLength(Array[0], Array[1]) 
-                + Point.GetLength(Array[1], Array[2]) 
-                + Point.GetLength(Array[2], Array[0]);
+            return Math.Min(Math.Min(A.Y, B.Y), C.Y);
         }
 
-        public Rectangle GetBorders()
+        private double MaxX()
         {
-            return new Rectangle(new Point(Array.Min(array => array.X), Array.Min(array => array.Y)),
-                new Point(Array.Max(array => array.X), Array.Max(array => array.Y)));
+            return Math.Max(Math.Max(A.X, B.X), C.X);
         }
 
-        new public string ToString()
+        private double MaxY()
         {
-            return "{" + Array[0].ToString() + ";" + Array[1].ToString()
-                + ";" + Array[2].ToString() + "}";
+            return Math.Max(Math.Min(A.Y, B.Y), C.Y);
+        }
+
+        override public double GetArea()
+        {
+            return Math.Sqrt(GetPerimeter()
+                * (GetPerimeter() - Point.GetLength(A, B))
+                * (GetPerimeter() - Point.GetLength(B, C))
+                * (GetPerimeter() - Point.GetLength(C, A)));
+        }
+
+        override public double GetPerimeter()
+        {
+            return Point.GetLength(A, B)
+                + Point.GetLength(B, C)
+                + Point.GetLength(C, A);
+        }
+
+        override public Rectangle GetBorders()
+        {
+            return new Rectangle(new Point(MinX(), MinY()),
+                new Point(MaxX(), MaxY()));
+        }
+
+        override public string ToString()
+        {
+            return "{" + A.ToString() + ";" + B.ToString()
+                + ";" + C.ToString() + "}";
         }
     }
 }
