@@ -15,10 +15,5 @@ namespace Lab1.Model
         public abstract override string ToString();
         public abstract override bool Equals(Object obj);
         public abstract override int GetHashCode();
-
-        internal object Calculation()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -10,7 +10,7 @@ namespace Lab1.Model
 
         public Power(Data elems)
         {
-            Elems = new Data(elems.A, elems.Coeff);
+            Elems = new Data(elems._a, elems._coeff);
         }
 
         public Power(int power, int coefficient)
@@ -20,51 +20,46 @@ namespace Lab1.Model
 
         public override double? Calculation(double value)
         {
-            return Elems.Coeff * Math.Pow(value, Elems.A);
+            return Elems._coeff * Math.Pow(value, Elems._a);
         }
 
         public override string Derivative()
         {
-            if (Elems.Coeff == 0)
+            if (Elems._coeff == 0)
                 return "y' = 0";
-            switch (Elems.A)
+            switch (Elems._a)
             {
                 case 1:
-                    return $"y' = {Elems.Coeff * Elems.A}";
+                    return $"y' = {Elems._coeff * Elems._a}";
 
                 case 0:
                     return "y' = 0";
 
                 default:
-                    return $"y' = { Elems.Coeff * Elems.A}x^{Elems.A - 1}";
+                    return $"y' = { Elems._coeff * Elems._a}x^{Elems._a - 1}";
             }
         }
 
         public override string ToString()
         {
-            switch (Elems.Coeff)
+            return Elems._coeff switch
             {
-                case 1:
-                    return $"y = x^{Elems.A}";
-
-                case 0:
-                    return "y = 0";
-
-                default:
-                    return $"y = {Elems.Coeff}x^{Elems.A}";
-            }
+                1 => $"y = x^{Elems._a}",
+                0 => "y = 0",
+                _ => $"y = {Elems._coeff}x^{Elems._a}"
+            };
         }
 
         public override bool Equals(Object obj)
         {
             if (obj is not Power other)
                 return false;
-            return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
+            return Elems._coeff == other.Elems._coeff && Elems._a == other.Elems._a;
         }
 
         public override int GetHashCode()
         {
-            return Elems.A.GetHashCode() ^ Elems.Coeff.GetHashCode();
+            return Elems._a.GetHashCode() ^ Elems._coeff.GetHashCode();
         }
     }
 }

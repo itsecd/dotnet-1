@@ -22,7 +22,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] DeleteAllFunctionSettings settings)
         {
             _functionsRepository.DeleteAllFunction();
-            AnsiConsole.MarkupLine($"[green1]Done![/]");
+            AnsiConsole.MarkupLine("[green1]Done![/]");
             return 0;
         }
 

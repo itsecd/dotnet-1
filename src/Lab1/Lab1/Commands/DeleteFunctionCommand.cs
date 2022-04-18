@@ -24,7 +24,7 @@ namespace Lab1.Commands
             int inputIndex = AnsiConsole.Prompt(new TextPrompt<int>("[aqua]Input the remove index: [/]"));
 
             _functionsRepository.DeleteFunction(inputIndex);
-            AnsiConsole.MarkupLine($"[green1]Done![/]");
+            AnsiConsole.MarkupLine("[green1]Done![/]");
 
             return 0;
         }

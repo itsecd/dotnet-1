@@ -54,7 +54,7 @@ namespace Lab1.Commands
                 return -1;
             }
             _functionsRepository.InsertFunction(newFunction, inputIndex);
-            AnsiConsole.MarkupLine($"[green1]Done![/]");
+            AnsiConsole.MarkupLine("[green1]Done![/]");
             return 0;
         }
     }

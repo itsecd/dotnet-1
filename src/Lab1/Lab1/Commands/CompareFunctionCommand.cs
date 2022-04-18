@@ -26,18 +26,13 @@ namespace Lab1.Commands
 
             if (inputIndex1 < 0 || inputIndex2 < 0)
             {
-                AnsiConsole.MarkupLine($"[red]Index is out of range[/]");
+                AnsiConsole.MarkupLine("[red]Index is out of range[/]");
                 return -1;
             }
-            if (_functionsRepository.CompareFunction(inputIndex1, inputIndex2) == true)
-            {
-                AnsiConsole.MarkupLine($"[green1]The functions are equal[/]");
-            }
-            else
-            {
-                AnsiConsole.MarkupLine($"[red]The functions arn't equal[/]");
-            }
-            AnsiConsole.MarkupLine($"[green1]Done![/]");
+
+            var a = _functionsRepository.CompareFunction(inputIndex1, inputIndex2) ? "[green1]The functions are equal[/]" : "[red]The functions arn't equal[/]";
+            AnsiConsole.MarkupLine($"{a}");
+            AnsiConsole.MarkupLine("[green1]Done![/]");
             return 0;
         }
     }
