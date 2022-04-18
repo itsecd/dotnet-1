@@ -30,5 +30,25 @@ namespace Lab1.Model
             if (obj is not Point vertex) return false;
             return X == vertex.X && Y == vertex.Y && Z == vertex.Z;
         }
+
+        public static bool operator ==(Point firstVertex, Point secondVertex)
+        {
+            bool status = false;
+            if (firstVertex.X == secondVertex.X && firstVertex.Y == secondVertex.Y && firstVertex.Z == secondVertex.Z)
+            {
+                status = true;
+            }
+            return status;
+        }
+
+        public static bool operator !=(Point firstVertex, Point secondVertex)
+        {
+            bool status = false;
+            if (firstVertex.X != secondVertex.X || firstVertex.Y != secondVertex.Y || firstVertex.Z != secondVertex.Z)
+            {
+                status = true;
+            }
+            return status;
+        }
     }
 }

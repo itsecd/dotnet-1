@@ -37,7 +37,7 @@ namespace Lab1.Model
         public override bool Equals(object? obj)
         {
             if (obj is not Sphere sphere) return false;
-            return Center.Equals(sphere.Center) && Radius == sphere.Radius;
+            return Center == sphere.Center && Radius == sphere.Radius;
         }
 
         public override Rectangular GetBoundingBox()

@@ -3,6 +3,7 @@ using Lab1.Infrastructure.Lab1.Infrastructure;
 using Lab1.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
+using System;
 
 namespace Lab1
 {
@@ -24,6 +25,7 @@ namespace Lab1
                 config.AddCommand<GetSumAreaCommand>("Sum");
             });
             app.Run(args);
+            Console.ReadKey();
         }
     }
 }
