@@ -10,7 +10,7 @@ namespace Lab1.Model
 
         public Logarithm(Data elems)
         {
-            Elems = new Data(elems._a, elems._coeff);
+            Elems = new Data(elems.A, elems.Coeff);
         }
         public Logarithm(int basis, int coefficient)
         {
@@ -21,29 +21,29 @@ namespace Lab1.Model
         {
             if (value < 0)
                 return null;
-            return Elems._coeff * Math.Round(Math.Log(value, Elems._a), 2);
+            return Elems.Coeff * Math.Round(Math.Log(value, Elems.A), 2);
         }
 
         public override string Derivative()
         {
-            if (Elems._a < 1)
+            if (Elems.A < 1)
                 return "indefinitely";
-            else if (Elems._coeff == 0)
+            else if (Elems.Coeff == 0)
                 return "y' = 0";
             else
-                return $"y' = {Math.Round(Elems._coeff / Math.Log(Elems._a), 2)} x^-1";
+                return $"y' = {Math.Round(Elems.Coeff / Math.Log(Elems.A), 2)} x^-1";
         }
 
         public override string ToString()
         {
-            if (Elems._a < 1)
+            if (Elems.A < 1)
                 return "incorrect base";
 
-            return Elems._coeff switch
+            return Elems.Coeff switch
             {
-                1 => $"y = log_{Elems._a}x",
+                1 => $"y = log_{Elems.A}x",
                 0 => "y = 0",
-                _ => $"y = {Elems._coeff} log_{Elems._a}x"
+                _ => $"y = {Elems.Coeff} log_{Elems.A}x"
             };
         }
 
@@ -51,12 +51,12 @@ namespace Lab1.Model
         {
             if (obj is not Logarithm other)
                 return false;
-            return Elems._coeff == other.Elems._coeff && Elems._a == other.Elems._a;
+            return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }
 
         public override int GetHashCode()
         {
-            return Elems._a.GetHashCode() ^ Elems._coeff.GetHashCode();
+            return Elems.A.GetHashCode() ^ Elems.Coeff.GetHashCode();
         }
     }
 }

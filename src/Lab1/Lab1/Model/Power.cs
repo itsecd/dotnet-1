@@ -10,7 +10,7 @@ namespace Lab1.Model
 
         public Power(Data elems)
         {
-            Elems = new Data(elems._a, elems._coeff);
+            Elems = new Data(elems.A, elems.Coeff);
         }
 
         public Power(int power, int coefficient)
@@ -20,33 +20,33 @@ namespace Lab1.Model
 
         public override double? Calculation(double value)
         {
-            return Elems._coeff * Math.Pow(value, Elems._a);
+            return Elems.Coeff * Math.Pow(value, Elems.A);
         }
 
         public override string Derivative()
         {
-            if (Elems._coeff == 0)
+            if (Elems.Coeff == 0)
                 return "y' = 0";
-            switch (Elems._a)
+            switch (Elems.A)
             {
                 case 1:
-                    return $"y' = {Elems._coeff * Elems._a}";
+                    return $"y' = {Elems.Coeff * Elems.A}";
 
                 case 0:
                     return "y' = 0";
 
                 default:
-                    return $"y' = { Elems._coeff * Elems._a}x^{Elems._a - 1}";
+                    return $"y' = { Elems.Coeff * Elems.A}x^{Elems.A - 1}";
             }
         }
 
         public override string ToString()
         {
-            return Elems._coeff switch
+            return Elems.Coeff switch
             {
-                1 => $"y = x^{Elems._a}",
+                1 => $"y = x^{Elems.A}",
                 0 => "y = 0",
-                _ => $"y = {Elems._coeff}x^{Elems._a}"
+                _ => $"y = {Elems.Coeff}x^{Elems.A}"
             };
         }
 
@@ -54,12 +54,12 @@ namespace Lab1.Model
         {
             if (obj is not Power other)
                 return false;
-            return Elems._coeff == other.Elems._coeff && Elems._a == other.Elems._a;
+            return Elems.Coeff == other.Elems.Coeff && Elems.A == other.Elems.A;
         }
 
         public override int GetHashCode()
         {
-            return Elems._a.GetHashCode() ^ Elems._coeff.GetHashCode();
+            return Elems.A.GetHashCode() ^ Elems.Coeff.GetHashCode();
         }
     }
 }
