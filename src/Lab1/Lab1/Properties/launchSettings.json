@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PromLab01": {
+      "commandName": "Project",
+      "commandLineArgs": "table"
+    }
+  }
+}
