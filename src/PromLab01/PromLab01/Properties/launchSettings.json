@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "PromLab01": {
-      "commandName": "Project",
-      "commandLineArgs": "compare"
-    }
-  }
-}
