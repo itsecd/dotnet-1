@@ -2,27 +2,30 @@ using System;
 
 namespace model
 {
-	public class PowerFunction : IFunctions
+	[Serializable]
+	public class PowerFunction : Function
 	{
-		private int _base;
-		private int _power;
+        private double Value { get; set; } = 1;
 
-		public PowerFunction() { }
+        public PowerFunction(double value) { Value = value; }
 
-		public PowerFunction(int _base, int _power) { this._base = _base; this._power = _power; }
 
-		public void setBase(int _base) { this._base = _base; }
-		public int getBase() { return _base;  }	
-		public void setPower(int _power) { this._power = _power; }
-		public int getPower() { return _power;  }
+        public override PowerFunction getDerivative() { return new PowerFunction(0); }
 
-		public double getResult() { 
-			return Math.Pow(_base, _power);
-		}
+        public override double getResult(double x) => Value;
 
-		public void toString()
+        public override bool Equals(object obj)
         {
-			Console.WriteLine("y = " + _base + "`" + _power);
+            if (obj is PowerFunction func)
+            {
+                return true;
+            }
+            return false;
         }
-	}
+
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

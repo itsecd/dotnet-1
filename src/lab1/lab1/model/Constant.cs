@@ -1,21 +1,31 @@
+using model;
 using System;
 
 namespace model
 {
-    public class Constant : IFunctions
+    [Serializable]
+    public class Constant : Function
     {
-        public int _x;
+        private double Value { get; set; } = 1;
 
-        public Constant(int x) { _x = x; }  
+        public Constant(double value) { Value = value; }  
 
-        public void setX(int x) { _x = x; }
-        public int getX() { return _x; }
 
-        public double getResult() { return (double)_x; }
+        public override Constant getDerivative() { return new Constant(0); }
 
-        public void toString()
+        public override double getResult(double x) => Value;
+
+        public override bool Equals(object obj)
         {
-            Console.WriteLine("y=" + _x);
+            if (obj is Constant func) {
+                return true;
+            }
+            return false;
+        }
+
+        public override string ToString()
+        {
+            throw new NotImplementedException();
         }
     }
 }

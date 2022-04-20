@@ -2,24 +2,31 @@ using System;
 
 namespace model
 {
-    public class ExponentialFunction : IFunctions
+    [Serializable]
+    public class ExponentialFunction : Function
     {
-        //private static double _E = 2.72;
-        private int _power;
 
-        ExponentialFunction() { }
-        ExponentialFunction(int _power) { this._power = _power; }
-        public void setPower(int _power) { this._power = _power; }
-        public int getPower() { return this._power; }
+        private double Value { get; set; } = 1;
 
-        public double getResult()
+        public ExponentialFunction(double value) { Value = value; }
+
+
+        public override ExponentialFunction getDerivative() { return new ExponentialFunction(0); }
+
+        public override double getResult(double x) => Value;
+
+        public override bool Equals(object obj)
         {
-            return Math.Exp(this._power);
+            if (obj is ExponentialFunction func)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public void toString()
+        public override string ToString()
         {
-            Console.WriteLine("y=e`" + _power);
+            throw new NotImplementedException();
         }
 
     }

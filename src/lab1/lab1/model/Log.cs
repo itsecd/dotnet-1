@@ -1,30 +1,32 @@
 using System;
 namespace model
 {
-	public class Log : IFunctions
+	[Serializable]
+	public class Log : Function
 	{
 
-		private int log_base;
-		private int log_arg;
+        private double Value { get; set; } = 1;
 
-		private static double LOG_E = 2.7;
+        public Log(double value) { Value = value; }
 
-		public Log() { }
-		public Log(int log_base, int log_args) { this.log_base = log_base; log_arg = log_args; }
 
-		public void setLogBase(int _base) { log_base = _base; }
-		public int getLogBase() { return log_base; }
-		public void setLogArg(int _arg) { log_arg = _arg; }
-		public int getLogArg() { return log_arg; }
+        public override Log getDerivative() { return new Log(0); }
 
-		public double getResult() { return Math.Log(log_base, log_arg); }
-		
+        public override double getResult(double x) => Value;
 
-	
-		public void toString()
+        public override bool Equals(object obj)
         {
-			Console.WriteLine("y = Log" + log_base + "(" + log_arg + ")");
+            if (obj is Log func)
+            {
+                return true;
+            }
+            return false;
         }
 
-	}
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+
+    }
 }
