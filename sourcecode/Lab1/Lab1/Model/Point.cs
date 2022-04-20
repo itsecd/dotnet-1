@@ -50,5 +50,10 @@ namespace Lab1.Model
             }
             return status;
         }
+
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() ^ Y.GetHashCode() ^ Z.GetHashCode();
+        }
     }
 }

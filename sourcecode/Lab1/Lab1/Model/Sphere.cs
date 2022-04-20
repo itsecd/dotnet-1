@@ -40,6 +40,11 @@ namespace Lab1.Model
             return Center == sphere.Center && Radius == sphere.Radius;
         }
 
+        public override int GetHashCode()
+        {
+            return Center.GetHashCode() ^ Radius.GetHashCode();
+        }
+
         public override Rectangular GetBoundingBox()
         {
             var minBoundingBox = new Rectangular(new Point(Center.X - Radius, Center.Y + Radius, Center.Z - Radius),

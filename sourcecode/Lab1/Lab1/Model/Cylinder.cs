@@ -43,6 +43,11 @@ namespace Lab1.Model
             return Center == cylinder.Center && Radius == cylinder.Radius && Height == cylinder.Height;
         }
 
+        public override int GetHashCode()
+        {
+            return Center.GetHashCode() ^ Radius.GetHashCode() ^ Height.GetHashCode();
+        }
+
         public override Rectangular GetBoundingBox()
         {
             var minBoundingBox = new Rectangular(new Point(Center.X - Radius, Center.Y + Radius, Center.Z),

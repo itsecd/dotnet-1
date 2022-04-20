@@ -1,5 +1,4 @@
-﻿using Lab1.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 using System;
 

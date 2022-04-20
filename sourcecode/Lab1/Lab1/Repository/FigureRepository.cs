@@ -9,7 +9,7 @@ namespace Lab1.Repository
     public class FigureRepository : IFigureRepository
     {
         private const string FileName = "figure.Xml";
-        private List<Figure> _figures;
+        private List<Figure>? _figures;
 
         private void ReadFileXml()
         {
@@ -21,7 +21,7 @@ namespace Lab1.Repository
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Figure>));
             using var fileStream = new FileStream(FileName, FileMode.Open);
-            _figures = (List<Figure>)xmlSerializer.Deserialize(fileStream);
+            _figures = (List<Figure>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException());
         }
 
         private void WriteFileXml()
@@ -38,27 +38,27 @@ namespace Lab1.Repository
                 throw new ArgumentNullException(nameof(figure));
             }
             ReadFileXml();
-            _figures.Add(figure);
+            _figures!.Add(figure);
             WriteFileXml();
         }
 
         public List<Figure> GetFigures()
         {
             ReadFileXml();
-            return _figures;
+            return _figures!;
         }
 
         public void RemoveAt(int index)
         {
             ReadFileXml();
-            _figures.RemoveAt(index);
+            _figures!.RemoveAt(index);
             WriteFileXml();
         }
 
         public void Clear()
         {
             ReadFileXml();
-            _figures.Clear();
+            _figures!.Clear();
             WriteFileXml();
         }
     }

@@ -50,6 +50,11 @@ namespace Lab1.Model
             return BaseLeftTop == rectangular.BaseRightBottom && BaseRightBottom == rectangular.BaseRightBottom && Depth == rectangular.Depth;
         }
 
+        public override int GetHashCode()
+        {
+            return BaseLeftTop.GetHashCode() ^ BaseRightBottom.GetHashCode() ^ Depth.GetHashCode();
+        }
+
         public override Rectangular GetBoundingBox() => this;
     }
 }

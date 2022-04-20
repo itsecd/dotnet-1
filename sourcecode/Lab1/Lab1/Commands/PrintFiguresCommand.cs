@@ -29,7 +29,7 @@ namespace Lab1.Commands
             table.AddColumn("GetVolume");
             foreach (var elem in figures)
             {
-                table.AddRow(elem.GetType().Name, elem.ToString(), elem.GetSurfaceArea().ToString(), elem.GetVolume().ToString());
+                table.AddRow(elem.GetType().Name, elem.ToString()!, elem.GetSurfaceArea().ToString(), elem.GetVolume().ToString());
             }
             AnsiConsole.Write(table);
             return 0;
