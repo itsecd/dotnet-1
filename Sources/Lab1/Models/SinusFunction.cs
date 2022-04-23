@@ -1,6 +1,6 @@
 ﻿namespace Lab1.Models
 {
-    internal class SinusFunction: Function
+    public class SinusFunction: Function
     {
         public double Constant { get; }
         public double Angle { get; }

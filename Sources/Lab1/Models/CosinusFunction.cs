@@ -1,6 +1,6 @@
 ﻿namespace Lab1.Models
 {
-    internal class CosinusFunction: Function
+    public class CosinusFunction: Function
     {
         public double Constant { get; }
         public double Angle { get; }

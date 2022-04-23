@@ -1,6 +1,6 @@
 ﻿namespace Lab1.Models
 {
-    internal class QuadraticFunction: Function
+    public class QuadraticFunction: Function
     {
 
         public double Quadratic { get; }
