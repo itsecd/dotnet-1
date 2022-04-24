@@ -8,11 +8,11 @@ using System.Xml.Serialization;
 
 namespace Lab1.Repositories
 {
-    public class XmlFunctionsRepository
+    public class XmlFunctionsRepository : IFunctionsRepository
     {
         private const string StorageFileName = "functions.xml";
 
-        private List<Function> _functions;
+        private List<Function>? _functions;
 
         private void ReadFromFile()
         {
@@ -25,12 +25,12 @@ namespace Lab1.Repositories
                 return;
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
-            using var fileStream = new FileStream(StorageFileName, (FileMode.Open));
+            using var fileStream = new FileStream(StorageFileName, FileMode.Open);
             _functions = (List<Function>)xmlSerializer.Deserialize(fileStream);
         }
 
-        public void WriteToFile()
-        { 
+        private void WriteToFile()
+        {
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
             using var fileStream = new FileStream(StorageFileName, (FileMode.Create));
             xmlSerializer.Serialize(fileStream, _functions);
@@ -53,11 +53,27 @@ namespace Lab1.Repositories
             WriteToFile();
         }
 
-        public void Clear(int index)
+        public void Clear()
         {
             ReadFromFile();
             _functions.Clear();
             WriteToFile();
+        }
+
+        public List<Function> GetFunctions()
+        {
+            return _functions;
+        }
+
+        Function? GetFunction(int index)
+        {
+            if (_functions == null)
+                throw new ArgumentNullException(nameof(_functions));
+
+            if (index < 0 || index > _functions.Count)
+                throw new ArgumentNullException(index.ToString());
+
+            return _functions[index];
         }
     }
 }

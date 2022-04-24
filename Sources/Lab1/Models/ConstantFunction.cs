@@ -28,5 +28,9 @@ namespace Lab1.Models
 
         public override string ToString()
             => Constant.ToString();
+
+        public override int GetHashCode()
+            => HashCode.Combine(Constant);
+
     }
 }

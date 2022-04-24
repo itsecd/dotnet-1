@@ -43,5 +43,8 @@ namespace Lab1.Models
                 return $"{Linear} {"x - "} {Math.Abs(Constant)}".ToString();
             return $"{Linear} {"x "}".ToString();
         }
+
+        public override int GetHashCode()
+            => HashCode.Combine(Linear, Constant);
     }
 }

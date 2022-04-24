@@ -44,5 +44,8 @@
                 return $"{Constant} {"sin("} {Angle} {"x +"} {Phase} {" )"}".ToString();
             return $"{Constant} {"sin("} {Angle} {"x -"} {Phase} {" )"}".ToString();
         }
+
+        public override int GetHashCode()
+            => HashCode.Combine(Constant, Angle, Phase);
     }
 }

@@ -61,5 +61,8 @@
                 return $"{Quadratic} {"x^2 - "} {Math.Abs(Constant)}".ToString();
             return $"{Quadratic} {"x^2 "}".ToString();
         }
+
+        public override int GetHashCode()
+            => HashCode.Combine(Quadratic, Linear, Constant);
     }
 }
