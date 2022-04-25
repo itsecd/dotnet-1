@@ -1,13 +1,15 @@
 ﻿using Lab1.Models;
 
+using System.Collections.Generic;
+
 namespace Lab1.Repositories
 {
     public interface IFunctionsRepository
     {
-        void AddFunction(Function function);
-        void Clear();
-        void RemoveFunction(int index);
         List<Function> GetFunctions();
+        void AddFunction(Function function);
+        void RemoveFunction(int index);
+        void Clear();
 
     }
 }

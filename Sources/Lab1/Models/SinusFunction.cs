@@ -6,12 +6,7 @@
         public double Angle { get; }
         public double Phase { get; }
 
-        public SinusFunction()
-        {
-            Constant = 1;
-            Angle = 0;
-            Phase = 0;
-        }
+        public SinusFunction() { }
 
         public SinusFunction(double constant, double angle, double phase)
         {

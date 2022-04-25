@@ -14,6 +14,9 @@ namespace Lab1.Repositories
 
         private List<Function>? _functions;
 
+        public XmlFunctionsRepository()
+            => _functions = new List<Function>();
+
         private void ReadFromFile()
         {
             if (_functions != null)
@@ -32,7 +35,7 @@ namespace Lab1.Repositories
         private void WriteToFile()
         {
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
-            using var fileStream = new FileStream(StorageFileName, (FileMode.Create));
+            using var fileStream = new FileStream(StorageFileName, FileMode.Create);
             xmlSerializer.Serialize(fileStream, _functions);
         }
 
@@ -62,6 +65,7 @@ namespace Lab1.Repositories
 
         public List<Function> GetFunctions()
         {
+            ReadFromFile();
             return _functions;
         }
 

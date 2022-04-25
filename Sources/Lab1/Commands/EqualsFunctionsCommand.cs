@@ -28,8 +28,8 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] EqualsFunctionsSettings settings)
         {
-            _functionsRepository
-            return 0;
+
+            return -1;
         }
 
 

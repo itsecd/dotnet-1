@@ -6,11 +6,7 @@
         public double Angle { get; }
         public double Phase { get; }
 
-        public CosinusFunction() {
-            Constant = 1;
-            Angle = 0;
-            Phase = 0;
-        }
+        public CosinusFunction() { }
 
         public CosinusFunction(double constant, double angle, double phase)
         {

@@ -11,22 +11,22 @@ using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
-    public class GetAllFunctionsCommand : Command<GetAllFunctionsCommand.GetAllFunctionsSettings>
+    public class PrintAllFunctionsCommand : Command<PrintAllFunctionsCommand.PrintAllFunctionsSettings>
     {
-        public class GetAllFunctionsSettings : CommandSettings
+        public class PrintAllFunctionsSettings : CommandSettings
         {
 
         }
 
         private readonly IFunctionsRepository _functionsRepository;
 
-        public GetAllFunctionsCommand(IFunctionsRepository functionsRepository)
+        public PrintAllFunctionsCommand(IFunctionsRepository functionsRepository)
         {
             _functionsRepository = functionsRepository;
         }
 
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] GetAllFunctionsSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] PrintAllFunctionsSettings settings)
         {
 
             var functions = _functionsRepository.GetFunctions();

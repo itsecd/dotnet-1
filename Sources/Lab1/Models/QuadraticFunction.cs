@@ -7,12 +7,7 @@
         public double Linear { get; }
         public double Constant { get; }
 
-        public QuadraticFunction()
-        {
-            Quadratic = 1;
-            Linear = 0;
-            Constant = 0;
-        }
+        public QuadraticFunction() { }
 
         public QuadraticFunction(double quadratic, double linear, double constant)
         {
