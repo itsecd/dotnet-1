@@ -3,11 +3,15 @@
     public class QuadraticFunction: Function
     {
 
-        public double Quadratic { get; }
-        public double Linear { get; }
-        public double Constant { get; }
+        public double Quadratic { get; init; }
+        public double Linear { get; init; }
+        public double Constant { get; init; }
 
-        public QuadraticFunction() { }
+        public QuadraticFunction() {
+            Quadratic = 1;
+            Linear = 0;
+            Constant = 0;
+        }
 
         public QuadraticFunction(double quadratic, double linear, double constant)
         {

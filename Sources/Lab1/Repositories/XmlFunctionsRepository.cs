@@ -12,10 +12,7 @@ namespace Lab1.Repositories
     {
         private const string StorageFileName = "functions.xml";
 
-        private List<Function>? _functions;
-
-        public XmlFunctionsRepository()
-            => _functions = new List<Function>();
+        private List<Function> _functions;
 
         private void ReadFromFile()
         {

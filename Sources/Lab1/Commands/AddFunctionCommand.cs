@@ -29,38 +29,86 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFunctionSettings settings)
         {
             var functionType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-    .Title("Выберите вид функции: ")
-    .AddChoices("Константа", "Линейная функция", "Квадратичная функция", "Синусоидальная", "Косинусоидальная"));
+                .Title("Выберите вид функции: ")
+                .AddChoices("Константа", "Линейная функция", "Квадратичная функция", "Синусоидальная", "Косинусоидальная"));
 
-            Function function = functionType switch
+            switch (functionType)
             {
-                "Линейная функция" => new LinearFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
-                    ),
-                "Квадратичная функция" => new QuadraticFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х^2: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
-                    ),
-                "Синусоидальная" => new SinusFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при sin: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))
-                    ),
-                "Косинусоидальная" => new CosinusFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при cos: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))),
-                _ => new ConstantFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]")))
-            };
+                case "Линейная функция":
+                    {
+                        var function = new LinearFunction(
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
+                            );
+                        _functionsRepository.AddFunction(function);
+                        break;
+                    }
 
-            if (function == null)
-            {
-                AnsiConsole.MarkupLine($"[red]Неизвестный тип функции, по умолчанию создалась функция константы [/]");
+                case "Квадратичная функция":
+                    {
+                        var function = new QuadraticFunction(
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х^2: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
+                            );
+                        _functionsRepository.AddFunction(function);
+                        break;
+                    }
+                case "Синусоидальная":
+                    {
+                        var function = new SinusFunction(
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при sin: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))
+                            );
+                        _functionsRepository.AddFunction(function);
+                        break;
+                    }
+                case "Косинусоидальная":
+                    {
+                        var function = new CosinusFunction(
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при cos: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))
+                            );
+                        _functionsRepository.AddFunction(function);
+                        break;
+                    }
+                case "Константа":
+                    _functionsRepository.AddFunction(new ConstantFunction(
+                                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))));
+                    break;
             }
-            _functionsRepository.AddFunction(function);
+
+            //Function function = functionType switch
+            //{
+            //    "Linear function" => new LinearFunction(
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
+            //        ),
+            //    "Квадратичная функция" => new QuadraticFunction(
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х^2: [/]")),
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
+            //        ),
+            //    "Синусоидальная" => new SinusFunction(
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при sin: [/]")),
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))
+            //        ),
+            //    "Косинусоидальная" => new CosinusFunction(
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при cos: [/]")),
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))),
+            //    _ => new ConstantFunction(
+            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]")))
+            //};
+
+            //if (function == null)
+            //{
+            //    AnsiConsole.MarkupLine($"[red]Неизвестный тип функции, по умолчанию создалась функция константы [/]");
+            //}
+            //_functionsRepository.AddFunction(function);
             return 0;
         }
 

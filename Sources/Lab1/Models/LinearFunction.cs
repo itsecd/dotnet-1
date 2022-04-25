@@ -6,16 +6,18 @@ namespace Lab1.Models
 {
     public class LinearFunction : Function
     {
-        public double Linear { get; }
-        public double Constant { get; }
+        public double Linear { get; init; }
+        public double Constant { get; init; }
 
-        public LinearFunction()
-        {
+        public LinearFunction() {
             Linear = 1;
             Constant = 0;
         }
 
-        public LinearFunction(double linear, double constant) { }
+        public LinearFunction(double linear, double constant) {
+            Linear = linear;
+            Constant = constant;
+        }
 
         public override double Calculate(double x)
             => Linear * x + Constant;

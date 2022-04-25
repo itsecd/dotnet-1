@@ -4,8 +4,7 @@ namespace Lab1.Models
 {
     public class ConstantFunction : Function
     {
-        public double Constant { get; set; }
-
+        public double Constant { get; init;  }
 
         public ConstantFunction() { }
 

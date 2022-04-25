@@ -2,11 +2,16 @@
 {
     public class CosinusFunction: Function
     {
-        public double Constant { get; }
-        public double Angle { get; }
-        public double Phase { get; }
+        public double Constant { get; init; }
+        public double Angle { get; init; }
+        public double Phase { get; init; }
 
-        public CosinusFunction() { }
+        public CosinusFunction()
+        {
+            Constant = 1;
+            Angle = 0;
+            Phase = 0;
+        }
 
         public CosinusFunction(double constant, double angle, double phase)
         {

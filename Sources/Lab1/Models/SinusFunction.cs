@@ -2,11 +2,15 @@
 {
     public class SinusFunction: Function
     {
-        public double Constant { get; }
-        public double Angle { get; }
-        public double Phase { get; }
+        public double Constant { get; init; }
+        public double Angle { get; init; }
+        public double Phase { get; init; }
 
-        public SinusFunction() { }
+        public SinusFunction() {
+            Constant = 1;
+            Angle = Math.PI/2;
+            Phase = 0;
+        }
 
         public SinusFunction(double constant, double angle, double phase)
         {

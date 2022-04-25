@@ -35,6 +35,8 @@ namespace Lab1.Commands
             table.AddColumn(new TableColumn(new Markup("[white]NameOfFunction[/]")));
             table.AddColumn(new TableColumn("[white]Function[/]"));
 
+            int count = 0;
+            int maxCount = 10;
             foreach (Function f in functions)
             {
                 switch (f.GetType().Name)
@@ -54,8 +56,14 @@ namespace Lab1.Commands
                     case "CosinusFunction":
                         table.AddRow($"[blue]{f.GetType().Name}[/]", $"[blue]{f.ToString()}[/]");
                         break;
-
                 }
+                count += 1;
+                if (count >= maxCount && functions.Count > maxCount)
+                {
+                    table.AddRow("[white]...[/]", "[white]...[/]");
+                    break;
+                }
+
                 //table.AddRow(f.GetType().Name, f.ToString());
                 //AnsiConsole.Write(new Markup($"[blue]{function}[/]"));
             }
