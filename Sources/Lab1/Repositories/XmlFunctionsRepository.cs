@@ -51,36 +51,27 @@ namespace Lab1.Repositories
         public void RemoveFunction(int index)
         {
             ReadFromFile();
-            _functions.RemoveAt(index);
+            _functions!.RemoveAt(index);
             WriteToFile();
         }
 
         public void Clear()
         {
             ReadFromFile();
-            _functions.Clear();
+            _functions!.Clear();
             WriteToFile();
         }
 
         public List<Function> GetFunctions()
         {
             ReadFromFile();
-            return _functions;
+            return _functions!;
         }
 
-        public Function? GetFunction(int index)
+        public Function GetFunction(int index)
         {
             ReadFromFile();
-            if (_functions == null)
-                return null;
-                //throw new ArgumentNullException(nameof(_functions));
-
-            if (index < 0 || index > _functions.Count)
-                return null;
-                //throw new ArgumentNullException(index.ToString());
-
-            return _functions[index];
+            return _functions![index];
         }
-
     }
 }

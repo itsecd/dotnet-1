@@ -30,8 +30,19 @@ namespace Lab1.Commands
             if (_functionsRepository == null)
                 return 1;
 
-            AnsiConsole.WriteLine(_functionsRepository.GetFunction(
-                AnsiConsole.Prompt(new TextPrompt<int>("[blue]Индекс функции в коллекции для вычисления производной: [/]")))
+            var index = AnsiConsole.Prompt(
+                new TextPrompt<int>("[blue]Индекс функции в коллекции для вычисления производной: [/]")
+                .ValidationErrorMessage("Invalid index entered")
+                    .Validate(index =>
+                    {
+                        return index switch
+                        {
+                            < 0 => ValidationResult.Error("[red]Индекс должен быть больше или равен нулю[/]"),
+                            _ => ValidationResult.Success(),
+                        };
+                    }));
+
+            AnsiConsole.WriteLine(_functionsRepository.GetFunction(index)!
                         .GetDerivative().ToString());
             return 0;
         }

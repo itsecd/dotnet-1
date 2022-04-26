@@ -61,7 +61,7 @@ namespace Lab1.Commands
                     }));
 
             AnsiConsole.WriteLine(_functionsRepository
-                .GetFunction(index1)
+                .GetFunction(index1)!
                     .Equals(_functionsRepository
                     .GetFunction(index2)));
             return 0;

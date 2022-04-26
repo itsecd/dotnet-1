@@ -85,40 +85,7 @@ namespace Lab1.Commands
                                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))));
                     break;
             }
-
-            //Function function = functionType switch
-            //{
-            //    "Linear function" => new LinearFunction(
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
-            //        ),
-            //    "Квадратичная функция" => new QuadraticFunction(
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х^2: [/]")),
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
-            //        ),
-            //    "Синусоидальная" => new SinusFunction(
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при sin: [/]")),
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))
-            //        ),
-            //    "Косинусоидальная" => new CosinusFunction(
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при cos: [/]")),
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))),
-            //    _ => new ConstantFunction(
-            //        AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]")))
-            //};
-
-            //if (function == null)
-            //{
-            //    AnsiConsole.MarkupLine($"[red]Неизвестный тип функции, по умолчанию создалась функция константы [/]");
-            //}
-            //_functionsRepository.AddFunction(function);
             return 0;
         }
-
-
-
     }
 }
