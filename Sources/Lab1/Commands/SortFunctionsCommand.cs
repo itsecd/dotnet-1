@@ -11,32 +11,45 @@ using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
-    public class PrintAllFunctionsCommand : Command<PrintAllFunctionsCommand.PrintAllFunctionsSettings>
+    public class SortFunctionsCommand : Command<SortFunctionsCommand.SortFunctionsSettings>
     {
-        public class PrintAllFunctionsSettings : CommandSettings
+        public class SortFunctionsSettings : CommandSettings
         {
 
         }
 
         private readonly IFunctionsRepository _functionsRepository;
 
-        public PrintAllFunctionsCommand(IFunctionsRepository functionsRepository)
+        public SortFunctionsCommand(IFunctionsRepository functionsRepository)
         {
             _functionsRepository = functionsRepository;
         }
 
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] PrintAllFunctionsSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] SortFunctionsSettings settings)
         {
-            if (_functionsRepository.GetCountFunctions() == 0)
+            var functions = _functionsRepository.GetFunctions();
+            int countFunctionType = 5;
+            int functionCount = functions.Count;
+            List<string> functionTypes = new List<string>()
+                { "ConstantFunction", "LinearFunction", "QuadraticFunction", "SinusFunction", "CosinusFunction" };
+            int tmpIndex = 0;
+            for (int i = 0; i < countFunctionType; i++)
             {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                AnsiConsole.WriteLine("Список пуст!");
-                Console.ForegroundColor = ConsoleColor.White;
-                return 0;
+                for (int j = tmpIndex; j < functionCount; j++)
+                {
+                    if (functions[j].GetType().Name == functionTypes[i])
+                    {
+                        functions.Insert(tmpIndex, functions[j]);
+                        functions.RemoveAt(j + 1);
+                        tmpIndex++;
+                    }
+                }
             }
 
-            var functions = _functionsRepository.GetFunctions();
+            string storageFileName = "sort_functions.xml";
+            var result = new XmlFunctionsRepository(storageFileName, functions);
+            
 
             var table = new Table();
             table.AddColumn(new TableColumn(new Markup("[white]NameOfFunction[/]")));
@@ -44,8 +57,6 @@ namespace Lab1.Commands
             table.AddColumn(new TableColumn("[white]Derivative[/]"));
             table.AddColumn(new TableColumn("[white]Antiderivative[/]"));
 
-            int count = 0;
-            int maxCount = 10;
             foreach (Function f in functions)
             {
                 switch (f.GetType().Name)
@@ -65,12 +76,6 @@ namespace Lab1.Commands
                     case "CosinusFunction":
                         table.AddRow($"[blue]{f.GetType().Name}[/]", $"[blue]{f.ToString()}[/]", $"[blue]{f.GetDerivative()}[/]", $"[blue]{f.GetAntiderivative()} + C[/]");
                         break;
-                }
-                count += 1;
-                if (count >= maxCount && functions.Count > maxCount)
-                {
-                    table.AddRow("[white]...[/]", "[white]...[/]", "[white]...[/]");
-                    break;
                 }
             }
             AnsiConsole.Write(table);

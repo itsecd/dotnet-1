@@ -28,6 +28,8 @@ namespace Lab1
                 config.AddCommand<EqualsFunctionsCommand>("equals");
                 config.AddCommand<GetDerivativeCommand>("derivative");
                 config.AddCommand<CalculateCommand>("calculate");
+                config.AddCommand<GetMinValueDerivativesCommand>("minvalue");
+                config.AddCommand<SortFunctionsCommand>("sort");
 
             });
             

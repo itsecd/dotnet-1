@@ -29,6 +29,9 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] ClearFeaturesSettings settings)
         {
             _functionsRepository.Clear();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            AnsiConsole.WriteLine("Список функции очищен!");
+            Console.ForegroundColor = ConsoleColor.White;
             return 0;
         }
     }

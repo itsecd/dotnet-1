@@ -17,6 +17,9 @@ namespace Lab1.Models
         public override Function GetDerivative()
             => new ConstantFunction();
 
+        public override Function GetAntiderivative()
+            => new LinearFunction(Constant, 0);
+
         public override bool Equals(Function? obj)
         {
             if (obj is not ConstantFunction f)

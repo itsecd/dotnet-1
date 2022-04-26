@@ -12,7 +12,7 @@ namespace Lab1.Commands
 {
     public class CalculateCommand : Command<CalculateCommand.CalculateSettings>
     {
-        public class CalculateSettings: CommandSettings
+        public class CalculateSettings : CommandSettings
         {
 
         }
@@ -27,8 +27,7 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] CalculateSettings settings)
         {
-            var functions = _functionsRepository.GetFunctions();
-            if (functions == null)
+            if (_functionsRepository == null)
             {
                 AnsiConsole.WriteLine("The collection is empty");
                 return 1;
@@ -47,7 +46,9 @@ namespace Lab1.Commands
                         };
                     }));
 
-            AnsiConsole.WriteLine(functions[index].Calculate(
+            AnsiConsole.WriteLine(_functionsRepository
+                .GetFunction(index)!
+                    .Calculate(
                         AnsiConsole.Prompt(new TextPrompt<double>("[blue]Введите значение х для вычисления значения функции: [/]"))).ToString());
             return 0;
         }

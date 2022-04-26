@@ -25,6 +25,9 @@
         public override Function GetDerivative()
             => new CosinusFunction(Constant * Angle, Angle, Phase);
 
+        public override Function GetAntiderivative()
+            => new CosinusFunction(-Constant, Angle, Phase);
+
         public override bool Equals(Function? obj)
         {
             if (obj is not SinusFunction f)
@@ -39,9 +42,9 @@
         {
             if (Phase == 0)
                 return $"{Constant}{"sin("}{Angle}{"x)"}".ToString();
-            if (Constant > 0)
+            if (Phase > 0)
                 return $"{Constant}{"sin("}{Angle}{"x + "}{Phase}{")"}".ToString();
-            return $"{Constant}{"sin("}{Angle}{"x - "}{Phase}{")"}".ToString();
+            return $"{Constant}{"sin("}{Angle}{"x - "}{Math.Abs(Phase)}{")"}".ToString();
         }
 
         public override int GetHashCode()

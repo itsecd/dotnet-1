@@ -10,9 +10,17 @@ namespace Lab1.Repositories
 {
     public class XmlFunctionsRepository : IFunctionsRepository
     {
-        private const string StorageFileName = "functions.xml";
+        private string StorageFileName { get; set; } = "functions.xml";
 
         private List<Function>? _functions;
+
+        public XmlFunctionsRepository() { }
+        public XmlFunctionsRepository(string storageFileName, List<Function> functions)
+        {
+            StorageFileName = storageFileName;
+            _functions = functions;
+            WriteToFile();
+        }
 
         private List<Function> ReadFromFile()
         {
@@ -34,7 +42,16 @@ namespace Lab1.Repositories
             xmlSerializer.Serialize(fileStream, _functions);
         }
 
-        public void AddFunction(int index, Function function)
+        public int GetCountFunctions()
+        {
+            ReadFromFile();
+            if (_functions != null)
+                return _functions!.Count;
+            return 0;
+        }
+
+
+        public void InsertFunction(int index, Function function)
         {
             if (function == null)
                 throw new ArgumentNullException(nameof(function));

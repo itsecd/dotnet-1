@@ -34,7 +34,6 @@ namespace Lab1.Commands
                 return 1;
             }
 
-
             var index1 = AnsiConsole.Prompt(
                 new TextPrompt<int>("[blue]Индекс 1 функции в коллекции для сравнения: [/]")
                 .ValidationErrorMessage("Invalid index entered")
@@ -46,7 +45,6 @@ namespace Lab1.Commands
                             _ => ValidationResult.Success(),
                         };
                     }));
-
 
             var index2 = AnsiConsole.Prompt(
                 new TextPrompt<int>("[blue]Индекс 2 функции в коллекции для сравнения: [/]")

@@ -26,6 +26,9 @@
         public override Function GetDerivative()
             => new LinearFunction(Quadratic, Linear);
 
+        public override Function GetAntiderivative()
+            => new CubicFunction(Quadratic, Linear, Constant, 0);
+
         public override bool Equals(Function? obj)
         {
             if (obj is not QuadraticFunction f)
