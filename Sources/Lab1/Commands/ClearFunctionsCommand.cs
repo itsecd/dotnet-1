@@ -31,8 +31,5 @@ namespace Lab1.Commands
             _functionsRepository.Clear();
             return 0;
         }
-
-
-
     }
 }

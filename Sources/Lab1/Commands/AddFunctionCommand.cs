@@ -40,7 +40,8 @@ namespace Lab1.Commands
                             AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
                             AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
                             );
-                        _functionsRepository.AddFunction(function);
+                        _functionsRepository.AddFunction(
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")),function);
                         break;
                     }
 
@@ -51,7 +52,8 @@ namespace Lab1.Commands
                             AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
                             AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
                             );
-                        _functionsRepository.AddFunction(function);
+                        _functionsRepository.AddFunction(
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), function);
                         break;
                     }
                 case "Синусоидальная":
@@ -61,7 +63,8 @@ namespace Lab1.Commands
                             AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
                             AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))
                             );
-                        _functionsRepository.AddFunction(function);
+                        _functionsRepository.AddFunction(
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), function);
                         break;
                     }
                 case "Косинусоидальная":
@@ -71,11 +74,14 @@ namespace Lab1.Commands
                             AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
                             AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))
                             );
-                        _functionsRepository.AddFunction(function);
+                        _functionsRepository.AddFunction(
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), function);
                         break;
                     }
                 case "Константа":
-                    _functionsRepository.AddFunction(new ConstantFunction(
+                    _functionsRepository.AddFunction(
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), 
+                            new ConstantFunction(
                                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))));
                     break;
             }

@@ -12,21 +12,19 @@ namespace Lab1.Repositories
     {
         private const string StorageFileName = "functions.xml";
 
-        private List<Function> _functions;
+        private List<Function>? _functions;
 
-        private void ReadFromFile()
+        private List<Function> ReadFromFile()
         {
-            if (_functions != null)
-                return;
-
             if (!File.Exists(StorageFileName))
             {
                 _functions = new List<Function>();
-                return;
+                return _functions;
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
-            using var fileStream = new FileStream(StorageFileName, FileMode.Open);
-            _functions = (List<Function>)xmlSerializer.Deserialize(fileStream);
+            using var fileStream = File.OpenRead(StorageFileName);
+            _functions = (List<Function>?)xmlSerializer.Deserialize(fileStream);
+            return _functions!;
         }
 
         private void WriteToFile()
@@ -36,13 +34,17 @@ namespace Lab1.Repositories
             xmlSerializer.Serialize(fileStream, _functions);
         }
 
-        public void AddFunction(Function function)
+        public void AddFunction(int index, Function function)
         {
             if (function == null)
                 throw new ArgumentNullException(nameof(function));
 
             ReadFromFile();
-            _functions.Add(function);
+
+            if (index >= _functions?.Count)
+                _functions.Add(function);
+            else
+                _functions?.Insert(index, function);
             WriteToFile();
         }
 
@@ -66,15 +68,19 @@ namespace Lab1.Repositories
             return _functions;
         }
 
-        Function? GetFunction(int index)
+        public Function? GetFunction(int index)
         {
+            ReadFromFile();
             if (_functions == null)
-                throw new ArgumentNullException(nameof(_functions));
+                return null;
+                //throw new ArgumentNullException(nameof(_functions));
 
             if (index < 0 || index > _functions.Count)
-                throw new ArgumentNullException(index.ToString());
+                return null;
+                //throw new ArgumentNullException(index.ToString());
 
             return _functions[index];
         }
+
     }
 }

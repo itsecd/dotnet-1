@@ -27,7 +27,7 @@
 
         public override bool Equals(Function? obj)
         {
-            if (obj is not CosinusFunction f)
+            if (obj is not SinusFunction f)
                 return false;
 
             return Math.Round(Constant, 3) == Math.Round(f.Constant, 3) &&
@@ -38,10 +38,10 @@
         public override string ToString()
         {
             if (Phase == 0)
-                return $"{Constant} {"sin("} {Angle} {"x )"}".ToString();
+                return $"{Constant}{"sin("}{Angle}{"x)"}".ToString();
             if (Constant > 0)
-                return $"{Constant} {"sin("} {Angle} {"x +"} {Phase} {" )"}".ToString();
-            return $"{Constant} {"sin("} {Angle} {"x -"} {Phase} {" )"}".ToString();
+                return $"{Constant}{"sin("}{Angle}{"x + "}{Phase}{")"}".ToString();
+            return $"{Constant}{"sin("}{Angle}{"x - "}{Phase}{")"}".ToString();
         }
 
         public override int GetHashCode()

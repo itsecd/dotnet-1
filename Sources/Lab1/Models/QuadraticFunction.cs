@@ -41,24 +41,24 @@
             if (Linear > 0)
             {
                 if (Constant > 0)
-                    return $"{Quadratic} {"x^2 + "} {Linear} {"x + "}{Constant}".ToString();
+                    return $"{Quadratic}{"x^2 + "}{Linear}{"x + "}{Constant}".ToString();
                 if (Constant < 0)
-                    return $"{Quadratic} {"x^2 + "} {Linear} {"x - "}{Math.Abs(Constant)}".ToString();
-                return $"{Quadratic} {"x^2 + "} {Linear} {"x "}".ToString();
+                    return $"{Quadratic}{"x^2 + "}{Linear}{"x - "}{Math.Abs(Constant)}".ToString();
+                return $"{Quadratic}{"x^2 + "}{Linear}{"x "}".ToString();
             }
             if (Linear < 0)
             {
                 if (Constant > 0)
-                    return $"{Quadratic} {"x^2 - "} {Math.Abs(Linear)} {"x + "}{Constant}".ToString();
+                    return $"{Quadratic}{"x^2 - "}{Math.Abs(Linear)}{"x + "}{Constant}".ToString();
                 if (Constant < 0)
-                    return $"{Quadratic} {"x^2 - "} {Math.Abs(Linear)} {"x - "}{Math.Abs(Constant)}".ToString();
-                return $"{Quadratic} {"x^2 - "} {Math.Abs(Linear)} {"x "}".ToString();
+                    return $"{Quadratic}{"x^2 - "}{Math.Abs(Linear)}{"x - "}{Math.Abs(Constant)}".ToString();
+                return $"{Quadratic}{"x^2 - "}{Math.Abs(Linear)}{"x "}".ToString();
             }
             if (Constant > 0)
-                return $"{Quadratic} {"x^2 + "} {Constant}".ToString();
+                return $"{Quadratic}{"x^2 + "}{Constant}".ToString();
             if (Constant < 0)
-                return $"{Quadratic} {"x^2 - "} {Math.Abs(Constant)}".ToString();
-            return $"{Quadratic} {"x^2 "}".ToString();
+                return $"{Quadratic}{"x^2 - "}{Math.Abs(Constant)}".ToString();
+            return $"{Quadratic}{"x^2 "}".ToString();
         }
 
         public override int GetHashCode()

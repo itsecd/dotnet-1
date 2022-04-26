@@ -37,10 +37,10 @@ namespace Lab1.Models
         public override string ToString()
         {
             if (Constant > 0)
-                return $"{Linear} {"x + "} {Constant}".ToString();
+                return $"{Linear}{"x + "}{Constant}".ToString();
             if (Constant < 0)
-                return $"{Linear} {"x - "} {Math.Abs(Constant)}".ToString();
-            return $"{Linear} {"x "}".ToString();
+                return $"{Linear}{"x - "}{Math.Abs(Constant)}".ToString();
+            return $"{Linear}{"x "}".ToString();
         }
 
         public override int GetHashCode()

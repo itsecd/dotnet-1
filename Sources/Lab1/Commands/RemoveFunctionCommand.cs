@@ -32,8 +32,5 @@ namespace Lab1.Commands
                 AnsiConsole.Prompt(new TextPrompt<int>("[blue]Индекс функции в коллекции для удаления: [/]")));
             return 0;
         }
-
-
-
     }
 }

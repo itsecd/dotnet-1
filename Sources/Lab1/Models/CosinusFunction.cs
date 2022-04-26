@@ -39,10 +39,10 @@
         public override string ToString()
         {
             if (Phase == 0)
-                return $"{Constant} {"cos("} {Angle} {"x )"}".ToString();
+                return $"{Constant}{"cos("}{Angle}".ToString();
             if (Constant > 0)
-                return $"{Constant} {"cos("} {Angle} {"x +"} {Phase} {" )"}".ToString();
-            return $"{Constant} {"cos("} {Angle} {"x -"} {Phase} {" )"}".ToString();
+                return $"{Constant}{"cos("}{Angle}{"x +"} {Phase}{" )"}".ToString();
+            return $"{Constant}{"cos("} {Angle}{"x -"} {Phase}{" )"}".ToString();
         }
     }
 }

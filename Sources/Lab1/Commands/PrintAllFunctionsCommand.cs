@@ -42,19 +42,19 @@ namespace Lab1.Commands
                 switch (f.GetType().Name)
                 {
                     case "ConstantFunction":
-                        table.AddRow($"[white]{f.GetType().Name}[/]", $"[white]{f.ToString()}[/]");
+                        table.AddRow($"[white]{f.GetType().Name}[/]", $"[white]{f.ToString()}[/]", $"[white]{f.GetDerivative()}[/]");
                         break;
                     case "LinearFunction":
-                        table.AddRow($"[yellow]{f.GetType().Name}[/]", $"[yellow]{f.ToString()}[/]");
+                        table.AddRow($"[yellow]{f.GetType().Name}[/]", $"[yellow]{f.ToString()}[/]", $"[yellow]{f.GetDerivative()}[/]");
                         break;
                     case "QuadraticFunction":
-                        table.AddRow($"[red]{f.GetType().Name}[/]", $"[red]{f.ToString()}[/]");
+                        table.AddRow($"[red]{f.GetType().Name}[/]", $"[red]{f.ToString()}[/]", $"[red]{f.GetDerivative()}[/]");
                         break;
                     case "SinusFunction":
-                        table.AddRow($"[green]{f.GetType().Name}[/]", $"[green]{f.ToString()}[/]");
+                        table.AddRow($"[green]{f.GetType().Name}[/]", $"[green]{f.ToString()}[/]", $"[green]{f.GetDerivative()}[/]");
                         break;
                     case "CosinusFunction":
-                        table.AddRow($"[blue]{f.GetType().Name}[/]", $"[blue]{f.ToString()}[/]");
+                        table.AddRow($"[blue]{f.GetType().Name}[/]", $"[blue]{f.ToString()}[/]", $"[blue]{f.GetDerivative()}[/]");
                         break;
                 }
                 count += 1;
@@ -70,8 +70,5 @@ namespace Lab1.Commands
             AnsiConsole.Write(table);
             return 0;
         }
-
-
-
     }
 }

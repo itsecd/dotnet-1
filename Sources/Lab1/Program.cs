@@ -22,7 +22,13 @@ namespace Lab1
             app.Configure(config =>
             {
                 config.AddCommand<AddFunctionCommand>("add");
+                config.AddCommand<RemoveFunctionCommand>("remove");
+                config.AddCommand<ClearFunctionsCommand>("clear");
                 config.AddCommand<PrintAllFunctionsCommand>("print");
+                config.AddCommand<EqualsFunctionsCommand>("equals");
+                config.AddCommand<GetDerivativeCommand>("derivative");
+                config.AddCommand<CalculateCommand>("calculate");
+
             });
             
             app.Run(args);
