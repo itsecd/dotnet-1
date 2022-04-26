@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace PromProgLab1.Repositories
 {
-    public class XmlOperationRepository : IXmlOperationRepository
+    public class XmlOperationRepository : IOperationRepository
     {
         private const string StorageFileName = "operations.xml";
         private List<Operation> _operations;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PromProgLab1.Repositories
 {
-    public interface IXmlOperationRepository
+    public interface IOperationRepository
     {
         void AddOperation(int index, Operation operation);
         bool CompareOperations(int lhsIndex, int rhsIndex);
