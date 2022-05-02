@@ -2,12 +2,7 @@
 using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
@@ -45,11 +40,8 @@ namespace Lab1.Commands
                     result = function;
                 }
             }
-
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            AnsiConsole.WriteLine("Результат System.Linq функции: \t\t" + FirstMinValue);
+            AnsiConsole.WriteLine("Результат System.Linq функции: \t\t " + FirstMinValue);
             AnsiConsole.WriteLine("Результат вычисления с помощью кода: \t" + result);
-            Console.ForegroundColor = ConsoleColor.White;
             return 0;
         }
     }

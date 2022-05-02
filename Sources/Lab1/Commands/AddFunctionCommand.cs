@@ -2,12 +2,7 @@
 using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab1.Commands
 {
@@ -41,7 +36,7 @@ namespace Lab1.Commands
                             AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
                             );
                         _functionsRepository.InsertFunction(
-                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")),function);
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), function);
                         break;
                     }
 
@@ -80,7 +75,7 @@ namespace Lab1.Commands
                     }
                 case "Константа":
                     _functionsRepository.InsertFunction(
-                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), 
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")),
                             new ConstantFunction(
                                     AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))));
                     break;

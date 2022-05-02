@@ -1,11 +1,8 @@
 ﻿using Lab1.Commands;
 using Lab1.Infrastructure;
-using Lab1.Models;
 using Lab1.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using Spectre.Console;
 using Spectre.Console.Cli;
-using System.Xml;
 
 namespace Lab1
 {
@@ -32,7 +29,7 @@ namespace Lab1
                 config.AddCommand<SortFunctionsCommand>("sort");
 
             });
-            
+
             app.Run(args);
         }
     }

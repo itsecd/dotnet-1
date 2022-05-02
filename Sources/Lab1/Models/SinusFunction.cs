@@ -40,11 +40,15 @@
 
         public override string ToString()
         {
-            if (Phase == 0)
-                return $"{Constant}{"sin("}{Angle}{"x)"}".ToString();
-            if (Phase > 0)
-                return $"{Constant}{"sin("}{Angle}{"x + "}{Phase}{")"}".ToString();
-            return $"{Constant}{"sin("}{Angle}{"x - "}{Math.Abs(Phase)}{")"}".ToString();
+            string result = $"{Constant}{"sin("}{Angle}{"x"}";
+
+            if (Phase != 0)
+                result += Phase > 0
+                    ? $" + {Phase})"
+                    : $" - {Math.Abs(Phase)})";
+
+            result += ")";
+            return result;
         }
 
         public override int GetHashCode()

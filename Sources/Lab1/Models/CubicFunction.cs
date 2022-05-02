@@ -46,49 +46,24 @@
         public override string ToString()
         {
             string result = "";
-            switch(Cubic)
-            {
-                case  0:
-                    break;
-                default:
-                    result += $"{Cubic}x^3 ";
-                    break;
-            }
-            switch (Quadratic)
-            {
-                case 0:
-                    break;
-                case >0:
-                    result += $"+ {Quadratic}x^2 ";
-                    break;
-                case < 0:
-                    result += $"- {Math.Abs(Quadratic)}x^2 ";
-                    break;
-            }
 
-            switch (Linear)
-            {
-                case 0:
-                    break;
-                case > 0:
-                    result += $"+ {Linear}x ";
-                    break;
-                case < 0:
-                    result += $"- {Math.Abs(Linear)}x ";
-                    break;
-            }
+            if (Cubic != 0)
+                result += $"{Cubic}x^3 ";
 
-            switch (Constant)
-            {
-                case 0:
-                    break;
-                case > 0:
-                    result += $"+ {Constant}x ";
-                    break;
-                case < 0:
-                    result += $"- {Math.Abs(Constant)}x ";
-                    break;
-            }
+            if (Quadratic != 0)
+                result += Quadratic > 0
+                    ? $"+ {Quadratic}x "
+                    : $"- {Math.Abs(Quadratic)}x ";
+
+            if (Linear != 0)
+                result += Linear > 0
+                    ? $"+ {Linear}x "
+                    : $"- {Math.Abs(Linear)}x ";
+
+            if (Constant != 0)
+                result += Constant > 0
+                    ? $"+ {Constant}x "
+                    : $"- {Math.Abs(Constant)}x ";
             return result;
         }
 

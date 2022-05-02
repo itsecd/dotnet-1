@@ -1,9 +1,4 @@
 ﻿using Lab1.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Lab1.Repositories
@@ -32,7 +27,9 @@ namespace Lab1.Repositories
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
             using var fileStream = File.OpenRead(StorageFileName);
             _functions = (List<Function>?)xmlSerializer.Deserialize(fileStream);
-            return _functions!;
+            if (_functions == null)
+                throw new ArgumentNullException(nameof(_functions));
+            return _functions;
         }
 
         private void WriteToFile()
@@ -42,53 +39,38 @@ namespace Lab1.Repositories
             xmlSerializer.Serialize(fileStream, _functions);
         }
 
-        public int GetCountFunctions()
-        {
-            ReadFromFile();
-            if (_functions != null)
-                return _functions!.Count;
-            return 0;
-        }
-
-
         public void InsertFunction(int index, Function function)
         {
             if (function == null)
                 throw new ArgumentNullException(nameof(function));
 
-            ReadFromFile();
+            _functions = ReadFromFile();
 
-            if (index >= _functions?.Count)
+            if (index >= _functions.Count)
                 _functions.Add(function);
             else
-                _functions?.Insert(index, function);
+                _functions.Insert(index, function);
             WriteToFile();
         }
 
         public void RemoveFunction(int index)
         {
-            ReadFromFile();
-            _functions!.RemoveAt(index);
+            _functions = ReadFromFile();
+            _functions.RemoveAt(index);
             WriteToFile();
         }
 
         public void Clear()
         {
-            ReadFromFile();
-            _functions!.Clear();
+            _functions = ReadFromFile();
+            _functions.Clear();
             WriteToFile();
         }
 
         public List<Function> GetFunctions()
         {
-            ReadFromFile();
-            return _functions!;
-        }
-
-        public Function GetFunction(int index)
-        {
-            ReadFromFile();
-            return _functions![index];
+            _functions = ReadFromFile();
+            return _functions;
         }
     }
 }

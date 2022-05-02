@@ -27,6 +27,7 @@ namespace Lab1.Models
 
         public override Function GetAntiderivative()
             => new QuadraticFunction(Linear, Constant, 0);
+
         public override bool Equals(Function? obj)
         {
             if (obj is not LinearFunction f)
@@ -38,11 +39,19 @@ namespace Lab1.Models
 
         public override string ToString()
         {
-            if (Constant > 0)
-                return $"{Linear}{"x + "}{Constant}".ToString();
-            if (Constant < 0)
-                return $"{Linear}{"x - "}{Math.Abs(Constant)}".ToString();
-            return $"{Linear}{"x "}".ToString();
+            string result = "";
+
+            if (Linear != 0)
+                result += Linear > 0
+                    ? $"+ {Linear}x "
+                    : $"- {Math.Abs(Linear)}x ";
+
+            if (Constant != 0)
+                result += Constant > 0
+                    ? $"+ {Constant}x "
+                    : $"- {Math.Abs(Constant)}x ";
+
+            return result;
         }
 
         public override int GetHashCode()

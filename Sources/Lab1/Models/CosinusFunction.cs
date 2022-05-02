@@ -41,11 +41,15 @@
 
         public override string ToString()
         {
-            if (Phase == 0)
-                return $"{Constant}{"cos("}{Angle}".ToString();
-            if (Phase > 0)
-                return $"{Constant}{"cos("}{Angle}{"x +"} {Phase}{")"}".ToString();
-            return $"{Constant}{"cos("}{Angle}{"x -"} {Math.Abs(Phase)}{")"}".ToString();
+            string result = $"{Constant}{"cos("}{Angle}{"x"}";
+
+            if (Phase != 0)
+                result += Phase > 0
+                    ? $" + {Phase})"
+                    : $" - {Math.Abs(Phase)})";
+
+            result += ")";
+            return result;
         }
     }
 }
