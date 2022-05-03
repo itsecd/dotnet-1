@@ -5,12 +5,10 @@ namespace Lab1
 {
     public class Rectangle : Shape
     {
-        [XmlElement("FirstPoint")]
         public Point A
         {
             get; init;
         }
-        [XmlElement("SecondPoint")]
         public Point B
         {
             get; init;

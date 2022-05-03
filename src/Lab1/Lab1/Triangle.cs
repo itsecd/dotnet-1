@@ -5,17 +5,16 @@ namespace Lab1
 {
     public class Triangle : Shape
     {
-        [XmlElement("FirstPoint")]
         public Point A
         {
             get; init;
         }
-        [XmlElement("SecondPoint")]
+
         public Point B
         {
             get; init;
         }
-        [XmlElement("ThirdPoint")]
+
         public Point C
         {
             get; init;

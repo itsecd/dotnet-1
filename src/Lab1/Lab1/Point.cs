@@ -5,12 +5,10 @@ namespace Lab1
 {
     public struct Point
     {
-        [XmlElement("X")]
         public double X
         {
             get; init;
         }
-        [XmlElement("Y")]
         public double Y
         {
             get; init;

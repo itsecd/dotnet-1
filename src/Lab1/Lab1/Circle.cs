@@ -5,12 +5,10 @@ namespace Lab1
 {
     public class Circle : Shape
     {
-        [XmlElement("Center")]
         public Point Center
         {
             get; init;
         }
-        [XmlElement("Radius")]
         public double Radius
         {
             get; init;
