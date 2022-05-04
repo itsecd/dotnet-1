@@ -40,8 +40,7 @@ namespace Lab1.Commands
                           minRectangle.ToString(),
                           minRectangle.GetPerimeter().ToString(),
                           minRectangle.GetArea().ToString());
-            AnsiConsole.WriteLine($"\nThe minimum framing rectangle " +
-                $"for the figure under the index {figureIndex} ");
+            AnsiConsole.WriteLine($"\nThe minimum framing rectangle for the figure under the index {figureIndex} ");
             AnsiConsole.Write(table);
             return 0;
         }
