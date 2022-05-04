@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "Dif7uDqI6DgTBjk5k9ARvpoRZSFN9z0T1G18Z3gryp/kFlyHHLWx30jJUCpQ0xkpJgJ09QhgB2rKvvI6dBEy2A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Antonina\\Source\\Repos\\dotnet-1\\Lab1\\Lab1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Antonina\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
+    "C:\\Users\\Antonina\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Antonina\\.nuget\\packages\\spectre.console\\0.43.0\\spectre.console.0.43.0.nupkg.sha512",
+    "C:\\Users\\Antonina\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

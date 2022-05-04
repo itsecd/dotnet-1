@@ -48,14 +48,10 @@ namespace Lab1.Commands
                     figure = new Circle(
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]X coordinate for centre:[/]")),
                     AnsiConsole.Prompt(new TextPrompt<double>("[green]Y coordinate for centre:[/]")),
-                    AnsiConsole.Prompt(new TextPrompt<double>("[green]Radius:[/]")
-                    .ValidationErrorMessage("[red]Invalid input[/]")
-                    .Validate(num => num >= 0)));
+                    AnsiConsole.Prompt(new TextPrompt<double>("[green]Radius:[/]")));
                     break;
-
-                default: break;
             }
-                    if (figure == null)
+            if (figure == null)
             {
                 AnsiConsole.MarkupLine($"[red]Unknown figure type:{figureType} [/]");
                 return -1;
