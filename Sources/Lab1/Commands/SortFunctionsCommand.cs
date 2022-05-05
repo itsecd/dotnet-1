@@ -23,22 +23,8 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] SortFunctionsSettings settings)
         {
-            var functions = _functionsRepository.GetFunctions();
-            List<string> functionTypes = new List<string>()
-                { "ConstantFunction", "LinearFunction", "QuadraticFunction", "SinusFunction", "CosinusFunction" };
-            int tmpIndex = 0;
-            for (int i = 0; i < functionTypes.Count; i++)
-            {
-                for (int j = tmpIndex; j < functions.Count; j++)
-                {
-                    if (functions[j].GetType().Name == functionTypes[i])
-                    {
-                        functions.Insert(tmpIndex, functions[j]);
-                        functions.RemoveAt(j + 1);
-                        tmpIndex++;
-                    }
-                }
-            }
+            var comparator = new FunctionComparator();
+            var functions = comparator.Sort(_functionsRepository.GetFunctions());
 
             string storageFileName = "sort_functions.xml";
             var result = new XmlFunctionsRepository(storageFileName, functions);

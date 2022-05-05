@@ -23,16 +23,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] GetDerivativeSettings settings)
         {
             var index = AnsiConsole.Prompt(
-                new TextPrompt<int>("[blue]Индекс функции в коллекции для вычисления производной: [/]")
-                .ValidationErrorMessage("Invalid index entered")
-                    .Validate(index =>
-                    {
-                        return index switch
-                        {
-                            < 0 => ValidationResult.Error("[red]Индекс должен быть больше или равен нулю[/]"),
-                            _ => ValidationResult.Success(),
-                        };
-                    }));
+                new TextPrompt<int>("[blue]Введите индекс функции для вычисления производной: [/]"));
 
             AnsiConsole.WriteLine(_functionsRepository.GetFunctions()[index]
                         .GetDerivative().ToString());

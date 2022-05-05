@@ -23,16 +23,8 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveFunctionSettings settings)
         {
             var index = AnsiConsole.Prompt(
-                new TextPrompt<int>("[blue]Индекс функции в коллекции для вычисления значения функции >=0: [/]")
-                .ValidationErrorMessage("Invalid index entered")
-                    .Validate(index =>
-                    {
-                        return index switch
-                        {
-                            < 0 => ValidationResult.Error("[red]Индекс должен быть больше или равен нулю[/]"),
-                            _ => ValidationResult.Success(),
-                        };
-                    }));
+                new TextPrompt<int>("[blue]Введите индекс функции для удаления: [/]"));
+
             _functionsRepository.RemoveFunction(index);
             return 0;
         }

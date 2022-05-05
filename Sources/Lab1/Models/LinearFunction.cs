@@ -42,9 +42,7 @@ namespace Lab1.Models
             string result = "";
 
             if (Linear != 0)
-                result += Linear > 0
-                    ? $"+ {Linear}x "
-                    : $"- {Math.Abs(Linear)}x ";
+                result += $"{Linear}x ";
 
             if (Constant != 0)
                 result += Constant > 0

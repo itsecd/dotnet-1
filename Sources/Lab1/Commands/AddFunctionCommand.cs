@@ -23,9 +23,11 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFunctionSettings settings)
         {
+            var choice = new List<string>() { "Константа", "Линейная функция", "Квадратичная функция", "Синусоидальная", "Косинусоидальная" };
+
             var functionType = AnsiConsole.Prompt(new SelectionPrompt<string>()
                 .Title("Выберите вид функции: ")
-                .AddChoices("Константа", "Линейная функция", "Квадратичная функция", "Синусоидальная", "Косинусоидальная"));
+                .AddChoices(choice));
 
             switch (functionType)
             {

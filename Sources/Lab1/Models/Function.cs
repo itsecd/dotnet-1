@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 
 namespace Lab1.Models
@@ -10,8 +9,7 @@ namespace Lab1.Models
     [XmlInclude(typeof(CubicFunction))]
     [XmlInclude(typeof(SinusFunction))]
     [XmlInclude(typeof(CosinusFunction))]
-    public abstract class Function :
-        IEquatable<Function>
+    public abstract class Function : IEquatable<Function>
     {
         public abstract double Calculate(double x);
         public abstract Function GetDerivative();
