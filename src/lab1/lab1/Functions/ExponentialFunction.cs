@@ -1,55 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab1.Functions
 {
-    class ExponentialFunction: Function
+    public class ExponentialFunction : Function
     {
-        public Data Elems { get; init; }
+        public Double Exponent { get; set; }
+        public Double Coefficient { get; set; }
 
-        public ExponentialFunction() { Elems = new Data(); }
-
-        public ExponentialFunction(Data elems)
+        public ExponentialFunction()
         {
-            Elems = new Data(elems.X, elems.Coeff, elems.Degree);
+            Exponent = 1;
+            Coefficient = 1;
         }
 
-        public override double? Calculation()
+        public ExponentialFunction(double exponent, double coefficient)
         {
-            if (Elems.X < 0)
-                return null;
-            return Elems.Coeff * Math.Pow(Elems.Degree, Elems.X);
+            Exponent = exponent;
+            Coefficient = coefficient;
         }
-        public override string Derivative()
+
+        public override double Calculation(double x)
         {
-            if (Elems.X < 0)
-                return "indefinitely";
-            else if (Elems.Coeff == 0)
-                return "y' = 0";
-            else if (Elems.Degree == 0)
-                return "y' = 0";
-            else
-                return $"y' = {Elems.Coeff * Math.Log(Elems.Degree)}*{Elems.Degree}^x ";
+
+            return Coefficient * Math.Pow(Exponent, x);
+        }
+        public override Function Derivative()
+        {
+            return new ExponentialFunction(Exponent, Coefficient * Math.Log(Exponent));
         }
         public override string ToString()
         {
-            if (Elems.Coeff == 0)
-                return "y = 0";
-            else
-                return $"y = {Elems.Coeff}*{Elems.Degree}^x";
+            return $"y = {Coefficient} * {Exponent }^ x";
         }
         public override bool Equals(Object obj)
         {
             if (obj is not ExponentialFunction other)
                 return false;
-            return Elems.Coeff == other.Elems.Coeff && Elems.X == other.Elems.X && Elems.Degree == other.Elems.Degree;
+            return Exponent == other.Exponent && Coefficient == other.Coefficient;
         }
         public override int GetHashCode()
         {
-            return Elems.X.GetHashCode() ^ Elems.Coeff.GetHashCode() ^ Elems.Degree.GetHashCode();
+            return Exponent.GetHashCode() + Coefficient.GetHashCode();
         }
     }
 }

@@ -1,59 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab1.Functions
 {
-    class LogarithmicFunction: Function
+    public class LogarithmicFunction : Function
     {
-        public Data Elems { get; init; }
+        public double Base { get; set; }
+        public double Coefficient { get; set; }
 
-        public LogarithmicFunction() { Elems = new Data(); }
-
-        public LogarithmicFunction(Data elems)
+        public LogarithmicFunction()
         {
-            Elems = new Data(elems.X, elems.Coeff, elems.Degree);
+            Base = 10;
+            Coefficient = 1;
         }
 
-        public override double? Calculation()
+        public LogarithmicFunction(double baseNum, double coefficient)
         {
-            if (Elems.X < 0)
-                return null;
-            return Elems.Coeff * Math.Log(Elems.X, Elems.Degree);
+            Base = baseNum;
+            Coefficient = coefficient;
         }
 
-        public override string Derivative()
+        public override double Calculation(double x)
         {
-            if (Elems.Degree == 1 || Elems.Degree <= 0 || Elems.X <= 0)
-                return "indefinitely";
-            else if (Elems.Coeff == 0)
-                return "y' = 0";
-            else
-                return $"y' = ({Elems.Coeff / Math.Log(Elems.Degree)})/x";
+            return Coefficient * Math.Log(x, Base);
+        }
+
+        public override Function Derivative()
+        {
+            return new PowerFunction(1 / Math.Log(Base), -1);
         }
 
         public override string ToString()
         {
-            if (Elems.Degree == 1 || Elems.Degree <= 0 || Elems.X <= 0)
-                return "indefinitely";
-            if (Elems.Coeff == 0)
-                return "y = 0";
-            else
-                return $"y = {Elems.Coeff} log_{Elems.Degree}x";
+            return $"y = {Coefficient} * log_{Base} (x)";
         }
 
         public override bool Equals(Object obj)
         {
             if (obj is not LogarithmicFunction other)
                 return false;
-            return Elems.Coeff == other.Elems.Coeff && Elems.X == other.Elems.X && Elems.Degree == other.Elems.Degree;
+            return Coefficient == other.Coefficient && Base == other.Base;
         }
 
         public override int GetHashCode()
         {
-            return Elems.X.GetHashCode() ^ Elems.Coeff.GetHashCode() ^ Elems.Degree.GetHashCode();
+            return Coefficient.GetHashCode() + Base.GetHashCode();
         }
     }
 }

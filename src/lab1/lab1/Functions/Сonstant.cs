@@ -1,46 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab1.Functions
 {
     public class Constant : Function
     {
-        public Data Elems { get; init; }
+        public double Coefficient { get; set; }
 
-        public Constant() { Elems = new Data(); }
-
-        public Constant(Data elems)
+        public Constant()
         {
-            Elems = new Data(elems.X, elems.Coeff);
-        }
-        public override double? Calculation() 
-        { 
-            return Elems.Coeff; 
+            Coefficient = 0;
         }
 
-        public override string Derivative() 
-        { 
-            return "y' = 0"; 
+        public Constant(double data)
+        {
+            Coefficient = data;
+        }
+
+        public override double Calculation(double x)
+        {
+            return Coefficient;
+        }
+
+        public override Function Derivative()
+        {
+            return new Constant(0);
         }
 
         public override string ToString()
         {
-            return $"y = {Elems.Coeff}";
+            return $"y = {Coefficient}";
         }
 
         public override bool Equals(Object obj)
         {
             if (obj is not Constant other)
                 return false;
-            return Elems.Coeff == other.Elems.Coeff;
+            return Coefficient == other.Coefficient;
         }
 
         public override int GetHashCode()
         {
-            return Elems.Coeff.GetHashCode();
+            return Coefficient.GetHashCode();
         }
     }
 }
