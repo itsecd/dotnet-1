@@ -3,6 +3,8 @@ using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Lab1.Commands
 {
@@ -19,32 +21,41 @@ namespace Lab1.Commands
             _repository = repository;
         }
 
-        public override int Execute(CommandContext context, Settings settings)
+        public override int Execute([NotNull]CommandContext context, [NotNull]Settings settings)
         {
-            var choice = AnsiConsole.Prompt(
-                new SelectionPrompt<FunctionType>()
-                    .Title("Select insert function")
-                    .AddChoices(new[] {
-                        FunctionType.Constant, FunctionType.Power,
-                        FunctionType.Exponential, FunctionType.Logarithmic
-                    }));
-
-            Function function = choice switch
+            var functionFactory = new Dictionary<string, Func<Function>>
             {
-                FunctionType.Constant => new Constant(AnsiConsole.Prompt(new TextPrompt<double>("Enter C for function f(x) = C :"))),
-                FunctionType.Exponential => new ExponentialFunction(
+                {
+                    "Constant",() => new Constant(
+                            AnsiConsole.Prompt(new TextPrompt<double>("Enter C for function f(x) = C :"))
+                        )
+                },
+                {
+                    "Exponential",() => new ExponentialFunction(
                     AnsiConsole.Prompt(new TextPrompt<double>("Enter A for function f(x) = B * A^x :")),
                     AnsiConsole.Prompt(new TextPrompt<double>("Enter B for function f(x) = B * A^x :"))
-                    ),
-                FunctionType.Logarithmic => new LogarithmicFunction(
+                    )
+                },
+                {
+                    "Logarithmic",() => new LogarithmicFunction(
                     AnsiConsole.Prompt(new TextPrompt<double>("Enter A for function f(x) = B * log_A(x) :")),
                     AnsiConsole.Prompt(new TextPrompt<double>("Enter B for function f(x) = B * log_A(x) :"))
-                    ),
-                FunctionType.Power => new PowerFunction(
+                    )
+                },
+                {
+                    "Power",() => new PowerFunction(
                     AnsiConsole.Prompt(new TextPrompt<double>("Enter B for function f(x) = B * x^A :")),
                     AnsiConsole.Prompt(new TextPrompt<double>("Enter A for function f(x) = B * x^A :"))
                     )
+                }
             };
+
+            var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("Select insert function")
+                    .AddChoices(functionFactory.Keys));
+
+            var function = functionFactory[choice].Invoke();
 
             AnsiConsole.Prompt(
                 new TextPrompt<int>("Enter insert index")
@@ -57,7 +68,7 @@ namespace Lab1.Commands
 
                             return ValidationResult.Success();
                         }
-                        catch (ArgumentOutOfRangeException exp)
+                        catch (ArgumentOutOfRangeException)
                         {
                             return ValidationResult.Error();
                         }

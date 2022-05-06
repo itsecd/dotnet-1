@@ -35,7 +35,7 @@ namespace Lab1.Functions
             return $"y = {Coefficient} * x^{Degree}";
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not PowerFunction other)
                 return false;

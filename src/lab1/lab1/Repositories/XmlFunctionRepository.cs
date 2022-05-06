@@ -7,7 +7,7 @@ namespace Lab1.Repositories
 {
     class XmlFunctionRepository : IFunctionRepository
     {
-        private List<Function> _functions;
+        private List<Function>? _functions;
         private const string _filePath = "functions.xml";
 
         private void ReadFile()
@@ -23,7 +23,7 @@ namespace Lab1.Repositories
 
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
             using var fileStream = new FileStream(_filePath, FileMode.OpenOrCreate);
-            _functions = (List<Function>)xmlSerializer.Deserialize(fileStream);
+            _functions = (List<Function>?)xmlSerializer.Deserialize(fileStream);
         }
 
         private void WriteFile()

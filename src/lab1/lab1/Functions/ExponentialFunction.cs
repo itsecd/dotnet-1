@@ -4,8 +4,8 @@ namespace Lab1.Functions
 {
     public class ExponentialFunction : Function
     {
-        public Double Exponent { get; set; }
-        public Double Coefficient { get; set; }
+        public double Exponent { get; set; }
+        public double Coefficient { get; set; }
 
         public ExponentialFunction()
         {
@@ -32,7 +32,7 @@ namespace Lab1.Functions
         {
             return $"y = {Coefficient} * {Exponent }^ x";
         }
-        public override bool Equals(Object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not ExponentialFunction other)
                 return false;

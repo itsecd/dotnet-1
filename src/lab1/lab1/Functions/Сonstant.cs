@@ -31,7 +31,7 @@ namespace Lab1.Functions
             return $"y = {Coefficient}";
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not Constant other)
                 return false;

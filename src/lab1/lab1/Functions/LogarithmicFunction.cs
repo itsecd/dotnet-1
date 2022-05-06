@@ -34,7 +34,7 @@ namespace Lab1.Functions
             return $"y = {Coefficient} * log_{Base} (x)";
         }
 
-        public override bool Equals(Object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is not LogarithmicFunction other)
                 return false;
