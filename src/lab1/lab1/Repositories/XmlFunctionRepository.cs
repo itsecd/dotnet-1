@@ -1,9 +1,9 @@
-﻿using lab1.Functions;
+﻿using Lab1.Functions;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace lab1.Repositories
+namespace Lab1.Repositories
 {
     class XmlFunctionRepository : IFunctionRepository
     {

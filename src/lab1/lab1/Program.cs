@@ -1,10 +1,10 @@
-﻿using lab1.Commands;
-using lab1.Infrastructure;
-using lab1.Repositories;
+﻿using Lab1.Commands;
+using Lab1.Infrastructure;
+using Lab1.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 
-namespace lab1
+namespace Lab1
 {
     class Program
     {

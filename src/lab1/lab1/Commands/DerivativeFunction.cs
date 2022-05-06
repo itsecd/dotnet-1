@@ -1,10 +1,10 @@
-﻿using lab1.Repositories;
+﻿using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace lab1.Commands
+namespace Lab1.Commands
 {
     class DerivativeFunction : Command<DerivativeFunction.Settings>
     {

@@ -1,7 +1,7 @@
-﻿using lab1.Functions;
+﻿using Lab1.Functions;
 using System.Collections.Generic;
 
-namespace lab1.Repositories
+namespace Lab1.Repositories
 {
     interface IFunctionRepository
     {

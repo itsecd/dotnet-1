@@ -1,9 +1,9 @@
-﻿using lab1.Repositories;
+﻿using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
 
-namespace lab1.Commands
+namespace Lab1.Commands
 {
     class CompareFunction : Command<CompareFunction.Settings>
     {

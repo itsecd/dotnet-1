@@ -1,10 +1,10 @@
-﻿using lab1.Repositories;
+﻿using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace lab1.Commands
+namespace Lab1.Commands
 {
     class MaxFunction : Command<MaxFunction.Settings>
     {

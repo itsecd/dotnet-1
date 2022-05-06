@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace lab1.Functions
+namespace Lab1.Functions
 {
     public class ExponentialFunction : Function
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace lab1.Functions
+namespace Lab1.Functions
 {
     [XmlInclude(typeof(Constant))]
     [XmlInclude(typeof(PowerFunction))]

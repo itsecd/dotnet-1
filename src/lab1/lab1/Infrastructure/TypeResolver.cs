@@ -1,7 +1,7 @@
 ﻿using Spectre.Console.Cli;
 using System;
 
-namespace lab1.Infrastructure
+namespace Lab1.Infrastructure
 {
     public sealed class TypeResolver : ITypeResolver, IDisposable
     {

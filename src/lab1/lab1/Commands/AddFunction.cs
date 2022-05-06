@@ -1,10 +1,10 @@
-﻿using lab1.Functions;
-using lab1.Repositories;
+﻿using Lab1.Functions;
+using Lab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
 
-namespace lab1.Commands
+namespace Lab1.Commands
 {
     class AddFunction : Command<AddFunction.Settings>
     {
