@@ -31,7 +31,7 @@ namespace Lab1.Commands
                 return -1;
             }
 
-            var resCompare = _functionsRepository.CompareFunction(inputIndex1, inputIndex2) ? "[green1]The functions are equal" : "[red]The functions arn't equal[/]";
+            var resCompare = _functionsRepository.CompareFunction(inputIndex1, inputIndex2) ? "[green1]The functions are equal" : "[red]The functions arn't equal";
             AnsiConsole.MarkupLine(resCompare);
             AnsiConsole.MarkupLine("[green1]Done!");
             return 0;
