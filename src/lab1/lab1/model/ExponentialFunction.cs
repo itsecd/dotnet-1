@@ -9,6 +9,7 @@ namespace model
         private double Value { get; set; } = 1;
 
         public ExponentialFunction(double value) { Value = value; }
+        public ExponentialFunction() { }
 
 
         public override ExponentialFunction getDerivative() { return new ExponentialFunction(0); }

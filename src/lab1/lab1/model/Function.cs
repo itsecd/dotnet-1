@@ -7,6 +7,12 @@ using System.Xml.Serialization;
 
 namespace model
 {
+
+    [XmlInclude(typeof(Constant))]
+    [XmlInclude(typeof(ExponentialFunction))]
+    [XmlInclude(typeof(Log))]
+    [XmlInclude(typeof(PowerFunction))]
+
     public abstract class Function
     {
 
@@ -17,6 +23,8 @@ namespace model
         public abstract override string ToString();
 
         public abstract override bool Equals(object obj);
+
+
 
         
 

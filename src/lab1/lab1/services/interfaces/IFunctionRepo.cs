@@ -7,11 +7,14 @@ using model;
 
 namespace lab1.services.interfaces
 {
-    internal interface IFunctionRepo
+    public interface IFunctionRepo
     {
         void Clear();
         List<Function> GetAll();
         void Insert(int index, Function newFunc);
-        void RemoveAt(int index);
+        void Delete(int index);
+        void AddFunction(Function function);
+        bool CompareFunction(int index1, int index2);
+
     }
 }

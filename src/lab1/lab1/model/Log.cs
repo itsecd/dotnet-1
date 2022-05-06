@@ -8,6 +8,7 @@ namespace model
         private double Value { get; set; } = 1;
 
         public Log(double value) { Value = value; }
+        public Log() { }
 
 
         public override Log getDerivative() { return new Log(0); }

@@ -8,7 +8,9 @@ namespace model
     {
         private double Value { get; set; } = 1;
 
-        public Constant(double value) { Value = value; }  
+        public Constant(double value) { Value = value; }
+
+        public Constant() { }
 
 
         public override Constant getDerivative() { return new Constant(0); }

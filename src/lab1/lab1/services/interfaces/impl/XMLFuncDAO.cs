@@ -12,42 +12,73 @@ namespace lab1.services.interfaces.impl
     internal class XMLFuncDAO : IFunctionRepo
     {
 
-        private const string StorageFileName = "functions.xml";
-        private List<Function>? function;
+        private const string StorageFileName = "f.xml";
+        private List<Function>? _function;
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            var list = DeserializeXml();
+            list.Clear();
+            SerializeXml(list);
         }
 
         public List<Function> GetAll()
         {
-            throw new NotImplementedException();
+            return DeserializeXml();
         }
 
         public void Insert(int index, Function newFunc)
         {
-            throw new NotImplementedException();
+            var list = DeserializeXml();
+            list.Insert(index, newFunc);
+            SerializeXml(list);
         }
 
-        public void RemoveAt(int index)
+        public void AddFunction(Function function)
         {
-            throw new NotImplementedException();
+            /*if (_function == null)
+                throw new ArgumentNullException(nameof(function));*/
+            DeserializeXml();
+            _function.Add(function);
+            SerializeXml(_function);
+        }
+
+        public bool CompareFunction(int index1, int index2)
+        {
+            DeserializeXml();
+            if (_function[index1] != null && _function[index2] != null)
+            {
+                if (_function[index1].GetType() == _function[index2].GetType())
+                {
+                    return _function[index1].Equals(_function[index2]);
+                }
+                else
+                    throw new ArgumentException("Mismatch of function types");
+            }
+            else
+                throw new ArgumentException("Index is out of range");
+        }
+
+        public void Delete(int index)
+        {
+            var list = DeserializeXml();
+            list.RemoveAt(index);
+            SerializeXml(list);
         }
 
         private List<Function> DeserializeXml()
         {
-            if (function is not null)
-                return function;
+            if (_function is not null)
+                return _function;
             if (!File.Exists(StorageFileName))
             {
-                return function = new List<Function>();
+                return _function = new List<Function>();
 
             }
             var xmlSerializer = new System.Xml.Serialization.XmlSerializer(typeof(List<Function>));
             using var fileStream = new FileStream(StorageFileName, FileMode.Open);
-            function = (List<Function>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException());
-            return function;
+            _function = (List<Function>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException());
+            return _function;
         }
 
         private void SerializeXml(List<Function> funcList)

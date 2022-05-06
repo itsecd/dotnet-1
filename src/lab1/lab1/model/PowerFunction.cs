@@ -8,6 +8,7 @@ namespace model
         private double Value { get; set; } = 1;
 
         public PowerFunction(double value) { Value = value; }
+        public PowerFunction() { }
 
 
         public override PowerFunction getDerivative() { return new PowerFunction(0); }
