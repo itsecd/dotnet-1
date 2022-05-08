@@ -23,7 +23,6 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] GetMinValueDerivativesSettings settings)
         {
-
             double value = AnsiConsole.Prompt(new TextPrompt<double>("[blue]Enter value :[/]"));
             var functions = _functionsRepository.GetFunctions();
 

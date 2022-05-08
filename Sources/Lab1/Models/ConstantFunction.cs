@@ -33,6 +33,5 @@ namespace Lab1.Models
 
         public override int GetHashCode()
             => HashCode.Combine(Constant);
-
     }
 }

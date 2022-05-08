@@ -23,7 +23,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] GetDerivativeSettings settings)
         {
             var index = AnsiConsole.Prompt(
-                new TextPrompt<int>("[blue]Enter the index of the function to calculate the derivative: [/]"));
+                new TextPrompt<int>("[blue]Enter the index of the function to calculate the derivative(antiderivative): [/]"));
 
             var functions = _functionsRepository.GetFunctions();
             var f = functions[index];
