@@ -1,5 +1,5 @@
-﻿using lab1.services.interfaces;
-using model;
+﻿using Lab1.Services.Interfaces;
+using Model;
 using System.Diagnostics.CodeAnalysis;
 using Spectre.Console;
 using Spectre.Console.Cli;

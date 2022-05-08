@@ -1,10 +1,5 @@
-﻿using lab1.services.interfaces;
-using System;
-using System.Collections.Generic;
+﻿using Lab1.Services.Interfaces;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Spectre.Console;
 using Spectre.Console.Cli;
 

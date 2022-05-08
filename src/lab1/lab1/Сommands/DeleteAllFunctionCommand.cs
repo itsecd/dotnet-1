@@ -1,4 +1,4 @@
-﻿using lab1.services.interfaces;
+﻿using Lab1.Services.Interfaces;
 using System.Diagnostics.CodeAnalysis;
 using Spectre.Console;
 using Spectre.Console.Cli;

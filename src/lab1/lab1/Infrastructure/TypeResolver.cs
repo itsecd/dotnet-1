@@ -1,17 +1,15 @@
 ﻿using Spectre.Console.Cli;
 using System;
 
-namespace Lab1.infrastructure
+namespace Lab1.Infrastructure
 {
     public sealed class TypeResolver : ITypeResolver, IDisposable
     {
         private readonly IServiceProvider _provider;
-
         public TypeResolver(IServiceProvider provider)
         {
             _provider = provider ?? throw new ArgumentNullException(nameof(provider));
         }
-
         public object Resolve(Type type)
         {
             if (type == null)
@@ -21,7 +19,6 @@ namespace Lab1.infrastructure
 
             return _provider.GetService(type);
         }
-
         public void Dispose()
         {
             if (_provider is IDisposable disposable)
