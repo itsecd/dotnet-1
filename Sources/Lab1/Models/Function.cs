@@ -7,8 +7,8 @@ namespace Lab1.Models
     [XmlInclude(typeof(LinearFunction))]
     [XmlInclude(typeof(QuadraticFunction))]
     [XmlInclude(typeof(CubicFunction))]
-    [XmlInclude(typeof(SinusFunction))]
-    [XmlInclude(typeof(CosinusFunction))]
+    [XmlInclude(typeof(SineFunction))]
+    [XmlInclude(typeof(CosineFunction))]
     public abstract class Function : IEquatable<Function>
     {
         public abstract double Calculate(double x);

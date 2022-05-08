@@ -23,7 +23,7 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] ClearFeaturesSettings settings)
         {
             _functionsRepository.Clear();
-            AnsiConsole.WriteLine("Список функций очищен!");
+            AnsiConsole.WriteLine("Function list cleared!");
             return 0;
         }
     }

@@ -24,24 +24,31 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] GetMinValueDerivativesSettings settings)
         {
 
-            double arg = AnsiConsole.Prompt(new TextPrompt<double>("[blue]Введите значение :[/]"));
+            double value = AnsiConsole.Prompt(new TextPrompt<double>("[blue]Enter value :[/]"));
             var functions = _functionsRepository.GetFunctions();
 
-            var minValue = functions.Min(x => x.GetDerivative().Calculate(arg));
-            var FirstMinValue = functions.First(x => x.GetDerivative().Calculate(arg) == minValue);
+            var minValue = functions.Min(x => x.GetDerivative().Calculate(value));
+            var FirstMinValue = functions.First(x => x.GetDerivative().Calculate(value) == minValue);
 
             double min = double.MaxValue;
-            Function? result = null;
+            Function result = functions[0];
             foreach (Function function in functions)
             {
-                if (function.GetDerivative().Calculate(arg) < min)
+                if (function.GetDerivative().Calculate(value) < min)
                 {
-                    min = function.GetDerivative().Calculate(arg);
+                    min = function.GetDerivative().Calculate(value);
                     result = function;
                 }
             }
-            AnsiConsole.WriteLine("Результат System.Linq функции: \t\t " + FirstMinValue);
-            AnsiConsole.WriteLine("Результат вычисления с помощью кода: \t" + result);
+
+            var table = new Table();
+            table.AddColumn(new TableColumn("Method"));
+            table.AddColumn(new TableColumn("Result"));
+            table.AddColumn(new TableColumn("Function value"));
+            table.AddRow($"System.Linq", FirstMinValue.ToString(), Math.Round(FirstMinValue.Calculate(value), 3).ToString());
+            table.AddRow($"Code", result.ToString(), Math.Round(result.Calculate(value)).ToString());
+
+            AnsiConsole.Write(table);
             return 0;
         }
     }

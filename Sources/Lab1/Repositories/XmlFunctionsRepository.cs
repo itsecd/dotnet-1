@@ -7,9 +7,12 @@ namespace Lab1.Repositories
     {
         private string StorageFileName { get; set; } = "functions.xml";
 
-        private List<Function>? _functions;
+        private List<Function> _functions;
 
-        public XmlFunctionsRepository() { }
+        public XmlFunctionsRepository() 
+        {
+            _functions = ReadFromFile();
+        }
         public XmlFunctionsRepository(string storageFileName, List<Function> functions)
         {
             StorageFileName = storageFileName;
@@ -26,7 +29,7 @@ namespace Lab1.Repositories
             }
             var xmlSerializer = new XmlSerializer(typeof(List<Function>));
             using var fileStream = File.OpenRead(StorageFileName);
-            _functions = (List<Function>?)xmlSerializer.Deserialize(fileStream);
+            _functions = (List<Function>)xmlSerializer.Deserialize(fileStream);
             if (_functions == null)
                 throw new ArgumentNullException(nameof(_functions));
             return _functions;
@@ -43,8 +46,6 @@ namespace Lab1.Repositories
         {
             if (function == null)
                 throw new ArgumentNullException(nameof(function));
-
-            _functions = ReadFromFile();
 
             if (index >= _functions.Count)
                 _functions.Add(function);

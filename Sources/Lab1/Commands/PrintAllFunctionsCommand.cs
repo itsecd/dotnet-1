@@ -23,18 +23,16 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] PrintAllFunctionsSettings settings)
         {
-            if (_functionsRepository.GetFunctions().Count == 0)
+            var functions = _functionsRepository.GetFunctions();
+
+            if (functions.Count == 0)
             {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                AnsiConsole.WriteLine("Список пуст!");
-                Console.ForegroundColor = ConsoleColor.White;
+                AnsiConsole.WriteLine("The list is empty!");
                 return 0;
             }
 
-            var functions = _functionsRepository.GetFunctions();
-
             var table = new Table();
-            table.AddColumn(new TableColumn(new Markup("[white]NameOfFunction[/]")));
+            table.AddColumn(new TableColumn(new Markup("[white]Name of function[/]")));
             table.AddColumn(new TableColumn("[white]Function[/]"));
             table.AddColumn(new TableColumn("[white]Derivative[/]"));
             table.AddColumn(new TableColumn("[white]Antiderivative[/]"));
@@ -54,10 +52,10 @@ namespace Lab1.Commands
                     case "QuadraticFunction":
                         table.AddRow($"[magenta]{f.GetType().Name}[/]", $"[magenta]{f.ToString()}[/]", $"[magenta]{f.GetDerivative()}[/]", $"[magenta]{f.GetAntiderivative()} + C[/]");
                         break;
-                    case "SinusFunction":
+                    case "SineFunction":
                         table.AddRow($"[cyan]{f.GetType().Name}[/]", $"[cyan]{f.ToString()}[/]", $"[cyan]{f.GetDerivative()}[/]", $"[cyan]{f.GetAntiderivative()} + C[/]");
                         break;
-                    case "CosinusFunction":
+                    case "CosineFunction":
                         table.AddRow($"[blue]{f.GetType().Name}[/]", $"[blue]{f.ToString()}[/]", $"[blue]{f.GetDerivative()}[/]", $"[blue]{f.GetAntiderivative()} + C[/]");
                         break;
                 }

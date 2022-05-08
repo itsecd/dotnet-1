@@ -1,19 +1,18 @@
 ﻿namespace Lab1.Models
 {
-    public class CosinusFunction: Function
+    public class SineFunction: Function
     {
         public double Constant { get; init; }
         public double Angle { get; init; }
         public double Phase { get; init; }
 
-        public CosinusFunction()
-        {
+        public SineFunction() {
             Constant = 1;
-            Angle = 0;
+            Angle = Math.PI/2;
             Phase = 0;
         }
 
-        public CosinusFunction(double constant, double angle, double phase)
+        public SineFunction(double constant, double angle, double phase)
         {
             Constant = constant;
             Angle = angle;
@@ -24,14 +23,14 @@
             => Constant * Math.Cos(Angle * x + Phase);
 
         public override Function GetDerivative()
-            => new SinusFunction(-Constant*Angle, Angle, Phase);
+            => new CosineFunction(Constant * Angle, Angle, Phase);
 
         public override Function GetAntiderivative()
-            => new SinusFunction(Constant, Angle, Phase);
+            => new CosineFunction(-Constant, Angle, Phase);
 
         public override bool Equals(Function? obj)
         {
-            if (obj is not CosinusFunction f)
+            if (obj is not SineFunction f)
                 return false;
 
             return Math.Round(Constant, 3) == Math.Round(f.Constant, 3) &&
@@ -41,15 +40,27 @@
 
         public override string ToString()
         {
-            string result = $"{Constant}{"cos("}{Angle}{"x"}";
+            string result = "";
+            if (Constant == 0)
+            {
+                result = "0";
+                return result;
+            }
+            result = $"{Constant}sin(";
+
+            if (Angle != 0)
+                result += $"{Angle}x";
 
             if (Phase != 0)
                 result += Phase > 0
-                    ? $" + {Phase})"
-                    : $" - {Math.Abs(Phase)})";
+                    ? $" + {Phase}"
+                    : $" - {Math.Abs(Phase)}";
 
             result += ")";
             return result;
         }
+
+        public override int GetHashCode()
+            => HashCode.Combine(Constant, Angle, Phase);
     }
 }

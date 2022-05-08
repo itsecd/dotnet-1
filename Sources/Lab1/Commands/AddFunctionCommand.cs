@@ -23,64 +23,66 @@ namespace Lab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] AddFunctionSettings settings)
         {
-            var choice = new List<string>() { "Константа", "Линейная функция", "Квадратичная функция", "Синусоидальная", "Косинусоидальная" };
+            var choice = new List<string>()
+                { "Constant", "Linear function", "Quadratic function", "Sine wave function", "Cosine wave function" };
 
             var functionType = AnsiConsole.Prompt(new SelectionPrompt<string>()
-                .Title("Выберите вид функции: ")
+                .Title("Select function type: ")
                 .AddChoices(choice));
 
-            switch (functionType)
+            switch (functionType.ToString())
             {
-                case "Линейная функция":
+                case "Constant":
+                    {
+                        var function = new ConstantFunction(
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Constant: [/]")));
+                        _functionsRepository.InsertFunction(
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Index to insert element: [/]")), function);
+                        break;
+                    }
+                case "Linear function":
                     {
                         var function = new LinearFunction(
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Coefficient at  х: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Constant: [/]"))
                             );
                         _functionsRepository.InsertFunction(
-                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), function);
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Index to insert element: [/]")), function);
                         break;
                     }
-
-                case "Квадратичная функция":
+                case "Quadratic function":
                     {
                         var function = new QuadraticFunction(
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х^2: [/]")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Coefficient at x^2: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Coefficient at х: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Constant: [/]"))
                             );
                         _functionsRepository.InsertFunction(
-                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), function);
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Index to insert element: [/]")), function);
                         break;
                     }
-                case "Синусоидальная":
+                case "Sine wave function":
                     {
-                        var function = new SinusFunction(
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при sin: [/]")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))
+                        var function = new SineFunction(
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Coefficient at sin: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Coefficient at х: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Constant (phase): [/]"))
                             );
                         _functionsRepository.InsertFunction(
-                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), function);
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Index to insert element: [/]")), function);
                         break;
                     }
-                case "Косинусоидальная":
+                case "Cosine wave function":
                     {
-                        var function = new CosinusFunction(
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при cos: [/]")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Коэффициент при х: [/]")),
-                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа (фаза): [/]"))
+                        var function = new CosineFunction(
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Coefficient at cos: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Coefficient at х: [/]")),
+                            AnsiConsole.Prompt(new TextPrompt<double>("[blue]Constant (phase): [/]"))
                             );
                         _functionsRepository.InsertFunction(
-                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")), function);
+                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Index to insert element: [/]")), function);
                         break;
                     }
-                case "Константа":
-                    _functionsRepository.InsertFunction(
-                            AnsiConsole.Prompt(new TextPrompt<int>("[blue]Иднекс для вставки элемента: [/]")),
-                            new ConstantFunction(
-                                    AnsiConsole.Prompt(new TextPrompt<double>("[blue]Константа: [/]"))));
-                    break;
             }
             return 0;
         }

@@ -1,8 +1,45 @@
 {
   "profiles": {
-    "Lab1": {
+    "WSL": {
+      "commandName": "WSL2",
+      "environmentVariables": {},
+      "distributionName": ""
+    },
+    "lab1-add": {
+      "commandName": "Project",
+      "commandLineArgs": "add"
+    },
+    "lab1-remove": {
+      "commandName": "Project",
+      "commandLineArgs": "remove"
+    },
+    "lab1-print": {
+      "commandName": "Project",
+      "commandLineArgs": "print"
+    },
+    "lab1-calculate": {
       "commandName": "Project",
       "commandLineArgs": "calculate"
+    },
+    "lab1-derivative": {
+      "commandName": "Project",
+      "commandLineArgs": "derivative"
+    },
+    "lab1-minvalue": {
+      "commandName": "Project",
+      "commandLineArgs": "minvalue"
+    },
+    "lab1-sort": {
+      "commandName": "Project",
+      "commandLineArgs": "sort"
+    },
+    "lab1-equals": {
+      "commandName": "Project",
+      "commandLineArgs": "equals"
+    },
+    "lab1-clear": {
+      "commandName": "Project",
+      "commandLineArgs": "clear"
     }
   }
 }

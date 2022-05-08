@@ -46,8 +46,8 @@ namespace Lab1.Models
 
             if (Constant != 0)
                 result += Constant > 0
-                    ? $"+ {Constant}x "
-                    : $"- {Math.Abs(Constant)}x ";
+                    ? $"+ {Constant} "
+                    : $"- {Math.Abs(Constant)} ";
 
             return result;
         }

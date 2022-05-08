@@ -23,10 +23,19 @@ namespace Lab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] GetDerivativeSettings settings)
         {
             var index = AnsiConsole.Prompt(
-                new TextPrompt<int>("[blue]Введите индекс функции для вычисления производной: [/]"));
+                new TextPrompt<int>("[blue]Enter the index of the function to calculate the derivative: [/]"));
 
-            AnsiConsole.WriteLine(_functionsRepository.GetFunctions()[index]
-                        .GetDerivative().ToString());
+            var functions = _functionsRepository.GetFunctions();
+            var f = functions[index];
+
+            var table = new Table();
+            table.AddColumn(new TableColumn(new Markup("[white]Name of function[/]")));
+            table.AddColumn(new TableColumn("[white]Function[/]"));
+            table.AddColumn(new TableColumn("[white]Derivative[/]"));
+            table.AddColumn(new TableColumn("[white]Antiderivative[/]"));
+            table.AddRow($"[yellow]{f.GetType().Name}[/]", $"[yellow]{f.ToString()}[/]", $"[yellow]{f.GetDerivative()}[/]", $"[yellow]{f.GetAntiderivative()} + C[/]");
+            
+            AnsiConsole.Write(table);
             return 0;
         }
     }
