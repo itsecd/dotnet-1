@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Lab1_3D": {
+      "commandName": "Project",
+      "commandLineArgs": "Add"
+    }
+  }
+}
