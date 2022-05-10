@@ -12,18 +12,16 @@ namespace Lab1_3D.Model
             Point1 = new Point();
             Point2 = new Point();
         }
-        public RectangularParallelepiped(double x1, double y1, double z1, double x2, double y2, double z2)
-        {
-            Point1 = new Point(x1, y1, z1);
-            Point2 = new Point(x2, y2, z2);
-        }
-
         public RectangularParallelepiped(Point point1, Point point2)
         {
             Point1 = point1;
             Point2 = point2;
         }
-
+        public RectangularParallelepiped(double x1, double y1, double z1, double x2, double y2, double z2)
+        {
+            Point1 = new Point(x1, y1, z1);
+            Point2 = new Point(x2, y2, z2);
+        }
         public double A()
         {
             return Math.Abs(Point1.X - Point2.X);
@@ -76,7 +74,7 @@ namespace Lab1_3D.Model
 
         public override int GetHashCode()
         {
-            return Point1.X.GetHashCode() ^ Point1.Y.GetHashCode() ^ Point1.Z.GetHashCode() ^ Point2.X.GetHashCode() ^ Point2.Y.GetHashCode() ^ Point2.Z.GetHashCode();
+            return Point1.GetHashCode() ^ Point2.GetHashCode();
         }
     }
 }
