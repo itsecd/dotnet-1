@@ -4,8 +4,8 @@ namespace Lab1_3D.Model
 {
     public class RectangularParallelepiped: Figure3D
     {
-        public Point Point1 { get; set; }
-        public Point Point2 { get; set; }
+        public Point Point1 { get; init; }
+        public Point Point2 { get; init; }
 
         public RectangularParallelepiped()
         {
