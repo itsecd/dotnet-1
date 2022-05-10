@@ -2,7 +2,7 @@
 
 namespace Lab1_3D.Model
 {
-    internal class Cylinder: Figure3D
+    public class Cylinder: Figure3D
     {
         public Point Centre { get; init; }
         public double Radius { get; init; }

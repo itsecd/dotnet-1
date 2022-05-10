@@ -2,7 +2,7 @@
 
 namespace Lab1_3D.Model
 {
-    internal class Sphere : Figure3D
+    public class Sphere : Figure3D
     {
         public Point Centre { get; init; }
         public double Radius { get; init; }
