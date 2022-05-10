@@ -16,6 +16,12 @@ namespace prProgLab1.Repository
         public void Insert(int index, Function func)
         {
             ReadFromFile();
+            if (index < 0)
+            {
+                _functionsList.Add(func);
+                WriteToFile();
+                return;
+            }
             _functionsList.Insert(index, func);
             WriteToFile();
         }

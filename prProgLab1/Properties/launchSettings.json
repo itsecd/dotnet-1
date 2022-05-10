@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "prProgLab1": {
+      "commandName": "Project",
+      "commandLineArgs": "insert"
+    }
+  }
+}
