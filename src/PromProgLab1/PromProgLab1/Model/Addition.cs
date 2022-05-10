@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PromProgLab1.Model
+﻿namespace PromProgLab1.Model
 {
     public class Addition : Operation
     {
         public Addition() { }
 
-        public override int GetResult(int left, int right) => left + right;
+        public override int Calculate(int left, int right) => left + right;
 
         public override string ToString() => nameof(Addition);
 

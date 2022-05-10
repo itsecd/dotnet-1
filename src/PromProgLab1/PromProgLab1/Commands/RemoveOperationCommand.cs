@@ -1,8 +1,8 @@
-﻿using PromProgLab1.Model;
-using PromProgLab1.Repositories;
+﻿using PromProgLab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
+
 
 
 namespace PromProgLab1.Commands
@@ -20,9 +20,9 @@ namespace PromProgLab1.Commands
         }
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveOperationSettings settings)
         {
-            var textDelete = new TextPrompt<int>("[blue]Введите индекс операции, которую хотите удалить: [/]");
-            int indexDelete = AnsiConsole.Prompt(textDelete);
-            _operationsRepository.RemoveOperation(indexDelete);
+            var removePrompt = new TextPrompt<int>("[blue]Введите индекс операции, которую хотите удалить: [/]");
+            int removeIndex = AnsiConsole.Prompt(removePrompt);
+            _operationsRepository.RemoveAt(removeIndex);
             return 0;
         }
     }

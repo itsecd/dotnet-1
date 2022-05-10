@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace PromProgLab1.Model
 {
@@ -15,7 +10,7 @@ namespace PromProgLab1.Model
 
     public abstract class Operation
     {
-        public abstract int GetResult(int lhs, int rhs);
+        public abstract int Calculate(int lhs, int rhs);
 
         public abstract override bool Equals(object? obj);
 

@@ -1,6 +1,4 @@
-﻿using PromProgLab1.Model;
-using PromProgLab1.Repositories;
-using Spectre.Console;
+﻿using PromProgLab1.Repositories;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
 
@@ -20,7 +18,7 @@ namespace PromProgLab1.Commands
 
         public override int Execute([NotNull] CommandContext context, [NotNull] RemoveAllCollectionSettings settings)
         {
-            _operationsRepository.RemoveCollection();
+            _operationsRepository.Clear();
             return 0;
         }
     }

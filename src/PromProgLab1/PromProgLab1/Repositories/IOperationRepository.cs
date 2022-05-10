@@ -5,11 +5,9 @@ namespace PromProgLab1.Repositories
 {
     public interface IOperationRepository
     {
-        void AddOperation(int index, Operation operation);
-        bool CompareOperations(int lhsIndex, int rhsIndex);
+        void Insert(int index, Operation operation);
         List<Operation> GetOperations();
-        string MinElement(int leftNumber, int rightNumber);
-        void RemoveCollection();
-        void RemoveOperation(int index);
+        void Clear();
+        void RemoveAt(int index);
     }
 }

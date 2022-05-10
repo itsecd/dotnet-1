@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PromProgLab1.Infrastructure;
 using Spectre.Console.Cli;
 using System;
 

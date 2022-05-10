@@ -9,8 +9,7 @@ namespace PromProgLab1.Commands
     public class AddOperationCommand : Command<AddOperationCommand.AddOperationSettings>
     {
         public class AddOperationSettings : CommandSettings
-        {
-        }
+        { }
 
         private readonly IOperationRepository _operationsRepository;
 
@@ -23,7 +22,8 @@ namespace PromProgLab1.Commands
             var operationType = AnsiConsole.Prompt(new SelectionPrompt<string>()
                    .Title("Выберите тип операции: ")
                    .AddChoices("Сложение", "Вычитание", "Умножение", "Деление", "Остаток от деления"));
-            Operation operation = operationType switch
+
+            Operation? operation = operationType switch
             {
                 "Сложение" => new Addition(),
                 "Вычитание" => new Substraction(),
@@ -32,14 +32,15 @@ namespace PromProgLab1.Commands
                 "Остаток от деления" => new DivisionRemainder(),
                 _ => null
             };
-            if (operationType == null)
+
+            if (operation == null)
             {
                 AnsiConsole.MarkupLine($"[orange]Неизвестный тип операции! [/]");
                 return -1;
             }
             var textInsert = new TextPrompt<int>("[darkslategray3]Введите индекс, куда хотите вставить операцию: [/]");
             int index = AnsiConsole.Prompt(textInsert);
-            _operationsRepository.AddOperation(index, operation);
+            _operationsRepository.Insert(index, operation);
             return 0;
         }
     }

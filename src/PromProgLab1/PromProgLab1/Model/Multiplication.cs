@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PromProgLab1.Model
+﻿namespace PromProgLab1.Model
 {
     public class Multiplication : Operation
     {
-
-        public override int GetResult(int lhs, int rhs) => lhs * rhs;
+        public override int Calculate(int lhs, int rhs) => lhs * rhs;
 
         public override bool Equals(object? obj) => obj is Multiplication;
 
