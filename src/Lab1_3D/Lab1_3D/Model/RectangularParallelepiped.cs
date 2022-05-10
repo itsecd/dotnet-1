@@ -42,15 +42,14 @@ namespace Lab1_3D.Model
             return 2 * (A() * B() + A() * H() + B() * H());
         }
 
-        public override double GetVolume()
+        public override int GetVolume()
         {
-            return A() * B() * H();
+            return (int)(A() * B() * H());
         }
 
         public override RectangularParallelepiped GetMinParallelepiped()
         {
-            return new RectangularParallelepiped(
-new(Point1.X, Point1.Y, Point1.Z), new(Point2.X, Point2.Y, Point2.Z));
+            return new RectangularParallelepiped(new(Point1.X, Point1.Y, Point1.Z), new(Point2.X, Point2.Y, Point2.Z));
         }
 
         public override string ToString()
@@ -60,7 +59,7 @@ new(Point1.X, Point1.Y, Point1.Z), new(Point2.X, Point2.Y, Point2.Z));
 
         public override bool Equals(Object obj)
         {
-            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Lab1_3D.Model;
 
 namespace Lab1_3D.Repositories

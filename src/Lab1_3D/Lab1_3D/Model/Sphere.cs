@@ -25,16 +25,14 @@ namespace Lab1_3D.Model
             return 4 * Math.PI * Math.Pow(Radius, 2);
         }
 
-        public override double GetVolume()
+        public override int GetVolume()
         {
-            return (4 / 3) * Math.PI * Math.Pow(Radius, 3);
+            return (int)(4 / 3 * Math.PI * Math.Pow(Radius, 3));
         }
 
         public override RectangularParallelepiped GetMinParallelepiped()
         {
-            return new RectangularParallelepiped
-(new(Centre.X + Radius, Centre.Y - Radius, Centre.Z - Radius),
-new(Centre.X - Radius, Centre.Y + Radius, Centre.Z + Radius));
+            return new RectangularParallelepiped(new(Centre.X + Radius, Centre.Y - Radius, Centre.Z - Radius), new(Centre.X - Radius, Centre.Y + Radius, Centre.Z + Radius));
         }
 
         public override string ToString()
@@ -44,7 +42,7 @@ new(Centre.X - Radius, Centre.Y + Radius, Centre.Z + Radius));
 
         public override bool Equals(Object obj)
         {
-            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }

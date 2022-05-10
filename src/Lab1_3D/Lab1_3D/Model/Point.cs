@@ -16,14 +16,14 @@ namespace Lab1_3D.Model
 
         public override bool Equals(Object obj)
         {
-            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
             else
             {
                 Point point = (Point)obj;
-                return (X == point.X) && (Y == point.Y) && (Z == point.Z);
+                return X == point.X && Y == point.Y && Z == point.Z;
             }
         }
         public override int GetHashCode()
