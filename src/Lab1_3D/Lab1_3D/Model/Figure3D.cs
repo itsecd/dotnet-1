@@ -8,7 +8,7 @@ namespace Lab1_3D.Model
     public abstract class Figure3D
     {
         public abstract double GetSurfaceArea();
-        public abstract int GetVolume();
+        public abstract double GetVolume();
 
         public abstract override string ToString();
         public abstract override bool Equals(object obj);

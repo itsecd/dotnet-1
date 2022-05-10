@@ -42,9 +42,9 @@ namespace Lab1_3D.Model
             return 2 * (A() * B() + A() * H() + B() * H());
         }
 
-        public override int GetVolume()
+        public override double GetVolume()
         {
-            return (int)(A() * B() * H());
+            return A() * B() * H();
         }
 
         public override RectangularParallelepiped GetMinParallelepiped()
@@ -76,7 +76,7 @@ namespace Lab1_3D.Model
 
         public override int GetHashCode()
         {
-            return Point1.GetHashCode() ^ Point2.GetHashCode();
+            return Point1.X.GetHashCode() ^ Point1.Y.GetHashCode() ^ Point1.Z.GetHashCode() ^ Point2.X.GetHashCode() ^ Point2.Y.GetHashCode() ^ Point2.Z.GetHashCode();
         }
     }
 }

@@ -25,9 +25,9 @@ namespace Lab1_3D.Model
             return 4 * Math.PI * Math.Pow(Radius, 2);
         }
 
-        public override int GetVolume()
+        public override double GetVolume()
         {
-            return (int)(4 / 3 * Math.PI * Math.Pow(Radius, 3));
+            return 4.0 * Math.PI * Math.Pow(Radius, 3) / 3;
         }
 
         public override RectangularParallelepiped GetMinParallelepiped()
