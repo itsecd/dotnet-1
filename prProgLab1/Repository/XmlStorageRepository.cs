@@ -65,7 +65,6 @@ namespace prProgLab1.Repository
             return function;
         }
 
-
         public string MinFuncLINQ(int x)
         {
             ReadFromFile();

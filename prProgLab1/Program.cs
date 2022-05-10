@@ -22,6 +22,12 @@ namespace prProgLab1
             app.Configure(config =>
             {
                 config.AddCommand<InsertFunctionCommand>("insert");
+                config.AddCommand<PrintFunctionsCommand>("print");
+                config.AddCommand<RemoveFunctionCommand>("remove");
+                config.AddCommand<ClearFunctionsCommand>("clear");
+                config.AddCommand<ComputeFunctionCommand>("compute");
+                config.AddCommand<MinDerivativeCommand>("min");
+                config.AddCommand<CompareFunctionsCommand>("compare");
             });
 
             app.Run(args);
