@@ -23,7 +23,7 @@ namespace prProgLab1.Commands
             var functions = _functionsRepository.GetAll();
             for (var i = 0; i < functions.Count; i++)
             {
-                AnsiConsole.MarkupLine($"[yellow]{i}. {functions[i].ToString()}[/]");
+                AnsiConsole.MarkupLine($"[yellow]{i}. {functions[i]}[/]");
             }
 
             int first;
