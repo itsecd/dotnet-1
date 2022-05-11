@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using prProgLab1.Model;
-using prProgLab1.Repository;
+﻿using prProgLab1.Repository;
 using prProgLab1.Infrastructure;
 using prProgLab1.Commands;
 using Microsoft.Extensions.DependencyInjection;

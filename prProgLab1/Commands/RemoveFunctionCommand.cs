@@ -1,9 +1,7 @@
-﻿using prProgLab1.Model;
-using prProgLab1.Repository;
+﻿using prProgLab1.Repository;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace prProgLab1.Commands
 {
