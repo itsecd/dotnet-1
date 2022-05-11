@@ -1,9 +1,7 @@
-﻿using prProgLab1.Model;
-using prProgLab1.Repository;
+﻿using prProgLab1.Repository;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace prProgLab1.Commands
 {
@@ -23,7 +21,7 @@ namespace prProgLab1.Commands
         public override int Execute([NotNull] CommandContext context, [NotNull] ClearFunctionsSettings settings)
         {
             _functionsRepository.Clear();
-            AnsiConsole.MarkupLine($"[green]Репозиторий очищен[/]");
+            AnsiConsole.MarkupLine("[green]Репозиторий очищен[/]");
             return 0;
         }
     }

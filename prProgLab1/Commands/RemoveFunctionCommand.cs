@@ -32,7 +32,7 @@ namespace prProgLab1.Commands
 
             for (var i = 0; i < functionsCount; i++)
             {
-                AnsiConsole.MarkupLine($"[yellow]{i}. {_functionsRepository.GetAll()[i].ToString()}[/]");
+                AnsiConsole.MarkupLine($"[yellow]{i}. {_functionsRepository.GetAll()[i]}[/]");
             }
 
             int index;

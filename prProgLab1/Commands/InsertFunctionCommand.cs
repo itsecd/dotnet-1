@@ -29,7 +29,7 @@ namespace prProgLab1.Commands
             Function func = functionType switch
             {
                 "Константа" => new Const(
-                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Введите значеие константы:[/]"))
+                    AnsiConsole.Prompt(new TextPrompt<int>("[green]Введите значение константы:[/]"))
                 ),
                 "Линейная функция" => new LinearFunction(
                     AnsiConsole.Prompt(new TextPrompt<int>("[green]Введите 'k' :[/]")),
@@ -65,14 +65,14 @@ namespace prProgLab1.Commands
 
             for (var i = 0; i < functionsCount; i++)
             {
-                AnsiConsole.MarkupLine($"[yellow]{i + 1}. {_functionsRepository.GetAll()[i].ToString()}[/]");
+                AnsiConsole.MarkupLine($"[yellow]{i + 1}. {_functionsRepository.GetAll()[i]}[/]");
             }
 
-            int index = -1;
+            int index;
             do
             {
                 index = AnsiConsole.Prompt(new TextPrompt<int>("[green]Индекс, после которого будет вставлена функция:[/]"));
-            } while (index > functionsCount || index < 0);
+            } while (index > functionsCount);
             
             _functionsRepository.Insert(index, func);
             return 0;

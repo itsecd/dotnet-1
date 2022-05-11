@@ -1,9 +1,7 @@
-﻿using prProgLab1.Model;
-using prProgLab1.Repository;
+﻿using prProgLab1.Repository;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace prProgLab1.Commands
 {
@@ -25,17 +23,16 @@ namespace prProgLab1.Commands
             var functions = _functionsRepository.GetAll();
             for (var i = 0; i < functions.Count; i++)
             {
-                AnsiConsole.MarkupLine($"[yellow]{i}. {functions[i].ToString()}[/]");
+                AnsiConsole.MarkupLine($"[yellow]{i}. {functions[i]}[/]");
             }
-            int index = -1;
+            int index;
             do
             {
-                index = AnsiConsole.Prompt(new TextPrompt<int>(
-               "[green]Введите индекс: [/]"));
-            } while (index > functions.Count || index < 0);
+                index = AnsiConsole.Prompt(new TextPrompt<int>("[green]Введите индекс: [/]"));
+            } while (index > functions.Count);
 
             int x = AnsiConsole.Prompt(new TextPrompt<int>("[green]Введите 'x' :[/]"));
-            AnsiConsole.MarkupLine($"Значение функции [yellow]{functions[index].ToString()}[/] с заданным аргументом = [green]{functions[index].GetValue(x)}[/]");
+            AnsiConsole.MarkupLine($"Значение функции [yellow]{functions[index]}[/] с заданным аргументом = [green]{functions[index].GetValue(x)}[/]");
 
             return 0;
         }

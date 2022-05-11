@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace prProgLab1.Model
 {
     public class Sin : Function
     {
-        public int X;
+        public int X  { get; init; }
 
         public Sin() { }
 

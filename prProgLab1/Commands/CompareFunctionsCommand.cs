@@ -1,9 +1,7 @@
-﻿using prProgLab1.Model;
-using prProgLab1.Repository;
+﻿using prProgLab1.Repository;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace prProgLab1.Commands
 {
@@ -28,19 +26,17 @@ namespace prProgLab1.Commands
                 AnsiConsole.MarkupLine($"[yellow]{i}. {functions[i].ToString()}[/]");
             }
 
-            int first = -1;
-            int second = -1;
+            int first;
+            int second;
             do
             {
-                first = AnsiConsole.Prompt(new TextPrompt<int>(
-               "[green]Введите первый индекс: [/]"));
-            } while (first > functions.Count || first < 0);
+                first = AnsiConsole.Prompt(new TextPrompt<int>("[green]Введите первый индекс: [/]"));
+            } while (first > functions.Count);
 
             do
             {
-                second = AnsiConsole.Prompt(new TextPrompt<int>(
-               "[green]Введите второй индекс: [/]"));
-            } while (second > functions.Count || second < 0);
+                second = AnsiConsole.Prompt(new TextPrompt<int>("[green]Введите второй индекс: [/]"));
+            } while (second > functions.Count);
 
             AnsiConsole.Write($"Функции ({functions[first]}) и ({functions[second]}) ");
 
