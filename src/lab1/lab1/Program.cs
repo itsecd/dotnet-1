@@ -22,6 +22,7 @@ namespace Lab1
                 config.AddCommand<InsertFunctionCommand>("insert");
                 config.AddCommand<DeleteFunctionCommand>("delete");
                 config.AddCommand<DeleteAllFunctionCommand>("deleteall");
+                config.AddCommand<ShowAllFunctionsCommand>("show");
             });
             app.Run(args);
         }

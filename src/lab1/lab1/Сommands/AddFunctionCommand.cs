@@ -30,7 +30,7 @@ namespace Lab1.Сommands
             {
                 "Constant" => new Constant(AnsiConsole.Prompt(new TextPrompt<double>("x: "))),
                 "Power function" => new PowerFunction(
-                    AnsiConsole.Prompt(new TextPrompt<double>("x:"))
+                    AnsiConsole.Prompt(new TextPrompt<double>("x:")), AnsiConsole.Prompt(new TextPrompt<double>("power:"))
                     ),
                 "Exponential function" => new ExponentialFunction(
                     AnsiConsole.Prompt(new TextPrompt<double>("x:"))

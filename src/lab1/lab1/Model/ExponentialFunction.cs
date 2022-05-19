@@ -8,7 +8,7 @@ namespace Model
         public ExponentialFunction(double value) { Value = value; }
         public ExponentialFunction() { }
         public override ExponentialFunction GetDerivative() { return new ExponentialFunction(0); }
-        public override double GetResult(double x) => Value;
+        public override double GetResult(double x) { return Math.Exp(x); }
         public override bool Equals(object obj)
         {
             if (obj is ExponentialFunction func)
