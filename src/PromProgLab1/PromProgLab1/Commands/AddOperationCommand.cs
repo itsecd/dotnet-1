@@ -2,6 +2,7 @@
 using PromProgLab1.Repositories;
 using Spectre.Console;
 using Spectre.Console.Cli;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace PromProgLab1.Commands
@@ -23,23 +24,18 @@ namespace PromProgLab1.Commands
                    .Title("Выберите тип операции: ")
                    .AddChoices("Сложение", "Вычитание", "Умножение", "Деление", "Остаток от деления"));
 
-            Operation? operation = operationType switch
+            Operation operation = operationType switch
             {
                 "Сложение" => new Addition(),
                 "Вычитание" => new Substraction(),
                 "Умножение" => new Multiplication(),
                 "Деление" => new IntDivision(),
                 "Остаток от деления" => new DivisionRemainder(),
-                _ => null
+                _ => throw new ApplicationException("Неизвестный тип операции")
             };
 
-            if (operation == null)
-            {
-                AnsiConsole.MarkupLine($"[orange]Неизвестный тип операции! [/]");
-                return -1;
-            }
-            var textInsert = new TextPrompt<int>("[darkslategray3]Введите индекс, куда хотите вставить операцию: [/]");
-            int index = AnsiConsole.Prompt(textInsert);
+            var indexPrompt = new TextPrompt<int>("[darkslategray3]Введите индекс, куда хотите вставить операцию: [/]");
+            int index = AnsiConsole.Prompt(indexPrompt);
             _operationsRepository.Insert(index, operation);
             return 0;
         }

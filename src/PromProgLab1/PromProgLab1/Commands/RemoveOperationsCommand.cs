@@ -4,19 +4,19 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PromProgLab1.Commands
 {
-    internal class RemoveAllCollection : Command<RemoveAllCollection.RemoveAllCollectionSettings>
+    internal class RemoveCollectionsCommand : Command<RemoveCollectionsCommand.RemoveCollectionsCommandSettings>
     {
-        public class RemoveAllCollectionSettings : CommandSettings
+        public class RemoveCollectionsCommandSettings : CommandSettings
         { }
 
         private readonly IOperationRepository _operationsRepository;
 
-        public RemoveAllCollection(IOperationRepository operationsRepository)
+        public RemoveCollectionsCommand(IOperationRepository operationsRepository)
         {
             _operationsRepository = operationsRepository;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] RemoveAllCollectionSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] RemoveCollectionsCommandSettings settings)
         {
             _operationsRepository.Clear();
             return 0;

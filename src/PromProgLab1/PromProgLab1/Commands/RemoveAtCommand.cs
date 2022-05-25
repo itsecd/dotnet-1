@@ -7,18 +7,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PromProgLab1.Commands
 {
-    public class RemoveOperationCommand : Command<RemoveOperationCommand.RemoveOperationSettings>
+    public class RemoveAtCommand : Command<RemoveAtCommand.RemoveAtCommandSettings>
     {
-        public class RemoveOperationSettings : CommandSettings
+        public class RemoveAtCommandSettings : CommandSettings
         { }
 
         private readonly IOperationRepository _operationsRepository;
 
-        public RemoveOperationCommand(IOperationRepository operationsRepository)
+        public RemoveAtCommand(IOperationRepository operationsRepository)
         {
             _operationsRepository = operationsRepository;
         }
-        public override int Execute([NotNull] CommandContext context, [NotNull] RemoveOperationSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] RemoveAtCommandSettings settings)
         {
             var removePrompt = new TextPrompt<int>("[blue]Введите индекс операции, которую хотите удалить: [/]");
             int removeIndex = AnsiConsole.Prompt(removePrompt);

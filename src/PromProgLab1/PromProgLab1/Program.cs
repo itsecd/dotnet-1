@@ -20,9 +20,9 @@ namespace PromProgLab1
             {
                 config.AddCommand<AddOperationCommand>("add");
                 config.AddCommand<GetAllOperationsCommand>("print");
-                config.AddCommand<RemoveOperationCommand>("delete");
-                config.AddCommand<RemoveAllCollection>("clear");
-                config.AddCommand<MinOperation>("min");
+                config.AddCommand<RemoveAtCommand>("delete");
+                config.AddCommand<RemoveCollectionsCommand>("clear");
+                config.AddCommand<FindMinOperationCommand>("min");
                 config.AddCommand<ComparingOperationsCommand>("compare");
             });
             app.Run(args);

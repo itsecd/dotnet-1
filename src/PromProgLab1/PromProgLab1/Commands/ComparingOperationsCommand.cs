@@ -21,13 +21,13 @@ namespace PromProgLab1.Commands
         {
             var operations = _operationsRepository.GetOperations();
 
-            var text1 = new TextPrompt<int>("[lightpink3]Введите индекс первой операции для сравнения: [/]");
-            int indexLhs = AnsiConsole.Prompt(text1);
+            var lhsIndexPrompt = new TextPrompt<int>("[lightpink3]Введите индекс первой операции для сравнения: [/]");
+            int lhsIndex = AnsiConsole.Prompt(lhsIndexPrompt);
 
-            var text2 = new TextPrompt<int>("[lightpink3]Введите индекс второй операции для сравнения: [/]");
-            int indexRhs = AnsiConsole.Prompt(text2);
+            var rhsIndexPrompt = new TextPrompt<int>("[lightpink3]Введите индекс второй операции для сравнения: [/]");
+            int rhsIndex = AnsiConsole.Prompt(rhsIndexPrompt);
 
-            if (operations[indexLhs].Equals(operations[indexRhs]))
+            if (operations[lhsIndex].Equals(operations[rhsIndex]))
                 AnsiConsole.MarkupLine("[green]Операции равны [/]");
             else
                 AnsiConsole.MarkupLine("[red]Операции не равны [/]");

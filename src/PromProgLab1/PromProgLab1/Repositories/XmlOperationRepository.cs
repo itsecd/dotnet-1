@@ -9,22 +9,34 @@ namespace PromProgLab1.Repositories
     public class XmlOperationRepository : IOperationRepository
     {
         private const string StorageFileName = "operations.xml";
-        private List<Operation>? _operations;
+        private List<Operation> _operations;
 
-        private void ReadFromFile()
+        public XmlOperationRepository()
+        {
+            _operations = ReadFromFile();
+        }
+
+        private List<Operation> ReadFromFile()
         {
             if (_operations != null)
-                return;
+                return _operations;
 
             if (!File.Exists(StorageFileName))
             {
-                _operations = new List<Operation>();
-                return;
+                return _operations = new List<Operation>();
             }
 
             var xmlSerializer = new XmlSerializer(typeof(List<Operation>));
             using var fileStream = new FileStream(StorageFileName, FileMode.Open);
-            _operations = (List<Operation>)(xmlSerializer.Deserialize(fileStream) ?? throw new InvalidOperationException());
+            var result = (List<Operation>?)xmlSerializer.Deserialize(fileStream);
+
+            if (result is null)
+                throw new InvalidOperationException();
+            _operations = result;
+
+            if (_operations == null)
+                throw new ArgumentNullException(nameof(_operations));
+            return _operations;
         }
 
         private void WriteToFile()
@@ -39,30 +51,31 @@ namespace PromProgLab1.Repositories
             if (operation == null)
                 throw new ArgumentNullException(nameof(operation));
 
-            ReadFromFile();
-            _operations!.Insert(index, operation);
+            if (index >= _operations.Count)
+                _operations.Add(operation);
+            else
+                _operations.Insert(index, operation);
             WriteToFile();
-
         }
 
         public void RemoveAt(int index)
         {
-            ReadFromFile();
-            _operations!.RemoveAt(index);
+            _operations = ReadFromFile();
+            _operations.RemoveAt(index);
             WriteToFile();
         }
 
         public void Clear()
         {
-            ReadFromFile();
-            _operations!.Clear();
+            _operations = ReadFromFile();
+            _operations.Clear();
             WriteToFile();
         }
 
         public List<Operation> GetOperations()
         {
             ReadFromFile();
-            return _operations!;
+            return _operations;
         }
     }
 }
