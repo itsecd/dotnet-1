@@ -7,9 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PromProgLab1.Commands
 {
-    public class AddOperationCommand : Command<AddOperationCommand.AddOperationSettings>
+    public class AddOperationCommand : Command<AddOperationCommand.AddOperationCommandSettings>
     {
-        public class AddOperationSettings : CommandSettings
+        public class AddOperationCommandSettings : CommandSettings
         { }
 
         private readonly IOperationRepository _operationsRepository;
@@ -18,7 +18,7 @@ namespace PromProgLab1.Commands
         {
             _operationsRepository = operationsRepository;
         }
-        public override int Execute([NotNull] CommandContext context, [NotNull] AddOperationSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] AddOperationCommandSettings settings)
         {
             var operationType = AnsiConsole.Prompt(new SelectionPrompt<string>()
                    .Title("Выберите тип операции: ")

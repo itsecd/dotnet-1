@@ -5,9 +5,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PromProgLab1.Commands
 {
-    public class GetAllOperationsCommand : Command<GetAllOperationsCommand.GetAllOperationsSettings>
+    public class GetAllOperationsCommand : Command<GetAllOperationsCommand.GetAllOperationsCommandSettings>
     {
-        public class GetAllOperationsSettings : CommandSettings
+        public class GetAllOperationsCommandSettings : CommandSettings
         { }
 
         private readonly IOperationRepository _operationsRepository;
@@ -17,7 +17,7 @@ namespace PromProgLab1.Commands
             _operationsRepository = operationsRepository;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] GetAllOperationsSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] GetAllOperationsCommandSettings settings)
         {
             var operations = _operationsRepository.GetOperations();
 

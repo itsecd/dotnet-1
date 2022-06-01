@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace PromProgLab1.Commands
 {
-    public class FindMinOperationCommand : Command<FindMinOperationCommand.FindMinOperationSettings>
+    public class FindMinOperationCommand : Command<FindMinOperationCommand.FindMinOperationCommandSettings>
     {
-        public class FindMinOperationSettings : CommandSettings
+        public class FindMinOperationCommandSettings : CommandSettings
         { }
 
         private readonly IOperationRepository _operationsRepository;
@@ -20,7 +20,7 @@ namespace PromProgLab1.Commands
             _operationsRepository = operationsRepository;
         }
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] FindMinOperationSettings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] FindMinOperationCommandSettings settings)
         {
             var lhsIndexPrompt = new TextPrompt<int>("[green]Введите левый операнд: [/]");
             int lhsIndex = AnsiConsole.Prompt<int>(lhsIndexPrompt);
